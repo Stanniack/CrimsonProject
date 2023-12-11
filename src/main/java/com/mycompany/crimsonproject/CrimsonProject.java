@@ -4,12 +4,7 @@
  */
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.robot.TakeScreenShot;
-import com.mycompany.crimsonproject.t4j.SegmentedRegionsByDeterminedBaseAndHeight;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sourceforge.tess4j.TesseractException;
+import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 
 /**
  *
@@ -18,14 +13,6 @@ import net.sourceforge.tess4j.TesseractException;
 public class CrimsonProject {
 
     public static void main(String[] args) {
-        try {
-
-            Thread.sleep(4000);
-            new TakeScreenShot().take();
-            new SegmentedRegionsByDeterminedBaseAndHeight().createSegment();
-
-        } catch (InterruptedException | IOException | TesseractException ex) {
-            Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new CheckCargoDeposit().check();
     }
 }
