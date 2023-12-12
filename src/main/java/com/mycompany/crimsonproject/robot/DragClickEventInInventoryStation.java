@@ -25,16 +25,20 @@ public class DragClickEventInInventoryStation {
         Thread.sleep(150);
 
         bot.mousePress(leftClick);
-        bot.mouseMove(566, 400);
+        bot.mouseMove(566, 380);
 
         Thread.sleep(150);
         bot.mouseRelease(leftClick);
         
-        bot.mouseMove(295, 405);
+        bot.mouseMove(295, 380);
+        Thread.sleep(150);
         bot.mousePress(leftClick);
-        bot.mouseMove(160, 720);
+        
+        bot.mouseMove(130, 682);
         Thread.sleep(150);
         bot.mouseRelease(leftClick);
+        
+        Thread.sleep(150);
 
     }
 }

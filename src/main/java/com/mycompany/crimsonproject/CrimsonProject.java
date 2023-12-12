@@ -5,6 +5,7 @@
 package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
+import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
 
 /**
  *
@@ -13,6 +14,6 @@ import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 public class CrimsonProject {
 
     public static void main(String[] args) {
-        new CheckCargoDeposit().check();
+        new CheckCargoDeposit2().check();
     }
 }
