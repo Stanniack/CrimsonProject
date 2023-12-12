@@ -11,6 +11,7 @@ import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegionsByDeterminedBaseAndHeight;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
+import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -26,8 +27,8 @@ import net.sourceforge.tess4j.TesseractException;
  */
 
 /* No I.A recognition for stack items in mining cargo and "item hangar" */
-/* Search a word on EVE.exe fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080 */
-/* Check cargo, drag itens and undock */
+ /* Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080 */
+ /* Check cargo, drag itens and undock */
 public class CheckCargoDeposit2 {
 
     public void check() {
@@ -47,27 +48,28 @@ public class CheckCargoDeposit2 {
 
                     /* First search max */
                     // Right side on screen, width and height
-                    if (result.get(i).x < 600 && ((result.get(i).width == 111 || result.get(i).width == 110)
-                            && result.get(i).height == 24)) {
+                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH || result.get(i).width == Rect1920x1080.MAXCARGO2_WIDTH)
+                            && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT)) {
 
                         // Rect found
                         amountRect++;
-                        System.out.printf("Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+                        System.out.printf("Rect found - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
 
                         /* If found max cargo so deposit all cargo in hangar, UNDOCK and break for */
                         new DragClickEventInInventoryStation().eventClick();
-                        //new UndockEvent().eventClick();
+                        new UndockEvent().eventClick();
                         break;
 
                     } else {
                         /* Then Search min */
                         // Right side on screen, width and height
-                        if (result.get(i).x < 600 && ((result.get(i).width == 51 || result.get(i).width == 72)
-                                && result.get(i).height == 9)) {
+                        if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO2_WITHOUTM3_WIDTH
+                                || result.get(i).width == Rect1920x1080.MINGCARGO1_WITHM3_WIDTH)
+                                && result.get(i).height == Rect1920x1080.MINGCARGO1_HEIGHT)) {
 
                             // Rect found
                             amountRect++;
-                            System.out.printf("Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+                            System.out.printf("Rect found with - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
 
                             /* If found min cargo then UNDOCK and break for */
                             new UndockEvent().eventClick();
