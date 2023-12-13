@@ -8,8 +8,10 @@ import com.mycompany.crimsonproject.CrimsonProject;
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
+import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -27,7 +29,7 @@ import net.sourceforge.tess4j.TesseractException;
 /* No I.A recognition for stack items in mining cargo and "item hangar" */
  /* Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080 */
  /* Check cargo, drag itens and undock */
-public class CheckCargoDeposit2 {
+public class CheckCargoDeposit3 {
 
     public void check() {
         try {
@@ -39,8 +41,8 @@ public class CheckCargoDeposit2 {
 
             /* Be aware about this infinite loop */
             do {
-                new TakeScreenShot().take();
-                List<Rectangle> result = new SegmentedRegions().createSegment();
+                new TakeScreenShot2().take();
+                List<Rectangle> result = new SegmentedRegions2().createSegment();
 
                 for (int i = 0; i < result.size(); i++) {
 
