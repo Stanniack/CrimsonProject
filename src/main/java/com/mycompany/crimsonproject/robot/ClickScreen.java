@@ -5,6 +5,7 @@
 package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
+import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 
@@ -12,25 +13,20 @@ import java.awt.event.InputEvent;
  *
  * @author Mateus
  */
+public class ClickScreen {
 
-/* Remove the magical numbers here */
-public class DragScreen {
-
-    public void eventClick() throws AWTException, InterruptedException {
+    public void eventClick(Rectangle rect) throws AWTException, InterruptedException {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
         int rightClick = InputEvent.BUTTON3_DOWN_MASK;
 
+        //Thread.sleep(4000);
         Robot bot = new Robot();
 
-        Thread.sleep(2000);
-        bot.mouseMove(1186, 849);
+        bot.mouseMove(rect.x, rect.y);
         Thread.sleep(150);
-
         bot.mousePress(leftClick);
-        bot.mouseMove(1250, 870);
-
-        Thread.sleep(250);
+        Thread.sleep(150);
         bot.mouseRelease(leftClick);
 
     }

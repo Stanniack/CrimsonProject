@@ -42,6 +42,32 @@ public class SegmentedRegions2 {
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
         return result;
+
+    }
+
+    public Rectangle getSegmentedRegion(int x, int y) throws IOException, TesseractException {
+
+        Tesseract instance = new Tesseract();
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datateriners\\");
+        instance.setLanguage("eng");
+        instance.setTessVariable("user_defined_dpi", "300");
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+        
+        /* This doesn't check which side (x) of screen the rectangle is. */
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).x == x && result.get(i).y == y)
+                return result.get(i);
+            
+        }
+        
+        return null;
         
     }
 

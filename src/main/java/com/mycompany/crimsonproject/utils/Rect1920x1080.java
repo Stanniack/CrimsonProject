@@ -17,4 +17,7 @@ public class Rect1920x1080 {
     public static final int MINGCARGO2_WITHOUTM3_WIDTH = 51;
     public static final int MINGCARGO1_HEIGHT = 9;
     
+    public static final int LOCATIONSYMBOL_WIDTH = 10;
+    public static final int LOCATIONSYMBOL_HEIGHT = 14;
+    
 }

@@ -31,64 +31,60 @@ import net.sourceforge.tess4j.TesseractException;
  /* Check cargo, drag itens and undock */
 public class CheckCargoDeposit3 {
 
-    public void check() {
-        try {
+    public void check() throws InterruptedException, IOException, AWTException, TesseractException {
 
-            int amountRect = 0;
+        int amountRect = 0;
 
-            // First inicialization 
-            Thread.sleep(4000);
+        // First inicialization 
+        Thread.sleep(4000);
 
-            /* Be aware about this infinite loop */
-            do {
-                new TakeScreenShot2().take();
-                List<Rectangle> result = new SegmentedRegions2().createSegment();
+        /* Be aware about this infinite loop */
+        do {
+            new TakeScreenShot2().take();
+            List<Rectangle> result = new SegmentedRegions2().createSegment();
 
-                for (int i = 0; i < result.size(); i++) {
+            for (int i = 0; i < result.size(); i++) {
 
-                    /* First search max */
+                /* First search max */
+                // Right side on screen, width and height
+                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH || result.get(i).width == Rect1920x1080.MAXCARGO2_WIDTH)
+                        && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT)) {
+
+                    // Rect found
+                    amountRect++;
+                    System.out.printf("Rect found maxCargo - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+
+                    /* If found max cargo so deposit all cargo in hangar, UNDOCK and break for */
+                    new DragClickEventInInventoryStation().eventClick();
+                    new UndockEvent().eventClick();
+                    break;
+
+                } else {
+                    /* Then Search min */
                     // Right side on screen, width and height
-                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH || result.get(i).width == Rect1920x1080.MAXCARGO2_WIDTH)
-                            && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT)) {
+                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO2_WITHOUTM3_WIDTH
+                            || result.get(i).width == Rect1920x1080.MINGCARGO1_WITHM3_WIDTH)
+                            && result.get(i).height == Rect1920x1080.MINGCARGO1_HEIGHT)) {
 
                         // Rect found
                         amountRect++;
-                        System.out.printf("Rect found - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+                        System.out.printf("Rect found minCargo - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
 
-                        /* If found max cargo so deposit all cargo in hangar, UNDOCK and break for */
-                        new DragClickEventInInventoryStation().eventClick();
+                        /* If found min cargo then UNDOCK and break for */
                         new UndockEvent().eventClick();
                         break;
 
-                    } else {
-                        /* Then Search min */
-                        // Right side on screen, width and height
-                        if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO2_WITHOUTM3_WIDTH
-                                || result.get(i).width == Rect1920x1080.MINGCARGO1_WITHM3_WIDTH)
-                                && result.get(i).height == Rect1920x1080.MINGCARGO1_HEIGHT)) {
-
-                            // Rect found
-                            amountRect++;
-                            System.out.printf("Rect found with - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
-
-                            /* If found min cargo then UNDOCK and break for */
-                            new UndockEvent().eventClick();
-                            break;
-
-                        }
                     }
                 }
+            }
 
-                if (amountRect == 0) {
-                    System.out.println("Rect not found!\n");
-                    new DragScreen().eventClick();
-                }
+            if (amountRect == 0) {
+                System.out.println("Rect not found!\n");
+                new DragScreen().eventClick();
+            }
 
-            } while (amountRect == 0);
+        } while (amountRect == 0);
 
-        } catch (InterruptedException | IOException | TesseractException | AWTException ex) {
-            Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }
