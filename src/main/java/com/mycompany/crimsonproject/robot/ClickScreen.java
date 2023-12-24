@@ -22,6 +22,7 @@ public class ClickScreen {
 
         //Thread.sleep(4000);
         Robot bot = new Robot();
+        Thread.sleep(1000);
 
         bot.mouseMove(rect.x, rect.y);
         Thread.sleep(150);

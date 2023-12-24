@@ -27,16 +27,17 @@ public class GetDestinationMiner {
             new TakeScreenShot2().take();
             Rectangle rectResult = new SegmentedRegions2()
                     .getSegmentedRegion(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT);
+            
+            System.out.println(Rect1920x1080.LOCATIONSYMBOL_WIDTH + "/" + Rect1920x1080.LOCATIONSYMBOL_HEIGHT);
 
             if (rectResult != null) {
                 System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
                 new ClickScreen().eventClick(rectResult);
-                amountRect++;
+                //amountRect++;
             }
+            
+            amountRect++;
 
-            Thread.sleep(4000);
-            new DragScreen().eventClick();
-
-        } while (amountRect < 1);
+        } while (amountRect < 10);
     }
 }

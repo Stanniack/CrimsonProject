@@ -29,7 +29,7 @@ public class SegmentedRegions2 {
     public List<Rectangle> createSegment() throws IOException, TesseractException, AWTException, InterruptedException {
 
         Tesseract instance = new Tesseract();
-        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datateriners\\");
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         instance.setLanguage("eng");
         instance.setTessVariable("user_defined_dpi", "300");
 
@@ -45,10 +45,10 @@ public class SegmentedRegions2 {
 
     }
 
-    public Rectangle getSegmentedRegion(int x, int y) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion(int width, int height) throws IOException, TesseractException {
 
         Tesseract instance = new Tesseract();
-        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datateriners\\");
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         instance.setLanguage("eng");
         instance.setTessVariable("user_defined_dpi", "300");
 
@@ -59,16 +59,17 @@ public class SegmentedRegions2 {
         int level = TessPageIteratorLevel.RIL_WORD;
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
-        
+
         /* This doesn't check which side (x) of screen the rectangle is. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).x == x && result.get(i).y == y)
+            if (result.get(i).width == width && result.get(i).height == height) {
                 return result.get(i);
-            
+            }
+
         }
-        
+
         return null;
-        
+
     }
 
 }

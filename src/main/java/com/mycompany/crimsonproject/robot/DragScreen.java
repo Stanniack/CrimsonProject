@@ -24,11 +24,11 @@ public class DragScreen {
         Robot bot = new Robot();
 
         Thread.sleep(2000);
-        bot.mouseMove(1186, 849);
+        bot.mouseMove(1200, 870);
         Thread.sleep(150);
 
         bot.mousePress(leftClick);
-        bot.mouseMove(1250, 870);
+        bot.mouseMove(1230, 870);
 
         Thread.sleep(250);
         bot.mouseRelease(leftClick);
