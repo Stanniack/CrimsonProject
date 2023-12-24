@@ -61,6 +61,7 @@ public class SegmentedRegions2 {
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
         /* This doesn't check which side (x) of screen the rectangle is. */
+        /* Disable Help EVE button because its attribute have same width and height to Localization button*/
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i).width == width && result.get(i).height == height) {
                 return result.get(i);

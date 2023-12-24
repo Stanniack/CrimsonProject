@@ -24,7 +24,8 @@ public class ClickScreen {
         Robot bot = new Robot();
         Thread.sleep(1000);
 
-        bot.mouseMove(rect.x, rect.y);
+        /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
+        bot.mouseMove(rect.x + rect.width/2, rect.y + rect.height/2);
         Thread.sleep(150);
         bot.mousePress(leftClick);
         Thread.sleep(150);
