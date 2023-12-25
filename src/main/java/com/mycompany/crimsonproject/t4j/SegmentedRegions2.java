@@ -46,7 +46,7 @@ public class SegmentedRegions2 {
     }
 
     /* Width, height */
-    public Rectangle getSegmentedRegionWxH(int width, int height) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_WxH(int width, int height) throws IOException, TesseractException {
 
         Tesseract instance = new Tesseract();
         instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
@@ -61,8 +61,8 @@ public class SegmentedRegions2 {
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
-        /* This doesn't check which side (x) of screen the rectangle is. */
- /* Disable Help EVE button because its attribute have same width and height to Localization button*/
+        /* This doesn't check which side (x) of screen the rectangle is.
+           Disable Help EVE button because its attribute have same width and height to Localization button */
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i).width == width && result.get(i).height == height) {
                 return result.get(i);
@@ -74,8 +74,8 @@ public class SegmentedRegions2 {
 
     }
 
-    /* Width, height */
-    public Rectangle getSegmentedRegion2WxH(int width, int width2, int height) throws IOException, TesseractException {
+    /* Width, height, X and Y */
+    public Rectangle getSegmentedRegionWxH_XxY(int width, int height, int x, int y) throws IOException, TesseractException {
 
         Tesseract instance = new Tesseract();
         instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
@@ -90,8 +90,38 @@ public class SegmentedRegions2 {
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
-        /* This doesn't check which side (x) of screen the rectangle is. */
- /* Disable Help EVE button because its attribute have same width and height to Localization button*/
+        /* This doesn't check which side (x) of screen the rectangle is.
+           Disable Help EVE button because its attribute have same width and height to Localization button */
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).width == width && result.get(i).height == height) {
+                return result.get(i);
+            }
+
+        }
+
+        return null;
+
+    }
+
+
+    /* Width, width, height */
+    public Rectangle getSegmentedRegion_2WxH(int width, int width2, int height) throws IOException, TesseractException {
+
+        Tesseract instance = new Tesseract();
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
+        instance.setLanguage("eng");
+        instance.setTessVariable("user_defined_dpi", "300");
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* This doesn't check which side (x) of screen the rectangle is.
+           Disable Help EVE button because its attribute have same width and height to Localization button */
         for (int i = 0; i < result.size(); i++) {
             if ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height) {
                 return result.get(i);
