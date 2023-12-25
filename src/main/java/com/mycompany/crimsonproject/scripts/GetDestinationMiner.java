@@ -33,7 +33,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().eventClick(rectResult);
+                        new ClickScreen().leftClickEvent(rectResult);
                         amountRect++;
                     }
                 }
@@ -45,7 +45,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().eventClick(rectResult);
+                        new ClickScreen().rightClickEvent(rectResult);
                         amountRect++;
                     }
                 }
