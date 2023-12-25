@@ -20,4 +20,8 @@ public class Rect1920x1080 {
     public static final int LOCATIONSYMBOL_WIDTH = 10;
     public static final int LOCATIONSYMBOL_HEIGHT = 14;
     
+    public static final int MININGBOT1_1_WIDTH = 59;
+    public static final int MININGBOT1_2_WIDTH = 60;
+    public static final int MININGBOT1_HEIGHT = 9;
+    
 }

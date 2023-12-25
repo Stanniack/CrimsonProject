@@ -25,19 +25,34 @@ public class GetDestinationMiner {
 
         do {
             new TakeScreenShot2().take();
-            Rectangle rectResult = new SegmentedRegions2()
-                    .getSegmentedRegion(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT);
-            
-            System.out.println(Rect1920x1080.LOCATIONSYMBOL_WIDTH + "/" + Rect1920x1080.LOCATIONSYMBOL_HEIGHT);
 
-            if (rectResult != null) {
-                System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                new ClickScreen().eventClick(rectResult);
-                amountRect++;
+            switch (amountRect) {
+                case 0 -> {
+                    Rectangle rectResult = new SegmentedRegions2()
+                            .getSegmentedRegionWxH(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        new ClickScreen().eventClick(rectResult);
+                        amountRect++;
+                    }
+                }
+                case 1 -> {
+
+                    Rectangle rectResult = new SegmentedRegions2()
+                            .getSegmentedRegion2WxH(Rect1920x1080.MININGBOT1_1_WIDTH, 
+                                    Rect1920x1080.MININGBOT1_2_WIDTH, Rect1920x1080.MININGBOT1_HEIGHT);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        new ClickScreen().eventClick(rectResult);
+                        amountRect++;
+                    }
+                }
             }
-            
-            amountRect++;
 
-        } while (amountRect < 1);
+            new DragScreen().eventClick();
+
+        } while (amountRect < 2);
     }
 }
