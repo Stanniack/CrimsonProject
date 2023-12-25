@@ -40,7 +40,7 @@ public class GetDestinationMiner {
                 case 1 -> {
 
                     Rectangle rectResult = new SegmentedRegions2()
-                            .getSegmentedRegion2WxH(Rect1920x1080.MININGBOT1_1_WIDTH, 
+                            .getSegmentedRegion2WxH(Rect1920x1080.MININGBOT1_1_WIDTH,
                                     Rect1920x1080.MININGBOT1_2_WIDTH, Rect1920x1080.MININGBOT1_HEIGHT);
 
                     if (rectResult != null) {
@@ -49,10 +49,26 @@ public class GetDestinationMiner {
                         amountRect++;
                     }
                 }
+
+                case 2 -> {
+
+                    Rectangle rectResult = new SegmentedRegions2()
+                            .getSegmentedRegionWxH(Rect1920x1080.WARPARROW_WIDTH,
+                                    Rect1920x1080.WARPARROW_HEIGHT);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        new ClickScreen().leftClickEvent(rectResult);
+                        amountRect++; // go to case 3
+                    } /*else {
+                        amountRect--; // back to case 1
+                    }*/
+                }
             }
 
+            System.out.println("Amountrect == " + amountRect);
             new DragScreen().eventClick();
 
-        } while (amountRect < 2);
+        } while (amountRect < 3);
     }
 }

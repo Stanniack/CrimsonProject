@@ -24,4 +24,7 @@ public class Rect1920x1080 {
     public static final int MININGBOT1_2_WIDTH = 60;
     public static final int MININGBOT1_HEIGHT = 9;
     
+    public static final int WARPARROW_WIDTH = 12;
+    public static final int WARPARROW_HEIGHT = 6;
+    
 }
