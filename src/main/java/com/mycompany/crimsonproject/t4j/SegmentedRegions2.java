@@ -61,8 +61,7 @@ public class SegmentedRegions2 {
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
-        /* This doesn't check which side (x) of screen the rectangle is.
-           Disable Help EVE button because its attribute have same width and height to Localization button */
+        /* This doesn't check which side (x) of screen the rectangle is. */
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i).width == width && result.get(i).height == height) {
                 return result.get(i);
@@ -90,10 +89,10 @@ public class SegmentedRegions2 {
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
-        /* This doesn't check which side (x) of screen the rectangle is.
-           Disable Help EVE button because its attribute have same width and height to Localization button */
+
+        /* In a few cases, it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width && result.get(i).height == height) {
+            if (result.get(i).width == width && result.get(i).height == height && result.get(i).x == x && result.get(i).y == y) {
                 return result.get(i);
             }
 
@@ -102,7 +101,6 @@ public class SegmentedRegions2 {
         return null;
 
     }
-
 
     /* Width, width, height */
     public Rectangle getSegmentedRegion_2WxH(int width, int width2, int height) throws IOException, TesseractException {
@@ -120,10 +118,40 @@ public class SegmentedRegions2 {
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
-        /* This doesn't check which side (x) of screen the rectangle is.
-           Disable Help EVE button because its attribute have same width and height to Localization button */
+        /* This doesn't check which side (x, y) of screen the rectangle is. */
         for (int i = 0; i < result.size(); i++) {
             if ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height) {
+                return result.get(i);
+            }
+
+        }
+
+        return null;
+
+    }
+    
+        public Rectangle getSegmentedRegion_2WxH_2Xx2Y(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+        Tesseract instance = new Tesseract();
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
+        instance.setLanguage("eng");
+        instance.setTessVariable("user_defined_dpi", "300");
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
+        for (int i = 0; i < result.size(); i++) {
+            if (
+                    (result.get(i).width == width || result.get(i).width == width2) 
+                    && result.get(i).height == height
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
             }
 

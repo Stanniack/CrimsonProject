@@ -9,6 +9,8 @@ package com.mycompany.crimsonproject.utils;
  * @author Mateus
  */
 public class Rect1920x1080 {
+    
+    
     public static final int MAXCARGO1_WIDTH = 111;
     public static final int MAXCARGO2_WIDTH = 110;
     public static final int MAXCARGO1_HEIGHT = 24;
@@ -17,12 +19,20 @@ public class Rect1920x1080 {
     public static final int MINGCARGO2_WITHOUTM3_WIDTH = 51;
     public static final int MINGCARGO1_HEIGHT = 9;
     
+    public static final int LOCATIONSYMBOL_X = 11;
+    public static final int LOCATIONSYMBOL_Y = 520;
     public static final int LOCATIONSYMBOL_WIDTH = 10;
     public static final int LOCATIONSYMBOL_HEIGHT = 14;
     
     public static final int MININGBOT1_1_WIDTH = 59;
     public static final int MININGBOT1_2_WIDTH = 60;
     public static final int MININGBOT1_HEIGHT = 9;
+    
+    /* This find where the button MINNINGBOT1 is in the display */
+    public static final int MININGBOT1_X_BLOCKSCREEN = 650;
+    public static final int MININGBOT1_X2_BLOCKSCREEN = 680;
+    public static final int MININGBOT1_Y_BLOCKSCREEN = 380;
+    public static final int MININGBOT1_Y2_BLOCKSCREEN = 410;
     
     public static final int WARPARROW_WIDTH = 12;
     public static final int WARPARROW_HEIGHT = 6;
