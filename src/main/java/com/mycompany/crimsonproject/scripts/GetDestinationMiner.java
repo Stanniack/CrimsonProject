@@ -22,6 +22,8 @@ public class GetDestinationMiner {
 
     public void getDestination() throws IOException, TesseractException, AWTException, InterruptedException {
         int amountRect = 0;
+        // it depends the amount of switch cases
+        int switchFlag = 2;
 
         do {
             new TakeScreenShot2().take();
@@ -76,6 +78,6 @@ public class GetDestinationMiner {
             System.out.println("Amountrect == " + amountRect);
             new DragScreen().eventClick();
 
-        } while (amountRect < 2);
+        } while (amountRect < switchFlag);
     }
 }
