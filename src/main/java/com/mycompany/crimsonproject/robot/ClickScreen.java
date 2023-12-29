@@ -18,15 +18,16 @@ public class ClickScreen {
     public void leftClickEvent(Rectangle rect) throws AWTException, InterruptedException {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
-
+        
+        Thread.sleep(250);
+        
         Robot bot = new Robot();
-        Thread.sleep(1000);
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(150);
+        Thread.sleep(250);
         bot.mousePress(leftClick);
-        Thread.sleep(150);
+        Thread.sleep(250);
         bot.mouseRelease(leftClick);
 
     }
@@ -36,13 +37,13 @@ public class ClickScreen {
         int rightClick = InputEvent.BUTTON3_DOWN_MASK;
 
         Robot bot = new Robot();
-        Thread.sleep(1000);
+        Thread.sleep(250);
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(150);
+        Thread.sleep(250);
         bot.mousePress(rightClick);
-        Thread.sleep(150);
+        Thread.sleep(250);
         bot.mouseRelease(rightClick);
 
     }

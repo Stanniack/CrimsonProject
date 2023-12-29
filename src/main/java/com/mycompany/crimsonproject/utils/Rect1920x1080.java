@@ -26,9 +26,6 @@ public class Rect1920x1080 {
     public static final int LOCATIONSYMBOL_Y = 460;
     public static final int LOCATIONSYMBOL_X2_W_BLOCKSCREEN = 50;
     public static final int LOCATIONSYMBOL_Y2_H_BLOCKSCREEN = 530;
-    
-    
-    
 
     public static final int MININGBOT1_1_WIDTH = 59;
     public static final int MININGBOT1_2_WIDTH = 60;
@@ -43,4 +40,21 @@ public class Rect1920x1080 {
     public static final int WARPARROW_WIDTH = 12;
     public static final int WARPARROW_HEIGHT = 6;
 
+    /* This find where the button WARP ARROW is in the display */
+    public static final int WARPARROW_X = 600;
+    public static final int WARPARROW_Y = 360;
+    public static final int WARPARROW_X2_B_BLOCKSCREEN = 1000;
+    public static final int WARPARROW_Y2_H_BLOCKSCREEN = 450;
+
+    public static final int HOMESTATION1_1_WIDTH = 74;
+    public static final int HOMESTATION1_2_WIDTH = 75;
+    public static final int HOMESTATION1_HEIGHT = 9;
+
+    /* This find where the button HOMESTATION1 is in the display */
+    public static final int HOMESTATION1_X = 620;
+    public static final int HOMESTATION1_Y = 360;
+    public static final int HOMESTATION1_X2_W_BLOCKSCREEN = 710;
+    public static final int HOMESTATION1_Y2_H_BLOCKSCREEN = 405;
+
+    //g2d.drawRect(600, 350, 500, 150);
 }
