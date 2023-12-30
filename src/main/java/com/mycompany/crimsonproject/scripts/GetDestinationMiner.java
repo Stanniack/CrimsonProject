@@ -51,8 +51,12 @@ public class GetDestinationMiner {
                 case 1 -> {
 
                     Rectangle rectResult = new SegmentedRegions2()
-                            .getSegmentedRegion_2WxH_2Xx2Y(Rect1920x1080.MININGBOT1_1_WIDTH,
-                                    Rect1920x1080.MININGBOT1_2_WIDTH, Rect1920x1080.MININGBOT1_HEIGHT,
+                            .getSegmentedRegion_3Wx2H_2Xx2Y(
+                                    Rect1920x1080.MININGBOT1_1_WIDTH,
+                                    Rect1920x1080.MININGBOT1_2_WIDTH,
+                                    Rect1920x1080.MININGBOT1_3_WIDTH,
+                                    Rect1920x1080.MININGBOT1_HEIGHT,
+                                    Rect1920x1080.MININGBOT1_2_HEIGHT,
                                     Rect1920x1080.MININGBOT1_X, Rect1920x1080.MININGBOT1_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.MININGBOT1_Y, Rect1920x1080.MININGBOT1_Y2_H_BLOCKSCREEN);
 
@@ -67,8 +71,12 @@ public class GetDestinationMiner {
 
                         do {
                             rectResult2 = new SegmentedRegions2()
-                                    .getSegmentedRegion_2WxH_2Xx2Y(Rect1920x1080.HOMESTATION1_1_WIDTH,
-                                            Rect1920x1080.HOMESTATION1_2_WIDTH, Rect1920x1080.HOMESTATION1_HEIGHT,
+                                    .getSegmentedRegion_3Wx2H_2Xx2Y(
+                                            Rect1920x1080.HOMESTATION1_1_WIDTH,
+                                            Rect1920x1080.HOMESTATION1_2_WIDTH,
+                                            Rect1920x1080.HOMESTATION1_3_WIDTH,
+                                            Rect1920x1080.HOMESTATION1_HEIGHT,
+                                            Rect1920x1080.HOMESTATION1_2_HEIGHT,
                                             Rect1920x1080.HOMESTATION1_X, Rect1920x1080.HOMESTATION1_X2_W_BLOCKSCREEN,
                                             Rect1920x1080.HOMESTATION1_Y, Rect1920x1080.HOMESTATION1_Y2_H_BLOCKSCREEN);
 
@@ -94,7 +102,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        //new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickEvent(rectResult);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
 
@@ -102,8 +110,20 @@ public class GetDestinationMiner {
                         amountRect--; // back to case 1 and find the MININGBOT1 to restart finding WARPARROW
                     }
 
-                } case 3 -> {
-                    amountRect = 1;
+                }
+                case 3 -> {
+                    /*Close the location window */
+                    Rectangle rectResult = new SegmentedRegions2()
+                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.CLOSEBUTTONLOCATION_WIDTH, Rect1920x1080.CLOSEBUTTONLOCATION_HEIGHT,
+                                    Rect1920x1080.CLOSEBUTTONLOCATION_X, Rect1920x1080.CLOSEBUTTONLOCATION_X2_W_BLOCKSCREEN,
+                                    Rect1920x1080.CLOSEBUTTONLOCATION_Y, Rect1920x1080.CLOSEBUTTONLOCATION1_Y2_H_BLOCKSCREEN);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found (CLOSEBUTTONLOCAITON) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        new ClickScreen().leftClickEvent(rectResult);
+                        amountRect++;
+                        flagNoDragScreen = true;
+                    }
                 }
             }
 

@@ -23,8 +23,8 @@ public class CrimsonProject {
     public static void main(String[] args) {
         try {
             Thread.sleep(4000);
-            //new CheckCargoDeposit3().check();
-            //Thread.sleep(15000);
+            new CheckCargoDeposit3().check();
+            Thread.sleep(15000);
             new GetDestinationMiner().getDestination();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);

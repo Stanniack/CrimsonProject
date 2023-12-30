@@ -190,4 +190,36 @@ public class SegmentedRegions2 {
 
     }
 
+    public Rectangle getSegmentedRegion_3Wx2H_2Xx2Y(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+        Tesseract instance = new Tesseract();
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
+        instance.setLanguage("eng");
+        instance.setTessVariable("user_defined_dpi", "300");
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
+        for (int i = 0; i < result.size(); i++) {
+            if (
+                    ((result.get(i).width == width || result.get(i).width == width2)
+                    && result.get(i).height == height)
+                    || (result.get(i).width == width3 && result.get(i).height == height2)
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
+                return result.get(i);
+            }
+
+        }
+
+        return null;
+
+    }
+
 }
