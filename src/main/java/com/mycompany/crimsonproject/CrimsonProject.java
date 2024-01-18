@@ -7,6 +7,7 @@ package com.mycompany.crimsonproject;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit3;
+import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.GetDestinationMiner;
 import com.mycompany.crimsonproject.scripts.GetDestinationMiner2;
 import java.awt.AWTException;
@@ -26,7 +27,8 @@ public class CrimsonProject {
             Thread.sleep(4000);
             //new CheckCargoDeposit3().check();
             //Thread.sleep(15000);
-            new GetDestinationMiner2().getDestination();
+            //new GetDestinationMiner2().getDestination();
+            new ExtractOre().extract();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
         }

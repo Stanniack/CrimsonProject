@@ -23,6 +23,7 @@ public class DragScreen {
         Robot bot = new Robot();
 
         Thread.sleep(2000);
+        
         bot.mouseMove(1200, 870);
         Thread.sleep(150);
 
