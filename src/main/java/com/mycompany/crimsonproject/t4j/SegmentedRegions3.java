@@ -78,6 +78,7 @@ public class SegmentedRegions3 {
     }
 
     /* Width, height, X and Y */
+    /* This method might be eliminated, an unnusual call or nothing called */
     public Rectangle getSegmentedRegionWxH_XxY(int width, int height, int x, int y) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
@@ -100,7 +101,7 @@ public class SegmentedRegions3 {
 
     }
 
-    public Rectangle getSegmentedRegion_WxH_2Xx2Y(int width, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
         
@@ -146,7 +147,7 @@ public class SegmentedRegions3 {
 
     }
 
-    public Rectangle getSegmentedRegion_2WxH_2Xx2Y(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
         
@@ -173,7 +174,7 @@ public class SegmentedRegions3 {
 
     }
 
-    public Rectangle getSegmentedRegion_Wx2H_2Xx2Y(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
         
@@ -197,7 +198,7 @@ public class SegmentedRegions3 {
 
     }
 
-    public Rectangle getSegmentedRegion_3Wx2H_2Xx2Y(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_3Wx2H_BLOCKSCREEN(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
         

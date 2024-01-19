@@ -71,14 +71,14 @@ public class Rect1920x1080 {
     public static final int CLOSEBUTTONLOCATION_X2_W_BLOCKSCREEN = 1050;
     public static final int CLOSEBUTTONLOCATION1_Y2_H_BLOCKSCREEN = 300;
 
-    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- 
 
-    /* Priority 1: (62, 9); (61, 9) */
+    * Priority 1: (62, 9); (61, 9) */
     public static final int CONDENSED_WIDTH1 = 62;
     public static final int CONDENSED_WIDTH2 = 61;
     public static final int CONDENSED_HEIGHT1 = 9;
 
-    /*Priority 2: (42,9); (42,10) */
+    /* Priority 2: (42,9); (42,10) */
     public static final int SCORDITE_WIDTH = 42;
     public static final int SCORDITE_HEIGHT1 = 9;
     public static final int SCORDITE_HEIGHT2 = 10;

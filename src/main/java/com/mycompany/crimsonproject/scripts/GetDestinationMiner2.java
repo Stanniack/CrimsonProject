@@ -38,7 +38,7 @@ public class GetDestinationMiner2 {
                     /* Disable "Help EVE" button because its attribute have same width and height to Localization button
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
                     Rectangle rectResult = sr3
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT,
+                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT,
                                     Rect1920x1080.LOCATIONSYMBOL_X, Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.LOCATIONSYMBOL_Y, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
 
@@ -53,7 +53,7 @@ public class GetDestinationMiner2 {
                 case 1 -> {
 
                     Rectangle rectResult = sr3
-                            .getSegmentedRegion_3Wx2H_2Xx2Y(
+                            .getSegmentedRegion_3Wx2H_BLOCKSCREEN(
                                     Rect1920x1080.MININGBOT1_1_WIDTH,
                                     Rect1920x1080.MININGBOT1_2_WIDTH,
                                     Rect1920x1080.MININGBOT1_3_WIDTH,
@@ -82,7 +82,7 @@ public class GetDestinationMiner2 {
 
                     /* For for a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window to click it. */
                     Rectangle rectResult = sr3
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
+                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
                                     Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
                                     Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
 
@@ -121,7 +121,7 @@ public class GetDestinationMiner2 {
         SegmentedRegions3 sr3 = new SegmentedRegions3();
 
         Rectangle rectResult = sr3
-                .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.CLOSEBUTTONLOCATION_WIDTH, Rect1920x1080.CLOSEBUTTONLOCATION_HEIGHT,
+                .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.CLOSEBUTTONLOCATION_WIDTH, Rect1920x1080.CLOSEBUTTONLOCATION_HEIGHT,
                         Rect1920x1080.CLOSEBUTTONLOCATION_X, Rect1920x1080.CLOSEBUTTONLOCATION_X2_W_BLOCKSCREEN,
                         Rect1920x1080.CLOSEBUTTONLOCATION_Y, Rect1920x1080.CLOSEBUTTONLOCATION1_Y2_H_BLOCKSCREEN);
 

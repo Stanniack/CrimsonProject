@@ -8,6 +8,7 @@ import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions3;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -24,9 +25,13 @@ public class ExtractOre {
         int amountRect = 0;
 
         do {
+            
+            SegmentedRegions3 sr3 = new SegmentedRegions3();
 
             boolean flagNoDragScreen = false;
             new TakeScreenShot2().take();
+            
+            //Rectangle condensedResult = sr3
 
             Rectangle rectResult = new SegmentedRegions2()
                     .getSegmentedRegion_2WxH_2Xx2Y(Rect1920x1080.CONDENSED_WIDTH1, Rect1920x1080.CONDENSED_WIDTH2, Rect1920x1080.CONDENSED_HEIGHT1,
