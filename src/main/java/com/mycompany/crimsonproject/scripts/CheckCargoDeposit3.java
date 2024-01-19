@@ -9,6 +9,7 @@ import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions3;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -37,7 +38,8 @@ public class CheckCargoDeposit3 {
         /* Be aware about this infinite loop */
         do {
             new TakeScreenShot2().take();
-            List<Rectangle> result = new SegmentedRegions2().createSegment();
+            SegmentedRegions3 sr3 = new SegmentedRegions3();
+            List<Rectangle> result = sr3.createSegment();
 
             for (int i = 0; i < result.size(); i++) {
 
