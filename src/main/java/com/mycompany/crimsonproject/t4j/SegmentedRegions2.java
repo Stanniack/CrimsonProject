@@ -6,6 +6,7 @@ package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.UndockEvent;
+import com.mycompany.crimsonproject.sort.RectComparatorByX;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -14,6 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
@@ -159,7 +162,6 @@ public class SegmentedRegions2 {
         return null;
 
     }
-    
 
     public Rectangle getSegmentedRegion_2WxH_2Xx2Y(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
@@ -178,11 +180,14 @@ public class SegmentedRegions2 {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if ((result.get(i).width == width || result.get(i).width == width2)
-                    && result.get(i).height == height
-                    && (result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                return result.get(i);
+
+            if (result.get(i).width == 61 || result.get(i).width == 62) {
+                if ((result.get(i).width == width || result.get(i).width == width2)
+                        && result.get(i).height == height
+                        && (result.get(i).x >= x && result.get(i).x <= x2)
+                        && (result.get(i).y >= y && result.get(i).y <= y2)) {
+                    return result.get(i);
+                }
             }
 
         }
@@ -190,8 +195,8 @@ public class SegmentedRegions2 {
         return null;
 
     }
-    
-        public Rectangle getSegmentedRegion_Wx2H_2Xx2Y(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+    public Rectangle getSegmentedRegion_Wx2H_2Xx2Y(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         Tesseract instance = new Tesseract();
         instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
@@ -238,8 +243,7 @@ public class SegmentedRegions2 {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (
-                    ((result.get(i).width == width || result.get(i).width == width2)
+            if (((result.get(i).width == width || result.get(i).width == width2)
                     && result.get(i).height == height)
                     || (result.get(i).width == width3 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)

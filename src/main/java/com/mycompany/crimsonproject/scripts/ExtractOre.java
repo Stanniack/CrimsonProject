@@ -6,6 +6,7 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
+import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
@@ -21,17 +22,18 @@ public class ExtractOre {
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
         int amountRect = 0;
-        boolean flagNoDragScreen = false;
 
         do {
+
+            boolean flagNoDragScreen = false;
+            new TakeScreenShot2().take();
 
             Rectangle rectResult = new SegmentedRegions2()
                     .getSegmentedRegion_2WxH_2Xx2Y(Rect1920x1080.CONDENSED_WIDTH1, Rect1920x1080.CONDENSED_WIDTH2, Rect1920x1080.CONDENSED_HEIGHT1,
                             Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
-            
-            // for percorrendo lista de rects aqui - utilizar lista ordenada
 
+            // for percorrendo lista de rects aqui - utilizar lista ordenada
             if (rectResult != null) {
                 System.out.printf("Rect found (OVERVIEW->MINING SCORDITE) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
                 new ClickScreen().rightClickEvent(rectResult);
@@ -40,11 +42,12 @@ public class ExtractOre {
             } else {
                 System.out.println("rect not found");
             }
-            
-            if (!flagNoDragScreen)
+
+            if (!flagNoDragScreen) {
                 new DragScreen().eventClick();
-            
-        } while (amountRect < 0);
+            }
+
+        } while (amountRect < amountRect);
 
     }
 
