@@ -72,14 +72,36 @@ public class Rect1920x1080 {
     public static final int CLOSEBUTTONLOCATION1_Y2_H_BLOCKSCREEN = 300;
 
     /* ------------------------------------------------------------- */
-    public static final int SCORDITE_WIDTH = 42; 
-    public static final int SCORDITE_HEIGHT1 = 9;
-    public static final int SCORDITE_HEIGHT2 = 10;
-    
+
+    /* Priority 1: (62, 9); (61, 9) */
     public static final int CONDENSED_WIDTH1 = 62;
     public static final int CONDENSED_WIDTH2 = 61;
     public static final int CONDENSED_HEIGHT1 = 9;
-    
+
+    /*Priority 2: (42,9); (42,10) */
+    public static final int SCORDITE_WIDTH = 42;
+    public static final int SCORDITE_HEIGHT1 = 9;
+    public static final int SCORDITE_HEIGHT2 = 10;
+
+    /* Priotity 3: (34, 9)/ (33, 9) */
+    public static final int DENSE_WIDHT1 = 34;
+    public static final int DENSE_WIDHT2 = 33;
+    public static final int DENSE_HEIGHT1 = 9;
+
+    /* Priority 4: (73, 10); (72, 10); (72, 9); (71, 9) */
+    public static final int CONCENTRATED_WIDTH1 = 73;
+    public static final int CONCENTRATED_WIDTH2 = 72;
+    public static final int CONCENTRATED_WIDTH3 = 71;
+    public static final int CONCENTRATED_HEIGHT1 = 10;
+    public static final int CONCENTRATED_HEIGHT2 = 9;
+
+    /* Priority 5: (50, 13); (49, 13); (48, 12)  */
+    public static final int VELDSPAR_WIDTH1 = 50;
+    public static final int VELDSPAR_WIDTH2 = 49;
+    public static final int VELDSPAR_WIDTH3 = 48;
+    public static final int VELDSPAR_HEIGHT1 = 13;
+    public static final int VELDSPAR_HEIGHT2 = 12;
+
     /* This find where the floating overview->mining window is in the display */
     public static final int OVERVIEWMINING_X = 1300;
     public static final int OVERVIEWMINING_Y = 275;
