@@ -83,7 +83,7 @@ public class Rect1920x1080 {
     public static final int SCORDITE_HEIGHT1 = 9;
     public static final int SCORDITE_HEIGHT2 = 10;
 
-    /* Priotity 3: (34, 9)/ (33, 9) */
+    /* Priotity 3: (34, 9); (33, 9) */
     public static final int DENSE_WIDHT1 = 34;
     public static final int DENSE_WIDHT2 = 33;
     public static final int DENSE_HEIGHT1 = 9;
@@ -95,7 +95,7 @@ public class Rect1920x1080 {
     public static final int CONCENTRATED_HEIGHT1 = 10;
     public static final int CONCENTRATED_HEIGHT2 = 9;
 
-    /* Priority 5: (50, 13); (49, 13); (48, 12)  */
+    /* Priority 5: (50, 13); (49, 13); (48, 12) */
     public static final int VELDSPAR_WIDTH1 = 50;
     public static final int VELDSPAR_WIDTH2 = 49;
     public static final int VELDSPAR_WIDTH3 = 48;

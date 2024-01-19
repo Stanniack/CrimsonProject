@@ -71,22 +71,22 @@ public class ExtractOre {
                         foundRect = true;
 
                     } else if (scorditeRectResult != null) {
-                        System.out.printf("Rect found (OVERVIEW->MINING - SCORDITE) - Width: %d and height: %d\n", condensedRectResult.width, condensedRectResult.height);
+                        System.out.printf("Rect found (OVERVIEW->MINING - SCORDITE) - Width: %d and height: %d\n", scorditeRectResult.width, scorditeRectResult.height);
                         new ClickScreen().rightClickEvent(scorditeRectResult);
                         foundRect = true;
 
                     } else if (denseRectResult != null) {
-                        System.out.printf("Rect found (OVERVIEW->MINING - DENSE VELDSPAR) - Width: %d and height: %d\n", condensedRectResult.width, condensedRectResult.height);
+                        System.out.printf("Rect found (OVERVIEW->MINING - DENSE VELDSPAR) - Width: %d and height: %d\n", denseRectResult.width, denseRectResult.height);
                         new ClickScreen().rightClickEvent(denseRectResult);
                         foundRect = true;
 
                     } else if (concentratedResult != null) {
-                        System.out.printf("Rect found (OVERVIEW->MINING - CONCENTRATED VELDSPAR) - Width: %d and height: %d\n", condensedRectResult.width, condensedRectResult.height);
+                        System.out.printf("Rect found (OVERVIEW->MINING - CONCENTRATED VELDSPAR) - Width: %d and height: %d\n", concentratedResult.width, concentratedResult.height);
                         new ClickScreen().rightClickEvent(concentratedResult);
                         foundRect = true;
 
                     } else if (veldsparResult != null) {
-                        System.out.printf("Rect found (OVERVIEW->MINING - VELDSPAR) - Width: %d and height: %d\n", condensedRectResult.width, condensedRectResult.height);
+                        System.out.printf("Rect found (OVERVIEW->MINING - VELDSPAR) - Width: %d and height: %d\n", veldsparResult.width, veldsparResult.height);
                         new ClickScreen().rightClickEvent(veldsparResult);
                         foundRect = true;
 

@@ -39,14 +39,14 @@ public class SegmentedRegions3 {
         instance.setLanguage("eng");
         instance.setTessVariable("user_defined_dpi", "300");
         imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        
+
     }
 
     public List<Rectangle> createSegment() throws IOException, TesseractException, AWTException, InterruptedException {
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
-        
+
         bf = ImageIO.read(imageFile);
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
@@ -59,7 +59,7 @@ public class SegmentedRegions3 {
     public Rectangle getSegmentedRegion_WxH(int width, int height) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -78,11 +78,10 @@ public class SegmentedRegions3 {
     }
 
     /* Width, height, X and Y */
-    /* This method might be eliminated, an unnusual call or nothing called */
     public Rectangle getSegmentedRegionWxH_XxY(int width, int height, int x, int y) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -101,10 +100,33 @@ public class SegmentedRegions3 {
 
     }
 
+    /* Width, width, height */
+    public Rectangle getSegmentedRegion_2WxH(int width, int width2, int height) throws IOException, TesseractException {
+
+        bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* This doesn't check which side (x, y) of screen the rectangle is. */
+        for (int i = 0; i < result.size(); i++) {
+            if ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height) {
+                return result.get(i);
+            }
+
+        }
+
+        return null;
+
+    }
+
+    /* --------------------------------------- Methods with blosck screen --------------------------------------- */
     public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -125,32 +147,10 @@ public class SegmentedRegions3 {
 
     }
 
-    /* Width, width, height */
-    public Rectangle getSegmentedRegion_2WxH(int width, int width2, int height) throws IOException, TesseractException {
-
-        bf = ImageIO.read(imageFile);
-        
-        /* First searching: Words */
-        int level = TessPageIteratorLevel.RIL_WORD;
-
-        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
-
-        /* This doesn't check which side (x, y) of screen the rectangle is. */
-        for (int i = 0; i < result.size(); i++) {
-            if ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height) {
-                return result.get(i);
-            }
-
-        }
-
-        return null;
-
-    }
-
     public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -159,13 +159,11 @@ public class SegmentedRegions3 {
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
 
-            if (result.get(i).width == 61 || result.get(i).width == 62) {
-                if ((result.get(i).width == width || result.get(i).width == width2)
-                        && result.get(i).height == height
-                        && (result.get(i).x >= x && result.get(i).x <= x2)
-                        && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                    return result.get(i);
-                }
+            if ((result.get(i).width == width || result.get(i).width == width2)
+                    && result.get(i).height == height
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
+                return result.get(i);
             }
 
         }
@@ -177,7 +175,7 @@ public class SegmentedRegions3 {
     public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -201,7 +199,7 @@ public class SegmentedRegions3 {
     public Rectangle getSegmentedRegion_3Wx2H_BLOCKSCREEN(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
-        
+
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
@@ -219,6 +217,33 @@ public class SegmentedRegions3 {
 
         }
 
+        return null;
+
+    }
+
+    public Rectangle getSegmentedRegionConcentrated_3Wx2H_BLOCKSCREEN(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+        bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
+        for (int i = 0; i < result.size(); i++) {
+            if (
+                    ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height)
+                    || ((result.get(i).width == width2 || result.get(i).width == width3) && result.get(i).height == height2)
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)
+                ){
+                return result.get(i);
+            }
+
+        }
+
+        /* Priority 4: (73, 10); (72, 10); (72, 9); (71, 9) */
         return null;
 
     }
