@@ -4,21 +4,17 @@
  */
 package com.mycompany.crimsonproject.scripts;
 
-import com.mycompany.crimsonproject.CrimsonProject;
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
-import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.robot.UndockEvent;
-import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import net.sourceforge.tess4j.TesseractException;
 
 /**

@@ -4,8 +4,6 @@
  */
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
-import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit3;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.GetDestinationMiner;
