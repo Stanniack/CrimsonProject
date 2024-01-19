@@ -29,6 +29,8 @@ public class ExtractOre {
                     .getSegmentedRegion_2WxH_2Xx2Y(Rect1920x1080.CONDENSED_WIDTH1, Rect1920x1080.CONDENSED_WIDTH2, Rect1920x1080.CONDENSED_HEIGHT1,
                             Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
+            
+            // for percorrendo lista de rects aqui - utilizar lista ordenada
 
             if (rectResult != null) {
                 System.out.printf("Rect found (OVERVIEW->MINING SCORDITE) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
@@ -42,7 +44,7 @@ public class ExtractOre {
             if (!flagNoDragScreen)
                 new DragScreen().eventClick();
             
-        } while (amountRect < 1);
+        } while (amountRect < 0);
 
     }
 
