@@ -68,5 +68,5 @@ public class ExtractOre2 {
         } while (amountRect < amountRect);
 
     }
-
+   
 }

@@ -4,20 +4,13 @@
  */
 package com.mycompany.crimsonproject.t4j;
 
-import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
-import com.mycompany.crimsonproject.robot.UndockEvent;
-import com.mycompany.crimsonproject.sort.RectComparatorByX;
+
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -254,7 +247,7 @@ public class SegmentedRegions3 {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        /*Ordenar do menor para o maior para achar os minérios mais próximos */
+        /* Sort from lower to bigger Y coordinate */
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
         HashMap<String, Rectangle> hm = new HashMap<>();
 
@@ -275,12 +268,12 @@ public class SegmentedRegions3 {
                     hm.put("P2:S - " + i, result.get(i));
 
                 }
-                
+
                 if ((result.get(i).width == Rect1920x1080.DENSE_WIDHT1 || result.get(i).width == Rect1920x1080.DENSE_WIDHT2)
                         && result.get(i).height == Rect1920x1080.DENSE_HEIGHT1) {
                     hm.put("P3:DV - " + i, result.get(i));
                 }
-                
+
                 if ((result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH1 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2)
                         && result.get(i).height == Rect1920x1080.CONCENTRATED_HEIGHT1
                         || (result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH3)
