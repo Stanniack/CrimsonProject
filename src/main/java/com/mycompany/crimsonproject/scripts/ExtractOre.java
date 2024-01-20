@@ -41,7 +41,7 @@ public class ExtractOre {
 
                     /* P2 */
                     Rectangle scorditeRectResult = sr3
-                            .getSegmentedRegion_Wx2H_BLOCKSCREEN(Rect1920x1080.SCORDITE_WIDTH, Rect1920x1080.SCORDITE_HEIGHT1, Rect1920x1080.SCORDITE_HEIGHT2,
+                            .getSegmentedRegion_Wx2H_BLOCKSCREEN(Rect1920x1080.SCORDITE_WIDTH1, Rect1920x1080.SCORDITE_HEIGHT1, Rect1920x1080.SCORDITE_HEIGHT2,
                                     Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
 

@@ -79,7 +79,7 @@ public class Rect1920x1080 {
     public static final int CONDENSED_HEIGHT1 = 9;
 
     /* Priority 2: (42,9); (42,10) */
-    public static final int SCORDITE_WIDTH = 42;
+    public static final int SCORDITE_WIDTH1 = 42;
     public static final int SCORDITE_HEIGHT1 = 9;
     public static final int SCORDITE_HEIGHT2 = 10;
 

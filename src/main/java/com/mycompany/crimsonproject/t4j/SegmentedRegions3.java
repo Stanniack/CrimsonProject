@@ -7,6 +7,7 @@ package com.mycompany.crimsonproject.t4j;
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.sort.RectComparatorByX;
+import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.util.Collections.list;
+import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
@@ -232,20 +234,75 @@ public class SegmentedRegions3 {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (
-                    ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height)
+            if (((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height)
                     || ((result.get(i).width == width2 || result.get(i).width == width3) && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2)
-                ){
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
             }
 
         }
 
-        /* Priority 4: (73, 10); (72, 10); (72, 9); (71, 9) */
         return null;
 
     }
 
+    public HashMap<String, Rectangle> getSegmentedRegionsAllOres_BLOCKSCREEN(int OVERVIEWMINING_X, int OVERVIEWMINING_X2_W, int OVERVIEWMINING_Y, int OVERVIEWMINING_Y2_H) throws IOException, TesseractException {
+
+        bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        /*Ordenar do menor para o maior para achar os minérios mais próximos */
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+        HashMap<String, Rectangle> hm = new HashMap<>();
+
+        for (int i = 0; i < result.size(); i++) {
+
+            /* If into block screen list ores area */
+            if ((result.get(i).x >= OVERVIEWMINING_X && result.get(i).x <= OVERVIEWMINING_X2_W)
+                    && (result.get(i).y >= OVERVIEWMINING_Y && result.get(i).y <= OVERVIEWMINING_Y2_H)) {
+
+                if ((result.get(i).width == Rect1920x1080.CONDENSED_WIDTH1 || result.get(i).width == Rect1920x1080.CONDENSED_WIDTH2)
+                        && result.get(i).height == Rect1920x1080.CONDENSED_HEIGHT1) {
+                    hm.put("P1:CS - " + i, result.get(i));
+
+                }
+
+                if (result.get(i).width == Rect1920x1080.SCORDITE_WIDTH1
+                        && (result.get(i).height == Rect1920x1080.SCORDITE_HEIGHT1 || result.get(i).height == Rect1920x1080.SCORDITE_HEIGHT2)) {
+                    hm.put("P2:S - " + i, result.get(i));
+
+                }
+                
+                if ((result.get(i).width == Rect1920x1080.DENSE_WIDHT1 || result.get(i).width == Rect1920x1080.DENSE_WIDHT2)
+                        && result.get(i).height == Rect1920x1080.DENSE_HEIGHT1) {
+                    hm.put("P3:DV - " + i, result.get(i));
+                }
+                
+                if ((result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH1 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2)
+                        && result.get(i).height == Rect1920x1080.CONCENTRATED_HEIGHT1
+                        || (result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH3)
+                        && result.get(i).height == Rect1920x1080.CONCENTRATED_HEIGHT2) {
+                    hm.put("P4:CV - " + i, result.get(i));
+                }
+
+                if (((result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH1 || result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH2)
+                        && result.get(i).height == Rect1920x1080.VELDSPAR_HEIGHT1)
+                        || result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH3 && result.get(i).height == Rect1920x1080.VELDSPAR_HEIGHT2) {
+                    hm.put("P5:V - " + i, result.get(i));
+                }
+            }
+        }
+
+        return hm;
+    }
+
 }
+
+// P5 Veldspar ok
+// P4 Concentrated veldspar ok
+// P3 Dense veldspar ok
+// P2 Scordite ok
+// P1 Condensed Scordite ok
