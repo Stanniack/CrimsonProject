@@ -6,16 +6,20 @@ package com.mycompany.crimsonproject.sort;
 
 import java.awt.Rectangle;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  *
  * @author Devmachine
  */
-public class RectComparatorByX implements Comparator<Rectangle> {
+public class HashMapRectComparatorByY implements Comparator<Entry<Integer, Rectangle>> {
 
     @Override
-    public int compare(Rectangle o1, Rectangle o2) {
-        return Integer.compare(o1.x, o2.x);
+    public int compare(Entry<Integer, Rectangle> o1, Entry<Integer, Rectangle> o2) {
+        return Integer.compare(o1.getValue().y, o2.getValue().y);
     }
+
+
 
 }

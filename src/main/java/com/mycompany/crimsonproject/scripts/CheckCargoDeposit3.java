@@ -32,8 +32,6 @@ public class CheckCargoDeposit3 {
 
         int amountRect = 0;
 
-        // First inicialization 
-        Thread.sleep(4000);
 
         /* Be aware about this infinite loop */
         do {

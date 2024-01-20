@@ -4,13 +4,14 @@
  */
 package com.mycompany.crimsonproject.t4j;
 
-
+import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -247,8 +248,10 @@ public class SegmentedRegions3 {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        /* Sort from lower to bigger Y coordinate */
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+        /* Sort from lower to bigger Y coordinate */
+        Collections.sort(result, new RectComparatorByY());
+
         HashMap<String, Rectangle> hm = new HashMap<>();
 
         for (int i = 0; i < result.size(); i++) {
