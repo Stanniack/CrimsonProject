@@ -69,7 +69,7 @@ public class ExtractOre2 {
                             if (item.getKey().contains("P1:CS") && priorityOre <= CSpriority) {
 
                                 System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                
+
                                 if (item.getValue().y < closestCSOre) {
                                     betterOre = item;
                                     closestCSOre = item.getValue().y;
@@ -77,9 +77,9 @@ public class ExtractOre2 {
                                 }
 
                             } else if (item.getKey().contains("P2:S") && priorityOre <= Spriority) {
-                                
+
                                 System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                
+
                                 if (item.getValue().y < closestSOre) {
                                     betterOre = item;
                                     closestSOre = item.getValue().y;
@@ -87,9 +87,9 @@ public class ExtractOre2 {
                                 }
 
                             } else if (item.getKey().contains("P3:DV") && priorityOre <= DVpriority) {
-                                
+
                                 System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                
+
                                 if (item.getValue().y < closestDVOre) {
                                     betterOre = item;
                                     closestDVOre = item.getValue().y;
@@ -97,9 +97,9 @@ public class ExtractOre2 {
                                 }
 
                             } else if (item.getKey().contains("P4:CV") && priorityOre <= CVpriority) {
-                                
-                               System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                
+
+                                System.out.println(item.getKey() + ": " + item.getValue().y + "y");
+
                                 if (item.getValue().y < closestCVOre) {
                                     betterOre = item;
                                     closestCVOre = item.getValue().y;
@@ -108,9 +108,9 @@ public class ExtractOre2 {
 
                             } else {
                                 if (item.getKey().contains("P5:V") && priorityOre <= Vpriority) {
-                                    
+
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                    
+
                                     if (item.getValue().y < closestVOre) {
                                         betterOre = item;
                                         closestVOre = item.getValue().y;
@@ -124,13 +124,12 @@ public class ExtractOre2 {
 
                         if (betterOre != null) {
                             System.out.println("Closest better ore found (Y Coordinate): " + betterOre.getKey() + " - " + betterOre.getValue().y + "y");
+                            amountRect++;
+                            flagNoDragScreen = true;
                             new ClickScreen().leftClickEvent(betterOre.getValue());
                         } else {
                             System.out.println("Better ore is null");
                         }
-
-                        amountRect++;
-                        flagNoDragScreen = true;
 
                     } else {
                         System.out.println("rect not found");
