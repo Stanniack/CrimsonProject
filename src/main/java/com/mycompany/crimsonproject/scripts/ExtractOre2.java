@@ -41,14 +41,15 @@ public class ExtractOre2 {
                             Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
 
-                    if (rectResult != null) {
+                    if (rectResult.size() > 0) {
+                        
                         System.out.println("Hash map size: " + rectResult.size());
+                        
                         for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
                             System.out.println(item.getKey() + ": " + item.getValue());
                             new ClickScreen().leftClickEvent(item.getValue());
                         }
 
-                        //System.out.printf("Rect found - Width: %d and height: %d\n", rectResult.width, rectResult.height);
                         //new ClickScreen().rightClickEvent(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;

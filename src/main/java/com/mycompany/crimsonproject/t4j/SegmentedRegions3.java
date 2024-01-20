@@ -300,9 +300,3 @@ public class SegmentedRegions3 {
     }
 
 }
-
-// P5 Veldspar ok
-// P4 Concentrated veldspar ok
-// P3 Dense veldspar ok
-// P2 Scordite ok
-// P1 Condensed Scordite ok
