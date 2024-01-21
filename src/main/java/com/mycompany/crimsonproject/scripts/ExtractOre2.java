@@ -43,6 +43,7 @@ public class ExtractOre2 {
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
         int amountRect = 0;
+        int switchFlag = 1;
 
         do {
 
@@ -142,7 +143,7 @@ public class ExtractOre2 {
                 new DragScreen().eventClick();
             }
 
-        } while (amountRect < amountRect);
+        } while (amountRect < switchFlag);
 
     }
 
