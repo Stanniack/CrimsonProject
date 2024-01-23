@@ -44,7 +44,7 @@ public class GetDestinationMiner2 {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
                     }
@@ -64,7 +64,7 @@ public class GetDestinationMiner2 {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().rightClickEvent(rectResult);
+                        new ClickScreen().rightClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
 
@@ -80,7 +80,7 @@ public class GetDestinationMiner2 {
 
                 case 2 -> {
 
-                    /* For for a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window to click it. */
+                    /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
                     Rectangle rectResult = sr3
                             .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
                                     Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
@@ -88,7 +88,7 @@ public class GetDestinationMiner2 {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
 
@@ -127,7 +127,7 @@ public class GetDestinationMiner2 {
 
         if (rectResult != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCAITON) case 3 - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-            new ClickScreen().leftClickEvent(rectResult);
+            new ClickScreen().leftClickCenterButton(rectResult);
 
             return true;
         }

@@ -42,7 +42,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
                     }
@@ -62,7 +62,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().rightClickEvent(rectResult);
+                        new ClickScreen().rightClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
 
@@ -88,7 +88,7 @@ public class GetDestinationMiner {
                         } while (rectResult2 == null);
 
                         System.out.printf("Rect found (HOMESTATION1) - Width: %d and height: %d\n", rectResult2.width, rectResult2.height);
-                        new ClickScreen().leftClickEvent(rectResult2);
+                        new ClickScreen().leftClickCenterButton(rectResult2);
                     }
                 }
 
@@ -102,7 +102,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
 
@@ -120,7 +120,7 @@ public class GetDestinationMiner {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (CLOSEBUTTONLOCAITON) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickEvent(rectResult);
+                        new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
                     }

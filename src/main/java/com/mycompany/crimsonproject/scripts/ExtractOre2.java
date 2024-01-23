@@ -56,6 +56,12 @@ public class ExtractOre2 {
             switch (amountRect) {
                 case 0 -> {
 
+                    closestCSOre = 1081;
+                    closestSOre = 1081;
+                    closestDVOre = 1081;
+                    closestCVOre = 1081;
+                    closestVOre = 1081;
+
                     HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOres_BLOCKSCREEN(
                             Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
@@ -125,9 +131,9 @@ public class ExtractOre2 {
 
                         if (betterOre != null) {
                             System.out.println("Closest better ore found (Y Coordinate): " + betterOre.getKey() + " - " + betterOre.getValue().y + "y");
-                            amountRect++;
+                            //amountRect++;
                             flagNoDragScreen = true;
-                            new ClickScreen().leftClickEvent(betterOre.getValue());
+                            new ClickScreen().leftClickCenterButton(betterOre.getValue());
                         } else {
                             System.out.println("Better ore is null");
                         }
@@ -135,6 +141,8 @@ public class ExtractOre2 {
                     } else {
                         System.out.println("rect not found");
                     }
+                    
+                    System.out.println(); //
 
                 } // end case 0
             }
@@ -143,7 +151,7 @@ public class ExtractOre2 {
                 new DragScreen().eventClick();
             }
 
-        } while (amountRect < switchFlag);
+        } while (true);
 
     }
 

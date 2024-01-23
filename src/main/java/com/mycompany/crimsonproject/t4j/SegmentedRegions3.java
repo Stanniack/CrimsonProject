@@ -262,32 +262,32 @@ public class SegmentedRegions3 {
 
                 if ((result.get(i).width == Rect1920x1080.CONDENSED_WIDTH1 || result.get(i).width == Rect1920x1080.CONDENSED_WIDTH2)
                         && result.get(i).height == Rect1920x1080.CONDENSED_HEIGHT1) {
-                    hm.put("P1:CS - " + i, result.get(i));
+                    hm.put("P1:CS - i: " + i, result.get(i));
 
                 }
 
                 if (result.get(i).width == Rect1920x1080.SCORDITE_WIDTH1
                         && (result.get(i).height == Rect1920x1080.SCORDITE_HEIGHT1 || result.get(i).height == Rect1920x1080.SCORDITE_HEIGHT2)) {
-                    hm.put("P2:S - " + i, result.get(i));
+                    hm.put("P2:S - i: " + i, result.get(i));
 
                 }
 
                 if ((result.get(i).width == Rect1920x1080.DENSE_WIDHT1 || result.get(i).width == Rect1920x1080.DENSE_WIDHT2)
                         && result.get(i).height == Rect1920x1080.DENSE_HEIGHT1) {
-                    hm.put("P3:DV - " + i, result.get(i));
+                    hm.put("P3:DV - i: " + i, result.get(i));
                 }
 
                 if ((result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH1 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2)
                         && result.get(i).height == Rect1920x1080.CONCENTRATED_HEIGHT1
                         || (result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH2 || result.get(i).width == Rect1920x1080.CONCENTRATED_WIDTH3)
                         && result.get(i).height == Rect1920x1080.CONCENTRATED_HEIGHT2) {
-                    hm.put("P4:CV - " + i, result.get(i));
+                    hm.put("P4:CV - i: " + i, result.get(i));
                 }
 
                 if (((result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH1 || result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH2)
                         && result.get(i).height == Rect1920x1080.VELDSPAR_HEIGHT1)
                         || result.get(i).width == Rect1920x1080.VELDSPAR_WIDTH3 && result.get(i).height == Rect1920x1080.VELDSPAR_HEIGHT2) {
-                    hm.put("P5:V - " + i, result.get(i));
+                    hm.put("P5:V - i: " + i, result.get(i));
                 }
             }
         }

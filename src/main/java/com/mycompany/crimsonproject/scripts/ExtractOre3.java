@@ -7,17 +7,12 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
-import com.mycompany.crimsonproject.sort.HashMapRectComparatorByY;
-import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions3;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,15 +36,14 @@ public class ExtractOre3 {
     private Integer closestCVOre = 1081;
     private Integer closestVOre = 1081;
 
-    
-
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
-    private List<Integer> closestOreList = Arrays.asList(closestCSOre, closestSOre, closestDVOre, closestCVOre, closestVOre);
+    /* In the resolution 1920x1080, 1081 isn't found */
+    //List<Integer> closestOreList = Arrays.asList(closestCSOre, closestSOre, closestDVOre, closestCVOre, closestVOre);
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
         int amountRect = 0;
-        int switchFlag = 1;
+        int switchFlag = 2;
 
         do {
 
@@ -57,10 +51,17 @@ public class ExtractOre3 {
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
             int priorityOre = 0;
+
+            /* Reset Y list coordinates to 1081y */
+            //this.resetYCoordinate();
             new TakeScreenShot2().take();
 
             switch (amountRect) {
+
                 case 0 -> {
+
+                    /* Reset Y list coordinates to 1081y */
+                    List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
                     HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOres_BLOCKSCREEN(
                             Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
@@ -75,13 +76,16 @@ public class ExtractOre3 {
                             for (int i = 0; i < priorityList.size(); i++) {
 
                                 if (item.getKey().contains("P" + i) && priorityOre <= priorityList.get(i)) {
-
+                                    
+                                    priorityOre = priorityList.get(i);
+                                    
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
+                                    System.out.println(item.getValue().y + " <? " + closestOreList.get(i));
 
-                                    if (item.getValue().y < closestOreList.get(i)) {
+                                    if (item.getValue().y <= closestOreList.get(i)) {
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
-                                        priorityOre = priorityList.get(i);
+
                                     }
                                 }
                             }
@@ -89,10 +93,13 @@ public class ExtractOre3 {
                         }
 
                         if (betterOre != null) {
-                            System.out.println("Closest better ore found (Y Coordinate): " + betterOre.getKey() + " - " + betterOre.getValue().y + "y");
-                            amountRect++;
+
+                            System.out.println("Closest better ore found (Y Coordinate): "
+                                    + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")");
+                            //amountRect++;
                             flagNoDragScreen = true;
-                            new ClickScreen().leftClickEvent(betterOre.getValue());
+                            new ClickScreen().leftClickCenterButton(betterOre.getValue()); /////////////!!!
+
                         } else {
                             System.out.println("Better ore is null");
                         }
@@ -101,15 +108,46 @@ public class ExtractOre3 {
                         System.out.println("rect not found");
                     }
 
+                    System.out.println(); //
+
                 } // end case 0
+
+                /*case 1 -> {
+                    //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
+                    Rectangle rectResult = sr3
+                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
+                                    Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
+                                    Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n",
+                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+
+                        new ClickScreen().leftClickCenterButton(rectResult);
+                        amountRect++; // go to case 2
+                        flagNoDragScreen = true;
+
+                    } else {
+                        new ClickScreen().leftClick(); // click to disappear the arrow float window to restart the script case 1
+                        amountRect--; // back to case 0 and find other ore
+                    }
+                }*/
             }
 
             if (!flagNoDragScreen) {
                 new DragScreen().eventClick();
             }
 
-        } while (amountRect < switchFlag);
+        } while (true);
 
+    }
+
+    private void resetYCoordinate() {
+        this.closestCSOre = 1081;
+        this.closestSOre = 1081;
+        this.closestDVOre = 1081;
+        this.closestCVOre = 1081;
+        this.closestVOre = 1081;
     }
 
 }
