@@ -11,18 +11,18 @@ package com.mycompany.crimsonproject.utils;
 public class Rect1920x1080 {
 
     /* ------------------------------------------------------------- */
-    public static final int MAXCARGO1_WIDTH = 111;
-    public static final int MAXCARGO2_WIDTH = 110;
-    public static final int MAXCARGO1_HEIGHT = 24;
+    public static final int MAXCARGO_WIDTH1 = 111;
+    public static final int MAXCARGO_WIDTH2 = 110;
+    public static final int MAXCARGO_HEIGHT1 = 24;
 
     /* ------------------------------------------------------------- */
-    public static final int MINGCARGO1_WITHM3_WIDTH = 72;
-    public static final int MINGCARGO2_WITHOUTM3_WIDTH = 51;
-    public static final int MINGCARGO1_HEIGHT = 9;
+    public static final int MINGCARGO_WITHM3_WIDTH1 = 72;
+    public static final int MINGCARGO_WITHOUTM3_WIDTH1 = 51;
+    public static final int MINGCARGO_HEIGHT1 = 9;
 
     /* ------------------------------------------------------------- */
-    public static final int LOCATIONSYMBOL_WIDTH = 10;
-    public static final int LOCATIONSYMBOL_HEIGHT = 14;
+    public static final int LOCATIONSYMBOL_WIDTH1 = 10;
+    public static final int LOCATIONSYMBOL_HEIGHT1 = 14;
     /* This find where the button Location is in the display */
     public static final int LOCATIONSYMBOL_X = 0;
     public static final int LOCATIONSYMBOL_Y = 460;
@@ -30,11 +30,11 @@ public class Rect1920x1080 {
     public static final int LOCATIONSYMBOL_Y2_H_BLOCKSCREEN = 530;
 
     /* ------------------------------------------------------------- */
-    public static final int MININGBOT1_1_WIDTH = 59;
-    public static final int MININGBOT1_2_WIDTH = 60;
-    public static final int MININGBOT1_3_WIDTH = 8;
-    public static final int MININGBOT1_HEIGHT = 9;
-    public static final int MININGBOT1_2_HEIGHT = 12;
+    public static final int MININGBOT1_WIDTH1 = 59;
+    public static final int MININGBOT1_WIDTH2 = 60;
+    public static final int MININGBOT1_WIDTH3 = 8;
+    public static final int MININGBOT1_HEIGHT1 = 9;
+    public static final int MININGBOT1_HEIGHT2 = 12;
     /* This find where the button MINNINGBOT1 is in the display */
     public static final int MININGBOT1_X = 650;
     public static final int MININGBOT1_Y = 380;
@@ -44,7 +44,7 @@ public class Rect1920x1080 {
     /* ------------------------------------------------------------- */
     public static final int WARPARROW_WIDTH1 = 13;
     public static final int WARPARROW_WIDTH2 = 12;
-    public static final int WARPARROW_HEIGHT = 6;
+    public static final int WARPARROW_HEIGHT1 = 6;
     /* This find where the button WARPARROW is in the display */
     public static final int WARPARROW_X = 600;
     public static final int WARPARROW_Y = 360;
@@ -52,11 +52,11 @@ public class Rect1920x1080 {
     public static final int WARPARROW_Y2_H_BLOCKSCREEN = 450;
 
     /* ------------------------------------------------------------- */
-    public static final int HOMESTATION1_1_WIDTH = 74;
-    public static final int HOMESTATION1_2_WIDTH = 75;
-    public static final int HOMESTATION1_3_WIDTH = 91;
-    public static final int HOMESTATION1_HEIGHT = 9;
-    public static final int HOMESTATION1_2_HEIGHT = 12;
+    public static final int HOMESTATION1_WIDTH1 = 74;
+    public static final int HOMESTATION1_WIDTH2 = 75;
+    public static final int HOMESTATION1_WIDTH3 = 91;
+    public static final int HOMESTATION1_HEIGHT1 = 9;
+    public static final int HOMESTATION1_HEIGHT2 = 12;
     /* This find where the button HOMESTATION1 is in the display */
     public static final int HOMESTATION1_X = 620;
     public static final int HOMESTATION1_Y = 360;
@@ -64,8 +64,8 @@ public class Rect1920x1080 {
     public static final int HOMESTATION1_Y2_H_BLOCKSCREEN = 405;
 
     /* ------------------------------------------------------------- */
-    public static final int CLOSEBUTTONLOCATION_WIDTH = 10;
-    public static final int CLOSEBUTTONLOCATION_HEIGHT = 10;
+    public static final int CLOSEBUTTONLOCATION_WIDTH1 = 10;
+    public static final int CLOSEBUTTONLOCATION_HEIGHT1 = 10;
     /* This find where the button CLOSEBUTTONLOCATION is in the display */
     public static final int CLOSEBUTTONLOCATION_X = 1000;
     public static final int CLOSEBUTTONLOCATION_Y = 250;
@@ -112,11 +112,30 @@ public class Rect1920x1080 {
     /* ------------------------------------------------------------- */
     public static final int LOCKTARGETFROMSELECTEDITEM_WIDTH1 = 26;
     public static final int LOCKTARGETFROMSELECTEDITEM_HEIGHT1 = 26;
-    
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
     public static final int SELECTEDITEM_LOCKTARGET_X = 1490;
     public static final int SELECTEDITEM_LOCKTARGET_Y = 135;
     public static final int SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN = 1510;
     public static final int SELECTEDITEM_LOCKTARGET_Y2_H_BLOCKSCREEN = 150;
+
+    /* ------------------------------------------------------------- 
+    This find where the rectangle of MAXCARGO is in the display */
+    public static final int MAXCARGO_BLOCKSCREEN_X = 340;
+    public static final int MAXCARGO_BLOCKSCREEN_Y = 290;
+    public static final int MAXCARGO_X2_W_BLOCKSCREEN = 360;
+    public static final int MAXCARGO_Y2_H_BLOCKSCREEN = 310;
+
+    /* ------------------------------------------------------------- */
+    // (122, 16); (121, 14); (121, 25)
+    public static final int APPROACHING_WIDTH1 = 122;
+    public static final int APPROACHING_WIDTH2 = 121;
+    public static final int APPROACHING_HEIGHT1 = 25;
+    public static final int APPROACHING_HEIGHT2 = 16;
+    public static final int APPROACHING_HEIGHT3 = 14;
+    /* This find where the word Approaching is in the display */
+    public static final int APPROACHING_BLOCKSCREEN_X = 885;
+    public static final int APPROACHING_BLOCKSCREEN_Y = 770;
+    public static final int APPROACHING_X2_W_BLOCKSCREEN = 915;
+    public static final int APPROACHING_Y2_H_BLOCKSCREEN = 795;
 
 }

@@ -43,8 +43,8 @@ public class CheckCargoDeposit {
 
                 /* First search max */
                 // Right side on screen, width and height
-                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH || result.get(i).width == Rect1920x1080.MAXCARGO2_WIDTH)
-                        && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT)) {
+                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO_WIDTH1 || result.get(i).width == Rect1920x1080.MAXCARGO_WIDTH2)
+                        && result.get(i).height == Rect1920x1080.MAXCARGO_HEIGHT1)) {
 
                     // Rect found
                     amountRect++;
@@ -58,9 +58,9 @@ public class CheckCargoDeposit {
                 } else {
                     /* Then Search min */
                     // Right side on screen, width and height
-                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO2_WITHOUTM3_WIDTH
-                            || result.get(i).width == Rect1920x1080.MINGCARGO1_WITHM3_WIDTH)
-                            && result.get(i).height == Rect1920x1080.MINGCARGO1_HEIGHT)) {
+                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO_WITHOUTM3_WIDTH1
+                            || result.get(i).width == Rect1920x1080.MINGCARGO_WITHM3_WIDTH1)
+                            && result.get(i).height == Rect1920x1080.MINGCARGO_HEIGHT1)) {
 
                         // Rect found
                         amountRect++;
