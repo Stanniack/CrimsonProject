@@ -31,7 +31,7 @@ public class ExtractOre {
     private final Integer CVpriority = 2;
     private final Integer Vpriority = 1;
     private int amountRect = 0;
-    private int switchFlag = 8;
+    private int switchFlag = 8; // it might be final statement.
     private int flagUntilBeDestroyed_MS = 0;
 
     private static final int TIMETOGETCLOSE_MS = 20000;
@@ -114,16 +114,16 @@ public class ExtractOre {
                 case 1 -> {
 
                     //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
-                    Rectangle rectResult = sr3
+                    Rectangle warpArrow = sr3
                             .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH1, Rect1920x1080.WARPARROW_WIDTH2, Rect1920x1080.WARPARROW_HEIGHT1,
                                     Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
 
-                    if (rectResult != null) {
+                    if (warpArrow != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+                                warpArrow.width, warpArrow.height, warpArrow.x, warpArrow.y);
 
-                        new ClickScreen().leftClickCenterButton(rectResult);
+                        new ClickScreen().leftClickCenterButton(warpArrow);
                         amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
@@ -137,15 +137,15 @@ public class ExtractOre {
                 }
 
                 case 2 -> {
-                    Rectangle rectResult = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_WIDTH1, Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_HEIGHT1,
+                    Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_WIDTH1, Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_HEIGHT1,
                             Rect1920x1080.SELECTEDITEM_LOCKTARGET_X, Rect1920x1080.SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN,
                             Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
 
-                    if (rectResult != null) {
+                    if (lockTargetFromSelectedItem != null) {
                         System.out.printf("Rect found (LOCKTARGET) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+                                lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                        new ClickScreen().leftClickCenterButton(rectResult);
+                        new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
                     }
@@ -159,14 +159,14 @@ public class ExtractOre {
                 }
 
                 case 4 -> {
-                    Rectangle rectResult = sr3.getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.MAXCARGO_WIDTH1, Rect1920x1080.MAXCARGO_WIDTH2, Rect1920x1080.MAXCARGO_HEIGHT1,
+                    Rectangle maxCargo = sr3.getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.MAXCARGO_WIDTH1, Rect1920x1080.MAXCARGO_WIDTH2, Rect1920x1080.MAXCARGO_HEIGHT1,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
 
                     /* go to the station and dragon itens */
-                    if (rectResult != null) {
+                    if (maxCargo != null) {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+                                maxCargo.width, maxCargo.height, maxCargo.x, maxCargo.y);
 
                         amountRect += 3; // go to case 7 - docking and drag itens to main station
                         flagNoDragScreen = true;
@@ -178,14 +178,14 @@ public class ExtractOre {
                 }
 
                 case 5 -> {
-                    Rectangle rectResult = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
+                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
                             Rect1920x1080.APPROACHING_HEIGHT1, Rect1920x1080.APPROACHING_HEIGHT2, Rect1920x1080.APPROACHING_HEIGHT3,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
 
-                    if (rectResult != null) {
+                    if (approaching != null) {
                         System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+                                approaching.width, approaching.height, approaching.x, approaching.y);
 
                         amountRect--; // go back to case 4
                         flagNoDragScreen = true;
@@ -210,14 +210,16 @@ public class ExtractOre {
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
 
-                    Rectangle mineringOre = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
+                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
                             Rect1920x1080.APPROACHING_HEIGHT1, Rect1920x1080.APPROACHING_HEIGHT2, Rect1920x1080.APPROACHING_HEIGHT3,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
 
                     /* There is no max cargo neither minering ore - mineringOre must be desactived or the stack will broke the script */
-                    if (maxCargo == null && mineringOre == null) {
+                    if (maxCargo == null && approaching == null) {
                         amountRect = 0; // return to case 0 and fin another ore
+                        
+                        // todo -> click again in lock target to unlock it and restart minering! 
                     }
                     else {
                         amountRect--; // Return to case 5
