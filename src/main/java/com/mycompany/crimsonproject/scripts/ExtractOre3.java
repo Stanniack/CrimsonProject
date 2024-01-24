@@ -30,20 +30,15 @@ public class ExtractOre3 {
     private final Integer DVpriority = 3;
     private final Integer CVpriority = 2;
     private final Integer Vpriority = 1;
-    private Integer closestCSOre = 1081;
-    private Integer closestSOre = 1081;
-    private Integer closestDVOre = 1081;
-    private Integer closestCVOre = 1081;
-    private Integer closestVOre = 1081;
+    private int amountRect = 0;
+    private int switchFlag = 4;
+
+    private static final int TIMETOWAIT_millis = 10000;
 
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
-    /* In the resolution 1920x1080, 1081 isn't found */
-    //List<Integer> closestOreList = Arrays.asList(closestCSOre, closestSOre, closestDVOre, closestCVOre, closestVOre);
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
-        int amountRect = 0;
-        int switchFlag = 2;
 
         do {
 
@@ -76,9 +71,9 @@ public class ExtractOre3 {
                             for (int i = 0; i < priorityList.size(); i++) {
 
                                 if (item.getKey().contains("P" + i) && priorityOre <= priorityList.get(i)) {
-                                    
+
                                     priorityOre = priorityList.get(i);
-                                    
+
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
                                     System.out.println(item.getValue().y + " <? " + closestOreList.get(i));
 
@@ -96,9 +91,9 @@ public class ExtractOre3 {
 
                             System.out.println("Closest better ore found (Y Coordinate): "
                                     + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")");
-                            //amountRect++;
+                            amountRect++;
                             flagNoDragScreen = true;
-                            new ClickScreen().leftClickCenterButton(betterOre.getValue()); /////////////!!!
+                            new ClickScreen().rightClickCenterButton(betterOre.getValue()); /////////////!!!
 
                         } else {
                             System.out.println("Better ore is null");
@@ -112,42 +107,61 @@ public class ExtractOre3 {
 
                 } // end case 0
 
-                /*case 1 -> {
+                case 1 -> {
+
                     //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
                     Rectangle rectResult = sr3
-                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
+                            .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH1, Rect1920x1080.WARPARROW_WIDTH2, Rect1920x1080.WARPARROW_HEIGHT,
                                     Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
 
                     if (rectResult != null) {
-                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n",
+                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 rectResult.width, rectResult.height, rectResult.x, rectResult.y);
 
                         new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
+                        /*Wait until ship close to the selected ore */
+                        Thread.sleep(TIMETOWAIT_millis);
+
                     } else {
-                        new ClickScreen().leftClick(); // click to disappear the arrow float window to restart the script case 1
+                        new ClickScreen().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
                         amountRect--; // back to case 0 and find other ore
                     }
-                }*/
+                }
+
+                case 2 -> {
+                    Rectangle rectResult = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_WIDTH1, Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_HEIGHT1,
+                            Rect1920x1080.SELECTEDITEM_LOCKTARGET_X, Rect1920x1080.SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN,
+                            Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
+
+                    if (rectResult != null) {
+                        System.out.printf("Rect found (LOCKTARGET) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                                rectResult.width, rectResult.height, rectResult.x, rectResult.y);
+
+                        new ClickScreen().leftClickCenterButton(rectResult);
+                        amountRect++; // go to case 3
+                        flagNoDragScreen = true;
+                    }
+                }
+
+                case 3 -> {
+                    /* This case needs attetion, its a fragile code */
+                    new ClickScreen().leftClick(1065, 935);
+                    amountRect++; // go to case 4
+                    flagNoDragScreen = true;
+                }
+
             }
 
             if (!flagNoDragScreen) {
                 new DragScreen().eventClick();
             }
 
-        } while (true);
+        } while (amountRect < switchFlag);
 
-    }
-
-    private void resetYCoordinate() {
-        this.closestCSOre = 1081;
-        this.closestSOre = 1081;
-        this.closestDVOre = 1081;
-        this.closestCVOre = 1081;
-        this.closestVOre = 1081;
     }
 
 }

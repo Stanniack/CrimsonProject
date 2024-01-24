@@ -29,7 +29,7 @@ public class CrimsonProject {
             //new CheckCargoDeposit3().check();
             //Thread.sleep(15000);
             //new GetDestinationMiner2().getDestination();
-            new ExtractOre2().extract();
+            new ExtractOre3().extract();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
         }

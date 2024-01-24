@@ -48,7 +48,7 @@ public class CheckCargoDeposit3 {
 
                     // Rect found
                     amountRect++;
-                    System.out.printf("Rect found maxCargo - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+                    System.out.printf("Rect found maxCargo - Width: %d and height: %d\n\n", result.get(i).width, result.get(i).height);
 
                     /* If found max cargo so deposit all cargo in hangar, UNDOCK and break for */
                     new DragClickEventInInventoryStation().eventClick();
@@ -64,7 +64,7 @@ public class CheckCargoDeposit3 {
 
                         // Rect found
                         amountRect++;
-                        System.out.printf("Rect found minCargo - Width: %d and height: %d\n", result.get(i).width, result.get(i).height);
+                        System.out.printf("Rect found minCargo - Width: %d and height: %d\n\n", result.get(i).width, result.get(i).height);
 
                         /* If found min cargo then UNDOCK and break for */
                         new UndockEvent().eventClick();
@@ -75,7 +75,7 @@ public class CheckCargoDeposit3 {
             }
 
             if (amountRect == 0) {
-                System.out.println("Rect not found!\n");
+                System.out.println("Rect not found!\n\n");
                 new DragScreen().eventClick();
             }
 

@@ -19,14 +19,14 @@ public class ClickScreen {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
 
-        Thread.sleep(250);
+        Thread.sleep(100);
         Robot bot = new Robot();
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(250);
+        Thread.sleep(300);
         bot.mousePress(leftClick);
-        Thread.sleep(250);
+        Thread.sleep(300);
         bot.mouseRelease(leftClick);
 
     }
@@ -35,7 +35,7 @@ public class ClickScreen {
 
         int rightClick = InputEvent.BUTTON3_DOWN_MASK;
 
-        Thread.sleep(250);
+        Thread.sleep(100);
         Robot bot = new Robot();
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
@@ -47,11 +47,12 @@ public class ClickScreen {
 
     }
 
-    public void leftClick() throws InterruptedException, AWTException {
+    /* Actioned when the I.A doesn't found the case and needs to be returned. */
+    public void returnCaseLeftClick() throws InterruptedException, AWTException {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
-        
-        Thread.sleep(250);
+
+        Thread.sleep(100);
         Robot bot = new Robot();
 
         bot.mouseMove(1230, 720);
@@ -59,5 +60,20 @@ public class ClickScreen {
         bot.mousePress(leftClick);
         Thread.sleep(250);
         bot.mouseRelease(leftClick);
+    }
+
+    public void leftClick(int x, int y) throws InterruptedException, AWTException {
+
+        int leftClick = InputEvent.BUTTON1_DOWN_MASK;
+
+        Thread.sleep(100);
+        Robot bot = new Robot();
+
+        bot.mouseMove(x, y);
+        Thread.sleep(250);
+        bot.mousePress(leftClick);
+        Thread.sleep(250);
+        bot.mouseRelease(leftClick);
+
     }
 }

@@ -42,7 +42,8 @@ public class Rect1920x1080 {
     public static final int MININGBOT1_Y2_H_BLOCKSCREEN = 410;
 
     /* ------------------------------------------------------------- */
-    public static final int WARPARROW_WIDTH = 12;
+    public static final int WARPARROW_WIDTH1 = 13;
+    public static final int WARPARROW_WIDTH2 = 12;
     public static final int WARPARROW_HEIGHT = 6;
     /* This find where the button WARPARROW is in the display */
     public static final int WARPARROW_X = 600;
@@ -107,5 +108,15 @@ public class Rect1920x1080 {
     public static final int OVERVIEWMINING_Y = 275;
     public static final int OVERVIEWMINING_X2_W_BLOCKSCREEN = 1900;
     public static final int OVERVIEWMINING_Y2_H_BLOCKSCREEN = 900;
+
+    /* ------------------------------------------------------------- */
+    public static final int LOCKTARGETFROMSELECTEDITEM_WIDTH1 = 26;
+    public static final int LOCKTARGETFROMSELECTEDITEM_HEIGHT1 = 26;
+    
+    /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
+    public static final int SELECTEDITEM_LOCKTARGET_X = 1490;
+    public static final int SELECTEDITEM_LOCKTARGET_Y = 135;
+    public static final int SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN = 1510;
+    public static final int SELECTEDITEM_LOCKTARGET_Y2_H_BLOCKSCREEN = 150;
 
 }

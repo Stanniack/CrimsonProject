@@ -96,7 +96,7 @@ public class GetDestinationMiner {
 
                     /* For for a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window to click it. */
                     Rectangle rectResult = new SegmentedRegions2()
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.WARPARROW_WIDTH, Rect1920x1080.WARPARROW_HEIGHT,
+                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.WARPARROW_WIDTH1, Rect1920x1080.WARPARROW_HEIGHT,
                                     Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
                                     Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
 
