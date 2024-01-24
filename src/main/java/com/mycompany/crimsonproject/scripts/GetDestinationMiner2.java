@@ -7,7 +7,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
-import com.mycompany.crimsonproject.t4j.SegmentedRegions3;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -26,7 +26,7 @@ public class GetDestinationMiner2 {
         int switchFlag = 4;
 
         do {
-            SegmentedRegions3 sr3 = new SegmentedRegions3();
+            SegmentedRegions sr3 = new SegmentedRegions();
             boolean flagNoDragScreen = false; 
             new TakeScreenShot2().take();
 
@@ -117,7 +117,7 @@ public class GetDestinationMiner2 {
 
     private boolean closeLocationWindow() throws IOException, TesseractException, AWTException, InterruptedException {
         /*Close the location window */
-        SegmentedRegions3 sr3 = new SegmentedRegions3();
+        SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle rectResult = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.CLOSEBUTTONLOCATION_WIDTH, Rect1920x1080.CLOSEBUTTONLOCATION_HEIGHT,

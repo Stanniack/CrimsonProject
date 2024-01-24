@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.crimsonproject.scripts;
+package com.mycompany.crimsonproject.legacycode;
 
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
-import com.mycompany.crimsonproject.t4j.SegmentedRegions2;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -18,7 +17,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Mateus
  */
-public class GetDestinationMiner {
+public class GetDestinationMinerLegacy {
 
     public void getDestination() throws IOException, TesseractException, AWTException, InterruptedException {
         int amountRect = 0;
@@ -35,7 +34,7 @@ public class GetDestinationMiner {
 
                     /* Disable "Help EVE" button because its attribute have same width and height to Localization button
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
-                    Rectangle rectResult = new SegmentedRegions2()
+                    Rectangle rectResult = new SegmentedRegionsLegacy()
                             .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.LOCATIONSYMBOL_WIDTH, Rect1920x1080.LOCATIONSYMBOL_HEIGHT,
                                     Rect1920x1080.LOCATIONSYMBOL_X, Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.LOCATIONSYMBOL_Y, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
@@ -50,7 +49,7 @@ public class GetDestinationMiner {
 
                 case 1 -> {
 
-                    Rectangle rectResult = new SegmentedRegions2()
+                    Rectangle rectResult = new SegmentedRegionsLegacy()
                             .getSegmentedRegion_3Wx2H_2Xx2Y(
                                     Rect1920x1080.MININGBOT1_1_WIDTH,
                                     Rect1920x1080.MININGBOT1_2_WIDTH,
@@ -70,7 +69,7 @@ public class GetDestinationMiner {
                         Rectangle rectResult2 = null;
 
                         do {
-                            rectResult2 = new SegmentedRegions2()
+                            rectResult2 = new SegmentedRegionsLegacy()
                                     .getSegmentedRegion_3Wx2H_2Xx2Y(
                                             Rect1920x1080.HOMESTATION1_1_WIDTH,
                                             Rect1920x1080.HOMESTATION1_2_WIDTH,
@@ -95,7 +94,7 @@ public class GetDestinationMiner {
                 case 2 -> {
 
                     /* For for a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window to click it. */
-                    Rectangle rectResult = new SegmentedRegions2()
+                    Rectangle rectResult = new SegmentedRegionsLegacy()
                             .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.WARPARROW_WIDTH1, Rect1920x1080.WARPARROW_HEIGHT,
                                     Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
                                     Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
@@ -113,7 +112,7 @@ public class GetDestinationMiner {
                 }
                 case 3 -> {
                     /*Close the location window */
-                    Rectangle rectResult = new SegmentedRegions2()
+                    Rectangle rectResult = new SegmentedRegionsLegacy()
                             .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.CLOSEBUTTONLOCATION_WIDTH, Rect1920x1080.CLOSEBUTTONLOCATION_HEIGHT,
                                     Rect1920x1080.CLOSEBUTTONLOCATION_X, Rect1920x1080.CLOSEBUTTONLOCATION_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.CLOSEBUTTONLOCATION_Y, Rect1920x1080.CLOSEBUTTONLOCATION1_Y2_H_BLOCKSCREEN);

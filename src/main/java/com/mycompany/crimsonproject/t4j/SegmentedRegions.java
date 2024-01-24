@@ -23,13 +23,13 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Mateus
  */
-public class SegmentedRegions3 {
+public class SegmentedRegions {
 
     Tesseract instance;
     File imageFile;
     BufferedImage bf;
 
-    public SegmentedRegions3() {
+    public SegmentedRegions() {
         instance = new Tesseract();
         instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         instance.setLanguage("eng");

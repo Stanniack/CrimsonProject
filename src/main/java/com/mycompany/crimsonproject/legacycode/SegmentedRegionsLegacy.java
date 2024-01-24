@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.crimsonproject.t4j;
+package com.mycompany.crimsonproject.legacycode;
 
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.UndockEvent;
@@ -27,7 +27,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Mateus
  */
-public class SegmentedRegions2 {
+public class SegmentedRegionsLegacy {
 
     public List<Rectangle> createSegment() throws IOException, TesseractException, AWTException, InterruptedException {
 

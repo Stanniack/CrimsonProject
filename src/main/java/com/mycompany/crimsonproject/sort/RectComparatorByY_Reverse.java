@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author Devmachine
  */
-public class RectComparatorByY_Reverse1 implements Comparator<Rectangle> {
+public class RectComparatorByY_Reverse implements Comparator<Rectangle> {
 
 
     @Override

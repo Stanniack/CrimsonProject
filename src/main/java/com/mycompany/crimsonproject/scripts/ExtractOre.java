@@ -7,7 +7,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
-import com.mycompany.crimsonproject.t4j.SegmentedRegions3;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -23,7 +23,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class ExtractOre3 {
+public class ExtractOre {
 
     private final Integer CSpriority = 5;
     private final Integer Spriority = 4;
@@ -42,7 +42,7 @@ public class ExtractOre3 {
 
         do {
 
-            SegmentedRegions3 sr3 = new SegmentedRegions3();
+            SegmentedRegions sr3 = new SegmentedRegions();
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
             int priorityOre = 0;
