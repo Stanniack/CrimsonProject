@@ -36,7 +36,7 @@ public class ExtractOre {
 
     private static final int TIMETOGETCLOSE_MS = 20000;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000;
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 170000;
+    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1700000;
 
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
@@ -228,6 +228,7 @@ public class ExtractOre {
 
                 case 7 -> {
                     System.out.println("End of mining and go docking!");
+                    new GetDestination().getDestination(0);
                     amountRect++;
                 }
 

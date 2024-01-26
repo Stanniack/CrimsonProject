@@ -45,6 +45,8 @@ public class Rect1920x1080 {
     public static final int WARPARROW_WIDTH1 = 13;
     public static final int WARPARROW_WIDTH2 = 12;
     public static final int WARPARROW_HEIGHT1 = 6;
+    public static final int DOCKARROW_WIDTH1 = 12;
+    public static final int DOCKARROW_HEIGHT1 = 12;
     /* This find where the button WARPARROW is in the display */
     public static final int WARPARROW_X = 600;
     public static final int WARPARROW_Y = 360;
@@ -52,11 +54,11 @@ public class Rect1920x1080 {
     public static final int WARPARROW_Y2_H_BLOCKSCREEN = 450;
 
     /* ------------------------------------------------------------- */
-    public static final int HOMESTATION1_WIDTH1 = 74;
-    public static final int HOMESTATION1_WIDTH2 = 75;
-    public static final int HOMESTATION1_WIDTH3 = 91;
+    public static final int HOMESTATION1_WIDTH1 = 75;
+    public static final int HOMESTATION1_WIDTH2 = 74;
+    public static final int HOMESTATION1_WIDTH3 = 91; // must be removed!!
     public static final int HOMESTATION1_HEIGHT1 = 9;
-    public static final int HOMESTATION1_HEIGHT2 = 12;
+    public static final int HOMESTATION1_HEIGHT2 = 12; // must be removed!
     /* This find where the button HOMESTATION1 is in the display */
     public static final int HOMESTATION1_X = 620;
     public static final int HOMESTATION1_Y = 360;

@@ -9,6 +9,7 @@ import com.mycompany.crimsonproject.legacycode.ExtractOreLegacy;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.legacycode.GetDestinationMinerLegacy;
 import com.mycompany.crimsonproject.scripts.GetDestinationMiner;
+import com.mycompany.crimsonproject.scripts.GetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class CrimsonProject {
             Thread.sleep(4000);
             //new CheckCargoDeposit().check();
             //Thread.sleep(15000);
-            //new GetDestinationMiner().getDestination();
+            //new GetDestination().getDestination(0);
             new ExtractOre().extract();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
