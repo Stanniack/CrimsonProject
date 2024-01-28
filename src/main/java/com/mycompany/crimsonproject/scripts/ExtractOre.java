@@ -190,7 +190,7 @@ public class ExtractOre {
                         amountRect--; // go back to case 4
                         flagNoDragScreen = true;
 
-                        Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+                        //Thread.sleep(TIMETOWAIT_APPROACHING_MS); !!!!!!!!!!!!!!!!!!!!---------------
                         
                     } else {
                         System.out.println("Time added until set another ore: " + flagUntilBeDestroyed_MS/1000 + " seconds\n");
@@ -206,6 +206,7 @@ public class ExtractOre {
                 }
 
                 case 6 -> {
+                    /* Add more options to identify the rectangle */
                     Rectangle maxCargo = sr3.getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.MAXCARGO_WIDTH1, Rect1920x1080.MAXCARGO_WIDTH2, Rect1920x1080.MAXCARGO_HEIGHT1,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
@@ -219,7 +220,7 @@ public class ExtractOre {
                     if (maxCargo == null && approaching == null) {
                         amountRect = 0; // return to case 0 and fin another ore
                         
-                        // todo -> click again in lock target to unlock it and restart minering! 
+                        // todo -> click again in lock target to unlock it and restart minering other ore! 
                     }
                     else {
                         amountRect--; // Return to case 5

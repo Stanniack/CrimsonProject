@@ -147,7 +147,6 @@ public class GetDestination {
         }
     }
 
-    //(74, 9); (75, 9)
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
