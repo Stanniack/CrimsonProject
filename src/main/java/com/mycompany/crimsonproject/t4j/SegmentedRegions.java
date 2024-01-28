@@ -168,7 +168,9 @@ public class SegmentedRegions {
 
     }
     
-        public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    
+
+    public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -179,34 +181,8 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-
-            if ((result.get(i).width == width || result.get(i).width == width2)
-                    && result.get(i).height == height
-                    && (result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                return result.get(i);
-            }
-
-        }
-
-        return null;
-
-    }
-
-    public Rectangle getSegmentedRegion_2Wx2H_BLOCKSCREEN(int width, int width2, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
-
-        bf = ImageIO.read(imageFile);
-
-        /* First searching: Words */
-        int level = TessPageIteratorLevel.RIL_WORD;
-
-        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
-
-        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
-        for (int i = 0; i < result.size(); i++) {
-            if ((result.get(i).width == width
-                    && result.get(i).height == height) 
-                    || (result.get(i).width == width2 && result.get(i).height == height2)
+            if (result.get(i).width == width
+                    && (result.get(i).height == height || result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
