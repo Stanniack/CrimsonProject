@@ -49,9 +49,10 @@ public class ExtractOre {
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
 
+        SegmentedRegions sr3 = new SegmentedRegions();
+        
         do {
 
-            SegmentedRegions sr3 = new SegmentedRegions();
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
             int priorityOre = 0;
@@ -119,7 +120,7 @@ public class ExtractOre {
 
                     //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
                     Rectangle warpArrow = sr3
-                            .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_WIDTH1, Rect1920x1080.WARPARROW_WIDTH2, Rect1920x1080.WARPARROW_HEIGHT1,
+                            .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_W1, Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
                                     Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
 
@@ -142,8 +143,8 @@ public class ExtractOre {
                 } // end case 1
 
                 case 2 -> {
-                    Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_WIDTH1, Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_HEIGHT1,
-                            Rect1920x1080.SELECTEDITEM_LOCKTARGET_X, Rect1920x1080.SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN,
+                    Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
+                            Rect1920x1080.LOCKTARGET_X, Rect1920x1080.LOCKTARGET_X2_W_BLOCKSCREEN,
                             Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
 
                     if (lockTargetFromSelectedItem != null) {
@@ -186,8 +187,8 @@ public class ExtractOre {
                 } // end case 4
 
                 case 5 -> {
-                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
-                            Rect1920x1080.APPROACHING_HEIGHT1, Rect1920x1080.APPROACHING_HEIGHT2, Rect1920x1080.APPROACHING_HEIGHT3,
+                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
+                            Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
 
@@ -221,8 +222,8 @@ public class ExtractOre {
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
 
-                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_WIDTH1, Rect1920x1080.APPROACHING_WIDTH2,
-                            Rect1920x1080.APPROACHING_HEIGHT1, Rect1920x1080.APPROACHING_HEIGHT2, Rect1920x1080.APPROACHING_HEIGHT3,
+                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
+                            Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
 
@@ -232,8 +233,8 @@ public class ExtractOre {
                         /* If the asteroid won't be destoyed, the lockTarget must be desactived or the stack will broke the script*/
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
                             // click again in lock target to unlock it and restart minering other ore! 
-                            Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_WIDTH1, Rect1920x1080.LOCKTARGETFROMSELECTEDITEM_HEIGHT1,
-                                    Rect1920x1080.SELECTEDITEM_LOCKTARGET_X, Rect1920x1080.SELECTEDITEM_LOCKTARGET_X2_W_BLOCKSCREEN,
+                            Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
+                                    Rect1920x1080.LOCKTARGET_X, Rect1920x1080.LOCKTARGET_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
 
                             if (lockTargetFromSelectedItem != null) {
