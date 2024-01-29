@@ -36,6 +36,7 @@ public class ExtractOre {
     private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
     private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1700000; // 1700 secs
+    private static final int GOTO_HOMESTATION = 0;
 
     private final Integer CSpriority = 5;
     private final Integer Spriority = 4;
@@ -216,7 +217,6 @@ public class ExtractOre {
                 } // end case 5
 
                 case 6 -> {
-                    /* Add more options to identify the MAXCARGO rectangle */
                     Rectangle maxCargo = sr3.getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
@@ -263,7 +263,7 @@ public class ExtractOre {
 
                 case 7 -> {
                     System.out.println("End of mining and go docking!\n");
-                    new GetDestination().getDestination(0);
+                    new GetDestination().getDestination(GOTO_HOMESTATION);
                     this.amountRect++;
                 } // end case 7
 
