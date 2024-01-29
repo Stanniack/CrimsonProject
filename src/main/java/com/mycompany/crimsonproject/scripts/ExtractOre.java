@@ -152,12 +152,13 @@ public class ExtractOre {
                         flagNoDragScreen = true;
 
                     } else {
-                        System.out.println("Rect (LOCKTARGET) at case 2 not found");
+                        System.out.println("Rect (LOCKTARGET) at case 2 not found\n");
                     }
                 } // end case 2
 
                 case 3 -> {
                     /* This case needs attetion, it's a fragile code */
+                    Thread.sleep(5000);
                     new ClickScreen().leftClick(1065, 935);
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
@@ -165,8 +166,8 @@ public class ExtractOre {
 
                 case 4 -> {
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
-                            Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_X, Rect1920x1080.COMPACTMAXCARGO_X2_W_BLOCKSCREEN,
+                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.COMPACTMAXCARGO_Y2_H_BLOCKSCREEN);
 
                     /* go to the station and dragon itens */
                     if (compactMaxCargo != null) {
@@ -215,8 +216,8 @@ public class ExtractOre {
 
                 case 6 -> {
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
-                            Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_X, Rect1920x1080.COMPACTMAXCARGO_X2_W_BLOCKSCREEN,
+                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.COMPACTMAXCARGO_Y2_H_BLOCKSCREEN);
 
                     Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
                             Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,

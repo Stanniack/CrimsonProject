@@ -1,4 +1,3 @@
-
 package com.mycompany.crimsonproject.utils;
 
 /**
@@ -17,7 +16,7 @@ public class Rect1920x1080 {
 
     public static final int MAXCARGO3_W1 = 29;
     public static final int MAXCARGO3_H1 = 8;
-    
+
     public static final int COMPACTMAXCARGO_W1 = 339;
     public static final int COMPACTMAXCARGO_H1 = 5;
 
@@ -132,6 +131,13 @@ public class Rect1920x1080 {
     public static final int MAXCARGO_BLOCKSCREEN_Y = 290;
     public static final int MAXCARGO_X2_W_BLOCKSCREEN = 360;
     public static final int MAXCARGO_Y2_H_BLOCKSCREEN = 310;
+
+    /* ------------------------------------------------------------- 
+    This find where the rectangle of COMPACTMAXCARGO is in the display */
+    public static final int COMPACTMAXCARGO_BLOCKSCREEN_X = 200;
+    public static final int COMPACTMAXCARGO_BLOCKSCREEN_Y = 250;
+    public static final int COMPACTMAXCARGO_X2_W_BLOCKSCREEN = 300;
+    public static final int COMPACTMAXCARGO_Y2_H_BLOCKSCREEN = 350;
 
     /* ------------------------------------------------------------- */
     // (122, 16); (121, 14); (121, 25)
