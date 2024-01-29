@@ -164,14 +164,14 @@ public class ExtractOre {
                 } // end case 3
 
                 case 4 -> {
-                    Rectangle maxCargo = sr3.getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(
+                    Rectangle collapsedMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COLLAPSEDMAXCARGO_W1, Rect1920x1080.COLLAPSEDMAXCARGO_H1,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
 
                     /* go to the station and dragon itens */
-                    if (maxCargo != null) {
+                    if (collapsedMaxCargo != null) {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                maxCargo.width, maxCargo.height, maxCargo.x, maxCargo.y);
+                                collapsedMaxCargo.width, collapsedMaxCargo.height, collapsedMaxCargo.x, collapsedMaxCargo.y);
 
                         this.amountRect += 3; // go to case 7 - docking and drag itens to main station
                         flagNoDragScreen = true;
@@ -214,7 +214,7 @@ public class ExtractOre {
                 } // end case 5
 
                 case 6 -> {
-                    Rectangle maxCargo = sr3.getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(
+                    Rectangle collapsedMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COLLAPSEDMAXCARGO_W1, Rect1920x1080.COLLAPSEDMAXCARGO_H1,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_X, Rect1920x1080.MAXCARGO_X2_W_BLOCKSCREEN,
                             Rect1920x1080.MAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.MAXCARGO_Y2_H_BLOCKSCREEN);
 
@@ -224,7 +224,7 @@ public class ExtractOre {
                             Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
 
                     /* There is no max cargo neither minering ore */
-                    if (maxCargo == null && approaching == null) {
+                    if (collapsedMaxCargo == null && approaching == null) {
 
                         /* If the asteroid won't be destoyed, the lockTarget must be desactived or the stack will broke the script*/
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
