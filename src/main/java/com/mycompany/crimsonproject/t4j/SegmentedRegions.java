@@ -47,7 +47,6 @@ public class SegmentedRegions {
 
     }
 
-
     /* --------------------------------------- Methods with blosck screen --------------------------------------- */
     public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
@@ -221,22 +220,23 @@ public class SegmentedRegions {
     }
 
     public Rectangle getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(int x, int x2, int y, int y2) throws IOException, TesseractException {
-        
+
         bf = ImageIO.read(imageFile);
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
-        
+
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
-        
+
         for (int i = 0; i < result.size(); i++) {
-            if (((result.get(i).width == Rect1920x1080.MAXCARGO1_W1 || result.get(i).width == Rect1920x1080.MAXCARGO1_W2) 
+            if (((result.get(i).width == Rect1920x1080.MAXCARGO1_W1 || result.get(i).width == Rect1920x1080.MAXCARGO1_W2)
                     && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT1)
                     || (result.get(i).width == Rect1920x1080.MAXCARGO2_W1 && result.get(i).height == Rect1920x1080.MAXCARGO2_H1)
                     || (result.get(i).width == Rect1920x1080.MAXCARGO3_W1 && result.get(i).height == Rect1920x1080.MAXCARGO3_H1)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2))
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
+            }
         }
 
         return null;

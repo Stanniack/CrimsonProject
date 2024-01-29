@@ -18,8 +18,8 @@ public class Rect1920x1080 {
     public static final int MAXCARGO3_W1 = 29;
     public static final int MAXCARGO3_H1 = 8;
     
-    public static final int COLLAPSEDMAXCARGO_W1 = 339;
-    public static final int COLLAPSEDMAXCARGO_H1 = 5;
+    public static final int COMPACTMAXCARGO_W1 = 339;
+    public static final int COMPACTMAXCARGO_H1 = 5;
 
     /* ------------------------------------------------------------- */
     public static final int MINGCARGO_WITHM3_W1 = 72;
