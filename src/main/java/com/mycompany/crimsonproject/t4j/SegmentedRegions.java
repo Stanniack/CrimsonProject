@@ -52,7 +52,7 @@ public class SegmentedRegions {
     }
 
     /* Width, height */
-    public Rectangle getSegmentedRegion_WxH(int width, int height) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_WxH(int width1, int height1) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -63,7 +63,7 @@ public class SegmentedRegions {
 
         /* This doesn't check which side (x) of screen the rectangle is. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width && result.get(i).height == height) {
+            if (result.get(i).width == width1 && result.get(i).height == height1) {
                 return result.get(i);
             }
 
@@ -74,7 +74,7 @@ public class SegmentedRegions {
     }
 
     /* Width, height, X and Y */
-    public Rectangle getSegmentedRegionWxH_XxY(int width, int height, int x, int y) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionWxH_XxY(int width1, int height1, int x, int y) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -86,7 +86,7 @@ public class SegmentedRegions {
 
         /* In a few cases, it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width && result.get(i).height == height && result.get(i).x == x && result.get(i).y == y) {
+            if (result.get(i).width == width1 && result.get(i).height == height1 && result.get(i).x == x && result.get(i).y == y) {
                 return result.get(i);
             }
 
@@ -97,7 +97,7 @@ public class SegmentedRegions {
     }
 
     /* Width, width, height */
-    public Rectangle getSegmentedRegion_2WxH(int width, int width2, int height) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_2WxH(int width1, int width2, int height1) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -108,7 +108,7 @@ public class SegmentedRegions {
 
         /* This doesn't check which side (x, y) of screen the rectangle is. */
         for (int i = 0; i < result.size(); i++) {
-            if ((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height) {
+            if ((result.get(i).width == width1 || result.get(i).width == width2) && result.get(i).height == height1) {
                 return result.get(i);
             }
 
@@ -119,7 +119,7 @@ public class SegmentedRegions {
     }
 
     /* --------------------------------------- Methods with blosck screen --------------------------------------- */
-    public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -130,8 +130,8 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width
-                    && result.get(i).height == height
+            if (result.get(i).width == width1
+                    && result.get(i).height == height1
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
@@ -143,7 +143,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width, int width2, int height, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width1, int width2, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -155,8 +155,8 @@ public class SegmentedRegions {
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
 
-            if ((result.get(i).width == width || result.get(i).width == width2)
-                    && result.get(i).height == height
+            if ((result.get(i).width == width1 || result.get(i).width == width2)
+                    && result.get(i).height == height1
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
@@ -168,7 +168,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width1, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -179,8 +179,8 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width
-                    && (result.get(i).height == height || result.get(i).height == height2)
+            if (result.get(i).width == width1
+                    && (result.get(i).height == height1 || result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
@@ -192,7 +192,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_2Wx2H_BLOCKSCREEN(int width, int width2, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_2Wx2H_BLOCKSCREEN(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -203,8 +203,8 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if ((result.get(i).width == width
-                    && result.get(i).height == height)
+            if ((result.get(i).width == width1
+                    && result.get(i).height == height1)
                     || (result.get(i).width == width2 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
@@ -217,7 +217,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_3Wx2H_BLOCKSCREEN(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion_3Wx2H_BLOCKSCREEN(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -228,8 +228,8 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (((result.get(i).width == width || result.get(i).width == width2)
-                    && result.get(i).height == height)
+            if (((result.get(i).width == width1 || result.get(i).width == width2)
+                    && result.get(i).height == height1)
                     || (result.get(i).width == width3 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
@@ -242,7 +242,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(int width, int width2, int height1, int height2, int height3, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(int width1, int width2, int height1, int height2, int height3, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -253,7 +253,7 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).width == width && result.get(i).height == height2
+            if (result.get(i).width == width1 && result.get(i).height == height2
                     || (result.get(i).width == width2 && (result.get(i).height == height1 || result.get(i).height == height3))
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
@@ -266,7 +266,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegionConcentrated_3Wx2H_BLOCKSCREEN(int width, int width2, int width3, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionConcentrated_3Wx2H_BLOCKSCREEN(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -277,7 +277,7 @@ public class SegmentedRegions {
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
-            if (((result.get(i).width == width || result.get(i).width == width2) && result.get(i).height == height)
+            if (((result.get(i).width == width1 || result.get(i).width == width2) && result.get(i).height == height1)
                     || ((result.get(i).width == width2 || result.get(i).width == width3) && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
