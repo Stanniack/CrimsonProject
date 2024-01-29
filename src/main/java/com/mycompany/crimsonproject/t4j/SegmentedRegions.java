@@ -167,8 +167,6 @@ public class SegmentedRegions {
         return null;
 
     }
-    
-    
 
     public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
@@ -183,6 +181,31 @@ public class SegmentedRegions {
         for (int i = 0; i < result.size(); i++) {
             if (result.get(i).width == width
                     && (result.get(i).height == height || result.get(i).height == height2)
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
+                return result.get(i);
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public Rectangle getSegmentedRegion_2Wx2H_BLOCKSCREEN(int width, int width2, int height, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+        bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
+        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
+        for (int i = 0; i < result.size(); i++) {
+            if ((result.get(i).width == width
+                    && result.get(i).height == height)
+                    || (result.get(i).width == width2 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
                 return result.get(i);
@@ -267,7 +290,29 @@ public class SegmentedRegions {
 
     }
 
-    public HashMap<String, Rectangle> getSegmentedRegionsAllOres_BLOCKSCREEN(int OVERVIEWMINING_X, int OVERVIEWMINING_X2_W, int OVERVIEWMINING_Y, int OVERVIEWMINING_Y2_H) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(int x, int x2, int y, int y2) throws IOException, TesseractException {
+        
+        bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+        
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+        
+        for (int i = 0; i < result.size(); i++) {
+            if (((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH1 || result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH2) 
+                    && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT1)
+                    || (result.get(i).width == Rect1920x1080.MAXCARGO2_WIDTH1 && result.get(i).height == Rect1920x1080.MAXCARGO2_HEIGHT1)
+                    || (result.get(i).width == Rect1920x1080.MAXCARGO3_WIDTH1 && result.get(i).height == Rect1920x1080.MAXCARGO3_HEIGHT1)
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2))
+                return result.get(i);
+        }
+
+        return null;
+    }
+
+    public HashMap<String, Rectangle> getSegmentedRegionsAllOres_BLOCKSCREEN(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -283,8 +328,8 @@ public class SegmentedRegions {
         for (int i = 0; i < result.size(); i++) {
 
             /* If into block screen list ores area */
-            if ((result.get(i).x >= OVERVIEWMINING_X && result.get(i).x <= OVERVIEWMINING_X2_W)
-                    && (result.get(i).y >= OVERVIEWMINING_Y && result.get(i).y <= OVERVIEWMINING_Y2_H)) {
+            if ((result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
 
                 if ((result.get(i).width == Rect1920x1080.CONDENSED_WIDTH1 || result.get(i).width == Rect1920x1080.CONDENSED_WIDTH2)
                         && result.get(i).height == Rect1920x1080.CONDENSED_HEIGHT1) {

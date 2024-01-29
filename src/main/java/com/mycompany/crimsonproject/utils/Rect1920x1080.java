@@ -11,9 +11,15 @@ package com.mycompany.crimsonproject.utils;
 public class Rect1920x1080 {
 
     /* ------------------------------------------------------------- */
-    public static final int MAXCARGO_WIDTH1 = 111;
-    public static final int MAXCARGO_WIDTH2 = 110;
-    public static final int MAXCARGO_HEIGHT1 = 24;
+    public static final int MAXCARGO1_WIDTH1 = 111;
+    public static final int MAXCARGO1_WIDTH2 = 110;
+    public static final int MAXCARGO1_HEIGHT1 = 24;
+
+    public static final int MAXCARGO2_WIDTH1 = 101;
+    public static final int MAXCARGO2_HEIGHT1 = 10;
+
+    public static final int MAXCARGO3_WIDTH1 = 29;
+    public static final int MAXCARGO3_HEIGHT1 = 8;
 
     /* ------------------------------------------------------------- */
     public static final int MINGCARGO_WITHM3_WIDTH1 = 72;

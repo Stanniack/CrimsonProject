@@ -43,8 +43,8 @@ public class CheckCargoDeposit {
 
                 /* First search max */
                 // Right side on screen, width and height
-                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO_WIDTH1 || result.get(i).width == Rect1920x1080.MAXCARGO_WIDTH2)
-                        && result.get(i).height == Rect1920x1080.MAXCARGO_HEIGHT1)) {
+                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH1 || result.get(i).width == Rect1920x1080.MAXCARGO1_WIDTH2)
+                        && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT1)) {
 
                     // Rect found
                     amountRect++;
