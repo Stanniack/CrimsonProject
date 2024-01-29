@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.crimsonproject.legacycode;
 
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
+import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -15,7 +12,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 public class GetDestinationMinerLegacy {
 
@@ -25,7 +22,8 @@ public class GetDestinationMinerLegacy {
         int switchFlag = 4;
 
         do {
-            boolean flagNoDragScreen = false;
+            SegmentedRegions sr3 = new SegmentedRegions();
+            boolean flagNoDragScreen = false; 
             new TakeScreenShot2().take();
 
             switch (amountRect) {
@@ -34,13 +32,13 @@ public class GetDestinationMinerLegacy {
 
                     /* Disable "Help EVE" button because its attribute have same width and height to Localization button
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
-                    Rectangle rectResult = new SegmentedRegionsLegacy()
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.LOCATIONSYMBOL_W1, Rect1920x1080.LOCATIONSYMBOL_H1,
+                    Rectangle rectResult = sr3
+                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCATIONSYMBOL_W1, Rect1920x1080.LOCATIONSYMBOL_H1,
                                     Rect1920x1080.LOCATIONSYMBOL_X, Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN,
                                     Rect1920x1080.LOCATIONSYMBOL_Y, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
 
                     if (rectResult != null) {
-                        System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
                         new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
@@ -49,8 +47,8 @@ public class GetDestinationMinerLegacy {
 
                 case 1 -> {
 
-                    Rectangle rectResult = new SegmentedRegionsLegacy()
-                            .getSegmentedRegion_3Wx2H_2Xx2Y(Rect1920x1080.MININGBOT1_W1,
+                    Rectangle rectResult = sr3
+                            .getSegmentedRegion_3Wx2H_BLOCKSCREEN(Rect1920x1080.MININGBOT1_W1,
                                     Rect1920x1080.MININGBOT1_W2,
                                     Rect1920x1080.MININGBOT1_W3,
                                     Rect1920x1080.MININGBOT1_H1,
@@ -59,46 +57,31 @@ public class GetDestinationMinerLegacy {
                                     Rect1920x1080.MININGBOT1_Y, Rect1920x1080.MININGBOT1_Y2_H_BLOCKSCREEN);
 
                     if (rectResult != null) {
-                        System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
                         new ClickScreen().rightClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
 
                     } else {
-                        Rectangle rectResult2 = null;
+                        /* Close location windows if doesnt find the MININGBOT1 */
+                        flagNoDragScreen = closeLocationWindow();
 
-                        do {
-                            rectResult2 = new SegmentedRegionsLegacy()
-                                    .getSegmentedRegion_3Wx2H_2Xx2Y(Rect1920x1080.HOMESTATION1_W1,
-                                            Rect1920x1080.HOMESTATION1_W2,
-                                            Rect1920x1080.HOMESTATION1_W3,
-                                            Rect1920x1080.HOMESTATION1_H1,
-                                            Rect1920x1080.HOMESTATION1_H2,
-                                            Rect1920x1080.HOMESTATION1_X, Rect1920x1080.HOMESTATION1_X2_W_BLOCKSCREEN,
-                                            Rect1920x1080.HOMESTATION1_Y, Rect1920x1080.HOMESTATION1_Y2_H_BLOCKSCREEN);
-
-                            if (rectResult2 == null) {
-                                new DragScreen().eventClick();
-                            }
-
-                            System.out.println("Case 1: resultRect2 loop\n");
-                        } while (rectResult2 == null);
-
-                        System.out.printf("Rect found (HOMESTATION1) - Width: %d and height: %d\n", rectResult2.width, rectResult2.height);
-                        new ClickScreen().leftClickCenterButton(rectResult2);
+                        if (!flagNoDragScreen) {
+                            amountRect--; // return to case 1 to open the location windows again
+                        }
                     }
                 }
 
                 case 2 -> {
 
-                    /* For for a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window to click it. */
-                    Rectangle rectResult = new SegmentedRegionsLegacy()
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.WARPARROW_W1, Rect1920x1080.WARPARROW_H1,
+                    /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
+                    Rectangle rectResult = sr3
+                            .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
                                     Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
                                     Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
 
                     if (rectResult != null) {
-                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
+                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
                         new ClickScreen().leftClickCenterButton(rectResult);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
@@ -109,18 +92,12 @@ public class GetDestinationMinerLegacy {
 
                 }
                 case 3 -> {
-                    /*Close the location window */
-                    Rectangle rectResult = new SegmentedRegionsLegacy()
-                            .getSegmentedRegion_WxH_2Xx2Y(Rect1920x1080.CLOSELOCATIONBUTTON_W1, Rect1920x1080.CLOSELOCATIONBUTTON_H1,
-                                    Rect1920x1080.CLOSELOCATIONBUTTON_X, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W_BLOCKSCREEN,
-                                    Rect1920x1080.CLOSELOCATIONBUTTON_Y, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN);
+                    flagNoDragScreen = closeLocationWindow();
 
-                    if (rectResult != null) {
-                        System.out.printf("Rect found (CLOSEBUTTONLOCAITON) - Width: %d and height: %d\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickCenterButton(rectResult);
+                    if (!flagNoDragScreen) {
                         amountRect++;
-                        flagNoDragScreen = true;
                     }
+
                 }
             }
 
@@ -131,5 +108,24 @@ public class GetDestinationMinerLegacy {
             System.out.println("main loop\n");
 
         } while (amountRect < switchFlag);
+    }
+
+    private boolean closeLocationWindow() throws IOException, TesseractException, AWTException, InterruptedException {
+        /*Close the location window */
+        SegmentedRegions sr3 = new SegmentedRegions();
+
+        Rectangle rectResult = sr3
+                .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.CLOSELOCATIONBUTTON_W1, Rect1920x1080.CLOSELOCATIONBUTTON_H1,
+                        Rect1920x1080.CLOSELOCATIONBUTTON_X, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W_BLOCKSCREEN,
+                        Rect1920x1080.CLOSELOCATIONBUTTON_Y, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN);
+
+        if (rectResult != null) {
+            System.out.printf("Rect found (CLOSEBUTTONLOCAITON) case 3 - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
+            new ClickScreen().leftClickCenterButton(rectResult);
+
+            return true;
+        }
+
+        return false;
     }
 }

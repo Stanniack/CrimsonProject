@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 package com.mycompany.crimsonproject;
-
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
-import com.mycompany.crimsonproject.legacycode.ExtractOreLegacy;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
-import com.mycompany.crimsonproject.legacycode.GetDestinationMinerLegacy;
-import com.mycompany.crimsonproject.scripts.GetDestinationMiner;
 import com.mycompany.crimsonproject.scripts.GetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 public class CrimsonProject {
 

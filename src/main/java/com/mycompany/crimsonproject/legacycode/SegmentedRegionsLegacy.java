@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.crimsonproject.legacycode;
 
-import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
-import com.mycompany.crimsonproject.robot.UndockEvent;
-import com.mycompany.crimsonproject.sort.RectComparatorByX;
 import java.awt.AWTException;
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import static java.util.Collections.list;
+
 import java.util.List;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
@@ -25,7 +14,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 public class SegmentedRegionsLegacy {
 

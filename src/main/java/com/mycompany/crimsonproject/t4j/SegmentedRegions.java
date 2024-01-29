@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
@@ -21,7 +17,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 public class SegmentedRegions {
 

@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.robot.UndockEvent;
-import com.mycompany.crimsonproject.legacycode.SegmentedRegionsLegacy;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
@@ -20,7 +15,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 
 /* No I.A recognition for stack items in mining cargo and "item hangar" */

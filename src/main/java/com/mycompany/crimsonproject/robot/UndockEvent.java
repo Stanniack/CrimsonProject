@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
@@ -10,7 +6,7 @@ import java.awt.event.InputEvent;
 
 /**
  *
- * @author Mateus
+ * @author Stanniack
  */
 public class UndockEvent {
     
