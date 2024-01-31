@@ -13,7 +13,6 @@ public class DragClickEventInInventoryStation {
     public void eventClick() throws AWTException, InterruptedException {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
-        int rightClick = InputEvent.BUTTON3_DOWN_MASK;
 
         Robot bot = new Robot();
 

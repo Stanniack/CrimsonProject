@@ -116,7 +116,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (LOCATIONSYNMBOL) case 0");
+            System.out.println("Rect not found (LOCATIONSYNMBOL) case 0\n");
             return false;
         }
     }
@@ -138,7 +138,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (MININGBOT1) case 1");
+            System.out.println("Rect not found (MININGBOT1) case 1\n");
             return false;
         }
     }
@@ -156,7 +156,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (HOMESTATION1) case 1");
+            System.out.println("Rect not found (HOMESTATION1) case 1\n");
             return false;
         }
     }
@@ -175,7 +175,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (WARPARROW) case 2");
+            System.out.println("Rect not found (WARPARROW) case 2\n");
             return false;
         }
 
@@ -195,7 +195,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (DOCKARROW) case 2");
+            System.out.println("Rect not found (DOCKARROW) case 2\n");
             return false;
         }
 
@@ -211,13 +211,13 @@ public class GetDestination {
                         Rect1920x1080.CLOSELOCATIONBUTTON_Y, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN);
 
         if (closeButtonWindowLocation != null) {
-            System.out.printf("Rect found (CLOSEBUTTONLOCAITON) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
+            System.out.printf("Rect found (CLOSEBUTTONLOCATION) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
             new ClickScreen().leftClickCenterButton(closeButtonWindowLocation);
 
             return true;
 
         } else {
-            System.out.println("Rect not found (CLOSEBUTTONLOCAITON) multiple cases (1,2,3)");
+            System.out.println("Rect not found (CLOSEBUTTONLOCAITON) multiple cases (1,2,3)\n");
             return false;
         }
     }

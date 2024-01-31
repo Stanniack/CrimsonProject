@@ -39,7 +39,7 @@ public class SegmentedRegions {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        bf = ImageIO.read(imageFile);
+        bf = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png"));
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
