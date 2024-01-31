@@ -3,6 +3,19 @@ package com.mycompany.crimsonproject.utils;
 /**
  *
  * @author Stanniack
+ * BLOCKSCREEN calculator: 
+ * x1 = x; 
+ * x2 = x + w; 
+ * y1 = y; 
+ * y2 + h.
+ * BLOSCKSCREEN calculator with DEADZONE:
+ * x1 = x; 
+ * x2 = x + w + DEADZONE; 
+ * y1 = y; 
+ * y2 + h + DEADZONE.
+ * 
+ * BLOCKSCREEN: Rect limitation where to find the recognized rects
+ * DEADZONE: Pixel's amount to add in the BLOCKSCREEN for caution
  */
 public class Rect1920x1080 {
 
