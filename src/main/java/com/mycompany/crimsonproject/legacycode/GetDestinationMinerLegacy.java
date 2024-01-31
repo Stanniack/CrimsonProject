@@ -34,8 +34,8 @@ public class GetDestinationMinerLegacy {
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
                     Rectangle rectResult = sr3
                             .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCATIONSYMBOL_W1, Rect1920x1080.LOCATIONSYMBOL_H1,
-                                    Rect1920x1080.LOCATIONSYMBOL_X, Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN,
-                                    Rect1920x1080.LOCATIONSYMBOL_Y, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
+                                    Rect1920x1080.LOCATIONSYMBOL_X1, Rect1920x1080.LOCATIONSYMBOL_X2_W,
+                                    Rect1920x1080.LOCATIONSYMBOL_Y1, Rect1920x1080.LOCATIONSYMBOL_Y2_H);
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
@@ -53,8 +53,8 @@ public class GetDestinationMinerLegacy {
                                     Rect1920x1080.MININGBOT1_W3,
                                     Rect1920x1080.MININGBOT1_H1,
                                     Rect1920x1080.MININGBOT1_H2,
-                                    Rect1920x1080.MININGBOT1_X, Rect1920x1080.MININGBOT1_X2_W_BLOCKSCREEN,
-                                    Rect1920x1080.MININGBOT1_Y, Rect1920x1080.MININGBOT1_Y2_H_BLOCKSCREEN);
+                                    Rect1920x1080.MININGBOT1_X1, Rect1920x1080.MININGBOT1_X2_W,
+                                    Rect1920x1080.MININGBOT1_Y1, Rect1920x1080.MININGBOT1_Y2_H);
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
@@ -77,8 +77,8 @@ public class GetDestinationMinerLegacy {
                     /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
                     Rectangle rectResult = sr3
                             .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
-                                    Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
-                                    Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
+                                    Rect1920x1080.WARPARROW_X1, Rect1920x1080.WARPARROW_X2_W,
+                                    Rect1920x1080.WARPARROW_Y1, Rect1920x1080.WARPARROW_Y2_H);
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
@@ -116,8 +116,8 @@ public class GetDestinationMinerLegacy {
 
         Rectangle rectResult = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.CLOSELOCATIONBUTTON_W1, Rect1920x1080.CLOSELOCATIONBUTTON_H1,
-                        Rect1920x1080.CLOSELOCATIONBUTTON_X, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W_BLOCKSCREEN,
-                        Rect1920x1080.CLOSELOCATIONBUTTON_Y, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.CLOSELOCATIONBUTTON_X1, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W,
+                        Rect1920x1080.CLOSELOCATIONBUTTON_Y1, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H);
 
         if (rectResult != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCAITON) case 3 - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);

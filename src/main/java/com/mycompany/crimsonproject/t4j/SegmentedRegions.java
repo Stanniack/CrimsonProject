@@ -230,7 +230,7 @@ public class SegmentedRegions {
 
         for (int i = 0; i < result.size(); i++) {
             if (((result.get(i).width == Rect1920x1080.MAXCARGO1_W1 || result.get(i).width == Rect1920x1080.MAXCARGO1_W2)
-                    && result.get(i).height == Rect1920x1080.MAXCARGO1_HEIGHT1)
+                    && result.get(i).height == Rect1920x1080.MAXCARGO1_H1)
                     || (result.get(i).width == Rect1920x1080.MAXCARGO2_W1 && result.get(i).height == Rect1920x1080.MAXCARGO2_H1)
                     || (result.get(i).width == Rect1920x1080.MAXCARGO3_W1 && result.get(i).height == Rect1920x1080.MAXCARGO3_H1)
                     && (result.get(i).x >= x && result.get(i).x <= x2)

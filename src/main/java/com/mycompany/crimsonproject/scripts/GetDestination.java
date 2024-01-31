@@ -107,8 +107,8 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCATIONSYMBOL_W1, Rect1920x1080.LOCATIONSYMBOL_H1,
-                        Rect1920x1080.LOCATIONSYMBOL_X, Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN,
-                        Rect1920x1080.LOCATIONSYMBOL_Y, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.LOCATIONSYMBOL_X1, Rect1920x1080.LOCATIONSYMBOL_X2_W,
+                        Rect1920x1080.LOCATIONSYMBOL_Y1, Rect1920x1080.LOCATIONSYMBOL_Y2_H);
 
         if (locationButton != null) {
             System.out.printf("Rect found (LOCATIONSYNMBOL) case 0 - Width: %d and height: %d\n\n", locationButton.width, locationButton.height);
@@ -129,8 +129,8 @@ public class GetDestination {
                         Rect1920x1080.MININGBOT1_W3,
                         Rect1920x1080.MININGBOT1_H1,
                         Rect1920x1080.MININGBOT1_H2,
-                        Rect1920x1080.MININGBOT1_X, Rect1920x1080.MININGBOT1_X2_W_BLOCKSCREEN,
-                        Rect1920x1080.MININGBOT1_Y, Rect1920x1080.MININGBOT1_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.MININGBOT1_X1, Rect1920x1080.MININGBOT1_X2_W,
+                        Rect1920x1080.MININGBOT1_Y1, Rect1920x1080.MININGBOT1_Y2_H);
 
         if (miningBot1Label != null) {
             System.out.printf("Rect found (MININGBOT1) case 1 - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
@@ -147,8 +147,8 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
                 .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.HOMESTATION1_W1, Rect1920x1080.HOMESTATION1_W2, Rect1920x1080.HOMESTATION1_H1,
-                        Rect1920x1080.HOMESTATION1_X, Rect1920x1080.HOMESTATION1_X2_W_BLOCKSCREEN,
-                        Rect1920x1080.HOMESTATION1_Y, Rect1920x1080.HOMESTATION1_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.HOMESTATION1_X1, Rect1920x1080.HOMESTATION1_X2_W,
+                        Rect1920x1080.HOMESTATION1_Y1, Rect1920x1080.HOMESTATION1_Y2_H);
 
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) case 1 - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
@@ -166,8 +166,8 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
-                        Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
-                        Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.WARPARROW_X1, Rect1920x1080.WARPARROW_X2_W,
+                        Rect1920x1080.WARPARROW_Y1, Rect1920x1080.WARPARROW_Y2_H);
 
         if (warpArrow != null) {
             System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
@@ -186,8 +186,8 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.DOCKARROW_W1, Rect1920x1080.DOCKARROW_H1,
-                        Rect1920x1080.WARPARROW_X, Rect1920x1080.WARPARROW_X2_B_BLOCKSCREEN,
-                        Rect1920x1080.WARPARROW_Y, Rect1920x1080.WARPARROW_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.WARPARROW_X1, Rect1920x1080.WARPARROW_X2_W,
+                        Rect1920x1080.WARPARROW_Y1, Rect1920x1080.WARPARROW_Y2_H);
 
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCKARROW) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
@@ -207,8 +207,8 @@ public class GetDestination {
 
         Rectangle closeButtonWindowLocation = sr3
                 .getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.CLOSELOCATIONBUTTON_W1, Rect1920x1080.CLOSELOCATIONBUTTON_H1,
-                        Rect1920x1080.CLOSELOCATIONBUTTON_X, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W_BLOCKSCREEN,
-                        Rect1920x1080.CLOSELOCATIONBUTTON_Y, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN);
+                        Rect1920x1080.CLOSELOCATIONBUTTON_X1, Rect1920x1080.CLOSELOCATIONBUTTON_X2_W,
+                        Rect1920x1080.CLOSELOCATIONBUTTON_Y1, Rect1920x1080.CLOSELOCATIONBUTTON_Y2_H);
 
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);

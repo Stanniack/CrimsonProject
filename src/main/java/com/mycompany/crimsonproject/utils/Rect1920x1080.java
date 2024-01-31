@@ -9,7 +9,7 @@ public class Rect1920x1080 {
     /* ------------------------------------------------------------- */
     public static final int MAXCARGO1_W1 = 111;
     public static final int MAXCARGO1_W2 = 110;
-    public static final int MAXCARGO1_HEIGHT1 = 24;
+    public static final int MAXCARGO1_H1 = 24;
 
     public static final int MAXCARGO2_W1 = 101;
     public static final int MAXCARGO2_H1 = 10;
@@ -29,10 +29,10 @@ public class Rect1920x1080 {
     public static final int LOCATIONSYMBOL_W1 = 10;
     public static final int LOCATIONSYMBOL_H1 = 14;
     /* This find where the button Location is in the display */
-    public static final int LOCATIONSYMBOL_X = 0;
-    public static final int LOCATIONSYMBOL_Y = 460;
-    public static final int LOCATIONSYMBOL_X2_W_BLOCKSCREEN = 50;
-    public static final int LOCATIONSYMBOL_Y2_H_BLOCKSCREEN = 530;
+    public static final int LOCATIONSYMBOL_X1 = 0;
+    public static final int LOCATIONSYMBOL_Y1 = 460;
+    public static final int LOCATIONSYMBOL_X2_W = 50;
+    public static final int LOCATIONSYMBOL_Y2_H = 530;
 
     /* ------------------------------------------------------------- */
     public static final int MININGBOT1_W1 = 59;
@@ -41,22 +41,23 @@ public class Rect1920x1080 {
     public static final int MININGBOT1_H1 = 9;
     public static final int MININGBOT1_H2 = 12;
     /* This find where the button MINNINGBOT1 is in the display */
-    public static final int MININGBOT1_X = 650;
-    public static final int MININGBOT1_Y = 380;
-    public static final int MININGBOT1_X2_W_BLOCKSCREEN = 680;
-    public static final int MININGBOT1_Y2_H_BLOCKSCREEN = 410;
+    public static final int MININGBOT1_X1 = 650;
+    public static final int MININGBOT1_Y1 = 380;
+    public static final int MININGBOT1_X2_W = 680;
+    public static final int MININGBOT1_Y2_H = 410;
 
     /* ------------------------------------------------------------- */
     public static final int WARPARROW_W1 = 13;
     public static final int WARPARROW_W2 = 12;
     public static final int WARPARROW_H1 = 6;
+    
     public static final int DOCKARROW_W1 = 12;
     public static final int DOCKARROW_H1 = 12;
     /* This find where the button WARPARROW is in the display */
-    public static final int WARPARROW_X = 600;
-    public static final int WARPARROW_Y = 360;
-    public static final int WARPARROW_X2_B_BLOCKSCREEN = 1000;
-    public static final int WARPARROW_Y2_H_BLOCKSCREEN = 450;
+    public static final int WARPARROW_X1 = 600;
+    public static final int WARPARROW_Y1 = 360;
+    public static final int WARPARROW_X2_W = 1000;
+    public static final int WARPARROW_Y2_H = 450;
 
     /* ------------------------------------------------------------- */
     public static final int HOMESTATION1_W1 = 75;
@@ -65,19 +66,19 @@ public class Rect1920x1080 {
     public static final int HOMESTATION1_H1 = 9;
     public static final int HOMESTATION1_H2 = 12; // must be removed!
     /* This find where the button HOMESTATION1 is in the display */
-    public static final int HOMESTATION1_X = 620;
-    public static final int HOMESTATION1_Y = 360;
-    public static final int HOMESTATION1_X2_W_BLOCKSCREEN = 710;
-    public static final int HOMESTATION1_Y2_H_BLOCKSCREEN = 405;
+    public static final int HOMESTATION1_X1 = 620;
+    public static final int HOMESTATION1_Y1 = 360;
+    public static final int HOMESTATION1_X2_W = 710;
+    public static final int HOMESTATION1_Y2_H = 405;
 
     /* ------------------------------------------------------------- */
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
     public static final int CLOSELOCATIONBUTTON_H1 = 10;
     /* This find where the button CLOSEBUTTONLOCATION is in the display */
-    public static final int CLOSELOCATIONBUTTON_X = 1000;
-    public static final int CLOSELOCATIONBUTTON_Y = 250;
-    public static final int CLOSELOCATIONBUTTON_X2_W_BLOCKSCREEN = 1050;
-    public static final int CLOSELOCATIONBUTTON_Y2_H_BLOCKSCREEN = 300;
+    public static final int CLOSELOCATIONBUTTON_X1 = 1000;
+    public static final int CLOSELOCATIONBUTTON_Y1 = 250;
+    public static final int CLOSELOCATIONBUTTON_X2_W = 1050;
+    public static final int CLOSELOCATIONBUTTON_Y2_H = 300;
 
     /* ------------------------------------------------------------- 
 
@@ -111,33 +112,33 @@ public class Rect1920x1080 {
     public static final int VELDSPAR_H2 = 12;
 
     /* This find where the floating overview->mining window is in the display */
-    public static final int OVERVIEWMINING_X = 1300;
-    public static final int OVERVIEWMINING_Y = 275;
-    public static final int OVERVIEWMINING_X2_W_BLOCKSCREEN = 1900;
-    public static final int OVERVIEWMINING_Y2_H_BLOCKSCREEN = 900;
+    public static final int OVERVIEWMINING_X1 = 1300;
+    public static final int OVERVIEWMINING_Y1 = 275;
+    public static final int OVERVIEWMINING_X2_W = 1900;
+    public static final int OVERVIEWMINING_Y2_H = 900;
 
     /* ------------------------------------------------------------- */
     public static final int LOCKTARGET_W1 = 26;
     public static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
-    public static final int LOCKTARGET_X = 1490;
-    public static final int LOCKTARGET_Y = 135;
-    public static final int LOCKTARGET_X2_W_BLOCKSCREEN = 1510;
-    public static final int LOCKTARGET_Y2_H_BLOCKSCREEN = 150;
+    public static final int LOCKTARGET_X1 = 1490;
+    public static final int LOCKTARGET_Y1 = 135;
+    public static final int LOCKTARGET_X2_W = 1510;
+    public static final int LOCKTARGET_Y2_H = 150;
 
     /* ------------------------------------------------------------- 
     This find where the rectangle of MAXCARGO is in the display */
-    public static final int MAXCARGO_BLOCKSCREEN_X = 340;
-    public static final int MAXCARGO_BLOCKSCREEN_Y = 290;
-    public static final int MAXCARGO_X2_W_BLOCKSCREEN = 360;
-    public static final int MAXCARGO_Y2_H_BLOCKSCREEN = 310;
+    public static final int MAXCARGO_X1 = 340;
+    public static final int MAXCARGO_Y1 = 290;
+    public static final int MAXCARGO_X2_W = 360;
+    public static final int MAXCARGO_Y2_H = 310;
 
     /* ------------------------------------------------------------- 
     This find where the rectangle of COMPACTMAXCARGO is in the display */
-    public static final int COMPACTMAXCARGO_BLOCKSCREEN_X = 200;
-    public static final int COMPACTMAXCARGO_BLOCKSCREEN_Y = 250;
-    public static final int COMPACTMAXCARGO_X2_W_BLOCKSCREEN = 300;
-    public static final int COMPACTMAXCARGO_Y2_H_BLOCKSCREEN = 350;
+    public static final int COMPACTEDMAXCARGO_X1 = 200;
+    public static final int COMPACTEDMAXCARGO_Y1 = 250;
+    public static final int COMPACTEDMAXCARGO_X2_W = 300;
+    public static final int COMPACEDTMAXCARGO_Y2_H = 350;
 
     /* ------------------------------------------------------------- */
     // (122, 16); (121, 14); (121, 25)
@@ -147,9 +148,21 @@ public class Rect1920x1080 {
     public static final int APPROACHING_H2 = 16;
     public static final int APPROACHING_H3 = 14;
     /* This find where the word Approaching is in the display */
-    public static final int APPROACHING_BLOCKSCREEN_X = 885;
-    public static final int APPROACHING_BLOCKSCREEN_Y = 770;
-    public static final int APPROACHING_X2_W_BLOCKSCREEN = 915;
-    public static final int APPROACHING_Y2_H_BLOCKSCREEN = 795;
+    public static final int APPROACHING_X1 = 885;
+    public static final int APPROACHING_Y1 = 770;
+    public static final int APPROACHING_X2_W = 915;
+    public static final int APPROACHING_Y2_H = 795;
 
+    /* ------------------------------------------------------------- */
+    public static final int ITEMGANGAR_W1 = 24;
+    public static final int ITEMGANGAR_H1 = 9;
+    /* This find where the word ITEM (Not HANGAR) is in the display */
+    public static final int ITEMHANGAR_X1 = 80;
+    public static final int ITEMHANGAR_Y1 = 290;
+    public static final int ITEMHANGAR_X2_W = 260;
+    public static final int ITEMHANGAR_Y2_H = 720;
+    
+    
+    
+    
 }

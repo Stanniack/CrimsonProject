@@ -62,9 +62,8 @@ public class ExtractOre {
                     /* Reset Y list coordinates to 1081y */
                     List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
-                    HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOres_BLOCKSCREEN(
-                            Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
+                    HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOres_BLOCKSCREEN(Rect1920x1080.OVERVIEWMINING_X1, Rect1920x1080.OVERVIEWMINING_X2_W,
+                            Rect1920x1080.OVERVIEWMINING_Y1, Rect1920x1080.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
 
@@ -117,8 +116,8 @@ public class ExtractOre {
                     //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
                     Rectangle warpArrow = sr3
                             .getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.WARPARROW_W1, Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
-                                    Rect1920x1080.OVERVIEWMINING_X, Rect1920x1080.OVERVIEWMINING_X2_W_BLOCKSCREEN,
-                                    Rect1920x1080.OVERVIEWMINING_Y, Rect1920x1080.OVERVIEWMINING_Y2_H_BLOCKSCREEN);
+                                    Rect1920x1080.OVERVIEWMINING_X1, Rect1920x1080.OVERVIEWMINING_X2_W,
+                                    Rect1920x1080.OVERVIEWMINING_Y1, Rect1920x1080.OVERVIEWMINING_Y2_H);
 
                     if (warpArrow != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -140,8 +139,8 @@ public class ExtractOre {
 
                 case 2 -> {
                     Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
-                            Rect1920x1080.LOCKTARGET_X, Rect1920x1080.LOCKTARGET_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.LOCKTARGET_X1, Rect1920x1080.LOCKTARGET_X2_W,
+                            Rect1920x1080.LOCATIONSYMBOL_X2_W, Rect1920x1080.LOCATIONSYMBOL_Y2_H);
 
                     if (lockTargetFromSelectedItem != null) {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -166,8 +165,8 @@ public class ExtractOre {
 
                 case 4 -> {
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
-                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_X, Rect1920x1080.COMPACTMAXCARGO_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.COMPACTMAXCARGO_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
+                            Rect1920x1080.COMPACTEDMAXCARGO_Y1, Rect1920x1080.COMPACEDTMAXCARGO_Y2_H);
 
                     /* go to the station and dragon itens */
                     if (compactMaxCargo != null) {
@@ -186,8 +185,8 @@ public class ExtractOre {
                 case 5 -> {
                     Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
                             Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
-                            Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.APPROACHING_X1, Rect1920x1080.APPROACHING_X2_W,
+                            Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
 
                     if (approaching != null) {
                         System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -216,13 +215,13 @@ public class ExtractOre {
 
                 case 6 -> {
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
-                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_X, Rect1920x1080.COMPACTMAXCARGO_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.COMPACTMAXCARGO_BLOCKSCREEN_Y, Rect1920x1080.COMPACTMAXCARGO_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
+                            Rect1920x1080.COMPACTEDMAXCARGO_Y1, Rect1920x1080.COMPACEDTMAXCARGO_Y2_H);
 
                     Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
                             Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
-                            Rect1920x1080.APPROACHING_BLOCKSCREEN_X, Rect1920x1080.APPROACHING_X2_W_BLOCKSCREEN,
-                            Rect1920x1080.APPROACHING_BLOCKSCREEN_Y, Rect1920x1080.APPROACHING_Y2_H_BLOCKSCREEN);
+                            Rect1920x1080.APPROACHING_X1, Rect1920x1080.APPROACHING_X2_W,
+                            Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
 
                     /* There is no max cargo neither minering ore */
                     if (compactMaxCargo == null && approaching == null) {
@@ -231,8 +230,8 @@ public class ExtractOre {
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
                             // click again in lock target to unlock it and restart minering other ore! 
                             Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
-                                    Rect1920x1080.LOCKTARGET_X, Rect1920x1080.LOCKTARGET_X2_W_BLOCKSCREEN,
-                                    Rect1920x1080.LOCATIONSYMBOL_X2_W_BLOCKSCREEN, Rect1920x1080.LOCATIONSYMBOL_Y2_H_BLOCKSCREEN);
+                                    Rect1920x1080.LOCKTARGET_X1, Rect1920x1080.LOCKTARGET_X2_W,
+                                    Rect1920x1080.LOCATIONSYMBOL_X2_W, Rect1920x1080.LOCATIONSYMBOL_Y2_H);
 
                             if (lockTargetFromSelectedItem != null) {
                                 System.out.printf("Rect found (LOCKTARGET) at case 6 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
