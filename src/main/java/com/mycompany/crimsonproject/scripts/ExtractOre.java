@@ -207,7 +207,7 @@ public class ExtractOre {
                     flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
+                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS/1000) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6
