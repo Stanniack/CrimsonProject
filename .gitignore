@@ -1,3 +1,4 @@
 /target/
 src/main/java/com/mycompany/crimsonproject/datateriners/eng.traineddata
 *.png
+src/main/java/com/mycompany/crimsonproject/CrimsonProject.java
