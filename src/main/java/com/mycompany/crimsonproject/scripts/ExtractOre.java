@@ -191,7 +191,7 @@ public class ExtractOre {
                             Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
 
                     if (approaching != null) {
-                        System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                        System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
                                 approaching.width, approaching.height, approaching.x, approaching.y);
 
                         this.amountRect--; // go back to case 4
