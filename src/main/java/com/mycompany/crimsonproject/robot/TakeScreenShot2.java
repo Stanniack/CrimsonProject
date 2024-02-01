@@ -19,7 +19,7 @@ public class TakeScreenShot2 {
     
     public void take () throws InterruptedException {
         try {
-            Thread.sleep(300);
+            Thread.sleep(200);
             
             Robot bot = new Robot();
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";

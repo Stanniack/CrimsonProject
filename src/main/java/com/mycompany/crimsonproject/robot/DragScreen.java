@@ -26,7 +26,7 @@ public class DragScreen {
         bot.mousePress(leftClick);
         bot.mouseMove(1230, 870);
 
-        Thread.sleep(250);
+        Thread.sleep(150);
         bot.mouseRelease(leftClick);
 
     }

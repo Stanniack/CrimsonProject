@@ -33,7 +33,6 @@ public class DragClickEventInInventoryStation {
         Thread.sleep(150);
         bot.mouseRelease(leftClick);
         
-        Thread.sleep(150);
 
     }
 }
