@@ -46,7 +46,7 @@ public class ExtractOre {
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
 
         SegmentedRegions sr3 = new SegmentedRegions();
-        
+
         do {
 
             boolean flagNoDragScreen = false;
@@ -197,17 +197,18 @@ public class ExtractOre {
                         flagNoDragScreen = true;
 
                         Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+                        
                     } else {
                         System.out.println("Rect (APRROACHING) not found");
                         System.out.println("Time added until set another ore: " + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds");
-                        System.out.println("Added 1 to amount var until set another ore - Max var tolerance: " + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
                         this.flagUntilBeDestroyed_AMOUNT += 1;
                     }
 
                     flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
+                    System.out.println("Added 1 to amount var until set another ore - Max var tolerance: " + this.flagUntilBeDestroyed_AMOUNT + "/" + TIMETOWAIT_TOBEDSTROYED_MS / 1000 + "\n");
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS/1000) {
+                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS / 1000) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6
