@@ -1,4 +1,4 @@
-#Alpha 0 - 29/01/24
+# Alpha 0 - 29/01/24
 
 * Minera apenas 5 tipos de minérios: Condensed Scordite, Scordite, Dense Veldspar e Veldspar
   - Mineração por prioridade, respectivamente
