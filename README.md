@@ -5,7 +5,7 @@
 * Minera apenas 5 tipos de minérios: Condensed Scordite, Scordite, Dense Veldspar e Veldspar
   - Mineração por prioridade, respectivamente
 
-* Utiliza Apenas a nave Venture 5km³ carho hold
+* Utiliza Apenas a nave Venture 5km³ cargo hold
     - Por enquanto não possui funcionalidade de drones mineradores
 
 * Estação espacial e área de mineração precisam estar no mesmo sistema solar
