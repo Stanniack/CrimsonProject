@@ -164,7 +164,8 @@ public class ExtractOre {
                 } // end case 3
 
                 case 4 -> {
-                    Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
+                    Rectangle compactMaxCargo = sr3.getSegmentedRegion_2WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_W2,
+                            Rect1920x1080.COMPACTMAXCARGO_H1,
                             Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
                             Rect1920x1080.COMPACTEDMAXCARGO_Y1, Rect1920x1080.COMPACEDTMAXCARGO_Y2_H);
 
