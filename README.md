@@ -1,3 +1,5 @@
+<h1 align="center"> Releases/Lançamentos </h1># 
+
 # Alpha 0 - 29/01/24
 
 * Minera apenas 5 tipos de minérios: Condensed Scordite, Scordite, Dense Veldspar e Veldspar
@@ -12,3 +14,10 @@
     - MININGBOT1 para a área de mineração;
 
 * Não possui interface gráfica, uma vez que é apenas uma versão Alpha de testes
+
+# Bug fixes
+
+* Versão
+   - Descrição
+
+  
