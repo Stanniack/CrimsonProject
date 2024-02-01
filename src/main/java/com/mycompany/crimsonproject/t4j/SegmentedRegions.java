@@ -22,8 +22,10 @@ import net.sourceforge.tess4j.TesseractException;
 public class SegmentedRegions {
 
     Tesseract instance;
-    File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "start.png");;
     BufferedImage bf;
+    
+    /* It might avoid the null pointer exception from Tesseract */
+    File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "start.png");
 
     public SegmentedRegions() {
         instance = new Tesseract();
