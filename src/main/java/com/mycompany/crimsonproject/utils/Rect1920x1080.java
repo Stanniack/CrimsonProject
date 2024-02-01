@@ -81,9 +81,9 @@ public class Rect1920x1080 {
     public static final int HOMESTATION1_H2 = 12; // must be removed!
     /* This find where the button HOMESTATION1 is in the display */
     public static final int HOMESTATION1_X1 = 620;
-    public static final int HOMESTATION1_Y1 = 360;
-    public static final int HOMESTATION1_X2_W = 710;
-    public static final int HOMESTATION1_Y2_H = 405;
+    public static final int HOMESTATION1_Y1 = 340;
+    public static final int HOMESTATION1_X2_W = 770;
+    public static final int HOMESTATION1_Y2_H = 420;
 
     /* ------------------------------------------------------------- */
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
