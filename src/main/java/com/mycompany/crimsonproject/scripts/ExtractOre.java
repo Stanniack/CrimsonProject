@@ -27,7 +27,7 @@ public class ExtractOre {
     private int flagSearchLockTarget = 0;
 
     private static final int SWITCHFLAG = 8;
-    private static final int LOCKTARGET_NOTFOUND = 5; // 10 secs
+    private static final int LOCKTARGET_NOTFOUND = 7; // 10 secs
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
@@ -207,7 +207,7 @@ public class ExtractOre {
                     flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
+                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS/1000) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6
