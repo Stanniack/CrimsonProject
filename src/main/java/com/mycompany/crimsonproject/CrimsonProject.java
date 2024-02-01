@@ -18,14 +18,14 @@ public class CrimsonProject {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
 
-                new CheckCargoDeposit().check();
-                Thread.sleep(15000);
+                //new CheckCargoDeposit().check();
+                //Thread.sleep(15000);
 
-                new GetDestination().getDestination(1);
-                Thread.sleep(25000);
+                //new GetDestination().getDestination(1);
+                //Thread.sleep(25000);
 
                 new ExtractOre().extract();
                 Thread.sleep(35000);

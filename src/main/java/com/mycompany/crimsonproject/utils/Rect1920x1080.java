@@ -90,8 +90,8 @@ public class Rect1920x1080 {
     /* This find where the button CLOSEBUTTONLOCATION is in the display */
     public static final int CLOSELOCATIONBUTTON_X1 = 1000;
     public static final int CLOSELOCATIONBUTTON_Y1 = 250;
-    public static final int CLOSELOCATIONBUTTON_X2_W = 1050;
-    public static final int CLOSELOCATIONBUTTON_Y2_H = 300;
+    public static final int CLOSELOCATIONBUTTON_X2_W = 1170;
+    public static final int CLOSELOCATIONBUTTON_Y2_H = 320;
 
     /* ------------------------------------------------------------- 
 
