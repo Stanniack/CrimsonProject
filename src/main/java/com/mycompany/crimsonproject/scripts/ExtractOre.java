@@ -34,7 +34,7 @@ public class ExtractOre {
     private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1700000; // 1700 secs
     private static final int GOTO_HOMESTATION = 0;
 
-    private Integer priorityOre = 0;
+    private Integer priorityOre;
     private final Integer CSpriority = 5;
     private final Integer Spriority = 4;
     private final Integer DVpriority = 3;
@@ -52,6 +52,7 @@ public class ExtractOre {
 
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
+            this.priorityOre = 0;
 
             new TakeScreenShot2().take();
 
