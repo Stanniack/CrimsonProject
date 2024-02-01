@@ -15,7 +15,6 @@ public class ClickScreen {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
 
-        Thread.sleep(100);
         Robot bot = new Robot();
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
@@ -31,7 +30,6 @@ public class ClickScreen {
 
         int rightClick = InputEvent.BUTTON3_DOWN_MASK;
 
-        Thread.sleep(100);
         Robot bot = new Robot();
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
@@ -48,7 +46,6 @@ public class ClickScreen {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
 
-        Thread.sleep(100);
         Robot bot = new Robot();
 
         bot.mouseMove(1230, 720);
@@ -62,7 +59,6 @@ public class ClickScreen {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
 
-        Thread.sleep(100);
         Robot bot = new Robot();
 
         bot.mouseMove(x, y);
