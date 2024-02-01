@@ -22,7 +22,7 @@ import net.sourceforge.tess4j.TesseractException;
 public class SegmentedRegions {
 
     Tesseract instance;
-    File imageFile;
+    File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "start.png");;
     BufferedImage bf;
 
     public SegmentedRegions() {
@@ -39,7 +39,7 @@ public class SegmentedRegions {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        bf = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png"));
+        bf = ImageIO.read(imageFile);
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
