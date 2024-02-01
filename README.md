@@ -1,4 +1,4 @@
-<h1 align="center"> Releases/Lançamentos </h1># 
+<h1 align="center"> Releases/Lançamentos </h1>
 
 # Alpha 0 - 29/01/24
 
