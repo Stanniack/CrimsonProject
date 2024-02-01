@@ -55,7 +55,7 @@ public class ExtractOre {
 
             new TakeScreenShot2().take();
 
-            switch (amountRect) {
+            switch (this.amountRect) {
 
                 case 0 -> {
 
@@ -71,11 +71,11 @@ public class ExtractOre {
 
                         for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
-                            for (int i = 0; i < priorityList.size(); i++) {
+                            for (int i = 0; i < this.priorityList.size(); i++) {
 
-                                if (item.getKey().contains("P" + i) && priorityOre <= priorityList.get(i)) {
+                                if (item.getKey().contains("P" + i) && this.priorityOre <= this.priorityList.get(i)) {
 
-                                    priorityOre = priorityList.get(i);
+                                    this.priorityOre = this.priorityList.get(i);
 
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
                                     System.out.println(item.getValue().y + " <? " + closestOreList.get(i));
@@ -95,7 +95,7 @@ public class ExtractOre {
                             System.out.println("Closest better ore found (Y Coordinate): "
                                     + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")");
 
-                            amountRect++; // go to case 1
+                            this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
                             new ClickScreen().rightClickCenterButton(betterOre.getValue()); /////////////!!!
 
@@ -196,19 +196,22 @@ public class ExtractOre {
                         this.amountRect--; // go back to case 4
                         flagNoDragScreen = true;
 
+                        flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
+                        System.out.println("Time added until set another ore: "
+                                + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
+
                         Thread.sleep(TIMETOWAIT_APPROACHING_MS);
-                        
+
                     } else {
                         System.out.println("Rect (APRROACHING) not found");
-                        System.out.println("Time added until set another ore: " + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds");
+                        System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
+                                + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
+
                         this.flagUntilBeDestroyed_AMOUNT += 1;
                     }
 
-                    flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
-                    System.out.println("Added 1 to amount var until set another ore - Max var tolerance: " + this.flagUntilBeDestroyed_AMOUNT + "/" + TIMETOWAIT_TOBEDSTROYED_MS / 1000 + "\n");
-
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS / 1000) {
+                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || (this.flagUntilBeDestroyed_MS / 1000) > (TIMETOWAIT_TOBEDSTROYED_MS / 1000)) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6

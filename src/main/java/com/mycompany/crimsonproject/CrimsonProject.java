@@ -28,7 +28,7 @@ public class CrimsonProject {
                 Thread.sleep(25000);
 
                 new ExtractOre().extract();
-                //Thread.sleep(35000);
+                Thread.sleep(35000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
