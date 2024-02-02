@@ -23,7 +23,7 @@ public class SegmentedRegions {
 
     Tesseract instance;
     BufferedImage bf;
-    
+
     /* It might avoid the null pointer exception from Tesseract */
     File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "start.png");
 
@@ -265,32 +265,32 @@ public class SegmentedRegions {
 
                 if ((result.get(i).width == Rect1920x1080.CONDENSED_W1 || result.get(i).width == Rect1920x1080.CONDENSED_W2)
                         && result.get(i).height == Rect1920x1080.CONDENSED_H1) {
-                    hm.put("P1:CS - i: " + i, result.get(i));
+                    hm.put("P4:CS - i: " + i, result.get(i));
 
                 }
 
                 if (result.get(i).width == Rect1920x1080.SCORDITE_W1
                         && (result.get(i).height == Rect1920x1080.SCORDITE_H1 || result.get(i).height == Rect1920x1080.SCORDITE_H2)) {
-                    hm.put("P2:S - i: " + i, result.get(i));
+                    hm.put("P3:S - i: " + i, result.get(i));
 
                 }
 
                 if ((result.get(i).width == Rect1920x1080.DENSE_W1 || result.get(i).width == Rect1920x1080.DENSE_W2)
                         && result.get(i).height == Rect1920x1080.DENSE_H1) {
-                    hm.put("P3:DV - i: " + i, result.get(i));
+                    hm.put("P2:DV - i: " + i, result.get(i));
                 }
 
                 if ((result.get(i).width == Rect1920x1080.CONCENTRATED_W1 || result.get(i).width == Rect1920x1080.CONCENTRATED_W2)
                         && result.get(i).height == Rect1920x1080.CONCENTRATED_H1
                         || (result.get(i).width == Rect1920x1080.CONCENTRATED_W2 || result.get(i).width == Rect1920x1080.CONCENTRATED_W3)
                         && result.get(i).height == Rect1920x1080.CONCENTRATED_H2) {
-                    hm.put("P4:CV - i: " + i, result.get(i));
+                    hm.put("P1:CV - i: " + i, result.get(i));
                 }
 
                 if (((result.get(i).width == Rect1920x1080.VELDSPAR_W1 || result.get(i).width == Rect1920x1080.VELDSPAR_W2)
                         && result.get(i).height == Rect1920x1080.VELDSPAR_H1)
                         || result.get(i).width == Rect1920x1080.VELDSPAR_W3 && result.get(i).height == Rect1920x1080.VELDSPAR_H2) {
-                    hm.put("P5:V - i: " + i, result.get(i));
+                    hm.put("P0:V - i: " + i, result.get(i));
                 }
             }
         }

@@ -35,14 +35,14 @@ public class ExtractOre {
     private static final int GOTO_HOMESTATION = 0;
 
     private Integer priorityOre;
-    private final Integer CSpriority = 5;
-    private final Integer Spriority = 4;
-    private final Integer DVpriority = 3;
-    private final Integer CVpriority = 2;
-    private final Integer Vpriority = 1;
+    private final Integer CSpriority = 4;
+    private final Integer Spriority = 3;
+    private final Integer DVpriority = 2;
+    private final Integer CVpriority = 1;
+    private final Integer Vpriority = 0;
 
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
-    private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
+    private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
 
@@ -52,7 +52,7 @@ public class ExtractOre {
 
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
-            this.priorityOre = 0;
+            this.priorityOre = this.priorityList.size();
 
             new TakeScreenShot2().take();
 
@@ -72,15 +72,15 @@ public class ExtractOre {
 
                         for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
-                            for (int i = 0; i < this.priorityList.size(); i++) {
+                            for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
 
-                                if (item.getKey().contains("P" + i) && this.priorityOre <= this.priorityList.get(i)) {
+                                /*System.out.println(item.getKey() + " contains " + ("P" + i) + "? " + item.getKey().contains("P" + i) + " and " + this.priorityOre + "=>" + this.priorityList.get(i) + " ?");
+                                this.priorityOre = this.priorityList.get(i);*/
 
-                                    this.priorityOre = this.priorityList.get(i);
+                                if (item.getKey().contains("P" + i) && this.priorityOre >= this.priorityList.get(i)) {
 
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                    System.out.println(item.getValue().y + " <? " + closestOreList.get(i));
-
+                                    System.out.println(item.getValue().y + " >? " + closestOreList.get(i));
                                     if (item.getValue().y <= closestOreList.get(i)) {
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
