@@ -157,9 +157,12 @@ public class ExtractOre {
                 } // end case 2
 
                 case 3 -> {
-                    /* This case needs attetion, it's a fragile code */
+                    /* This case needs attetion, it's a fragile code - Two miner cannons*/
                     Thread.sleep(5000);
                     new ClickScreen().leftClick(1065, 935);
+                    Thread.sleep(150);
+                    new ClickScreen().leftClick(1115, 935);
+                    
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
                 } // end case 3
