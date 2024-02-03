@@ -31,7 +31,7 @@ public class ExtractOre {
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1700000; // 1700 secs
+    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private Integer priorityOre;

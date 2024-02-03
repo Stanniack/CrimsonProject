@@ -13,7 +13,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Stanniack
  */
-public class CrimsonProject {
+public class MainNotebook {
 
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
@@ -22,16 +22,16 @@ public class CrimsonProject {
             try {
 
                 new CheckCargoDeposit().check();
-                Thread.sleep(18000);
+                Thread.sleep(20000);
 
                 new GetDestination().getDestination(1);
                 Thread.sleep(30000);
 
                 new ExtractOre().extract();
-                Thread.sleep(35000);
+                Thread.sleep(40000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
-                Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MainNotebook.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
