@@ -215,7 +215,7 @@ public class ExtractOre {
                     }
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || (this.flagUntilBeDestroyed_MS / 1000) > (TIMETOWAIT_TOBEDSTROYED_MS / 1000)) {
+                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6
@@ -223,6 +223,7 @@ public class ExtractOre {
                 } // end case 5
 
                 case 6 -> {
+                    
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
                             Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
                             Rect1920x1080.COMPACTEDMAXCARGO_Y1, Rect1920x1080.COMPACEDTMAXCARGO_Y2_H);
