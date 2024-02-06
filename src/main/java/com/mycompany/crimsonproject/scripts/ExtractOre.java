@@ -76,7 +76,6 @@ public class ExtractOre {
 
                                 /*System.out.println(item.getKey() + " contains " + ("P" + i) + "? " + item.getKey().contains("P" + i) + " and " + this.priorityOre + "=>" + this.priorityList.get(i) + " ?");
                                 this.priorityOre = this.priorityList.get(i);*/
-
                                 if (item.getKey().contains("P" + i) && this.priorityOre >= this.priorityList.get(i)) {
 
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
@@ -162,7 +161,7 @@ public class ExtractOre {
                     new ClickScreen().leftClick(1065, 935);
                     Thread.sleep(150);
                     new ClickScreen().leftClick(1115, 935);
-                    
+
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
                 } // end case 3
@@ -188,42 +187,46 @@ public class ExtractOre {
                 } // end case 4
 
                 case 5 -> {
-                    Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
-                            Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
-                            Rect1920x1080.APPROACHING_X1, Rect1920x1080.APPROACHING_X2_W,
-                            Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
-
-                    if (approaching != null) {
-                        System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
-                                approaching.width, approaching.height, approaching.x, approaching.y);
-
-                        this.amountRect--; // go back to case 4
-                        flagNoDragScreen = true;
-
-                        flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
-                        System.out.println("Time added until set another ore: "
-                                + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
-
-                        Thread.sleep(TIMETOWAIT_APPROACHING_MS);
-
-                    } else {
-                        System.out.println("Rect (APRROACHING) not found");
-                        System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
-                                + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
-
-                        this.flagUntilBeDestroyed_AMOUNT += 1;
-                    }
 
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
                         this.flagUntilBeDestroyed_MS = 0;
                         this.amountRect++; // go to case 6
+
+                    } else {
+                        
+                        Rectangle approaching = sr3.getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(Rect1920x1080.APPROACHING_W1, Rect1920x1080.APPROACHING_W2,
+                                Rect1920x1080.APPROACHING_H1, Rect1920x1080.APPROACHING_H2, Rect1920x1080.APPROACHING_H3,
+                                Rect1920x1080.APPROACHING_X1, Rect1920x1080.APPROACHING_X2_W,
+                                Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
+
+                        if (approaching != null) {
+                            System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
+                                    approaching.width, approaching.height, approaching.x, approaching.y);
+
+                            this.amountRect--; // go back to case 4
+                            flagNoDragScreen = true;
+
+                            Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+
+                        } else {
+                            System.out.println("Rect (APRROACHING) not found");
+                            System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
+                                    + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
+
+                            this.flagUntilBeDestroyed_AMOUNT += 1;
+                        }
+
+                        flagUntilBeDestroyed_MS += TIMETOWAIT_APPROACHING_MS;
+                        System.out.println("Time added until set another ore: "
+                                + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
                     }
+
                 } // end case 5
 
                 case 6 -> {
-                    
+
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
                             Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
                             Rect1920x1080.COMPACTEDMAXCARGO_Y1, Rect1920x1080.COMPACEDTMAXCARGO_Y2_H);
@@ -233,12 +236,14 @@ public class ExtractOre {
                             Rect1920x1080.APPROACHING_X1, Rect1920x1080.APPROACHING_X2_W,
                             Rect1920x1080.APPROACHING_Y1, Rect1920x1080.APPROACHING_Y2_H);
 
+                    // one more if this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS !!!!!
+
                     /* There is no max cargo neither minering ore */
                     if (compactMaxCargo == null && approaching == null) {
 
                         /* If the asteroid won't be destoyed, the lockTarget must be desactived or the stack will broke the script*/
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
-                            
+
                             // click again in lock target to unlock it and restart minering other ore! 
                             Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
                                     Rect1920x1080.LOCKTARGET_X1, Rect1920x1080.LOCKTARGET_X2_W,
@@ -251,7 +256,7 @@ public class ExtractOre {
                                 new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
                                 flagNoDragScreen = true;
                                 amountRect = 0; // return to case 0 and find another ore
-                                
+
                             } else {
                                 System.out.println("Rect (LOCKTARGET) not found at case 6");
                                 System.out.println("Max tolerance until search another asteroid: " + (this.flagSearchLockTarget + 1) + "/" + LOCKTARGET_NOTFOUND + "\n");
