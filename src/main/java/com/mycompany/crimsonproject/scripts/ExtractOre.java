@@ -237,6 +237,7 @@ public class ExtractOre {
 
                         /* If the asteroid won't be destoyed, the lockTarget must be desactived or the stack will broke the script*/
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
+                            
                             // click again in lock target to unlock it and restart minering other ore! 
                             Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegion_WxH_BLOCKSCREEN(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
                                     Rect1920x1080.LOCKTARGET_X1, Rect1920x1080.LOCKTARGET_X2_W,
@@ -249,6 +250,7 @@ public class ExtractOre {
                                 new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
                                 flagNoDragScreen = true;
                                 amountRect = 0; // return to case 0 and find another ore
+                                
                             } else {
                                 System.out.println("Rect (LOCKTARGET) not found at case 6");
                                 System.out.println("Max tolerance until search another asteroid: " + (this.flagSearchLockTarget + 1) + "/" + LOCKTARGET_NOTFOUND + "\n");
