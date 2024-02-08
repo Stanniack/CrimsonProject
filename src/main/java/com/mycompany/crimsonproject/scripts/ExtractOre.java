@@ -138,6 +138,7 @@ public class ExtractOre {
                         System.out.println("Rect (WARPARROW) not found\n");
                         new ClickScreen().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
                         this.amountRect--; // back to case 0 and find other ore
+                        
                     }
                 } // end case 1
 
@@ -291,6 +292,7 @@ public class ExtractOre {
 
                     } else {
                         this.amountRect--; // Return to case 5
+                        this.timeStart = System.currentTimeMillis();
                     }
                 } // end case 6
 
