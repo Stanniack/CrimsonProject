@@ -30,7 +30,7 @@
 * Alpha 0.1 - 08/02/24
    - Atributo timeStart agora é reiniciado na condicional onde volta para o caso 5. O atributo timeStart não era reiniciado, portanto entrando em um possível looping entre o case 5 e 6;
    - Tolerância para achar LOCKTARGET aumentado para 10. Aumenta o tempo em 3 segundos mas minimiza possível erro de não achar LOCKTARGET mesmo ele existindo;
-   - Alterando lógica do case 5 do script ExtractOre. Agora a checagem de tolerância "Approaching" e tolerância de tempo está aninhando com o else que aborda a lógica principal, evitando a var flag amountRect chegar dentro do antigo if valendo 4. Isso é um erro de lógica e poderia acontecer;
+   - Alterando lógica do case 5 do script ExtractOre. Agora a checagem de tolerância de tempo para "Approaching" está aninhando com o else que aborda a lógica principal, evitando a var flag amountRect chegar dentro do antigo if valendo 4. Isso é um erro de lógica e poderia acontecer;
    - Se o script quebrasse, a nave ficaria parada no Asteroid sem minerar. Adicionando um tempo de tolerância de acordo com o tempo de mineração de cada nave (Nesse caso, 20 minutos) para verificar se os canhões estão ativados. Caso não, ativa os canhões.
    
 
