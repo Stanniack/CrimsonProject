@@ -106,10 +106,8 @@ public class ExtractOre {
                         }
 
                     } else {
-                        System.out.println("Ore not found");
+                        System.out.println("Ore not found\n");
                     }
-
-                    System.out.println(); //
 
                 } // end case 0
 
@@ -138,7 +136,7 @@ public class ExtractOre {
                         System.out.println("Rect (WARPARROW) not found\n");
                         new ClickScreen().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
                         this.amountRect--; // back to case 0 and find other ore
-                        
+
                     }
                 } // end case 1
 
@@ -292,7 +290,7 @@ public class ExtractOre {
 
                     } else {
                         this.amountRect--; // Return to case 5
-                        this.timeStart = System.currentTimeMillis();
+                        this.timeStart = System.currentTimeMillis(); // reset timeStart to back to case 5
                     }
                 } // end case 6
 
