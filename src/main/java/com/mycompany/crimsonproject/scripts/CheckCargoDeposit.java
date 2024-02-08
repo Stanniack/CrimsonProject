@@ -14,13 +14,13 @@ import java.util.List;
 import net.sourceforge.tess4j.TesseractException;
 
 /**
- *
- * @author Stanniack
- */
-
-/* No I.A recognition for stack items in mining cargo and "item hangar" */
- /* Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080 */
- /* Check cargo, drag itens and undock */
+*
+* @author Stanniack
+* 
+*  No I.A recognition for stack items in mining cargo and "item hangar"
+* Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080
+* Check cargo, drag itens and undock 
+*/
 public class CheckCargoDeposit {
 
     public void check() throws InterruptedException, IOException, AWTException, TesseractException {
