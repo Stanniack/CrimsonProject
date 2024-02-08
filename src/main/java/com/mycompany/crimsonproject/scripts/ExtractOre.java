@@ -27,7 +27,7 @@ public class ExtractOre {
     private int flagSearchLockTarget = 0;
 
     private static final int SWITCHFLAG = 8;
-    private static final int LOCKTARGET_NOTFOUND = 7; // 10 secs
+    private static final int LOCKTARGET_NOTFOUND = 10; // 10 secs
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
