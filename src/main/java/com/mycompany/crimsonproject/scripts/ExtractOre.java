@@ -83,6 +83,7 @@ public class ExtractOre {
                                     System.out.println(item.getValue().y + " >? " + closestOreList.get(i));
 
                                     if (item.getValue().y <= closestOreList.get(i)) {
+                                        System.out.println(" Better ore found: " + item);
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
 
@@ -167,7 +168,7 @@ public class ExtractOre {
 
                     Thread.sleep(5000);
                     new ClickScreen().leftClick(1065, 935);
-                    Thread.sleep(150);
+                    Thread.sleep(300);
                     new ClickScreen().leftClick(1115, 935);
 
                     this.amountRect++; // go to case 4
