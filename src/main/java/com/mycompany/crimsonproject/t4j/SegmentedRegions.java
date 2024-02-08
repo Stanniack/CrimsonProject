@@ -50,7 +50,7 @@ public class SegmentedRegions {
     }
 
     /* --------------------------------------- Methods with blosck screen --------------------------------------- */
-    public Rectangle getSegmentedRegion_WxH_BLOCKSCREEN(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionWxHblocksScreen(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -74,7 +74,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_2WxH_BLOCKSCREEN(int width1, int width2, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion2WxHblockScreen(int width1, int width2, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -99,7 +99,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_Wx2H_BLOCKSCREEN(int width1, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionWx2HblockScreen(int width1, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -123,7 +123,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_2Wx2H_BLOCKSCREEN(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion2Wx2HblockScreen(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -148,7 +148,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegion_3Wx2H_BLOCKSCREEN(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegion3Wx2HblockScreen(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -173,7 +173,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegionApproaching_2Wx3H_BLOCKSCREEN(int width1, int width2, int height1, int height2, int height3, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionApproaching2Wx3HblockScreen(int width1, int width2, int height1, int height2, int height3, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -197,7 +197,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegionConcentrated_3Wx2H_BLOCKSCREEN(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionConcentrated3Wx2HblockScreen(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -221,7 +221,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle getSegmentedRegionsAllRectsMaxCargo_BLOCKSCREEN(int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getSegmentedRegionsAllRectsMaxCargoBlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
@@ -244,7 +244,7 @@ public class SegmentedRegions {
         return null;
     }
 
-    public HashMap<String, Rectangle> getSegmentedRegionsAllOres_BLOCKSCREEN(int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public HashMap<String, Rectangle> getSegmentedRegionsAllOresBlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         bf = ImageIO.read(imageFile);
 
