@@ -169,12 +169,16 @@ public class Rect1920x1080 {
 
     /* ------------------------------------------------------------- */
     public static final int ITEMGANGAR_W1 = 24;
+    public static final int ITEMGANGAR_W2 = 23;
     public static final int ITEMGANGAR_H1 = 9;
     /* This find where the word ITEM (Not HANGAR) is in the display */
     public static final int ITEMHANGAR_X1 = 80;
     public static final int ITEMHANGAR_Y1 = 290;
     public static final int ITEMHANGAR_X2_W = 260;
     public static final int ITEMHANGAR_Y2_H = 720;
+    
+    /* ------------------------------------------------------------- */
+    //public static final int 
     
     
     

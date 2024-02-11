@@ -19,9 +19,9 @@ public class ClickScreen {
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(150);
+        Thread.sleep(300);
         bot.mousePress(leftClick);
-        Thread.sleep(150);
+        Thread.sleep(300);
         bot.mouseRelease(leftClick);
 
     }
@@ -34,9 +34,9 @@ public class ClickScreen {
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(150);
+        Thread.sleep(300);
         bot.mousePress(rightClick);
-        Thread.sleep(150);
+        Thread.sleep(300);
         bot.mouseRelease(rightClick);
 
     }
