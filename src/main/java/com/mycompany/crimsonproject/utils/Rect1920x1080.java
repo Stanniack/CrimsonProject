@@ -177,9 +177,6 @@ public class Rect1920x1080 {
     public static final int ITEMHANGAR_X2_W = 260;
     public static final int ITEMHANGAR_Y2_H = 720;
     
-    /* ------------------------------------------------------------- */
-    //public static final int 
-    
     
     
     
