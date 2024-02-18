@@ -35,7 +35,7 @@ public class ExtractOre {
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
-    private Integer priorityOre;
+    private Integer priorityOreValue;
     private final Integer CSpriority = 4;
     private final Integer Spriority = 3;
     private final Integer DVpriority = 2;
@@ -53,7 +53,7 @@ public class ExtractOre {
 
             boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
-            this.priorityOre = this.priorityList.size();
+            this.priorityOreValue = 0;
 
             new TakeScreenShot2().take();
 
@@ -75,15 +75,14 @@ public class ExtractOre {
 
                             for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
 
-                                /*System.out.println(item.getKey() + " contains " + ("P" + i) + "? " + item.getKey().contains("P" + i) + " and " + this.priorityOre + "=>" + this.priorityList.get(i) + " ?");
-                                this.priorityOre = this.priorityList.get(i);*/
-                                if (item.getKey().contains("P" + i) && this.priorityOre >= this.priorityList.get(i)) {
+                                if (item.getKey().contains("P" + i) && this.priorityOreValue <= this.priorityList.get(i)) {
+
+                                    this.priorityOreValue = this.priorityList.get(i);
 
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-                                    System.out.println(item.getValue().y + " >? " + closestOreList.get(i));
 
                                     if (item.getValue().y <= closestOreList.get(i)) {
-                                        System.out.println(" Better ore found: " + item);
+                                        System.out.println("Temp better ore found: " + item + "\n");
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
 
@@ -95,8 +94,8 @@ public class ExtractOre {
 
                         if (betterOre != null) {
 
-                            System.out.println("Closest better ore found (Y Coordinate): "
-                                    + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")");
+                            System.out.println("Closest, better ore found (Y Coordinate): "
+                                    + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")\n");
 
                             this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
