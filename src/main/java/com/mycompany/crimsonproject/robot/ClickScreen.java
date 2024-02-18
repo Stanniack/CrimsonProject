@@ -40,8 +40,8 @@ public class ClickScreen {
         bot.mouseRelease(rightClick);
 
     }
-    
-        public void doubleClick(Rectangle rect) throws AWTException, InterruptedException {
+
+    public void doubleClick(Rectangle rect) throws AWTException, InterruptedException {
 
         int leftClick = InputEvent.BUTTON1_DOWN_MASK;
 
@@ -50,11 +50,11 @@ public class ClickScreen {
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
         
+        Thread.sleep(100);
         bot.mousePress(leftClick);
         bot.mouseRelease(leftClick);
-        
-        Thread.sleep(200);
-        
+
+        Thread.sleep(100);
         bot.mousePress(leftClick);
         bot.mouseRelease(leftClick);
 

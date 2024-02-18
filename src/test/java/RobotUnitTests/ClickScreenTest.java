@@ -3,8 +3,6 @@ package RobotUnitTests;
 import com.mycompany.crimsonproject.robot.ClickScreen;
 import java.awt.AWTException;
 import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
