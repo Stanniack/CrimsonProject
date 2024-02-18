@@ -40,6 +40,25 @@ public class ClickScreen {
         bot.mouseRelease(rightClick);
 
     }
+    
+        public void doubleClick(Rectangle rect) throws AWTException, InterruptedException {
+
+        int leftClick = InputEvent.BUTTON1_DOWN_MASK;
+
+        Robot bot = new Robot();
+
+        /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
+        bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        
+        bot.mousePress(leftClick);
+        bot.mouseRelease(leftClick);
+        
+        Thread.sleep(200);
+        
+        bot.mousePress(leftClick);
+        bot.mouseRelease(leftClick);
+
+    }
 
     /* Actioned when the I.A doesn't found the case and needs to be returned. */
     public void returnCaseLeftClick() throws InterruptedException, AWTException {

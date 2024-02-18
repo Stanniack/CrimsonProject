@@ -19,19 +19,19 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Stanniack
  */
-public class ExtractOre {
+public class ExtractOre2 {
 
     private int amountRect = 0;
     private long flagUntilBeDestroyed_MS = 0;
     private int flagUntilBeDestroyed_AMOUNT = 0;
     private int flagSearchLockTarget = 0;
 
-    private static final int SWITCHFLAG = 8;
+    private static final int SWITCHFLAG = 7;
     private static final int LOCKTARGET_NOTFOUND = 10; // 10 secs
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 900000; // 900 secs
+    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
@@ -99,7 +99,7 @@ public class ExtractOre {
 
                             this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
-                            new ClickScreen().rightClickCenterButton(betterOre.getValue()); /////////////!!!
+                            new ClickScreen().doubleClick(betterOre.getValue()); /////////////!!!
 
                         } else {
                             System.out.println("Better ore is null");
@@ -111,36 +111,8 @@ public class ExtractOre {
 
                 } // end case 0
 
+
                 case 1 -> {
-
-                    //For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. 
-                    Rectangle warpArrow = sr3
-                            .getSegmentedRegion2WxHblockScreen(Rect1920x1080.WARPARROW_W1, Rect1920x1080.WARPARROW_W2, Rect1920x1080.WARPARROW_H1,
-                                    Rect1920x1080.OVERVIEWMINING_X1, Rect1920x1080.OVERVIEWMINING_X2_W,
-                                    Rect1920x1080.OVERVIEWMINING_Y1, Rect1920x1080.OVERVIEWMINING_Y2_H);
-
-                    if (warpArrow != null) {
-
-                        System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                warpArrow.width, warpArrow.height, warpArrow.x, warpArrow.y);
-
-                        new ClickScreen().leftClickCenterButton(warpArrow);
-                        this.amountRect++; // go to case 2
-                        flagNoDragScreen = true;
-
-                        /*Wait until ship get close to the selected ore */
-                        Thread.sleep(TIMETOGETCLOSE_MS);
-
-                    } else {
-
-                        System.out.println("Rect (WARPARROW) not found\n");
-                        new ClickScreen().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
-                        this.amountRect--; // back to case 0 and find other ore
-
-                    }
-                } // end case 1
-
-                case 2 -> {
 
                     Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegionWxHblocksScreen(Rect1920x1080.LOCKTARGET_W1, Rect1920x1080.LOCKTARGET_H1,
                             Rect1920x1080.LOCKTARGET_X1, Rect1920x1080.LOCKTARGET_X2_W,
@@ -152,15 +124,15 @@ public class ExtractOre {
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
                         new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
-                        this.amountRect++; // go to case 3
+                        this.amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
                     } else {
                         System.out.println("Rect (LOCKTARGET) at case 2 not found\n");
                     }
-                } // end case 2
+                } // end case 1
 
-                case 3 -> {
+                case 2 -> {
 
                     /* This case needs attetion, it's a fragile code - Two miner cannons*/
                     this.timeStart = System.currentTimeMillis();
@@ -172,9 +144,9 @@ public class ExtractOre {
 
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
-                } // end case 3
+                } // end case 2
 
-                case 4 -> {
+                case 3 -> {
 
                     Rectangle compactMaxCargo = sr3.getSegmentedRegion2WxHblockScreen(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_W2,
                             Rect1920x1080.COMPACTMAXCARGO_H1,
@@ -187,7 +159,7 @@ public class ExtractOre {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
 
-                        this.amountRect += 3; // go to case 7 - docking and drag itens to main station
+                        this.amountRect += 2; // go to case 7 - docking and drag itens to main station
                         flagNoDragScreen = true;
 
                     } else {
@@ -195,14 +167,14 @@ public class ExtractOre {
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
                         this.amountRect++; // go to case 5
                     }
-                } // end case 4
+                } // end case 3
 
-                case 5 -> {
+                case 4 -> {
 
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
-                        this.amountRect++; // go to case 6
+                        this.amountRect++; // go to case 5
 
                     } else {
 
@@ -216,7 +188,7 @@ public class ExtractOre {
                             System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
                                     approaching.width, approaching.height, approaching.x, approaching.y);
 
-                            this.amountRect--; // go back to case 4
+                            this.amountRect--; // go back to case 3
                             flagNoDragScreen = true;
 
                             Thread.sleep(TIMETOWAIT_APPROACHING_MS);
@@ -236,9 +208,9 @@ public class ExtractOre {
                     System.out.println("Time added until set another ore: "
                             + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
 
-                } // end case 5
+                } // end case 4
 
-                case 6 -> {
+                case 5 -> {
 
                     Rectangle compactMaxCargo = sr3.getSegmentedRegionWxHblocksScreen(Rect1920x1080.COMPACTMAXCARGO_W1, Rect1920x1080.COMPACTMAXCARGO_H1,
                             Rect1920x1080.COMPACTEDMAXCARGO_X1, Rect1920x1080.COMPACTEDMAXCARGO_X2_W,
@@ -254,7 +226,7 @@ public class ExtractOre {
 
                         this.flagUntilBeDestroyed_MS = 0;
                         System.out.println("The cannon(s) have been stoped. Turning on again\n");
-                        this.amountRect = 3;
+                        this.amountRect = 2;
 
                         //There is no max cargo neither minering ore 
                     } else if (compactMaxCargo == null && approaching == null) {
@@ -292,14 +264,14 @@ public class ExtractOre {
                         this.amountRect--; // Return to case 5
                         this.timeStart = System.currentTimeMillis(); // reset timeStart to back to case 5
                     }
-                } // end case 6
+                } // end case 5
 
-                case 7 -> {
+                case 6 -> {
 
                     System.out.println("End of mining and go docking!\n");
                     new GetDestination().getDestination(GOTO_HOMESTATION);
                     this.amountRect++;
-                } // end case 7
+                } // end case 6
 
             }
 
