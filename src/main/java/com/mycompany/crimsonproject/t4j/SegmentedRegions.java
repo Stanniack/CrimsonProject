@@ -24,8 +24,7 @@ public class SegmentedRegions {
     Tesseract instance;
     BufferedImage bf;
 
-    /* It might avoid the null pointer exception from Tesseract */
-    File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "start.png");
+    File imageFile;
 
     public SegmentedRegions() {
         instance = new Tesseract();
