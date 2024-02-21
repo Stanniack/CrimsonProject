@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
  *
  * @author Stanniack
  */
-public class ClickScreen {
+public class ClickScreenEvents {
 
     public void leftClickCenterButton(Rectangle rect) throws AWTException, InterruptedException {
 

@@ -1,7 +1,7 @@
 
 package com.mycompany.crimsonproject.legacycode;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -122,7 +122,7 @@ public class ExtractOreLegacy {
                             System.out.println("Closest better ore found (Y Coordinate): " + betterOre.getKey() + " - " + betterOre.getValue().y + "y");
                             //amountRect++;
                             flagNoDragScreen = true;
-                            new ClickScreen().leftClickCenterButton(betterOre.getValue());
+                            new ClickScreenEvents().leftClickCenterButton(betterOre.getValue());
                         } else {
                             System.out.println("Better ore is null");
                         }

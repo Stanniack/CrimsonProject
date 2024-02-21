@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -99,7 +99,7 @@ public class ExtractOre {
 
                             this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
-                            new ClickScreen().rightClickCenterButton(betterOre.getValue()); /////////////!!!
+                            new ClickScreenEvents().rightClickCenterButton(betterOre.getValue()); /////////////!!!
 
                         } else {
                             System.out.println("Better ore is null");
@@ -124,7 +124,7 @@ public class ExtractOre {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 warpArrow.width, warpArrow.height, warpArrow.x, warpArrow.y);
 
-                        new ClickScreen().leftClickCenterButton(warpArrow);
+                        new ClickScreenEvents().leftClickCenterButton(warpArrow);
                         this.amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
@@ -134,7 +134,7 @@ public class ExtractOre {
                     } else {
 
                         System.out.println("Rect (WARPARROW) not found\n");
-                        new ClickScreen().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
+                        new ClickScreenEvents().returnCaseLeftClick(); // click to disappear the arrow float window to restart the script case 1
                         this.amountRect--; // back to case 0 and find other ore
 
                     }
@@ -151,7 +151,7 @@ public class ExtractOre {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                        new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
+                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                         this.amountRect++; // go to case 3
                         flagNoDragScreen = true;
 
@@ -166,9 +166,9 @@ public class ExtractOre {
                     this.timeStart = System.currentTimeMillis();
 
                     Thread.sleep(5000);
-                    new ClickScreen().leftClick(1065, 935);
+                    new ClickScreenEvents().leftClick(1065, 935);
                     Thread.sleep(300);
-                    new ClickScreen().leftClick(1115, 935);
+                    new ClickScreenEvents().leftClick(1115, 935);
 
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
@@ -271,7 +271,7 @@ public class ExtractOre {
                                 System.out.printf("Rect found (LOCKTARGET) at case 6 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                         lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                                new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
+                                new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                                 flagNoDragScreen = true;
                                 amountRect = 0; // return to case 0 and find another ore
 

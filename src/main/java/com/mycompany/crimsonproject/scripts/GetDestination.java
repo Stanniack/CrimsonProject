@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -112,7 +112,7 @@ public class GetDestination {
 
         if (locationButton != null) {
             System.out.printf("Rect found (LOCATIONSYNMBOL) case 0 - Width: %d and height: %d\n\n", locationButton.width, locationButton.height);
-            new ClickScreen().leftClickCenterButton(locationButton);
+            new ClickScreenEvents().leftClickCenterButton(locationButton);
             return true;
 
         } else {
@@ -134,7 +134,7 @@ public class GetDestination {
 
         if (miningBot1Label != null) {
             System.out.printf("Rect found (MININGBOT1) case 1 - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
-            new ClickScreen().rightClickCenterButton(miningBot1Label);
+            new ClickScreenEvents().rightClickCenterButton(miningBot1Label);
             return true;
 
         } else {
@@ -152,7 +152,7 @@ public class GetDestination {
 
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) case 1 - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
-            new ClickScreen().rightClickCenterButton(homeStationLabel);
+            new ClickScreenEvents().rightClickCenterButton(homeStationLabel);
             return true;
 
         } else {
@@ -171,7 +171,7 @@ public class GetDestination {
 
         if (warpArrow != null) {
             System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
-            new ClickScreen().leftClickCenterButton(warpArrow);
+            new ClickScreenEvents().leftClickCenterButton(warpArrow);
             return true;
 
         } else {
@@ -191,7 +191,7 @@ public class GetDestination {
 
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCKARROW) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
-            new ClickScreen().leftClickCenterButton(dockArrow);
+            new ClickScreenEvents().leftClickCenterButton(dockArrow);
             return true;
 
         } else {
@@ -212,7 +212,7 @@ public class GetDestination {
 
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
-            new ClickScreen().leftClickCenterButton(closeButtonWindowLocation);
+            new ClickScreenEvents().leftClickCenterButton(closeButtonWindowLocation);
 
             return true;
 

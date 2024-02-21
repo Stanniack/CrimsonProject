@@ -1,6 +1,6 @@
 package RobotUnitTests;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.util.logging.Level;
@@ -14,8 +14,8 @@ import org.junit.Test;
 public class ClickScreenTest {
 
     @Test
-    public void VerifydoubleClick() {
-        ClickScreen cs = new ClickScreen();
+    public void verifyDoubleClick() {
+        ClickScreenEvents cs = new ClickScreenEvents();
         Rectangle rect = new Rectangle(600, 600, 0, 0);
 
         try {
@@ -27,10 +27,9 @@ public class ClickScreenTest {
     }
 
     @Test
-    public void VerifyHoldCtrlAndLeftClick() {
-        ClickScreen cs = new ClickScreen();
+    public void verifyHoldCtrlAndLeftClick() {
+        ClickScreenEvents cs = new ClickScreenEvents();
         Rectangle rect = new Rectangle(600, 600, 0, 0);
-
         try {
             cs.holdCtrlAndLeftClick(rect);
         } catch (AWTException | InterruptedException ex) {

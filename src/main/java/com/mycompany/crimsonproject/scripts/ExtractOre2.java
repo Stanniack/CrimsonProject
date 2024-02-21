@@ -1,12 +1,14 @@
 package com.mycompany.crimsonproject.scripts;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
+import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.Rect1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +31,6 @@ public class ExtractOre2 {
     private static final int SWITCHFLAG = 7;
     private static final int LOCKTARGET_NOTFOUND = 10; // 10 secs
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
-    private static final int TIMETOGETCLOSE_MS = 8000; // 8 secs
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
     private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
@@ -46,6 +47,9 @@ public class ExtractOre2 {
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
+
+        Thread.sleep(500);
+        new KeyboardEvents().pressFn(KeyEvent.VK_F3); // afterburner
 
         SegmentedRegions sr3 = new SegmentedRegions();
 
@@ -99,7 +103,7 @@ public class ExtractOre2 {
 
                             this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
-                            new ClickScreen().doubleClick(betterOre.getValue()); 
+                            new ClickScreenEvents().doubleClick(betterOre.getValue());
 
                         } else {
                             System.out.println("Better ore is null");
@@ -110,7 +114,6 @@ public class ExtractOre2 {
                     }
 
                 } // end case 0
-
 
                 case 1 -> {
 
@@ -123,7 +126,7 @@ public class ExtractOre2 {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                        new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
+                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                         this.amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
@@ -138,9 +141,9 @@ public class ExtractOre2 {
                     this.timeStart = System.currentTimeMillis();
 
                     Thread.sleep(5000);
-                    new ClickScreen().leftClick(1065, 935);
-                    Thread.sleep(300);
-                    new ClickScreen().leftClick(1115, 935);
+                    new KeyboardEvents().pressFn(KeyEvent.VK_F1); // cannon 1
+                    Thread.sleep(500);
+                    new KeyboardEvents().pressFn(KeyEvent.VK_F2); // cannon 2
 
                     this.amountRect++; // go to case 4
                     flagNoDragScreen = true;
@@ -243,7 +246,7 @@ public class ExtractOre2 {
                                 System.out.printf("Rect found (LOCKTARGET) at case 6 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                         lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                                new ClickScreen().leftClickCenterButton(lockTargetFromSelectedItem);
+                                new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                                 flagNoDragScreen = true;
                                 amountRect = 0; // return to case 0 and find another ore
 

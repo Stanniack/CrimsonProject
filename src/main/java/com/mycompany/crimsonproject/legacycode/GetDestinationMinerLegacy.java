@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject.legacycode;
 
-import com.mycompany.crimsonproject.robot.ClickScreen;
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -39,7 +39,7 @@ public class GetDestinationMinerLegacy {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (LOCATIONSYNMBOL) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickCenterButton(rectResult);
+                        new ClickScreenEvents().leftClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
                     }
@@ -58,7 +58,7 @@ public class GetDestinationMinerLegacy {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (MININGBOT1) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
-                        new ClickScreen().rightClickCenterButton(rectResult);
+                        new ClickScreenEvents().rightClickCenterButton(rectResult);
                         amountRect++;
                         flagNoDragScreen = true;
 
@@ -82,7 +82,7 @@ public class GetDestinationMinerLegacy {
 
                     if (rectResult != null) {
                         System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
-                        new ClickScreen().leftClickCenterButton(rectResult);
+                        new ClickScreenEvents().leftClickCenterButton(rectResult);
                         amountRect++; // go to case 3
                         flagNoDragScreen = true;
 
@@ -121,7 +121,7 @@ public class GetDestinationMinerLegacy {
 
         if (rectResult != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCAITON) case 3 - Width: %d and height: %d\n\n", rectResult.width, rectResult.height);
-            new ClickScreen().leftClickCenterButton(rectResult);
+            new ClickScreenEvents().leftClickCenterButton(rectResult);
 
             return true;
         }
