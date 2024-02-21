@@ -48,7 +48,6 @@ public class ExtractOre2 {
 
     public void extract() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        Thread.sleep(500);
         new KeyboardEvents().pressFn(KeyEvent.VK_F3); // afterburner
 
         SegmentedRegions sr3 = new SegmentedRegions();
@@ -145,7 +144,7 @@ public class ExtractOre2 {
                     Thread.sleep(500);
                     new KeyboardEvents().pressFn(KeyEvent.VK_F2); // cannon 2
 
-                    this.amountRect++; // go to case 4
+                    this.amountRect++; // go to case 3
                     flagNoDragScreen = true;
                 } // end case 2
 
@@ -168,7 +167,7 @@ public class ExtractOre2 {
                     } else {
 
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
-                        this.amountRect++; // go to case 5
+                        this.amountRect++; // go to case 4
                     }
                 } // end case 3
 
