@@ -5,7 +5,7 @@ import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.Rect1920x1080;
+import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -38,8 +38,8 @@ public class CheckCargoDeposit {
 
                 /* First search max */
                 // Right side on screen, width and height
-                if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MAXCARGO1_W1 || result.get(i).width == Rect1920x1080.MAXCARGO1_W2)
-                        && result.get(i).height == Rect1920x1080.MAXCARGO1_H1)) {
+                if (result.get(i).x < 600 && ((result.get(i).width == R1920x1080SMALL.MAXCARGO1_W1 || result.get(i).width == R1920x1080SMALL.MAXCARGO1_W2)
+                        && result.get(i).height == R1920x1080SMALL.MAXCARGO1_H1)) {
 
                     // Rect found
                     amountRect++;
@@ -53,9 +53,9 @@ public class CheckCargoDeposit {
                 } else {
                     /* Then Search min */
                     // Right side on screen, width and height
-                    if (result.get(i).x < 600 && ((result.get(i).width == Rect1920x1080.MINGCARGO_WITHOUTM3_W1
-                            || result.get(i).width == Rect1920x1080.MINGCARGO_WITHM3_W1)
-                            && result.get(i).height == Rect1920x1080.MINGCARGO_H1)) {
+                    if (result.get(i).x < 600 && ((result.get(i).width == R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1
+                            || result.get(i).width == R1920x1080SMALL.MINGCARGO_WITHM3_W1)
+                            && result.get(i).height == R1920x1080SMALL.MINGCARGO_H1)) {
 
                         // Rect found
                         amountRect++;

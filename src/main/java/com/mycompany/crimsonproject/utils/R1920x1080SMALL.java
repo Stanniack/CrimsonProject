@@ -17,7 +17,7 @@ package com.mycompany.crimsonproject.utils;
  * BLOCKSCREEN: Rect limitation where to find the recognized rects
  * DEADZONE: Pixel's amount to add in the BLOCKSCREEN for caution
  */
-public class Rect1920x1080 {
+public class R1920x1080SMALL {
 
     /* ------------------------------------------------------------- */
     public static final int MAXCARGO1_W1 = 111;

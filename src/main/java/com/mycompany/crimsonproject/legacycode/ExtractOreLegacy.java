@@ -5,7 +5,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.Rect1920x1080;
+import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -52,8 +52,8 @@ public class ExtractOreLegacy {
                     closestCVOre = 1081;
                     closestVOre = 1081;
 
-                    HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOresBlockScreen(Rect1920x1080.OVERVIEWMINING_X1, Rect1920x1080.OVERVIEWMINING_X2_W,
-                            Rect1920x1080.OVERVIEWMINING_Y1, Rect1920x1080.OVERVIEWMINING_Y2_H);
+                    HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOresBlockScreen(R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
+                            R1920x1080SMALL.OVERVIEWMINING_Y1, R1920x1080SMALL.OVERVIEWMINING_Y2_H);
 
                     if (rectResult.size() > 0) {
 
