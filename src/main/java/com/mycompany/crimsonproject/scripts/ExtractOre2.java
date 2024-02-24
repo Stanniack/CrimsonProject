@@ -30,7 +30,7 @@ public class ExtractOre2 {
     private static final int SWITCHFLAG = 7;
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
+    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 90000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
@@ -171,6 +171,7 @@ public class ExtractOre2 {
 
                 case 4 -> {
 
+                    System.out.println("Secs: " + this.flagUntilBeDestroyed_MS/1000);
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
                         this.flagUntilBeDestroyed_AMOUNT = 0;
@@ -214,8 +215,9 @@ public class ExtractOre2 {
 
                     // just find another asteroid and restart script after 1200 secs or get limit of no found approaching
                     this.amountRect = 0;
+                    this.flagUntilBeDestroyed_MS = 0;
                     System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
-                    
+
                 } // end case 5
 
                 case 6 -> {
@@ -223,7 +225,7 @@ public class ExtractOre2 {
                     System.out.println("End of mining and go docking!\n");
                     new GetDestination().getDestination(GOTO_HOMESTATION);
                     this.amountRect++;
-                    
+
                 } // end case 6
 
             }
