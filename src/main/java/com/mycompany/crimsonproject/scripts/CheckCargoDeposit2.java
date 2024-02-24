@@ -36,7 +36,7 @@ public class CheckCargoDeposit2 {
 
                 case 0 -> {
 
-                    Rectangle maxCargo = new SegmentedRegions().getSegmentedRegion2WxHblockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
+                    Rectangle maxCargo = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
                             R1920x1080SMALL.MAXCARGO1_H1,
                             R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
@@ -52,7 +52,7 @@ public class CheckCargoDeposit2 {
 
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
 
-                        Rectangle minCargo = new SegmentedRegions().getSegmentedRegion2WxHblockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
+                        Rectangle minCargo = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
                                 R1920x1080SMALL.MINGCARGO_H1,
                                 R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                                 R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
@@ -73,7 +73,7 @@ public class CheckCargoDeposit2 {
 
                 case 1 -> {
 
-                    this.itemHangar = new SegmentedRegions().getSegmentedRegion2WxHblockScreen(R1920x1080SMALL.ITEMGANGAR_W1, R1920x1080SMALL.ITEMGANGAR_W2,
+                    this.itemHangar = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.ITEMGANGAR_W1, R1920x1080SMALL.ITEMGANGAR_W2,
                             R1920x1080SMALL.ITEMGANGAR_H1,
                             R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);

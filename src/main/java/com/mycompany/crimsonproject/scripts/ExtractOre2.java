@@ -67,7 +67,7 @@ public class ExtractOre2 {
                     /* Reset Y list coordinates to 1081y */
                     List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
-                    HashMap<String, Rectangle> rectResult = sr3.getSegmentedRegionsAllOresBlockScreen(R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
+                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
                             R1920x1080SMALL.OVERVIEWMINING_Y1, R1920x1080SMALL.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
@@ -116,7 +116,7 @@ public class ExtractOre2 {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
+                    Rectangle lockTargetFromSelectedItem = sr3.get_WxH_BlocksScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
                             R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,
                             R1920x1080SMALL.LOCATIONSYMBOL_X2_W, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
 
@@ -150,7 +150,7 @@ public class ExtractOre2 {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = sr3.getSegmentedRegion2WxHblockScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_W2,
+                    Rectangle compactMaxCargo = sr3.get_2WxH_BlockScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_W2,
                             R1920x1080SMALL.COMPACTMAXCARGO_H1,
                             R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
                             R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
@@ -180,7 +180,7 @@ public class ExtractOre2 {
 
                     } else {
 
-                        Rectangle approaching = sr3.getSegmentedRegionApproaching2Wx3HblockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
+                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                                 R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
                                 R1920x1080SMALL.APPROACHING_X1, R1920x1080SMALL.APPROACHING_X2_W,
                                 R1920x1080SMALL.APPROACHING_Y1, R1920x1080SMALL.APPROACHING_Y2_H);
@@ -214,11 +214,11 @@ public class ExtractOre2 {
 
                 case 5 -> {
 
-                    Rectangle compactMaxCargo = sr3.getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_H1,
+                    Rectangle compactMaxCargo = sr3.get_WxH_BlocksScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_H1,
                             R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
                             R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
 
-                    Rectangle approaching = sr3.getSegmentedRegionApproaching2Wx3HblockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
+                    Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                             R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
                             R1920x1080SMALL.APPROACHING_X1, R1920x1080SMALL.APPROACHING_X2_W,
                             R1920x1080SMALL.APPROACHING_Y1, R1920x1080SMALL.APPROACHING_Y2_H);
@@ -237,7 +237,7 @@ public class ExtractOre2 {
                         if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
 
                             // click again in lock target to unlock it and restart minering other ore! 
-                            Rectangle lockTargetFromSelectedItem = sr3.getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
+                            Rectangle lockTargetFromSelectedItem = sr3.get_WxH_BlocksScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
                                     R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,
                                     R1920x1080SMALL.LOCATIONSYMBOL_X2_W, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
 

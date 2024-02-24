@@ -18,23 +18,25 @@ public class GetDestination {
 
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
+    // it depends the amount of switch cases
+    private static final int SWITCHFLAG = 4;
+
+    private int amountRect = 0;
 
     public void getDestination(int option) throws IOException, TesseractException, AWTException, InterruptedException {
-        int amountRect = 0;
-        // it depends the amount of switch cases
-        int switchFlag = 4;
 
         do {
+            
             boolean flagNoDragScreen = false;
             new TakeScreenShot2().take();
 
-            switch (amountRect) {
+            switch (this.amountRect) {
 
                 case 0 -> {
 
                     if (this.locationButton()) {
                         flagNoDragScreen = true;
-                        amountRect++;
+                        this.amountRect++;
                     }
                 }
 
@@ -43,13 +45,13 @@ public class GetDestination {
                     if (option == MININGBOT) {
                         if (this.miningbot1Label()) {
                             flagNoDragScreen = true;
-                            amountRect++;
+                            this.amountRect++;
                         }
 
                     } else if (option == HOMESTATION) {
                         if (this.homestationLabel()) {
                             flagNoDragScreen = true;
-                            amountRect++;
+                            this.amountRect++;
                         }
 
                     }
@@ -57,7 +59,7 @@ public class GetDestination {
                     /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                     if (!flagNoDragScreen) {
                         this.closeLocationWindow();
-                        amountRect--; // return to case 1 to open the location windows again
+                        this.amountRect--; // return to case 1 to open the location windows again
                     }
                 }
 
@@ -66,13 +68,13 @@ public class GetDestination {
                     if (option == MININGBOT) {
                         if (this.warpArrow()) {
                             flagNoDragScreen = true;
-                            amountRect++;
+                            this.amountRect++;
                         }
 
                     } else if (option == HOMESTATION) {
                         if (this.dockArrow()) {
                             flagNoDragScreen = true;
-                            amountRect++;
+                            this.amountRect++;
                         }
 
                     }
@@ -80,7 +82,7 @@ public class GetDestination {
                     // back to case 1 and find the MININGBOT1 or HOMESTATION1  to restart finding WARPARROW/DOCKARROW
                     if (!flagNoDragScreen) {
                         this.closeLocationWindow();
-                        amountRect--;
+                        this.amountRect--;
                     }
                 }
 
@@ -88,7 +90,7 @@ public class GetDestination {
 
                     if (this.closeLocationWindow()) {
                         flagNoDragScreen = true;
-                        amountRect++;
+                        this.amountRect++;
                     }
 
                 }
@@ -98,7 +100,7 @@ public class GetDestination {
                 new DragScreen().eventClick();
             }
 
-        } while (amountRect < switchFlag);
+        } while (this.amountRect < SWITCHFLAG);
     }
 
     private boolean locationButton() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -106,7 +108,7 @@ public class GetDestination {
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
-                .getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.LOCATIONSYMBOL_W1, R1920x1080SMALL.LOCATIONSYMBOL_H1,
+                .get_WxH_BlocksScreen(R1920x1080SMALL.LOCATIONSYMBOL_W1, R1920x1080SMALL.LOCATIONSYMBOL_H1,
                         R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
                         R1920x1080SMALL.LOCATIONSYMBOL_Y1, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
 
@@ -124,7 +126,7 @@ public class GetDestination {
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle miningBot1Label = sr3
-                .getSegmentedRegion3Wx2HblockScreen(R1920x1080SMALL.MININGBOT1_W1,
+                .get_3Wx2H_BlockScreen(R1920x1080SMALL.MININGBOT1_W1,
                         R1920x1080SMALL.MININGBOT1_W2,
                         R1920x1080SMALL.MININGBOT1_W3,
                         R1920x1080SMALL.MININGBOT1_H1,
@@ -146,7 +148,7 @@ public class GetDestination {
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
-                .getSegmentedRegion2WxHblockScreen(R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2, R1920x1080SMALL.HOMESTATION1_H1,
+                .get_2WxH_BlockScreen(R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2, R1920x1080SMALL.HOMESTATION1_H1,
                         R1920x1080SMALL.HOMESTATION1_X1, R1920x1080SMALL.HOMESTATION1_X2_W,
                         R1920x1080SMALL.HOMESTATION1_Y1, R1920x1080SMALL.HOMESTATION1_Y2_H);
 
@@ -165,7 +167,7 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.WARPARROW_W2, R1920x1080SMALL.WARPARROW_H1,
+                .get_WxH_BlocksScreen(R1920x1080SMALL.WARPARROW_W2, R1920x1080SMALL.WARPARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
                         R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
 
@@ -185,7 +187,7 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
-                .getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.DOCKARROW_W1, R1920x1080SMALL.DOCKARROW_H1,
+                .get_WxH_BlocksScreen(R1920x1080SMALL.DOCKARROW_W1, R1920x1080SMALL.DOCKARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
                         R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
 
@@ -206,7 +208,7 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle closeButtonWindowLocation = sr3
-                .getSegmentedRegionWxHblocksScreen(R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
+                .get_WxH_BlocksScreen(R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_X1, R1920x1080SMALL.CLOSELOCATIONBUTTON_X2_W,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_Y1, R1920x1080SMALL.CLOSELOCATIONBUTTON_Y2_H);
 
