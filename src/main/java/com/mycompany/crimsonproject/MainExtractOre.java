@@ -5,7 +5,6 @@
 package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.scripts.ExtractOre;
-import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
