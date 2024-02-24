@@ -155,7 +155,7 @@ public class ExtractOre2 {
                             R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
                             R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
 
-                    /* go to the station and dragon itens */
+                    /* go to the station and dragn itens */
                     if (compactMaxCargo != null) {
 
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",

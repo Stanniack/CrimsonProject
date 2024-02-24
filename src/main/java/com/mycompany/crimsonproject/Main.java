@@ -4,13 +4,15 @@
  */
 package com.mycompany.crimsonproject;
 
+import com.mycompany.crimsonproject.utils.SortBy;
+
 /**
  *
  * @author Stanniack
  */
 public class Main {
     public static void main(String[] args) {
-        
+        SortBy sb = SortBy.X;
     }
     
 }

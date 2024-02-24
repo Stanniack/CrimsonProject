@@ -17,7 +17,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class SegmentedRegions {
 
@@ -81,6 +81,7 @@ public class SegmentedRegions {
         int level = TessPageIteratorLevel.RIL_WORD;
 
         List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+
 
         /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
         for (int i = 0; i < result.size(); i++) {
@@ -218,29 +219,6 @@ public class SegmentedRegions {
 
         return null;
 
-    }
-
-    public Rectangle getSegmentedRegionsAllRectsMaxCargoBlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
-
-        bf = ImageIO.read(imageFile);
-
-        /* First searching: Words */
-        int level = TessPageIteratorLevel.RIL_WORD;
-
-        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
-
-        for (int i = 0; i < result.size(); i++) {
-            if (((result.get(i).width == R1920x1080SMALL.MAXCARGO1_W1 || result.get(i).width == R1920x1080SMALL.MAXCARGO1_W2)
-                    && result.get(i).height == R1920x1080SMALL.MAXCARGO1_H1)
-                    || (result.get(i).width == R1920x1080SMALL.MAXCARGO2_W1 && result.get(i).height == R1920x1080SMALL.MAXCARGO2_H1)
-                    || (result.get(i).width == R1920x1080SMALL.MAXCARGO3_W1 && result.get(i).height == R1920x1080SMALL.MAXCARGO3_H1)
-                    && (result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                return result.get(i);
-            }
-        }
-
-        return null;
     }
 
     public HashMap<String, Rectangle> getSegmentedRegionsAllOresBlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
