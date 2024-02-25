@@ -162,5 +162,25 @@ public class R1920x1080SMALL {
     public static final int DRAGITENS_X2_W = 530;
     public static final int DRAGITENS_Y2_H = 985;
     /* ------------------------------------------------------------- */
+    
+    public static final int UNDOCK_BUTTON_W1 = 235;
+    public static final int UNDOCK_BUTTON_W2 = 234;
+    public static final int UNDOCK_BUTTON_H1 = 40;
+    /* This find where the word Approaching is in the display */
+    public static final int UNDOCK_DEADZONE_X1 = 571;
+    public static final int UNDOCK_DEADZONE_Y1 = 0;
+    public static final int UNDOCK_DEADZONE_X2_W = 1919;
+    public static final int UNDOCK_DEADZONE_Y2_H = 1079;
+    /* ------------------------------------------------------------- */
 
+    
+
+    
+    
 }
+/**
+ *
+ * @author Devmachine BLOCKSCREEN 
+ * calculator: x1 = x; x2 = x + w; y1 = y; y2 = y + h.
+ *
+ */

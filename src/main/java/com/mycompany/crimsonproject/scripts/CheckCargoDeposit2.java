@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot2;
@@ -23,7 +24,7 @@ public class CheckCargoDeposit2 {
 
     Rectangle shipHangar;
     private int amountRect = 0;
-    private static final int SWTICHFLAG = 3;
+    private static final int SWTICHFLAG = 4;
 
     public void check() throws InterruptedException, IOException, AWTException, TesseractException {
 
@@ -61,7 +62,7 @@ public class CheckCargoDeposit2 {
                             System.out.printf("Rect found (MINGCARHO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                     minCargo.width, minCargo.height, minCargo.x, minCargo.y);
 
-                            // TODO undock
+                            this.amountRect = 3; // get undock
                             flagNoDragScreen = true;
 
                         } else {
@@ -92,16 +93,21 @@ public class CheckCargoDeposit2 {
                 }
 
                 case 2 -> {
-                    
+
                     new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_X1, R1920x1080SMALL.DRAGITENS_X2_W,
                             R1920x1080SMALL.DRAGITENS_Y1, R1920x1080SMALL.DRAGITENS_Y2_H, this.shipHangar);
                     flagNoDragScreen = true;
                     this.amountRect++;
                     this.shipHangar = null; // 
-                    
-                    // TODO undock
+
                 }
 
+                case 3 -> {
+                    if (this.pressUndockButton()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
+                    }
+                }
 
             } // end switch
 
@@ -112,5 +118,23 @@ public class CheckCargoDeposit2 {
         } // end main loop
 
     } // end method
+
+    private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {
+        SegmentedRegions sr3 = new SegmentedRegions();
+        Rectangle undockButton = sr3
+                .getT_2WxH_BlockScreen(R1920x1080SMALL.UNDOCK_BUTTON_W1, R1920x1080SMALL.UNDOCK_BUTTON_W2,
+                        R1920x1080SMALL.UNDOCK_BUTTON_H1, R1920x1080SMALL.UNDOCK_DEADZONE_X1, R1920x1080SMALL.UNDOCK_DEADZONE_X2_W,
+                        R1920x1080SMALL.UNDOCK_DEADZONE_Y1, R1920x1080SMALL.UNDOCK_DEADZONE_Y2_H);
+
+        if (undockButton != null) {
+            System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
+            new ClickScreenEvents().rightClickCenterButton(undockButton);
+            return true;
+
+        } else {
+            System.out.println("Rect not found (UNDOCK_BUTTON)\n");
+            return false;
+        }
+    }
 
 } // end class

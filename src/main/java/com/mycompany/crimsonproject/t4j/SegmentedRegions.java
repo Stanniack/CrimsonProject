@@ -193,7 +193,6 @@ public class SegmentedRegions {
 
         }
 
-        // (23, 13), (22, 13), (22, 12) 
         return null;
 
     }
