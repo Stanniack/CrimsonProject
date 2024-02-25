@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
-import com.mycompany.crimsonproject.robot.TakeScreenShot2;
+import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
@@ -30,7 +30,7 @@ public class CheckCargoDeposit {
 
         /* Be aware about this infinite loop */
         do {
-            new TakeScreenShot2().take();
+            new TakeScreenShot().take();
             SegmentedRegions sr3 = new SegmentedRegions();
             List<Rectangle> result = sr3.createSegment();
 

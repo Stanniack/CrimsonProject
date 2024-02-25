@@ -27,7 +27,7 @@ public class ExtractOre2 {
     private long flagUntilBeDestroyed_MS = 0;
     private int flagUntilBeDestroyed_AMOUNT = 0;
 
-    private static final int CANNONS_MS = 10000;
+    private static final int CANNONS_MS = 15000;
     private static final int SWITCHFLAG = 7;
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs

@@ -53,7 +53,7 @@ public class DragClickEventInInventoryStation {
         bot.mousePress(leftClick); // n
         
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
-        Thread.sleep(300); //ok
+        Thread.sleep(150); //ok
         bot.mouseRelease(leftClick); // ok
 
     }
