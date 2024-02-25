@@ -48,7 +48,7 @@ public class SegmentedRegions {
     }
 
     /* --------------------------------------- Methods with block screen --------------------------------------- */
-    public Rectangle get_WxH_BlocksScreen(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_WxH_BlocksScreen(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(this.imageFile);
 
@@ -72,7 +72,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle get_2WxH_BlockScreen(int width1, int width2, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_2WxH_BlockScreen(int width1, int width2, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(this.imageFile);
 
@@ -98,7 +98,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle get_Wx2H_BlockScreen(int width1, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_Wx2H_BlockScreen(int width1, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(imageFile);
 
@@ -122,7 +122,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle get_2Wx2H_BlockScreen(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_2Wx2H_BlockScreen(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(imageFile);
 
@@ -147,7 +147,7 @@ public class SegmentedRegions {
 
     }
 
-    public Rectangle get_3Wx2H_BlockScreen(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_3Wx2H_BlockScreen(int width1, int width2, int width3, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(this.imageFile);
 
@@ -168,6 +168,32 @@ public class SegmentedRegions {
 
         }
 
+        return null;
+
+    }
+
+    public Rectangle getShipHangar_2Wx2H_BlockScreen(int width1, int width2, int height1, int height2, int x, int x2, int y, int y2) throws IOException, TesseractException {
+
+        this.bf = ImageIO.read(imageFile);
+
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = this.instance.getSegmentedRegions(bf, level);
+
+        /* it will have pixel ranges in coordinates X or Y or both sent by who calls this method. */
+        for (int i = 0; i < result.size(); i++) {
+            if (((result.get(i).width == width1
+                    && (result.get(i).height == height1 || result.get(i).height == height2))
+                    || (result.get(i).width == width2 && result.get(i).height == height2))
+                    && (result.get(i).x >= x && result.get(i).x <= x2)
+                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
+                return result.get(i);
+            }
+
+        }
+
+        // (23, 13), (22, 13), (22, 12) 
         return null;
 
     }
@@ -228,7 +254,7 @@ public class SegmentedRegions {
         int level = TessPageIteratorLevel.RIL_WORD;
 
         List<Rectangle> result = this.instance.getSegmentedRegions(bf, level);
-        
+
         /* Sort from lower to bigger Y coordinate */
         Collections.sort(result, new RectComparatorByY());
 

@@ -21,7 +21,7 @@ import net.sourceforge.tess4j.TesseractException;
  */
 public class CheckCargoDeposit2 {
 
-    Rectangle itemHangar;
+    Rectangle shipHangar;
     private int amountRect = 0;
     private static final int SWTICHFLAG = 3;
 
@@ -36,7 +36,7 @@ public class CheckCargoDeposit2 {
 
                 case 0 -> {
 
-                    Rectangle maxCargo = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
+                    Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
                             R1920x1080SMALL.MAXCARGO1_H1,
                             R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
@@ -52,7 +52,7 @@ public class CheckCargoDeposit2 {
 
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
 
-                        Rectangle minCargo = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
+                        Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
                                 R1920x1080SMALL.MINGCARGO_H1,
                                 R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                                 R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
@@ -73,20 +73,20 @@ public class CheckCargoDeposit2 {
 
                 case 1 -> {
 
-                    this.itemHangar = new SegmentedRegions().get_2WxH_BlockScreen(R1920x1080SMALL.ITEMGANGAR_W1, R1920x1080SMALL.ITEMGANGAR_W2,
-                            R1920x1080SMALL.ITEMGANGAR_H1,
+                    this.shipHangar = new SegmentedRegions().getShipHangar_2Wx2H_BlockScreen(R1920x1080SMALL.SHIPHANGAR_W1, R1920x1080SMALL.SHIPHANGAR_W2,
+                            R1920x1080SMALL.SHIPHANGAR_H1, R1920x1080SMALL.SHIPHANGAR_H2,
                             R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
 
-                    if (this.itemHangar != null) {
-                        System.out.printf("Rect found (ITEM_HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                itemHangar.width, itemHangar.height, itemHangar.x, itemHangar.y);
+                    if (this.shipHangar != null) {
+                        System.out.printf("Rect found (SHIP_HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                                shipHangar.width, shipHangar.height, shipHangar.x, shipHangar.y);
 
                         this.amountRect++;
                         flagNoDragScreen = true;
 
                     } else {
-                        System.out.println("Rect (ITEM_HANGAR) not found\n");
+                        System.out.println("Rect (SHIP_HANGAR) not found\n");
 
                     }
                 }
@@ -94,13 +94,14 @@ public class CheckCargoDeposit2 {
                 case 2 -> {
                     
                     new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_X1, R1920x1080SMALL.DRAGITENS_X2_W,
-                            R1920x1080SMALL.DRAGITENS_Y1, R1920x1080SMALL.DRAGITENS_Y2_H, this.itemHangar);
+                            R1920x1080SMALL.DRAGITENS_Y1, R1920x1080SMALL.DRAGITENS_Y2_H, this.shipHangar);
                     flagNoDragScreen = true;
                     this.amountRect++;
-                    this.itemHangar = null; // 
+                    this.shipHangar = null; // 
                     
                     // TODO undock
                 }
+
 
             } // end switch
 
