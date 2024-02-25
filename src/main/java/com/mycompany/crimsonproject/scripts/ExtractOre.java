@@ -3,7 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
-import com.mycompany.crimsonproject.robot.TakeScreenShot2;
+import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
@@ -58,7 +58,7 @@ public class ExtractOre {
             Entry<String, Rectangle> betterOre = null;
             this.priorityOreValue = 0;
 
-            new TakeScreenShot2().take();
+            new TakeScreenShot().take();
 
             switch (this.amountRect) {
 

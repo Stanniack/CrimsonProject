@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  *
  * @author Stanniack
  */
-public class TakeScreenShot2 {
+public class TakeScreenShot {
     
     public void take () throws InterruptedException {
         try {
@@ -33,7 +33,7 @@ public class TakeScreenShot2 {
             System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
             
         } catch (AWTException | IOException ex ) {
-            Logger.getLogger(TakeScreenShot2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TakeScreenShot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
