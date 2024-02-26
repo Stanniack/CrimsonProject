@@ -85,7 +85,7 @@ public class CheckCargoDeposit2 {
 
                     if (this.hangarButton != null) {
                         System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                hangarButton.width, hangarButton.height, hangarButton.x, hangarButton.y);
+                                this.hangarButton.width, this.hangarButton.height, this.hangarButton.x, this.hangarButton.y);
 
                         this.amountRect++;
                         flagNoDragScreen = true;
@@ -134,7 +134,7 @@ public class CheckCargoDeposit2 {
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
-            new ClickScreenEvents().rightClickCenterButton(undockButton);
+            new ClickScreenEvents().leftClickCenterButton(undockButton);
             return true;
 
         } else {
