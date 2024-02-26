@@ -2,7 +2,6 @@ package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
-import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,21 +10,18 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Stanniack
+ * @author DevMachine
  */
-public class TakeScreenShot {
-
-    private static final int SLEEP_MS = 200;
+public class TakeScreenShot extends RobotEvent {
 
     public void take() throws InterruptedException, AWTException, IOException {
-        Thread.sleep(SLEEP_MS);
+        Thread.sleep(SLEEP_MS2);
 
-        Robot bot = new Robot();
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
         Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-        BufferedImage bf = bot.createScreenCapture(rectangle);
+        BufferedImage bf = this.bot.createScreenCapture(rectangle);
         ImageIO.write(bf, "png", new File(path));
 
         System.out.println("Screenshot created in path: " + path);

@@ -1,26 +1,20 @@
 package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
 
 /**
  *
- * @author Stanniack
+ * @author DevMachine
  */
-public class UndockEvent {
-    
-    public void eventClick () throws AWTException, InterruptedException {
+public class UndockEvent extends RobotEvent {
 
-        int leftClick = InputEvent.BUTTON1_DOWN_MASK;
-        
-        Robot bot = new Robot();
-        
-        bot.mouseMove(1780, 290);
+    public void eventClick() throws AWTException, InterruptedException {
+
+        this.bot.mouseMove(1780, 290);
         Thread.sleep(150);
-        
-        bot.mousePress(leftClick);
-        bot.mouseRelease(leftClick);
+
+        this.bot.mousePress(this.leftClick);
+        this.bot.mouseRelease(this.leftClick);
     }
-    
+
 }

@@ -2,60 +2,49 @@ package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
-public class DragClickEventInInventoryStation {
-    private static final int SLEEP_MS = 150; 
+public class DragClickEventInInventoryStation extends RobotEvent {
 
     public void eventClick() throws AWTException, InterruptedException {
 
-        int leftClick = InputEvent.BUTTON1_DOWN_MASK;
+        this.bot.mouseMove(286, 700);
+        Thread.sleep(this.SLEEP_MS);
 
-        Robot bot = new Robot();
-
-        bot.mouseMove(286, 700);
-        Thread.sleep(SLEEP_MS);
-
-        bot.mousePress(leftClick);
+        this.bot.mousePress(this.leftClick);
         bot.mouseMove(566, 380);
 
         Thread.sleep(SLEEP_MS);
-        bot.mouseRelease(leftClick);
+        this.bot.mouseRelease(this.leftClick);
 
-        bot.mouseMove(295, 380);
+        this.bot.mouseMove(295, 380);
         Thread.sleep(SLEEP_MS);
-        bot.mousePress(leftClick);
+        this.bot.mousePress(this.leftClick);
 
-        bot.mouseMove(130, 425);
+        this.bot.mouseMove(130, 425);
         Thread.sleep(SLEEP_MS);
-        bot.mouseRelease(leftClick);
+        this.bot.mouseRelease(this.leftClick);
     }
 
     public void eventClick(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
 
-        int leftClick = InputEvent.BUTTON1_DOWN_MASK;
-
-        Robot bot = new Robot();
-
-        bot.mouseMove(x2, y2); // ok
+        this.bot.mouseMove(x2, y2); // ok
         Thread.sleep(SLEEP_MS); // ok
 
-        bot.mousePress(leftClick); // ok
-        bot.mouseMove(x1, y1); // ok
+        this.bot.mousePress(this.leftClick); // ok
+        this.bot.mouseMove(x1, y1); // ok
 
         Thread.sleep(SLEEP_MS); //ok
-        bot.mouseRelease(leftClick); //ok
-        
-        bot.mousePress(leftClick); // n
-        
-        bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
+        this.bot.mouseRelease(this.leftClick); //ok
+
+        this.bot.mousePress(this.leftClick); // n
+
+        this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
         Thread.sleep(SLEEP_MS); //ok
-        bot.mouseRelease(leftClick); // ok
+        this.bot.mouseRelease(this.leftClick); // ok
 
     }
 }
