@@ -48,7 +48,7 @@ public class SegmentedRegions {
     }
 
     /* --------------------------------------- Methods with block screen --------------------------------------- */
-    public Rectangle getT_WxH_BlocksScreen(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
+    public Rectangle getT_WxH_BlockScreen(int width1, int height1, int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         this.bf = ImageIO.read(this.imageFile);
 

@@ -108,7 +108,7 @@ public class GetDestination2 {
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.LOCATIONSYMBOL_W1,
                         R1920x1080SMALL.LOCATIONSYMBOL_H1,
                         R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
@@ -170,19 +170,19 @@ public class GetDestination2 {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getT_WxH_BlocksScreen(
-                        R1920x1080SMALL.WARPARROW_W2,
-                        R1920x1080SMALL.WARPARROW_H1,
+                .getT_WxH_BlockScreen(
+                        R1920x1080SMALL.WHITIN_W1,
+                        R1920x1080SMALL.WHITIN_H1,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (warpArrow != null) {
-            System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
+            System.out.printf("Rect found (WHITHIN) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (WARPARROW) case 2\n");
+            System.out.println("Rect not found (WHITHIN) case 2\n");
             return false;
         }
 
@@ -192,7 +192,7 @@ public class GetDestination2 {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.DOCKARROW_W1,
                         R1920x1080SMALL.DOCKARROW_H1,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
@@ -215,7 +215,7 @@ public class GetDestination2 {
         SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle closeButtonWindowLocation = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_W1,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,

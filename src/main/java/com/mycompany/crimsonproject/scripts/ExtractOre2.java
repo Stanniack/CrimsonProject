@@ -116,7 +116,7 @@ public class ExtractOre2 {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlocksScreen(
+                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
                             R1920x1080SMALL.LOCKTARGET_W1, 
                             R1920x1080SMALL.LOCKTARGET_H1,
                             R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,

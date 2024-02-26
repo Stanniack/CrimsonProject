@@ -5,6 +5,7 @@ import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import com.mycompany.crimsonproject.scripts.GetDestination;
+import com.mycompany.crimsonproject.scripts.GetDestination2;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -26,7 +27,7 @@ public class MainPC {
                 new CheckCargoDeposit2().check();
                 Thread.sleep(18000);
 
-                new GetDestination().getDestination(1);
+                new GetDestination2().getDestination(1);
                 Thread.sleep(28000);
 
                 new ExtractOre2().extract();

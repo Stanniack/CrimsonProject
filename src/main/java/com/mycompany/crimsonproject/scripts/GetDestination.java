@@ -108,7 +108,7 @@ public class GetDestination {
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.LOCATIONSYMBOL_W1, 
                         R1920x1080SMALL.LOCATIONSYMBOL_H1,
                         R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
@@ -172,7 +172,7 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.WARPARROW_W2, 
                         R1920x1080SMALL.WARPARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
@@ -194,7 +194,7 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.DOCKARROW_W1, 
                         R1920x1080SMALL.DOCKARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
@@ -217,7 +217,7 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle closeButtonWindowLocation = sr3
-                .getT_WxH_BlocksScreen(
+                .getT_WxH_BlockScreen(
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, 
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_X1, R1920x1080SMALL.CLOSELOCATIONBUTTON_X2_W,

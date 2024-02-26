@@ -4,7 +4,7 @@
  */
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.scripts.GetDestination2;
+import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,17 +15,18 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class MainGetDestination2 {
+public class MainExtractOre3 {
 
     public static void main(String[] args) {
 
         try {
 
             Thread.sleep(4000);
-            new GetDestination2().getDestination(0);
+            new ExtractOre2().extract();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 }

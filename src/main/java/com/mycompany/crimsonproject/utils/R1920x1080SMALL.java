@@ -25,8 +25,8 @@ public class R1920x1080SMALL {
     public static final int MININGBOT1_W1 = 60;
     public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_W3 = 8;
-    public static final int MININGBOT1_H1 = 9;
-    public static final int MININGBOT1_H2 = 12;
+    public static final int MININGBOT1_H1 = 9; // !!
+    public static final int MININGBOT1_H2 = 12; // !!
     /* This find where the button MINNINGBOT1 is in the display */
     public static final int MININGBOT1_X1 = 650;   //!!
     public static final int MININGBOT1_Y1 = 380;   //!!
@@ -51,6 +51,8 @@ public class R1920x1080SMALL {
     public static final int WARPARROW_H1 = 6;
     public static final int DOCKARROW_W1 = 12;
     public static final int DOCKARROW_H1 = 12;
+    public static final int WHITIN_W1 = 31;
+    public static final int WHITIN_H1 = 9;
     /* This find where the button WARPARROW is in the display */
     public static final int WARPARROW_X1 = 600;    //!!
     public static final int WARPARROW_Y1 = 360;    //!!
@@ -133,6 +135,7 @@ public class R1920x1080SMALL {
 
     public static final int COMPACTMAXCARGO_W1 = 339;
     public static final int COMPACTMAXCARGO_W2 = 419;
+    public static final int COMPACTMAXCARGO_W3 = 331; //!!
     public static final int COMPACTMAXCARGO_H1 = 5;
     /* This find where the rectangle of COMPACTMAXCARGO is in the display */
     public static final int COMPACTEDMAXCARGO_X1 = 200;   //!!
