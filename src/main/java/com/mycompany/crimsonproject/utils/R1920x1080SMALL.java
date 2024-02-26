@@ -170,12 +170,7 @@ public class R1920x1080SMALL {
     public static final int UNDOCK_DEADZONE_Y1 = 0;
     public static final int UNDOCK_DEADZONE_X2_W = 1919;
     public static final int UNDOCK_DEADZONE_Y2_H = 1079;
-    /* ------------------------------------------------------------- */
-
-    
-
-    
-    
+    /* ------------------------------------------------------------- */ 
 }
 /**
  *
