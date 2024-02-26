@@ -16,10 +16,11 @@ import javax.imageio.ImageIO;
  * @author Stanniack
  */
 public class TakeScreenShot {
+    private static final int SLEEP_MS = 200; 
     
     public void take () throws InterruptedException {
         try {
-            Thread.sleep(200);
+            Thread.sleep(SLEEP_MS);
             
             Robot bot = new Robot();
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";

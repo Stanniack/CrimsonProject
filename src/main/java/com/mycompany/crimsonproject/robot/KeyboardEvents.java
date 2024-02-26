@@ -12,6 +12,7 @@ import java.awt.Robot;
  * @author Devmachine
  */
 public class KeyboardEvents {
+    private static final int SLEEP_MS = 150; 
 
     public void pressFn(int KeyEvent1) throws AWTException, InterruptedException {
 
@@ -19,7 +20,7 @@ public class KeyboardEvents {
 
         Robot bot = new Robot();
 
-        Thread.sleep(100);
+        Thread.sleep(SLEEP_MS);
         bot.keyPress(fn);
         bot.keyRelease(fn);
 

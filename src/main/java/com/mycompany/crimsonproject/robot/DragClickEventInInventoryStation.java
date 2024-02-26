@@ -10,6 +10,7 @@ import java.awt.event.InputEvent;
  * @author Stanniack
  */
 public class DragClickEventInInventoryStation {
+    private static final int SLEEP_MS = 150; 
 
     public void eventClick() throws AWTException, InterruptedException {
 
@@ -18,20 +19,20 @@ public class DragClickEventInInventoryStation {
         Robot bot = new Robot();
 
         bot.mouseMove(286, 700);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
 
         bot.mousePress(leftClick);
         bot.mouseMove(566, 380);
 
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
 
         bot.mouseMove(295, 380);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
 
         bot.mouseMove(130, 425);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
     }
 
@@ -42,18 +43,18 @@ public class DragClickEventInInventoryStation {
         Robot bot = new Robot();
 
         bot.mouseMove(x2, y2); // ok
-        Thread.sleep(150); // ok
+        Thread.sleep(SLEEP_MS); // ok
 
         bot.mousePress(leftClick); // ok
         bot.mouseMove(x1, y1); // ok
 
-        Thread.sleep(150); //ok
+        Thread.sleep(SLEEP_MS); //ok
         bot.mouseRelease(leftClick); //ok
         
         bot.mousePress(leftClick); // n
         
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
-        Thread.sleep(150); //ok
+        Thread.sleep(SLEEP_MS); //ok
         bot.mouseRelease(leftClick); // ok
 
     }

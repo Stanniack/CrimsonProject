@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
  * @author Stanniack
  */
 public class ClickScreenEvents {
+    private static final int SLEEP_MS = 150; 
 
     public void leftClickCenterButton(Rectangle rect) throws AWTException, InterruptedException {
 
@@ -20,9 +21,9 @@ public class ClickScreenEvents {
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(300);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
-        Thread.sleep(300);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
 
     }
@@ -35,9 +36,9 @@ public class ClickScreenEvents {
 
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-        Thread.sleep(300);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(rightClick);
-        Thread.sleep(300);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(rightClick);
 
     }
@@ -51,11 +52,11 @@ public class ClickScreenEvents {
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
 
-        Thread.sleep(100);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
         bot.mouseRelease(leftClick);
 
-        Thread.sleep(100);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
         bot.mouseRelease(leftClick);
 
@@ -71,10 +72,10 @@ public class ClickScreenEvents {
         /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
         bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
 
-        Thread.sleep(100);
+        Thread.sleep(SLEEP_MS);
         bot.keyPress(ctrl);
 
-        Thread.sleep(100);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
 
         bot.keyRelease(ctrl);
@@ -90,9 +91,9 @@ public class ClickScreenEvents {
         Robot bot = new Robot();
 
         bot.mouseMove(1230, 720);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
     }
 
@@ -103,9 +104,9 @@ public class ClickScreenEvents {
         Robot bot = new Robot();
 
         bot.mouseMove(x, y);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mousePress(leftClick);
-        Thread.sleep(150);
+        Thread.sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
 
     }

@@ -24,14 +24,14 @@ import net.sourceforge.tess4j.TesseractException;
 public class ExtractOre2 {
 
     private int amountRect = 0;
-    private long flagUntilBeDestroyed_MS = 0;
-    private int flagUntilBeDestroyed_AMOUNT = 0;
+    private long flagUntilBeFilled_MS = 0;
+    private int flagUntilBeFilled_AMOUNT = 0;
 
     private static final int CANNONS_MS = 15000;
     private static final int SWITCHFLAG = 7;
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1400000; // 1400 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
@@ -173,8 +173,8 @@ public class ExtractOre2 {
                 case 4 -> {
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
-                        this.flagUntilBeDestroyed_AMOUNT = 0;
+                    if (this.flagUntilBeFilled_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
+                        this.flagUntilBeFilled_AMOUNT = 0;
                         this.amountRect++; // go to case 5
 
                     } else {
@@ -198,16 +198,16 @@ public class ExtractOre2 {
 
                             System.out.println("Rect (APRROACHING) not found");
                             System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
-                                    + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
+                                    + this.flagUntilBeFilled_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
 
-                            this.flagUntilBeDestroyed_AMOUNT += 1;
+                            this.flagUntilBeFilled_AMOUNT += 1;
                         }
 
                     }
 
-                    flagUntilBeDestroyed_MS = (System.currentTimeMillis() - this.timeStart);
+                    flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
-                            + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
+                            + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
 
                 } // end case 4
 
@@ -215,7 +215,7 @@ public class ExtractOre2 {
 
                     // just find another asteroid and restart script after 1200 secs or get limit of no found approaching
                     this.amountRect = 0;
-                    this.flagUntilBeDestroyed_MS = 0;
+                    this.flagUntilBeFilled_MS = 0;
                     System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
 
                 } // end case 5
