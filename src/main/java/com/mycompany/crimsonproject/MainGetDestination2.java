@@ -22,7 +22,7 @@ public class MainGetDestination2 {
         try {
 
             Thread.sleep(4000);
-            new GetDestination2().getDestination(0);
+            new GetDestination2().getDestination(1);
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
