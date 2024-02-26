@@ -121,10 +121,8 @@ public class R1920x1080SMALL {
     public static final int MINGCARGO_WITHOUTM3_W1 = 51;
     public static final int MINGCARGO_H1 = 9;
     
-    public static final int SHIPHANGAR_W1 = 23;
-    public static final int SHIPHANGAR_W2 = 22;
-    public static final int SHIPHANGAR_H1 = 13;
-    public static final int SHIPHANGAR_H2 = 12;
+    public static final int HANGAR_W1 = 40;
+    public static final int HANGAR_H1 = 11;
     
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
     public static final int INVENTORY_X1 = 70;

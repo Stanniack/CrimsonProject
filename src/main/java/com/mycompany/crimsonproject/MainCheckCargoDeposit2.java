@@ -4,7 +4,6 @@
  */
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
 import java.awt.AWTException;
 import java.io.IOException;
