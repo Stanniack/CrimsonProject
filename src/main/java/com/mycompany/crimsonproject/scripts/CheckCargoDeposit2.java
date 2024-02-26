@@ -134,7 +134,7 @@ public class CheckCargoDeposit2 {
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
-            new ClickScreenEvents().rightClickCenterButton(undockButton);
+            new ClickScreenEvents().leftClickCenterButton(undockButton);
             return true;
 
         } else {
