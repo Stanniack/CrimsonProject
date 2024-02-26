@@ -77,9 +77,9 @@ public class CheckCargoDeposit2 {
                 case 1 -> {
 
                     // !!!!!
-                    this.hangarButton = new SegmentedRegions().getT_WxH_BlocksScreen(
+                    this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(
                             R1920x1080SMALL.HANGAR_W1,
-                            R1920x1080SMALL.HANGAR_H1,
+                            R1920x1080SMALL.HANGAR_H1, R1920x1080SMALL.HANGAR_H2,
                             R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
 
@@ -134,7 +134,7 @@ public class CheckCargoDeposit2 {
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
-            new ClickScreenEvents().leftClickCenterButton(undockButton);
+            new ClickScreenEvents().rightClickCenterButton(undockButton);
             return true;
 
         } else {
