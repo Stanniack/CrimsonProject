@@ -160,7 +160,7 @@ public class ExtractOre2 {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
 
-                        this.amountRect += 3; // go to case 6 - docking and drag itens to main station
+                        this.amountRect = 6; // go to case 6 - docking and drag itens to main station
                         flagNoDragScreen = true;
 
                     } else {
