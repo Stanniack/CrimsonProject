@@ -84,14 +84,14 @@ public class CheckCargoDeposit2 {
                             R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
 
                     if (this.hangarButton != null) {
-                        System.out.printf("Rect found (SHIP_HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                        System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 hangarButton.width, hangarButton.height, hangarButton.x, hangarButton.y);
 
                         this.amountRect++;
                         flagNoDragScreen = true;
 
                     } else {
-                        System.out.println("Rect (SHIP_HANGAR) not found\n");
+                        System.out.println("Rect (HANGAR) not found\n");
 
                     }
                 }
