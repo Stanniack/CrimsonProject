@@ -37,11 +37,10 @@ public class CheckCargoDeposit2 {
 
                 case 0 -> {
 
-                    Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
-                            R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
+                    Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
                             R1920x1080SMALL.MAXCARGO1_H1,
-                            R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
-                            R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
+                            R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
 
                     if (maxCargo != null) {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -54,11 +53,10 @@ public class CheckCargoDeposit2 {
 
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
 
-                        Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
-                                R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
+                        Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
                                 R1920x1080SMALL.MINGCARGO_H1,
-                                R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
-                                R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
+                                R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                                R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
 
                         if (minCargo != null) {
                             System.out.printf("Rect found (MINGCARHO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -77,11 +75,10 @@ public class CheckCargoDeposit2 {
                 case 1 -> {
 
                     // !!!!!
-                    this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(
-                            R1920x1080SMALL.HANGAR_W1,
+                    this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(R1920x1080SMALL.HANGAR_W1,
                             R1920x1080SMALL.HANGAR_H1, R1920x1080SMALL.HANGAR_H2,
-                            R1920x1080SMALL.INVENTORY_X1, R1920x1080SMALL.INVENTORY_X2_W,
-                            R1920x1080SMALL.INVENTORY_Y1, R1920x1080SMALL.INVENTORY_Y2_H);
+                            R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
 
                     if (this.hangarButton != null) {
                         System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -98,9 +95,8 @@ public class CheckCargoDeposit2 {
 
                 case 2 -> {
 
-                    new DragClickEventInInventoryStation().eventClick(
-                            R1920x1080SMALL.DRAGITENS_X1, R1920x1080SMALL.DRAGITENS_X2_W,
-                            R1920x1080SMALL.DRAGITENS_Y1, R1920x1080SMALL.DRAGITENS_Y2_H, this.hangarButton);
+                    new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
+                            R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, this.hangarButton);
                     flagNoDragScreen = true;
                     this.amountRect++;
                     this.hangarButton = null; // 

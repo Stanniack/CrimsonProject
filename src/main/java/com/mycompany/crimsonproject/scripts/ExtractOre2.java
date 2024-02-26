@@ -183,11 +183,10 @@ public class ExtractOre2 {
 
                     } else {
 
-                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(
-                                R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
+                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                                 R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
-                                R1920x1080SMALL.APPROACHING_X1, R1920x1080SMALL.APPROACHING_X2_W,
-                                R1920x1080SMALL.APPROACHING_Y1, R1920x1080SMALL.APPROACHING_Y2_H);
+                                R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
+                                R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
 
                         if (approaching != null) {
 

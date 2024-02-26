@@ -182,8 +182,8 @@ public class ExtractOre {
 
                         Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                                 R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
-                                R1920x1080SMALL.APPROACHING_X1, R1920x1080SMALL.APPROACHING_X2_W,
-                                R1920x1080SMALL.APPROACHING_Y1, R1920x1080SMALL.APPROACHING_Y2_H);
+                                R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
+                                R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
 
                         if (approaching != null) {
 
@@ -220,8 +220,8 @@ public class ExtractOre {
 
                     Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                             R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
-                            R1920x1080SMALL.APPROACHING_X1, R1920x1080SMALL.APPROACHING_X2_W,
-                            R1920x1080SMALL.APPROACHING_Y1, R1920x1080SMALL.APPROACHING_Y2_H);
+                            R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
+                            R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
 
                     /* The flag 'flagUntilBeDestroyed_MS' has been triggered, it's has stoped mining the 'Approaching' asteroird, reajusting */
                     if (this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {

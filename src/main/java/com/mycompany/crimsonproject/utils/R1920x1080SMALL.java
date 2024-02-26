@@ -22,29 +22,16 @@ public class R1920x1080SMALL {
     public static final int LOCATIONSYMBOL_Y2_H = 530;
     /* ------------------------------------------------------------- */
 
-    public static final int MININGBOT1_W1 = 59;
-    public static final int MININGBOT1_W2 = 60;
+    public static final int MININGBOT1_W1 = 60;
+    public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_W3 = 8;
     public static final int MININGBOT1_H1 = 9;
     public static final int MININGBOT1_H2 = 12;
     /* This find where the button MINNINGBOT1 is in the display */
-    public static final int MININGBOT1_X1 = 650;
-    public static final int MININGBOT1_Y1 = 380;
-    public static final int MININGBOT1_X2_W = 680;
-    public static final int MININGBOT1_Y2_H = 410;
-    /* ------------------------------------------------------------- */
-
-    public static final int WARPARROW_W1 = 13;
-    public static final int WARPARROW_W2 = 12;
-    public static final int WARPARROW_H1 = 6;
-
-    public static final int DOCKARROW_W1 = 12;
-    public static final int DOCKARROW_H1 = 12;
-    /* This find where the button WARPARROW is in the display */
-    public static final int WARPARROW_X1 = 600;
-    public static final int WARPARROW_Y1 = 360;
-    public static final int WARPARROW_X2_W = 1000;
-    public static final int WARPARROW_Y2_H = 450;
+    public static final int MININGBOT1_X1 = 650;   //!!
+    public static final int MININGBOT1_Y1 = 380;   //!!
+    public static final int MININGBOT1_X2_W = 680; //!!
+    public static final int MININGBOT1_Y2_H = 410; //!!
     /* ------------------------------------------------------------- */
 
     public static final int HOMESTATION1_W1 = 75;
@@ -53,10 +40,22 @@ public class R1920x1080SMALL {
     public static final int HOMESTATION1_H1 = 9;
     public static final int HOMESTATION1_H2 = 12; // must be removed!
     /* This find where the button HOMESTATION1 is in the display */
-    public static final int HOMESTATION1_X1 = 620;
-    public static final int HOMESTATION1_Y1 = 340;
-    public static final int HOMESTATION1_X2_W = 770;
-    public static final int HOMESTATION1_Y2_H = 420;
+    public static final int HOMESTATION1_X1 = 620;   //!!
+    public static final int HOMESTATION1_Y1 = 340;   //!!
+    public static final int HOMESTATION1_X2_W = 770; //!!
+    public static final int HOMESTATION1_Y2_H = 420; //!!
+    /* ------------------------------------------------------------- */
+
+    public static final int WARPARROW_W1 = 13;
+    public static final int WARPARROW_W2 = 12;
+    public static final int WARPARROW_H1 = 6;
+    public static final int DOCKARROW_W1 = 12;
+    public static final int DOCKARROW_H1 = 12;
+    /* This find where the button WARPARROW is in the display */
+    public static final int WARPARROW_X1 = 600;    //!!
+    public static final int WARPARROW_Y1 = 360;    //!!
+    public static final int WARPARROW_X2_W = 1000; //!!
+    public static final int WARPARROW_Y2_H = 450;  //!!
     /* ------------------------------------------------------------- */
 
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
@@ -120,26 +119,26 @@ public class R1920x1080SMALL {
     public static final int MINGCARGO_WITHM3_W1 = 72;
     public static final int MINGCARGO_WITHOUTM3_W1 = 51;
     public static final int MINGCARGO_H1 = 9;
-    
+
     public static final int HANGAR_W1 = 40;
     public static final int HANGAR_H1 = 12;
     public static final int HANGAR_H2 = 11;
-    
+
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
-    public static final int INVENTORY_X1 = 70;
-    public static final int INVENTORY_Y1 = 40;
-    public static final int INVENTORY_X2_W = 570;
-    public static final int INVENTORY_Y2_H = 1040;
+    public static final int INVENTORY_DEADZONE_X1 = 70;
+    public static final int INVENTORY_DEADZONE_Y1 = 40;
+    public static final int INVENTORY_DEADZONE_X2_W = 570;
+    public static final int INVENTORY_DEADZONE_Y2_H = 1040;
     /* ------------------------------------------------------------- */
 
     public static final int COMPACTMAXCARGO_W1 = 339;
     public static final int COMPACTMAXCARGO_W2 = 419;
     public static final int COMPACTMAXCARGO_H1 = 5;
     /* This find where the rectangle of COMPACTMAXCARGO is in the display */
-    public static final int COMPACTEDMAXCARGO_X1 = 200;
-    public static final int COMPACTEDMAXCARGO_Y1 = 250;
-    public static final int COMPACTEDMAXCARGO_X2_W = 300;
-    public static final int COMPACEDTMAXCARGO_Y2_H = 350;
+    public static final int COMPACTEDMAXCARGO_X1 = 200;   //!!
+    public static final int COMPACTEDMAXCARGO_Y1 = 250;   //!!
+    public static final int COMPACTEDMAXCARGO_X2_W = 300; //!!
+    public static final int COMPACEDTMAXCARGO_Y2_H = 350; //!!
     /* ------------------------------------------------------------- */
 
     // (122, 16); (121, 14); (121, 25)
@@ -149,19 +148,19 @@ public class R1920x1080SMALL {
     public static final int APPROACHING_H2 = 16;
     public static final int APPROACHING_H3 = 14;
     /* This find where the word Approaching is in the display */
-    public static final int APPROACHING_X1 = 885;
-    public static final int APPROACHING_Y1 = 770;
-    public static final int APPROACHING_X2_W = 915;
-    public static final int APPROACHING_Y2_H = 795;
+    public static final int APPROACHING_DEADZONE_X1 = 885;
+    public static final int APPROACHING_DEADZONE_Y1 = 770;
+    public static final int APPROACHING_DEADZONE_X2_W = 915;
+    public static final int APPROACHING_DEADZONE_Y2_H = 795;
     /* ------------------------------------------------------------- */
 
     // Drag itens deadzone
-    public static final int DRAGITENS_X1 = 245;
-    public static final int DRAGITENS_Y1 = 185;
-    public static final int DRAGITENS_X2_W = 530;
-    public static final int DRAGITENS_Y2_H = 985;
+    public static final int DRAGITENS_DEADZONE_X1 = 245;
+    public static final int DRAGITENS_DEADZONE_Y1 = 185;
+    public static final int DRAGITENS_DEADZONE_X2_W = 530;
+    public static final int DRAGITENS_DEADZONE_Y2_H = 985;
     /* ------------------------------------------------------------- */
-    
+
     public static final int UNDOCK_BUTTON_W1 = 235;
     public static final int UNDOCK_BUTTON_W2 = 234;
     public static final int UNDOCK_BUTTON_H1 = 40;
@@ -170,7 +169,18 @@ public class R1920x1080SMALL {
     public static final int UNDOCK_DEADZONE_Y1 = 0;
     public static final int UNDOCK_DEADZONE_X2_W = 1919;
     public static final int UNDOCK_DEADZONE_Y2_H = 1079;
-    /* ------------------------------------------------------------- */ 
+    /* ------------------------------------------------------------- */
+    
+    public static final int COMPACTCARGO_DEADZONE_X1 = 30;
+    public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
+    public static final int COMPACTCARGO_DEADZONE_X2_W = 444;
+    public static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
+    
+    public static final int LOCATIONTAB_DEADZONE_X1 = 445;
+    public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
+    public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
+    public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
+    
 }
 /**
  *
