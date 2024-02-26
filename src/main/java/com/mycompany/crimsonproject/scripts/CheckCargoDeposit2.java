@@ -98,7 +98,8 @@ public class CheckCargoDeposit2 {
 
                 case 2 -> {
 
-                    new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_X1, R1920x1080SMALL.DRAGITENS_X2_W,
+                    new DragClickEventInInventoryStation().eventClick(
+                            R1920x1080SMALL.DRAGITENS_X1, R1920x1080SMALL.DRAGITENS_X2_W,
                             R1920x1080SMALL.DRAGITENS_Y1, R1920x1080SMALL.DRAGITENS_Y2_H, this.hangarButton);
                     flagNoDragScreen = true;
                     this.amountRect++;

@@ -108,7 +108,9 @@ public class GetDestination {
                        Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
-                .getT_WxH_BlocksScreen(R1920x1080SMALL.LOCATIONSYMBOL_W1, R1920x1080SMALL.LOCATIONSYMBOL_H1,
+                .getT_WxH_BlocksScreen(
+                        R1920x1080SMALL.LOCATIONSYMBOL_W1, 
+                        R1920x1080SMALL.LOCATIONSYMBOL_H1,
                         R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
                         R1920x1080SMALL.LOCATIONSYMBOL_Y1, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
 
@@ -126,7 +128,8 @@ public class GetDestination {
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle miningBot1Label = sr3
-                .getT_3Wx2H_BlockScreen(R1920x1080SMALL.MININGBOT1_W1,
+                .getT_3Wx2H_BlockScreen(
+                        R1920x1080SMALL.MININGBOT1_W1,
                         R1920x1080SMALL.MININGBOT1_W2,
                         R1920x1080SMALL.MININGBOT1_W3,
                         R1920x1080SMALL.MININGBOT1_H1,
@@ -148,7 +151,9 @@ public class GetDestination {
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
-                .getT_2WxH_BlockScreen(R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2, R1920x1080SMALL.HOMESTATION1_H1,
+                .getT_2WxH_BlockScreen(
+                        R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2, 
+                        R1920x1080SMALL.HOMESTATION1_H1,
                         R1920x1080SMALL.HOMESTATION1_X1, R1920x1080SMALL.HOMESTATION1_X2_W,
                         R1920x1080SMALL.HOMESTATION1_Y1, R1920x1080SMALL.HOMESTATION1_Y2_H);
 
@@ -167,7 +172,9 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getT_WxH_BlocksScreen(R1920x1080SMALL.WARPARROW_W2, R1920x1080SMALL.WARPARROW_H1,
+                .getT_WxH_BlocksScreen(
+                        R1920x1080SMALL.WARPARROW_W2, 
+                        R1920x1080SMALL.WARPARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
                         R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
 
@@ -187,7 +194,9 @@ public class GetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
-                .getT_WxH_BlocksScreen(R1920x1080SMALL.DOCKARROW_W1, R1920x1080SMALL.DOCKARROW_H1,
+                .getT_WxH_BlocksScreen(
+                        R1920x1080SMALL.DOCKARROW_W1, 
+                        R1920x1080SMALL.DOCKARROW_H1,
                         R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
                         R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
 
@@ -208,7 +217,9 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle closeButtonWindowLocation = sr3
-                .getT_WxH_BlocksScreen(R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
+                .getT_WxH_BlocksScreen(
+                        R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, 
+                        R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_X1, R1920x1080SMALL.CLOSELOCATIONBUTTON_X2_W,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_Y1, R1920x1080SMALL.CLOSELOCATIONBUTTON_Y2_H);
 
