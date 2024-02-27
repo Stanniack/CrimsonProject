@@ -108,10 +108,10 @@ public class R1920x1080SMALL {
     public static final int LOCKTARGET_W1 = 26;
     public static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
-    public static final int LOCKTARGET_X1 = 1490;
-    public static final int LOCKTARGET_Y1 = 135;
-    public static final int LOCKTARGET_X2_W = 1510;
-    public static final int LOCKTARGET_Y2_H = 150;
+    public static final int LOCKTARGET_X1 = 1000;
+    public static final int LOCKTARGET_Y1 = 0;
+    public static final int LOCKTARGET_X2_W = 1919;
+    public static final int LOCKTARGET_Y2_H = 250;
     /* ------------------------------------------------------------- */
 
     public static final int MAXCARGO1_W1 = 111;
@@ -173,21 +173,21 @@ public class R1920x1080SMALL {
     public static final int UNDOCK_DEADZONE_X2_W = 1919;
     public static final int UNDOCK_DEADZONE_Y2_H = 1079;
     /* ------------------------------------------------------------- */
-    
+
     public static final int COMPACTCARGO_DEADZONE_X1 = 30;
     public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
     public static final int COMPACTCARGO_DEADZONE_X2_W = 444;
     public static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
-    
+
     public static final int LOCATIONTAB_DEADZONE_X1 = 445;
     public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
-    
+
 }
 /**
  *
- * @author Devmachine BLOCKSCREEN 
- * calculator: x1 = x; x2 = x + w; y1 = y; y2 = y + h.
+ * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
+ * + h.
  *
  */
