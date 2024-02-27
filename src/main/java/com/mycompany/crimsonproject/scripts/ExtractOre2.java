@@ -227,7 +227,7 @@ public class ExtractOre2 {
                 case 6 -> {
 
                     System.out.println("End of mining and go docking!\n");
-                    new GetDestination().getDestination(GOTO_HOMESTATION);
+                    new GetDestination2().getDestination(GOTO_HOMESTATION);
                     this.amountRect++;
 
                 } // end case 6
