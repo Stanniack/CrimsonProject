@@ -99,10 +99,10 @@ public class R1920x1080SMALL {
     public static final int VELDSPAR_H2 = 12;
 
     // This find where the floating overview->mining window is in the display
-    public static final int OVERVIEWMINING_X1 = 1300;
-    public static final int OVERVIEWMINING_Y1 = 275;
-    public static final int OVERVIEWMINING_X2_W = 1900;
-    public static final int OVERVIEWMINING_Y2_H = 900;
+    public static final int OVERVIEWMINING_X1 = 1230;
+    public static final int OVERVIEWMINING_Y1 = 251;
+    public static final int OVERVIEWMINING_X2_W = 1919;
+    public static final int OVERVIEWMINING_Y2_H = 1079;
     /* ------------------------------------------------------------- */
 
     public static final int LOCKTARGET_W1 = 26;
