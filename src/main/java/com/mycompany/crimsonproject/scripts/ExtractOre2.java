@@ -152,11 +152,11 @@ public class ExtractOre2 {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = sr3.getT_2WxH_BlockScreen(
-                            R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_W2,
+                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(
+                            R1920x1080SMALL.COMPACTMAXCARGO_W3,
                             R1920x1080SMALL.COMPACTMAXCARGO_H1,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
+                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_X1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_X2_W,
+                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y2_H);
 
                     /* go to the station and dragn itens */
                     if (compactMaxCargo != null) {
