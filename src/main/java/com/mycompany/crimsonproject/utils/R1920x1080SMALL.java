@@ -53,6 +53,8 @@ public class R1920x1080SMALL {
     public static final int DOCKARROW_H1 = 12;
     public static final int WHITIN_W1 = 31;
     public static final int WHITIN_H1 = 9;
+    public static final int DOCK_W1 = 23;
+    public static final int DOCK_H1 = 9;
     /* This find where the button WARPARROW is in the display */
     public static final int WARPARROW_X1 = 600;    //!!
     public static final int WARPARROW_Y1 = 360;    //!!

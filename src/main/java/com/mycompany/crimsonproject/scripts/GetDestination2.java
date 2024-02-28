@@ -66,7 +66,7 @@ public class GetDestination2 {
                 case 2 -> {
 
                     if (option == MININGBOT) {
-                        if (this.warpArrow()) {
+                        if (this.whithin()) {
                             flagNoDragScreen = true;
                             this.amountRect++;
                         }
@@ -166,7 +166,7 @@ public class GetDestination2 {
         }
     }
 
-    private boolean warpArrow() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean whithin() throws IOException, TesseractException, AWTException, InterruptedException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
@@ -193,18 +193,18 @@ public class GetDestination2 {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
                 .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.DOCKARROW_W1,
-                        R1920x1080SMALL.DOCKARROW_H1,
+                        R1920x1080SMALL.DOCK_W1,
+                        R1920x1080SMALL.DOCK_H1,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (dockArrow != null) {
-            System.out.printf("Rect found (DOCKARROW) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
+            System.out.printf("Rect found (DOCK) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
             new ClickScreenEvents().leftClickCenterButton(dockArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (DOCKARROW) case 2\n");
+            System.out.println("Rect not found (DOCK) case 2\n");
             return false;
         }
 
