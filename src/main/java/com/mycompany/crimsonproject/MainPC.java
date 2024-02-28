@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.scripts.CheckCargoDeposit2;
+import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import com.mycompany.crimsonproject.scripts.GetDestination2;
 import java.awt.AWTException;
@@ -21,7 +21,7 @@ public class MainPC {
         for (int i = 0; i < 3; i++) {
             try {
 
-                new CheckCargoDeposit2().check();
+                new CheckCargoDeposit().check();
                 Thread.sleep(18000);
 
                 new GetDestination2().getDestination(1);

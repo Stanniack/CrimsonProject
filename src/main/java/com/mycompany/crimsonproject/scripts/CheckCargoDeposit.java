@@ -1,81 +1,143 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
 import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
-import com.mycompany.crimsonproject.robot.UndockEvent;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.List;
 
 import net.sourceforge.tess4j.TesseractException;
 
 /**
-*
-* @author Stanniack
-* 
-*  No I.A recognition for stack items in mining cargo and "item hangar"
-* Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small), resolution: 1920x1080
-* Check cargo, drag itens and undock 
-*/
+ *
+ * @author Stanniack
+
+ No I.A recognition for stack items in mining cargo and "item hangarButton" Search a
+ word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small),
+ resolution: 1920x1080 Check cargo, drag itens and undock
+ */
 public class CheckCargoDeposit {
+
+    Rectangle hangarButton;
+    private int amountRect = 0;
+    private static final int SWTICHFLAG = 4;
 
     public void check() throws InterruptedException, IOException, AWTException, TesseractException {
 
-        int amountRect = 0;
+        while (this.amountRect < SWTICHFLAG) {
 
-
-        /* Be aware about this infinite loop */
-        do {
+            boolean flagNoDragScreen = false;
             new TakeScreenShot().take();
-            SegmentedRegions sr3 = new SegmentedRegions();
-            List<Rectangle> result = sr3.createSegment();
 
-            for (int i = 0; i < result.size(); i++) {
+            switch (this.amountRect) {
 
-                /* First search max */
-                // Right side on screen, width and height
-                if (result.get(i).x < 600 && ((result.get(i).width == R1920x1080SMALL.MAXCARGO1_W1 || result.get(i).width == R1920x1080SMALL.MAXCARGO1_W2)
-                        && result.get(i).height == R1920x1080SMALL.MAXCARGO1_H1)) {
+                case 0 -> {
 
-                    // Rect found
-                    amountRect++;
-                    System.out.printf("Rect found maxCargo - Width: %d and height: %d\n\n", result.get(i).width, result.get(i).height);
+                    Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
+                            R1920x1080SMALL.MAXCARGO1_H1,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
 
-                    /* If found max cargo so deposit all cargo in hangar, UNDOCK and break for */
-                    new DragClickEventInInventoryStation().eventClick();
-                    new UndockEvent().eventClick();
-                    break;
+                    if (maxCargo != null) {
+                        System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                                maxCargo.width, maxCargo.height, maxCargo.x, maxCargo.y);
 
-                } else {
-                    /* Then Search min */
-                    // Right side on screen, width and height
-                    if (result.get(i).x < 600 && ((result.get(i).width == R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1
-                            || result.get(i).width == R1920x1080SMALL.MINGCARGO_WITHM3_W1)
-                            && result.get(i).height == R1920x1080SMALL.MINGCARGO_H1)) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
 
-                        // Rect found
-                        amountRect++;
-                        System.out.printf("Rect found minCargo - Width: %d and height: %d\n\n", result.get(i).width, result.get(i).height);
+                    } else {
 
-                        /* If found min cargo then UNDOCK and break for */
-                        new UndockEvent().eventClick();
-                        break;
+                        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
+
+                        Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
+                                R1920x1080SMALL.MINGCARGO_H1,
+                                R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                                R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
+
+                        if (minCargo != null) {
+                            System.out.printf("Rect found (MINGCARHO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                                    minCargo.width, minCargo.height, minCargo.x, minCargo.y);
+
+                            this.amountRect = 3; // get undock
+                            flagNoDragScreen = true;
+
+                        } else {
+                            System.out.println("Rect (MINCARGO_VENTURE) not found\n");
+                        }
+                    }
+
+                } // end case 1
+
+                case 1 -> {
+
+                    // !!!!!
+                    this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(R1920x1080SMALL.HANGAR_W1,
+                            R1920x1080SMALL.HANGAR_H1, R1920x1080SMALL.HANGAR_H2,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
+                            R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
+
+                    if (this.hangarButton != null) {
+                        System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                                this.hangarButton.width, this.hangarButton.height, this.hangarButton.x, this.hangarButton.y);
+
+                        this.amountRect++;
+                        flagNoDragScreen = true;
+
+                    } else {
+                        System.out.println("Rect (HANGAR) not found\n");
 
                     }
                 }
-            }
 
-            if (amountRect == 0) {
-                System.out.println("Rect not found!\n\n");
+                case 2 -> {
+
+                    new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
+                            R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, this.hangarButton);
+                    flagNoDragScreen = true;
+                    this.amountRect++;
+                    this.hangarButton = null; // 
+
+                }
+
+                case 3 -> {
+                    if (this.pressUndockButton()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
+                    }
+                }
+
+            } // end switch
+
+            if (!flagNoDragScreen) {
                 new DragScreen().eventClick();
             }
 
-        } while (amountRect == 0);
+        } // end main loop
 
+    } // end method
+
+    private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {
+        SegmentedRegions sr3 = new SegmentedRegions();
+        Rectangle undockButton = sr3
+                .getT_2WxH_BlockScreen(
+                        R1920x1080SMALL.UNDOCK_BUTTON_W1, R1920x1080SMALL.UNDOCK_BUTTON_W2,
+                        R1920x1080SMALL.UNDOCK_BUTTON_H1,
+                        R1920x1080SMALL.UNDOCK_DEADZONE_X1, R1920x1080SMALL.UNDOCK_DEADZONE_X2_W,
+                        R1920x1080SMALL.UNDOCK_DEADZONE_Y1, R1920x1080SMALL.UNDOCK_DEADZONE_Y2_H);
+
+        if (undockButton != null) {
+            System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
+            new ClickScreenEvents().leftClickCenterButton(undockButton);
+            return true;
+
+        } else {
+            System.out.println("Rect not found (UNDOCK_BUTTON)\n");
+            return false;
+        }
     }
 
-}
+} // end class
