@@ -22,6 +22,11 @@
 
   * As demais funcionalidades são iguais ao do Alpha 0
 
+# Alpha 0.2 - 27/02/24
+   - As funcionalidades do Alpha 0.1 continuam as mesmas;
+   - Abas foram repadronizadas com para facilitar o uso do bot sem que ele quebre com frequência;
+   - Algoritmo foi enxugado em ExtractOre para evitar que o algoritmo quebre com frequência ou, se quebrar, volte depois de um tempo.
+
 # Bug fixes
 
 * Alpha 0 - 02/02/24
