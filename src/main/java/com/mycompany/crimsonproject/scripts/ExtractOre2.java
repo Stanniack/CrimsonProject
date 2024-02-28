@@ -105,11 +105,11 @@ public class ExtractOre2 {
                             new ClickScreenEvents().doubleClick(betterOre.getValue());
 
                         } else {
-                            System.out.println("Better ore is null");
+                            System.out.println("Better asteroid is null");
                         }
 
                     } else {
-                        System.out.println("Ore not found\n");
+                        System.out.println("Asteroids not found\n");
                     }
 
                 } // end case 0
@@ -209,7 +209,7 @@ public class ExtractOre2 {
 
                     }
 
-                    flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
+                    this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
                             + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
 
