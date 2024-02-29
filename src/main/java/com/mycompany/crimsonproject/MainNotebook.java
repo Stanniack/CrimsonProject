@@ -11,7 +11,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class MainNotebook {
 

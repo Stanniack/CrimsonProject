@@ -1,7 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
-import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -235,7 +234,7 @@ public class ExtractOre {
             }
 
             if (!flagNoDragScreen) {
-                new DragScreen().eventClick();
+                new ClickScreenEvents().dragScreen();
             }
 
         } while (this.amountRect < SWITCHFLAG);

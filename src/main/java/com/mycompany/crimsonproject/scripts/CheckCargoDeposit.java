@@ -1,8 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
-import com.mycompany.crimsonproject.robot.DragClickEventInInventoryStation;
-import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
@@ -95,7 +93,7 @@ public class CheckCargoDeposit {
 
                 case 2 -> {
 
-                    new DragClickEventInInventoryStation().eventClick(R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
+                    new ClickScreenEvents().dragItensToIventory(R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
                             R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, this.hangarButton);
                     flagNoDragScreen = true;
                     this.amountRect++;
@@ -113,7 +111,7 @@ public class CheckCargoDeposit {
             } // end switch
 
             if (!flagNoDragScreen) {
-                new DragScreen().eventClick();
+                new ClickScreenEvents().dragScreen();
             }
 
         } // end main loop

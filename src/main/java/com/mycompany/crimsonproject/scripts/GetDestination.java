@@ -1,7 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
-import com.mycompany.crimsonproject.robot.DragScreen;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
@@ -97,7 +96,7 @@ public class GetDestination {
             }
 
             if (!flagNoDragScreen) {
-                new DragScreen().eventClick();
+                new ClickScreenEvents().dragScreen();
             }
 
         } while (this.amountRect < SWITCHFLAG);

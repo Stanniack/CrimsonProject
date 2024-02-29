@@ -63,23 +63,38 @@ public class ClickScreenEvents extends RobotEvent {
 
     }
 
-    /* Actioned when the I.A doesn't found the case and needs to be returned. */
-    public void returnCaseLeftClick() throws InterruptedException, AWTException {
+    public void dragScreen() throws AWTException, InterruptedException {
 
-        this.bot.mouseMove(1230, 720);
+        Thread.sleep(1000);
+
+        this.bot.mouseMove(1200, 870);
         Thread.sleep(SLEEP_MS);
+
         this.bot.mousePress(this.leftClick);
-        Thread.sleep(SLEEP_MS);
-        this.bot.mouseRelease(this.leftClick);
-    }
+        this.bot.mouseMove(1230, 870);
 
-    public void leftClick(int x, int y) throws InterruptedException, AWTException {
-
-        this.bot.mouseMove(x, y);
-        Thread.sleep(SLEEP_MS);
-        this.bot.mousePress(this.leftClick);
         Thread.sleep(SLEEP_MS);
         this.bot.mouseRelease(this.leftClick);
 
     }
+    
+        public void dragItensToIventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
+
+        this.bot.mouseMove(x2, y2); // ok
+        Thread.sleep(SLEEP_MS); // ok
+
+        this.bot.mousePress(this.leftClick); // ok
+        this.bot.mouseMove(x1, y1); // ok
+
+        Thread.sleep(SLEEP_MS); //ok
+        this.bot.mouseRelease(this.leftClick); //ok
+
+        this.bot.mousePress(this.leftClick); // n
+
+        this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
+        Thread.sleep(SLEEP_MS); //ok
+        this.bot.mouseRelease(this.leftClick); // ok
+
+    }
+
 }
