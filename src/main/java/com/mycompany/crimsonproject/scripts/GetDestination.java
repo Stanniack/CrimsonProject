@@ -26,7 +26,7 @@ public class GetDestination {
     public void getDestination(int option) throws IOException, TesseractException, AWTException, InterruptedException {
 
         do {
-            
+
             boolean flagNoDragScreen = false;
             new TakeScreenShot().take();
 
@@ -66,7 +66,7 @@ public class GetDestination {
                 case 2 -> {
 
                     if (option == MININGBOT) {
-                        if (this.warpArrow()) {
+                        if (this.whithin()) {
                             flagNoDragScreen = true;
                             this.amountRect++;
                         }
@@ -109,7 +109,7 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle locationButton = sr3
                 .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.LOCATIONSYMBOL_W1, 
+                        R1920x1080SMALL.LOCATIONSYMBOL_W1,
                         R1920x1080SMALL.LOCATIONSYMBOL_H1,
                         R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
                         R1920x1080SMALL.LOCATIONSYMBOL_Y1, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
@@ -128,14 +128,12 @@ public class GetDestination {
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle miningBot1Label = sr3
-                .getT_3Wx2H_BlockScreen(
+                .getT_2WxH_BlockScreen(
                         R1920x1080SMALL.MININGBOT1_W1,
                         R1920x1080SMALL.MININGBOT1_W2,
-                        R1920x1080SMALL.MININGBOT1_W3,
                         R1920x1080SMALL.MININGBOT1_H1,
-                        R1920x1080SMALL.MININGBOT1_H2,
-                        R1920x1080SMALL.MININGBOT1_X1, R1920x1080SMALL.MININGBOT1_X2_W,
-                        R1920x1080SMALL.MININGBOT1_Y1, R1920x1080SMALL.MININGBOT1_Y2_H);
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (miningBot1Label != null) {
             System.out.printf("Rect found (MININGBOT1) case 1 - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
@@ -152,10 +150,10 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
                 .getT_2WxH_BlockScreen(
-                        R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2, 
+                        R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2,
                         R1920x1080SMALL.HOMESTATION1_H1,
-                        R1920x1080SMALL.HOMESTATION1_X1, R1920x1080SMALL.HOMESTATION1_X2_W,
-                        R1920x1080SMALL.HOMESTATION1_Y1, R1920x1080SMALL.HOMESTATION1_Y2_H);
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) case 1 - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
@@ -168,23 +166,23 @@ public class GetDestination {
         }
     }
 
-    private boolean warpArrow() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean whithin() throws IOException, TesseractException, AWTException, InterruptedException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
                 .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.WARPARROW_W2, 
-                        R1920x1080SMALL.WARPARROW_H1,
-                        R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
-                        R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
+                        R1920x1080SMALL.WHITIN_W1,
+                        R1920x1080SMALL.WHITIN_H1,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (warpArrow != null) {
-            System.out.printf("Rect found (WARPARROW) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
+            System.out.printf("Rect found (WHITHIN) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (WARPARROW) case 2\n");
+            System.out.println("Rect not found (WHITHIN) case 2\n");
             return false;
         }
 
@@ -195,18 +193,18 @@ public class GetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
                 .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.DOCKARROW_W1, 
-                        R1920x1080SMALL.DOCKARROW_H1,
-                        R1920x1080SMALL.WARPARROW_X1, R1920x1080SMALL.WARPARROW_X2_W,
-                        R1920x1080SMALL.WARPARROW_Y1, R1920x1080SMALL.WARPARROW_Y2_H);
+                        R1920x1080SMALL.DOCK_W1,
+                        R1920x1080SMALL.DOCK_H1,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (dockArrow != null) {
-            System.out.printf("Rect found (DOCKARROW) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
+            System.out.printf("Rect found (DOCK) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
             new ClickScreenEvents().leftClickCenterButton(dockArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (DOCKARROW) case 2\n");
+            System.out.println("Rect not found (DOCK) case 2\n");
             return false;
         }
 
@@ -218,10 +216,10 @@ public class GetDestination {
 
         Rectangle closeButtonWindowLocation = sr3
                 .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.CLOSELOCATIONBUTTON_W1, 
+                        R1920x1080SMALL.CLOSELOCATIONBUTTON_W1,
                         R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
-                        R1920x1080SMALL.CLOSELOCATIONBUTTON_X1, R1920x1080SMALL.CLOSELOCATIONBUTTON_X2_W,
-                        R1920x1080SMALL.CLOSELOCATIONBUTTON_Y1, R1920x1080SMALL.CLOSELOCATIONBUTTON_Y2_H);
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
+                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);

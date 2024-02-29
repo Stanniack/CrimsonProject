@@ -24,15 +24,14 @@ import net.sourceforge.tess4j.TesseractException;
 public class ExtractOre {
 
     private int amountRect = 0;
-    private long flagUntilBeDestroyed_MS = 0;
-    private int flagUntilBeDestroyed_AMOUNT = 0;
-    private int flagSearchLockTarget = 0;
+    private long flagUntilBeFilled_MS = 0;
+    private int flagUntilBeFilled_AMOUNT = 0;
 
+    private static final int CANNONS_MS = 15000;
     private static final int SWITCHFLAG = 7;
-    private static final int LOCKTARGET_NOTFOUND = 10; // 10 secs
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEDSTROYED_MS = 1200000; // 1200 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1400000; // 1400 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
@@ -67,7 +66,8 @@ public class ExtractOre {
                     /* Reset Y list coordinates to 1081y */
                     List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
-                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
+                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(
+                            R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
                             R1920x1080SMALL.OVERVIEWMINING_Y1, R1920x1080SMALL.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
@@ -105,18 +105,20 @@ public class ExtractOre {
                             new ClickScreenEvents().doubleClick(betterOre.getValue());
 
                         } else {
-                            System.out.println("Better ore is null");
+                            System.out.println("Better asteroid is null");
                         }
 
                     } else {
-                        System.out.println("Ore not found\n");
+                        System.out.println("Asteroids not found\n");
                     }
 
                 } // end case 0
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
+                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
+                            R1920x1080SMALL.LOCKTARGET_W1, 
+                            R1920x1080SMALL.LOCKTARGET_H1,
                             R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,
                             R1920x1080SMALL.LOCATIONSYMBOL_X2_W, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
 
@@ -139,7 +141,7 @@ public class ExtractOre {
                     /* This case needs attetion, it's a fragile code - Two miner cannons*/
                     this.timeStart = System.currentTimeMillis();
 
-                    Thread.sleep(5000);
+                    Thread.sleep(CANNONS_MS);
                     new KeyboardEvents().pressFn(KeyEvent.VK_F1); // cannon 1
                     Thread.sleep(500);
                     new KeyboardEvents().pressFn(KeyEvent.VK_F2); // cannon 2
@@ -150,10 +152,11 @@ public class ExtractOre {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = sr3.getT_2WxH_BlockScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_W2,
+                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(
+                            R1920x1080SMALL.COMPACTMAXCARGO_W3,
                             R1920x1080SMALL.COMPACTMAXCARGO_H1,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
+                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_X1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_X2_W,
+                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y2_H);
 
                     /* go to the station and dragn itens */
                     if (compactMaxCargo != null) {
@@ -161,7 +164,7 @@ public class ExtractOre {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
 
-                        this.amountRect += 3; // go to case 6 - docking and drag itens to main station
+                        this.amountRect = 6; // go to case 6 - docking and drag itens to main station
                         flagNoDragScreen = true;
 
                     } else {
@@ -174,8 +177,8 @@ public class ExtractOre {
                 case 4 -> {
 
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeDestroyed_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
-                        this.flagUntilBeDestroyed_AMOUNT = 0;
+                    if (this.flagUntilBeFilled_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
+                        this.flagUntilBeFilled_AMOUNT = 0;
                         this.amountRect++; // go to case 5
 
                     } else {
@@ -199,73 +202,26 @@ public class ExtractOre {
 
                             System.out.println("Rect (APRROACHING) not found");
                             System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
-                                    + this.flagUntilBeDestroyed_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
+                                    + this.flagUntilBeFilled_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
 
-                            this.flagUntilBeDestroyed_AMOUNT += 1;
+                            this.flagUntilBeFilled_AMOUNT += 1;
                         }
 
                     }
 
-                    flagUntilBeDestroyed_MS = (System.currentTimeMillis() - this.timeStart);
+                    this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
-                            + (this.flagUntilBeDestroyed_MS / 1000) + "/" + (TIMETOWAIT_TOBEDSTROYED_MS / 1000) + " seconds\n");
+                            + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
 
                 } // end case 4
 
                 case 5 -> {
 
-                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(R1920x1080SMALL.COMPACTMAXCARGO_W1, R1920x1080SMALL.COMPACTMAXCARGO_H1,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_X1, R1920x1080SMALL.COMPACTEDMAXCARGO_X2_W,
-                            R1920x1080SMALL.COMPACTEDMAXCARGO_Y1, R1920x1080SMALL.COMPACEDTMAXCARGO_Y2_H);
+                    // just find another asteroid and restart script after 1200 secs or get limit of no found approaching
+                    this.amountRect = 0;
+                    this.flagUntilBeFilled_MS = 0;
+                    System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
 
-                    Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
-                            R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
-                            R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
-                            R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
-
-                    /* The flag 'flagUntilBeDestroyed_MS' has been triggered, it's has stoped mining the 'Approaching' asteroird, reajusting */
-                    if (this.flagUntilBeDestroyed_MS > TIMETOWAIT_TOBEDSTROYED_MS) {
-
-                        this.flagUntilBeDestroyed_MS = 0;
-                        System.out.println("The cannon(s) have been stoped. Turning on again\n");
-                        this.amountRect = 2;
-
-                        //There is no max cargo neither minering ore 
-                    } else if (compactMaxCargo == null && approaching == null) {
-
-                        /* If the asteroid won't be destoyed, the lockTarget must be deactivated or the stack will broke the script*/
-                        if (this.flagSearchLockTarget < LOCKTARGET_NOTFOUND) {
-
-                            // click again in lock target to unlock it and restart minering other ore! 
-                            Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(R1920x1080SMALL.LOCKTARGET_W1, R1920x1080SMALL.LOCKTARGET_H1,
-                                    R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,
-                                    R1920x1080SMALL.LOCATIONSYMBOL_X2_W, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
-
-                            if (lockTargetFromSelectedItem != null) {
-                                System.out.printf("Rect found (LOCKTARGET) at case 6 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                        lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
-
-                                new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
-                                flagNoDragScreen = true;
-                                amountRect = 0; // return to case 0 and find another ore
-
-                            } else {
-                                System.out.println("Rect (LOCKTARGET) not found at case 6");
-                                System.out.println("Max tolerance until search another asteroid: " + (this.flagSearchLockTarget + 1) + "/" + LOCKTARGET_NOTFOUND + "\n");
-                                this.flagSearchLockTarget++;
-                            }
-
-                        } else {
-                            System.out.println("Rect (LOCKTARGET) not found at case 6 -> Searching another asteroid\n");
-                            flagNoDragScreen = true;
-                            this.flagSearchLockTarget = 0;
-                            this.amountRect = 0; // return to case 0 and find another ore
-                        }
-
-                    } else {
-                        this.amountRect--; // Return to case 5
-                        this.timeStart = System.currentTimeMillis(); // reset timeStart to back to case 5
-                    }
                 } // end case 5
 
                 case 6 -> {
@@ -273,6 +229,7 @@ public class ExtractOre {
                     System.out.println("End of mining and go docking!\n");
                     new GetDestination().getDestination(GOTO_HOMESTATION);
                     this.amountRect++;
+
                 } // end case 6
 
             }
