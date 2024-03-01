@@ -21,13 +21,13 @@ public class MainNotebook {
         for (int i = 0; i < 1; i++) {
             try {
 
-                new CheckCargoDeposit().check();
+                new CheckCargoDeposit().strartScript();
                 Thread.sleep(20000);
 
-                new GetDestination().getDestination(1);
+                new GetDestination().strartScript(1);
                 Thread.sleep(30000);
 
-                new ExtractOre().extract();
+                new ExtractOre().strartScript();
                 Thread.sleep(50000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {

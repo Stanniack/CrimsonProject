@@ -22,7 +22,7 @@ public class GetDestination {
 
     private int amountRect = 0;
 
-    public void getDestination(int option) throws IOException, TesseractException, AWTException, InterruptedException {
+    public void strartScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
 
         do {
 

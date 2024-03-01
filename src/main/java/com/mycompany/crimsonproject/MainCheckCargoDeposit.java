@@ -18,7 +18,7 @@ public class MainCheckCargoDeposit {
         try {
 
             Thread.sleep(4000);
-            new CheckCargoDeposit().check();
+            new CheckCargoDeposit().strartScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
