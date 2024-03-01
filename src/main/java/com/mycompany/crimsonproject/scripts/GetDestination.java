@@ -28,6 +28,7 @@ public class GetDestination {
 
             boolean flagNoDragScreen = false;
             new TakeScreenShot().take();
+            // Todo connection lost
 
             switch (this.amountRect) {
 

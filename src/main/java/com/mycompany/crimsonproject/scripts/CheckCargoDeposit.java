@@ -30,6 +30,7 @@ public class CheckCargoDeposit {
 
             boolean flagNoDragScreen = false;
             new TakeScreenShot().take();
+            // Todo connection lost
 
             switch (this.amountRect) {
 

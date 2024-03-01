@@ -57,6 +57,7 @@ public class ExtractOre {
             this.priorityOreValue = 0;
 
             new TakeScreenShot().take();
+            // Todo connection lost
 
             switch (this.amountRect) {
 

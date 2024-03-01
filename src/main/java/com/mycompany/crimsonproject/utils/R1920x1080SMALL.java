@@ -26,12 +26,6 @@ public class R1920x1080SMALL {
     public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_W3 = 8;
     public static final int MININGBOT1_H1 = 9; // !!
-    public static final int MININGBOT1_H2 = 12; // !!
-    /* This find where the button MINNINGBOT1 is in the display */
-    public static final int MININGBOT1_X1 = 650;   //!!
-    public static final int MININGBOT1_Y1 = 380;   //!!
-    public static final int MININGBOT1_X2_W = 680; //!!
-    public static final int MININGBOT1_Y2_H = 410; //!!
     /* ------------------------------------------------------------- */
 
     public static final int HOMESTATION1_W1 = 75;
@@ -39,27 +33,12 @@ public class R1920x1080SMALL {
     public static final int HOMESTATION1_W3 = 91; // must be removed!!
     public static final int HOMESTATION1_H1 = 9;
     public static final int HOMESTATION1_H2 = 12; // must be removed!
-    /* This find where the button HOMESTATION1 is in the display */
-    public static final int HOMESTATION1_X1 = 620;   //!!
-    public static final int HOMESTATION1_Y1 = 340;   //!!
-    public static final int HOMESTATION1_X2_W = 770; //!!
-    public static final int HOMESTATION1_Y2_H = 420; //!!
     /* ------------------------------------------------------------- */
 
-    public static final int WARPARROW_W1 = 13;
-    public static final int WARPARROW_W2 = 12;
-    public static final int WARPARROW_H1 = 6;
-    public static final int DOCKARROW_W1 = 12;
-    public static final int DOCKARROW_H1 = 12;
     public static final int WHITIN_W1 = 31;
     public static final int WHITIN_H1 = 9;
     public static final int DOCK_W1 = 23;
     public static final int DOCK_H1 = 9;
-    /* This find where the button WARPARROW is in the display */
-    public static final int WARPARROW_X1 = 600;    //!!
-    public static final int WARPARROW_Y1 = 360;    //!!
-    public static final int WARPARROW_X2_W = 1000; //!!
-    public static final int WARPARROW_Y2_H = 450;  //!!
     /* ------------------------------------------------------------- */
 
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
@@ -139,11 +118,6 @@ public class R1920x1080SMALL {
     public static final int COMPACTMAXCARGO_W2 = 419;
     public static final int COMPACTMAXCARGO_W3 = 331; //!!
     public static final int COMPACTMAXCARGO_H1 = 5;
-    /* This find where the rectangle of COMPACTMAXCARGO is in the display */
-    public static final int COMPACTEDMAXCARGO_X1 = 200;   //!!
-    public static final int COMPACTEDMAXCARGO_Y1 = 250;   //!!
-    public static final int COMPACTEDMAXCARGO_X2_W = 300; //!!
-    public static final int COMPACEDTMAXCARGO_Y2_H = 350; //!!
     /* ------------------------------------------------------------- */
 
     // (122, 16); (121, 14); (121, 25)
