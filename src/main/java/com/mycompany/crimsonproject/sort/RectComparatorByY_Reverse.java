@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class RectComparatorByY_Reverse implements Comparator<Rectangle> {
 

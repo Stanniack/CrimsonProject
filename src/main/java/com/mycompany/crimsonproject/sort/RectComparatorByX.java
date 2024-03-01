@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class RectComparatorByX implements Comparator<Rectangle> {
 

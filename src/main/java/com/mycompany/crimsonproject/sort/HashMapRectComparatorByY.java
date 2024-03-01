@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class HashMapRectComparatorByY implements Comparator<Entry<Integer, Rectangle>> {
 

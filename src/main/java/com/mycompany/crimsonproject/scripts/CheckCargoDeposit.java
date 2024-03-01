@@ -12,7 +12,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
 
  No I.A recognition for stack items in mining cargo and "item hangarButton" Search a
  word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13 (small),

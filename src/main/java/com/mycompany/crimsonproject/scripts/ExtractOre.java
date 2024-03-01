@@ -18,7 +18,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class ExtractOre {
 
@@ -216,7 +216,7 @@ public class ExtractOre {
 
                 case 5 -> {
 
-                    // just find another asteroid and restart script after 1200 secs or get limit of no found approaching
+                    // just find another asteroid and restart script after 'flagUntilBeFilled_MS' secs or get limit of no found approaching
                     this.amountRect = 0;
                     this.flagUntilBeFilled_MS = 0;
                     System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");

@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject;
 
 /**
  *
- * @author Stanniack
+ * @author Devmachine
  */
 public class CrimsonProject {
 

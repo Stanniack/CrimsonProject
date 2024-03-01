@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author DevMachine
+ * @author Devmachine
  */
 public class ClickScreenEvents extends RobotEvent {
 
