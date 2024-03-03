@@ -30,7 +30,7 @@ public class SegmentedRegions {
         this.instance = new Tesseract();
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");
-        this.instance.setTessVariable("user_defined_dpi", "300");
+        this.instance.setVariable("user_defined_dpi", "300");
         this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
     }
 
