@@ -25,15 +25,4 @@ public class ClickScreenTest {
         }
 
     }
-
-    @Test
-    public void verifyHoldCtrlAndLeftClick() {
-        ClickScreenEvents cs = new ClickScreenEvents();
-        Rectangle rect = new Rectangle(600, 600, 0, 0);
-        try {
-            cs.holdCtrlAndLeftClick(rect);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ClickScreenTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

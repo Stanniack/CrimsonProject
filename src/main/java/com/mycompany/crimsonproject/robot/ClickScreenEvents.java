@@ -47,22 +47,6 @@ public class ClickScreenEvents extends RobotEvent {
 
     }
 
-    public void holdCtrlAndLeftClick(Rectangle rect) throws AWTException, InterruptedException {
-
-        /* (Xa = Xo + w/2) | (Ya = Yo + h/2) - Search the center of the rectangle */
-        this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2);
-
-        Thread.sleep(SLEEP_MS);
-        this.bot.keyPress(this.ctrl);
-
-        Thread.sleep(SLEEP_MS);
-        this.bot.mousePress(this.leftClick);
-
-        this.bot.keyRelease(this.ctrl);
-        this.bot.mouseRelease(this.leftClick);
-
-    }
-
     public void dragScreen() throws AWTException, InterruptedException {
 
         Thread.sleep(1000);
