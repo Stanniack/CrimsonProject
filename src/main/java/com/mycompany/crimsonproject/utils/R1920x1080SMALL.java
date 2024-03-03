@@ -89,10 +89,10 @@ public class R1920x1080SMALL {
     public static final int LOCKTARGET_W1 = 26;
     public static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
-    public static final int LOCKTARGET_X1 = 1000;
-    public static final int LOCKTARGET_Y1 = 0;
-    public static final int LOCKTARGET_X2_W = 1919;
-    public static final int LOCKTARGET_Y2_H = 200;
+    public static final int LOCKTARGET_DEADZONE_X1 = 1000;
+    public static final int LOCKTARGET_DEADZONE_Y1 = 0;
+    public static final int LOCKTARGET_DEADZONE_X2_W = 1919;
+    public static final int LOCKTARGET_DEADZONE_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
     public static final int MAXCARGO1_W1 = 111;

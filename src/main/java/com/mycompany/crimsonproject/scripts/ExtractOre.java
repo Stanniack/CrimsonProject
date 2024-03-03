@@ -116,11 +116,10 @@ public class ExtractOre {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
-                            R1920x1080SMALL.LOCKTARGET_W1, 
+                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(R1920x1080SMALL.LOCKTARGET_W1, 
                             R1920x1080SMALL.LOCKTARGET_H1,
-                            R1920x1080SMALL.LOCKTARGET_X1, R1920x1080SMALL.LOCKTARGET_X2_W,
-                            R1920x1080SMALL.LOCATIONSYMBOL_X2_W, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
+                            R1920x1080SMALL.LOCKTARGET_DEADZONE_X1, R1920x1080SMALL.LOCKTARGET_DEADZONE_X2_W,
+                            R1920x1080SMALL.LOCKTARGET_DEADZONE_Y1, R1920x1080SMALL.LOCKTARGET_DEADZONE_Y2_H);
 
                     if (lockTargetFromSelectedItem != null) {
 
