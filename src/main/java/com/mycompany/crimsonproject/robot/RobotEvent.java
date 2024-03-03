@@ -12,6 +12,7 @@ import java.util.logging.Logger;
  * @author Devmachine
  */
 abstract class RobotEvent {
+    
     protected static final int SLEEP_MS = 150; 
     protected static final int SLEEP_MS2 = 200;
     

@@ -46,7 +46,7 @@ public class ExtractOre {
 
     public void strartScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        new KeyboardEvents().pressFn(KeyEvent.VK_F3); // afterburner
+        new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
 
         SegmentedRegions sr3 = new SegmentedRegions();
 
@@ -142,9 +142,9 @@ public class ExtractOre {
                     this.timeStart = System.currentTimeMillis();
 
                     Thread.sleep(CANNONS_MS);
-                    new KeyboardEvents().pressFn(KeyEvent.VK_F1); // cannon 1
+                    new KeyboardEvents().pressKey(KeyEvent.VK_F1); // cannon 1
                     Thread.sleep(500);
-                    new KeyboardEvents().pressFn(KeyEvent.VK_F2); // cannon 2
+                    new KeyboardEvents().pressKey(KeyEvent.VK_F2); // cannon 2
 
                     this.amountRect++; // go to case 3
                     flagNoDragScreen = true;

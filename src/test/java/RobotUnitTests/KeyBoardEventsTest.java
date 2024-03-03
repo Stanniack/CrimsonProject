@@ -28,7 +28,7 @@ public class KeyBoardEventsTest {
     public void verifyPressFn() {
         try {
             KeyboardEvents kbe = new KeyboardEvents();
-            kbe.pressFn(KeyEvent.VK_F1);
+            kbe.pressKey(KeyEvent.VK_F1);
 
         } catch (AWTException | InterruptedException ex) {
             Logger.getLogger(KeyBoardEventsTest.class.getName()).log(Level.SEVERE, null, ex);
