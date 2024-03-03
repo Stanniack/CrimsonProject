@@ -92,7 +92,7 @@ public class R1920x1080SMALL {
     public static final int LOCKTARGET_X1 = 1000;
     public static final int LOCKTARGET_Y1 = 0;
     public static final int LOCKTARGET_X2_W = 1919;
-    public static final int LOCKTARGET_Y2_H = 250;
+    public static final int LOCKTARGET_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
     public static final int MAXCARGO1_W1 = 111;
