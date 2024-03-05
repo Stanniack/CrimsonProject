@@ -30,7 +30,7 @@ public class ExtractOre {
     private static final int SWITCHFLAG = 7;
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1400000; // 1400 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1200000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStart = 0;
@@ -116,7 +116,8 @@ public class ExtractOre {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(R1920x1080SMALL.LOCKTARGET_W1, 
+                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
+                            R1920x1080SMALL.LOCKTARGET_W1, 
                             R1920x1080SMALL.LOCKTARGET_H1,
                             R1920x1080SMALL.LOCKTARGET_DEADZONE_X1, R1920x1080SMALL.LOCKTARGET_DEADZONE_X2_W,
                             R1920x1080SMALL.LOCKTARGET_DEADZONE_Y1, R1920x1080SMALL.LOCKTARGET_DEADZONE_Y2_H);
@@ -182,7 +183,8 @@ public class ExtractOre {
 
                     } else {
 
-                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
+                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(
+                                R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
                                 R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
                                 R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
                                 R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
