@@ -1,11 +1,13 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
+import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -34,7 +36,7 @@ public class GetDestination {
 
                 case 0 -> {
 
-                    if (this.locationButton()) {
+                    if (this.openLocation()) {
                         flagNoDragScreen = true;
                         this.amountRect++;
                     }
@@ -59,7 +61,7 @@ public class GetDestination {
                     /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                     if (!flagNoDragScreen) {
                         this.closeLocationWindow();
-                        this.amountRect--; // return to case 1 to open the location windows again
+                        this.amountRect--; // return to case 0 to open the location window again
                     }
                 }
 
@@ -103,26 +105,11 @@ public class GetDestination {
         } while (this.amountRect < SWITCHFLAG);
     }
 
-    private boolean locationButton() throws IOException, TesseractException, AWTException, InterruptedException {
-        /* Disable "Help EVE" button because its attribute have same width and height to Localization button
-                       Location symbol must be the last shortcut in fixed hub on right side with min scale hud  */
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle locationButton = sr3
-                .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.LOCATIONSYMBOL_W1,
-                        R1920x1080SMALL.LOCATIONSYMBOL_H1,
-                        R1920x1080SMALL.LOCATIONSYMBOL_X1, R1920x1080SMALL.LOCATIONSYMBOL_X2_W,
-                        R1920x1080SMALL.LOCATIONSYMBOL_Y1, R1920x1080SMALL.LOCATIONSYMBOL_Y2_H);
-
-        if (locationButton != null) {
-            System.out.printf("Rect found (LOCATIONSYNMBOL) case 0 - Width: %d and height: %d\n\n", locationButton.width, locationButton.height);
-            new ClickScreenEvents().leftClickCenterButton(locationButton);
-            return true;
-
-        } else {
-            System.out.println("Rect not found (LOCATIONSYNMBOL) case 0\n");
-            return false;
-        }
+    private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
+        new KeyboardEvents().pressKey(KeyEvent.VK_L);
+        System.out.println("L clicked at case " + this.amountRect + "\n");
+        
+        return true;
     }
 
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -136,12 +123,12 @@ public class GetDestination {
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (miningBot1Label != null) {
-            System.out.printf("Rect found (MININGBOT1) case 1 - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
+            System.out.printf("Rect found (MININGBOT1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
             new ClickScreenEvents().rightClickCenterButton(miningBot1Label);
             return true;
 
         } else {
-            System.out.println("Rect not found (MININGBOT1) case 1\n");
+            System.out.println("Rect not found (MININGBOT1) case " + this.amountRect + "\n");
             return false;
         }
     }
@@ -156,12 +143,12 @@ public class GetDestination {
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (homeStationLabel != null) {
-            System.out.printf("Rect found (HOMESTATION1) case 1 - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
+            System.out.printf("Rect found (HOMESTATION1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
             new ClickScreenEvents().rightClickCenterButton(homeStationLabel);
             return true;
 
         } else {
-            System.out.println("Rect not found (HOMESTATION1) case 1\n");
+            System.out.println("Rect not found (HOMESTATION1) at case" + this.amountRect + "\n");
             return false;
         }
     }
@@ -177,12 +164,12 @@ public class GetDestination {
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (warpArrow != null) {
-            System.out.printf("Rect found (WHITHIN) - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
+            System.out.printf("Rect found (WHITHIN) at case " + this.amountRect + " - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (WHITHIN) case 2\n");
+            System.out.println("Rect not found (WHITHIN) at case " + this.amountRect + "\n");
             return false;
         }
 
@@ -199,12 +186,12 @@ public class GetDestination {
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (dockArrow != null) {
-            System.out.printf("Rect found (DOCK) - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
+            System.out.printf("Rect found (DOCK) at case " + this.amountRect + " - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
             new ClickScreenEvents().leftClickCenterButton(dockArrow);
             return true;
 
         } else {
-            System.out.println("Rect not found (DOCK) case 2\n");
+            System.out.println("Rect not found (DOCK) at case " + this.amountRect + "\n");
             return false;
         }
 
@@ -222,13 +209,13 @@ public class GetDestination {
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (closeButtonWindowLocation != null) {
-            System.out.printf("Rect found (CLOSEBUTTONLOCATION) multiple cases (1,2,3) - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
+            System.out.printf("Rect found (CLOSEBUTTONLOCATION) at casse " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
             new ClickScreenEvents().leftClickCenterButton(closeButtonWindowLocation);
 
             return true;
 
         } else {
-            System.out.println("Rect not found (CLOSEBUTTONLOCAITON) multiple cases (1,2,3)\n");
+            System.out.println("Rect not found (CLOSEBUTTONLOCATION) at cases"+ this.amountRect + "\n");
             return false;
         }
     }
