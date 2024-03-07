@@ -27,6 +27,12 @@
    - Abas foram repadronizadas com para facilitar o uso do bot sem que ele quebre com frequência;
    - Algoritmo foi enxugado em ExtractOre para evitar que o algoritmo quebre com frequência ou, se quebrar, volte depois de um tempo.
 
+# Alpha 0.21 - 03/03/24
+  -  Não é mais necessário a HUD do jogo para abrir a aba de localização. O script ExtractOre agora utiliza a shortcut 'L' para tal função.
+
+# Alpha 0.22 - 06/03/24
+  - Aba de lock Target agora possui tempo de tolerância para resetar o script se caso o botão não for achado.
+
 # Bug fixes
 
 * Alpha 0 - 02/02/24
