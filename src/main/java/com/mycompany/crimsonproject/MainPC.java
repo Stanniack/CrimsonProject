@@ -3,7 +3,7 @@ package com.mycompany.crimsonproject;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.ExtractOre2;
-import com.mycompany.crimsonproject.scripts.GetDestination;
+import com.mycompany.crimsonproject.scripts.SetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ public class MainPC {
                 new CheckCargoDeposit().startScript();
                 Thread.sleep(18000);
 
-                new GetDestination().startScript(1);
+                new SetDestination().startScript(1);
                 Thread.sleep(28000);
 
                 new ExtractOre2().strartScript();

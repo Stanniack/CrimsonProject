@@ -15,7 +15,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class GetDestination {
+public class SetDestination {
 
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;

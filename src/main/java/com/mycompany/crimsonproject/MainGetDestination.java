@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject;
 
-import com.mycompany.crimsonproject.scripts.GetDestination;
+import com.mycompany.crimsonproject.scripts.SetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,7 +18,7 @@ public class MainGetDestination {
         try {
 
             Thread.sleep(4000);
-            new GetDestination().startScript(1);
+            new SetDestination().startScript(1);
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
