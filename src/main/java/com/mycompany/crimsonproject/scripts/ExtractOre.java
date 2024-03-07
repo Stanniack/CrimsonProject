@@ -20,7 +20,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class ExtractOre2 {
+public class ExtractOre {
 
     private int amountRect = 0;
     private long flagUntilBeFilled_MS = 0;
