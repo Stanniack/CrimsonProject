@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
+import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import com.mycompany.crimsonproject.scripts.GetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class MainPC {
                 new GetDestination().strartScript(1);
                 Thread.sleep(28000);
 
-                new ExtractOre().strartScript();
+                new ExtractOre2().strartScript();
                 Thread.sleep(45000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {

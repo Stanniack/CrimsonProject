@@ -20,12 +20,14 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class ExtractOre {
+public class ExtractOre2 {
 
     private int amountRect = 0;
     private long flagUntilBeFilled_MS = 0;
+    private long flagLockTarget_MS = 0;
     private int flagUntilBeFilled_AMOUNT = 0;
 
+    private static final int LOCKTARGET_MS = 60000;
     private static final int CANNONS_MS = 15000;
     private static final int SWITCHFLAG = 7;
     private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
@@ -33,6 +35,7 @@ public class ExtractOre {
     private static final int TIMETOWAIT_TOBEFILLED_MS = 1200000; // 1200 secs
     private static final int GOTO_HOMESTATION = 0;
 
+    private long timeStartLockTarget = 0;
     private long timeStart = 0;
     private Integer priorityOreValue;
     private final Integer CSpriority = 4;
@@ -85,6 +88,7 @@ public class ExtractOre {
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
 
                                     if (item.getValue().y <= closestOreList.get(i)) {
+                                        
                                         System.out.println("Temp better ore found: " + item + "\n");
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
@@ -104,6 +108,9 @@ public class ExtractOre {
                             flagNoDragScreen = true;
                             new ClickScreenEvents().doubleClick(betterOre.getValue());
 
+                            /* Check case 1 of lock target */
+                            this.timeStartLockTarget = System.currentTimeMillis();
+
                         } else {
                             System.out.println("Better asteroid is null");
                         }
@@ -117,7 +124,7 @@ public class ExtractOre {
                 case 1 -> {
 
                     Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
-                            R1920x1080SMALL.LOCKTARGET_W1, 
+                            R1920x1080SMALL.LOCKTARGET_W1,
                             R1920x1080SMALL.LOCKTARGET_H1,
                             R1920x1080SMALL.LOCKTARGET_DEADZONE_X1, R1920x1080SMALL.LOCKTARGET_DEADZONE_X2_W,
                             R1920x1080SMALL.LOCKTARGET_DEADZONE_Y1, R1920x1080SMALL.LOCKTARGET_DEADZONE_Y2_H);
@@ -132,7 +139,18 @@ public class ExtractOre {
                         flagNoDragScreen = true;
 
                     } else {
-                        System.out.println("Rect (LOCKTARGET) at case 2 not found\n");
+
+                        this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
+                        System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
+                                + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000);
+
+                        if (this.flagLockTarget_MS > LOCKTARGET_MS) {
+
+                            System.out.println("Lock target not found. Restarting script.\n");
+                            this.flagLockTarget_MS = 0; // reset flag
+                            this.amountRect = 0; // reset script
+                            
+                        }
                     }
                 } // end case 1
 
@@ -158,7 +176,7 @@ public class ExtractOre {
                             R1920x1080SMALL.COMPACTCARGO_DEADZONE_X1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_X2_W,
                             R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y2_H);
 
-                    /* go to the station and dragn itens */
+                    /* go to the station and drag itens */
                     if (compactMaxCargo != null) {
 
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -171,6 +189,7 @@ public class ExtractOre {
 
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
                         this.amountRect++; // go to case 4
+                        
                     }
                 } // end case 3
 
@@ -178,6 +197,7 @@ public class ExtractOre {
 
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeFilled_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
+                        
                         this.flagUntilBeFilled_AMOUNT = 0;
                         this.amountRect++; // go to case 5
 
