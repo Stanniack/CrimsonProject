@@ -19,7 +19,7 @@ public class MainExtractOre {
         try {
 
             Thread.sleep(4000);
-            new ExtractOre().strartScript();
+            new ExtractOre().startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);

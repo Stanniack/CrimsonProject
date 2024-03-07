@@ -18,16 +18,16 @@ public class MainNotebook {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 18; i++) {
             try {
 
-                new CheckCargoDeposit().strartScript();
+                new CheckCargoDeposit().startScript();
                 Thread.sleep(20000);
 
-                new GetDestination().strartScript(1);
+                new GetDestination().startScript(1);
                 Thread.sleep(30000);
 
-                new ExtractOre().strartScript();
+                new ExtractOre().startScript();
                 Thread.sleep(50000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {

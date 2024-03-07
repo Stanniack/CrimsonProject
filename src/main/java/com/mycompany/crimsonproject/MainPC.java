@@ -22,10 +22,10 @@ public class MainPC {
         for (int i = 0; i < 1; i++) {
             try {
 
-                new CheckCargoDeposit().strartScript();
+                new CheckCargoDeposit().startScript();
                 Thread.sleep(18000);
 
-                new GetDestination().strartScript(1);
+                new GetDestination().startScript(1);
                 Thread.sleep(28000);
 
                 new ExtractOre2().strartScript();

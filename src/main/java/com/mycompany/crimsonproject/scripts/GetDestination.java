@@ -24,7 +24,7 @@ public class GetDestination {
 
     private int amountRect = 0;
 
-    public void strartScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
+    public void startScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
 
         do {
 

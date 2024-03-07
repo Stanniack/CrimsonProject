@@ -24,7 +24,7 @@ public class CheckCargoDeposit {
     private int amountRect = 0;
     private static final int SWTICHFLAG = 4;
 
-    public void strartScript() throws InterruptedException, IOException, AWTException, TesseractException {
+    public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
         while (this.amountRect < SWTICHFLAG) {
 

@@ -47,7 +47,7 @@ public class ExtractOre {
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
-    public void strartScript() throws IOException, TesseractException, AWTException, InterruptedException {
+    public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
 
@@ -248,7 +248,7 @@ public class ExtractOre {
                 case 6 -> {
 
                     System.out.println("End of mining and go docking!\n");
-                    new GetDestination().strartScript(GOTO_HOMESTATION);
+                    new GetDestination().startScript(GOTO_HOMESTATION);
                     this.amountRect++;
 
                 } // end case 6

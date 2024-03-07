@@ -18,7 +18,7 @@ public class MainGetDestination {
         try {
 
             Thread.sleep(4000);
-            new GetDestination().strartScript(1);
+            new GetDestination().startScript(1);
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
