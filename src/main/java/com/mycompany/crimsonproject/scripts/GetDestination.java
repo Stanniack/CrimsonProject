@@ -60,8 +60,8 @@ public class GetDestination {
 
                     /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                     if (!flagNoDragScreen) {
-                        this.closeLocationWindow();
                         this.amountRect--; // return to case 0 to open the location window again
+                        flagNoDragScreen = this.closeLocationWindow();
                     }
                 }
 
@@ -83,8 +83,8 @@ public class GetDestination {
 
                     // back to case 1 and find the MININGBOT1 or HOMESTATION1  to restart finding WARPARROW/DOCKARROW
                     if (!flagNoDragScreen) {
-                        this.closeLocationWindow();
                         this.amountRect--;
+                        flagNoDragScreen = this.closeLocationWindow();
                     }
                 }
 
@@ -108,7 +108,7 @@ public class GetDestination {
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
         new KeyboardEvents().pressKey(KeyEvent.VK_L);
         System.out.println("L clicked at case " + this.amountRect + "\n");
-        
+
         return true;
     }
 
@@ -215,7 +215,7 @@ public class GetDestination {
             return true;
 
         } else {
-            System.out.println("Rect not found (CLOSEBUTTONLOCATION) at cases"+ this.amountRect + "\n");
+            System.out.println("Rect not found (CLOSEBUTTONLOCATION) at cases" + this.amountRect + "\n");
             return false;
         }
     }
