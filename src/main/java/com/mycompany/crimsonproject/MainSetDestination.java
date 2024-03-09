@@ -11,7 +11,7 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  */
-public class MainGetDestination {
+public class MainSetDestination {
 
     public static void main(String[] args) {
 
