@@ -40,7 +40,8 @@ public class SetDestination {
                         flagNoDragScreen = true;
                         this.amountRect++;
                     }
-                }
+                    
+                } // end case 0
 
                 case 1 -> {
 
@@ -63,7 +64,8 @@ public class SetDestination {
                         this.amountRect--; // return to case 0 to open the location window again
                         flagNoDragScreen = this.closeLocationWindow();
                     }
-                }
+                    
+                } // end case 1
 
                 case 2 -> {
 
@@ -86,7 +88,8 @@ public class SetDestination {
                         this.amountRect--;
                         flagNoDragScreen = this.closeLocationWindow();
                     }
-                }
+                    
+                } // end case 2
 
                 case 3 -> {
 
@@ -96,7 +99,8 @@ public class SetDestination {
                     }
 
                 }
-            }
+                
+            } // end case 3
 
             if (!flagNoDragScreen) {
                 new ClickScreenEvents().dragScreen();
@@ -106,6 +110,7 @@ public class SetDestination {
     }
 
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         new KeyboardEvents().pressKey(KeyEvent.VK_L);
         System.out.println("L clicked at case " + this.amountRect + "\n");
 
@@ -113,6 +118,7 @@ public class SetDestination {
     }
 
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle miningBot1Label = sr3
                 .getT_2WxH_BlockScreen(
@@ -134,6 +140,7 @@ public class SetDestination {
     }
 
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
                 .getT_2WxH_BlockScreen(
@@ -154,6 +161,7 @@ public class SetDestination {
     }
 
     private boolean whithin() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
@@ -176,6 +184,7 @@ public class SetDestination {
     }
 
     private boolean dockArrow() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
@@ -198,6 +207,7 @@ public class SetDestination {
     }
 
     private boolean closeLocationWindow() throws IOException, TesseractException, AWTException, InterruptedException {
+        
         /*Close the location window */
         SegmentedRegions sr3 = new SegmentedRegions();
 

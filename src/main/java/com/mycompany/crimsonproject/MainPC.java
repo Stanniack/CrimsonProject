@@ -28,7 +28,7 @@ public class MainPC {
                 new SetDestination().startScript(1);
                 Thread.sleep(28000);
 
-                new ExtractOre2().strartScript();
+                new ExtractOre2().startScript();
                 Thread.sleep(45000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {

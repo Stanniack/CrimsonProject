@@ -74,7 +74,6 @@ public class ExtractOre {
                             R1920x1080SMALL.OVERVIEWMINING_Y1, R1920x1080SMALL.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
-
                         System.out.println("Hash map size: " + rectResult.size());
 
                         for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
@@ -82,13 +81,11 @@ public class ExtractOre {
                             for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
 
                                 if (item.getKey().contains("P" + i) && this.priorityOreValue <= this.priorityList.get(i)) {
-
                                     this.priorityOreValue = this.priorityList.get(i);
 
                                     System.out.println(item.getKey() + ": " + item.getValue().y + "y");
 
                                     if (item.getValue().y <= closestOreList.get(i)) {
-                                        
                                         System.out.println("Temp better ore found: " + item + "\n");
                                         betterOre = item;
                                         closestOreList.set(i, item.getValue().y);
@@ -100,7 +97,6 @@ public class ExtractOre {
                         }
 
                         if (betterOre != null) {
-
                             System.out.println("Closest, better ore found (Y Coordinate): "
                                     + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")\n");
 
@@ -130,7 +126,6 @@ public class ExtractOre {
                             R1920x1080SMALL.LOCKTARGET_DEADZONE_Y1, R1920x1080SMALL.LOCKTARGET_DEADZONE_Y2_H);
 
                     if (lockTargetFromSelectedItem != null) {
-
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
@@ -139,19 +134,17 @@ public class ExtractOre {
                         flagNoDragScreen = true;
 
                     } else {
-
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
                         System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
                                 + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000);
-
+                        
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
-
-                            System.out.println("Lock target not found. Restarting script.\n");
+                            System.out.println("Lock target not found. Restarting script.\n\n");
                             this.flagLockTarget_MS = 0; // reset flag
                             this.amountRect = 0; // reset script
-                            
                         }
                     }
+                    
                 } // end case 1
 
                 case 2 -> {
@@ -164,8 +157,9 @@ public class ExtractOre {
                     Thread.sleep(500);
                     new KeyboardEvents().pressKey(KeyEvent.VK_F2); // cannon 2
 
-                    this.amountRect++; // go to case 3
                     flagNoDragScreen = true;
+                    this.amountRect++; // go to case 3
+                    
                 } // end case 2
 
                 case 3 -> {
@@ -178,29 +172,25 @@ public class ExtractOre {
 
                     /* go to the station and drag itens */
                     if (compactMaxCargo != null) {
-
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
 
-                        this.amountRect = 6; // go to case 6 - docking and drag itens to main station
                         flagNoDragScreen = true;
-
+                        this.amountRect = 6; // go to case 6 - docking and drag itens to main station
+                        
                     } else {
-
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
                         this.amountRect++; // go to case 4
-                        
                     }
+                    
                 } // end case 3
 
                 case 4 -> {
 
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeFilled_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
-                        
                         this.flagUntilBeFilled_AMOUNT = 0;
                         this.amountRect++; // go to case 5
-
                     } else {
 
                         Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(
@@ -210,17 +200,15 @@ public class ExtractOre {
                                 R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
 
                         if (approaching != null) {
-
                             System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
                                     approaching.width, approaching.height, approaching.x, approaching.y);
-
-                            this.amountRect--; // go back to case 3
+                            
                             flagNoDragScreen = true;
+                            this.amountRect--; // go back to case 3
 
                             Thread.sleep(TIMETOWAIT_APPROACHING_MS);
 
                         } else {
-
                             System.out.println("Rect (APRROACHING) not found");
                             System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
                                     + this.flagUntilBeFilled_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
@@ -239,14 +227,16 @@ public class ExtractOre {
                 case 5 -> {
 
                     // just find another asteroid and restart script after 'flagUntilBeFilled_MS' secs or get limit of no found approaching
-                    this.amountRect = 0;
+                    flagNoDragScreen = true;
                     this.flagUntilBeFilled_MS = 0;
                     System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
+                    this.amountRect = 0;
 
                 } // end case 5
 
                 case 6 -> {
 
+                    flagNoDragScreen = true;
                     System.out.println("End of mining and go docking!\n");
                     new SetDestination().startScript(GOTO_HOMESTATION);
                     this.amountRect++;
