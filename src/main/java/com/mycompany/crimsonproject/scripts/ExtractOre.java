@@ -137,14 +137,14 @@ public class ExtractOre {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
                         System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
                                 + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000);
-                        
+
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                             System.out.println("Lock target not found. Restarting script.\n\n");
                             this.flagLockTarget_MS = 0; // reset flag
                             this.amountRect = 0; // reset script
                         }
                     }
-                    
+
                 } // end case 1
 
                 case 2 -> {
@@ -159,7 +159,7 @@ public class ExtractOre {
 
                     flagNoDragScreen = true;
                     this.amountRect++; // go to case 3
-                    
+
                 } // end case 2
 
                 case 3 -> {
@@ -177,12 +177,12 @@ public class ExtractOre {
 
                         flagNoDragScreen = true;
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
-                        
+
                     } else {
                         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
                         this.amountRect++; // go to case 4
                     }
-                    
+
                 } // end case 3
 
                 case 4 -> {
@@ -202,7 +202,7 @@ public class ExtractOre {
                         if (approaching != null) {
                             System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
                                     approaching.width, approaching.height, approaching.x, approaching.y);
-                            
+
                             flagNoDragScreen = true;
                             this.amountRect--; // go back to case 3
 
@@ -227,9 +227,9 @@ public class ExtractOre {
                 case 5 -> {
 
                     // just find another asteroid and restart script after 'flagUntilBeFilled_MS' secs or get limit of no found approaching
+                    System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
                     flagNoDragScreen = true;
                     this.flagUntilBeFilled_MS = 0;
-                    System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
                     this.amountRect = 0;
 
                 } // end case 5
