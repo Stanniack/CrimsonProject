@@ -122,10 +122,12 @@ public class R1920x1080SMALL {
 
     // (122, 16); (121, 14); (121, 25)
     public static final int APPROACHING_W1 = 122;
-    public static final int APPROACHING_W2 = 121;
+    public static final int APPROACHING_W2 = 121; //
     public static final int APPROACHING_H1 = 25;
     public static final int APPROACHING_H2 = 16;
-    public static final int APPROACHING_H3 = 14;
+    public static final int APPROACHING_H3 = 14; //
+    public static final int APPROACHING_X = 899; //
+    public static final int APPROACHING_Y = 787; //
     /* This find where the word Approaching is in the display */
     public static final int APPROACHING_DEADZONE_X1 = 885;
     public static final int APPROACHING_DEADZONE_Y1 = 770;
