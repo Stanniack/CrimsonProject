@@ -39,7 +39,7 @@ public class FindPixels {
         return area >= APPR_PERCENT;
     }
 
-    public int pixelContainsColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> RGBvalue) throws IOException {
+    public int pixelContainsColorByRange(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
 
         File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         BufferedImage bf = ImageIO.read(imageFile);
@@ -51,8 +51,12 @@ public class FindPixels {
             for (int c = column; c < (column + height); c++) {
                 color = new Color(bf.getRGB(r, c));
 
-                if (color.getRed() == RGBvalue.getValue0() && color.getGreen() == RGBvalue.getValue1() && color.getBlue() == RGBvalue.getValue2()) {
+                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
+                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
+                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
+
                     area++;
+
                 }
             }
         }

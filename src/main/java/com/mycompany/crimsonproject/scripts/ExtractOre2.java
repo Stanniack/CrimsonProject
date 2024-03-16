@@ -32,7 +32,7 @@ public class ExtractOre2 {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1200000; // 1200 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
@@ -149,6 +149,7 @@ public class ExtractOre2 {
 
                 case 2 -> {
 
+                    this.timeStart = System.currentTimeMillis();
                     List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
                     for (int i = 0; i < events.size(); i++) {
@@ -199,23 +200,32 @@ public class ExtractOre2 {
                 } // end case 3
 
                 case 4 -> {
-
-                    boolean approaching = new FindPixels().countWhitePixels(
-                            R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
-                            R1920x1080SMALL.APPROACHING_W2, R1920x1080SMALL.APPROACHING_H3);
-
-                    if (approaching == true) {
-                        System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
-
-                        flagNoDragScreen = true;
-                        this.amountRect--; // go back to case 3
-
-                        Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+                    /* If true, there is no max cargo neither minering ore */
+                    if (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
+                        this.amountRect++; // go to case 5
 
                     } else {
-                        System.out.println("Rect (APRROACHING) not found\n");
-                        this.amountRect++;
+                        boolean approaching = new FindPixels().countWhitePixels(
+                                R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
+                                R1920x1080SMALL.APPROACHING_W2, R1920x1080SMALL.APPROACHING_H3);
+
+                        if (approaching == true) {
+                            System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
+
+                            flagNoDragScreen = true;
+                            this.amountRect--; // go back to case 3
+
+                            Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+
+                        } else {
+                            System.out.println("Rect (APRROACHING) not found\n");
+                            this.amountRect++;
+                        }
                     }
+
+                    this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
+                    System.out.println("Time added until set another ore: "
+                            + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
 
                 } // end case 4
 
@@ -250,7 +260,7 @@ public class ExtractOre2 {
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
-        int flagTry = 7;
+        int flagTry = 3;
         boolean actived;
 
         for (int j = 0; j < flagTry; j++) {
