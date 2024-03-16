@@ -260,10 +260,10 @@ public class ExtractOre2 {
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
-        int flagTry = 3;
+        int flagAttempt = 10;
         boolean actived;
 
-        for (int j = 0; j < flagTry; j++) {
+        for (int j = 0; j < flagAttempt; j++) {
 
             Thread.sleep(180);
             new TakeScreenShot().take();
@@ -286,10 +286,10 @@ public class ExtractOre2 {
     private boolean isCanceled(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
-        int flagTry = 5;
+        int flagAttempt = 5;
         boolean canceled;
 
-        for (int j = 0; j < flagTry; j++) {
+        for (int j = 0; j < flagAttempt; j++) {
 
             new TakeScreenShot().take();
 
