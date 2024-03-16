@@ -1,4 +1,4 @@
-package RobotUnitTests;
+package robot.unit.tests;
 
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import java.awt.AWTException;

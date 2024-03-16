@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import org.javatuples.Triplet;
 
 /**
  *
@@ -35,11 +36,55 @@ public class FindPixels {
         System.out.println("Total area: " + (width * height) + "\nFilled with white pixels area: " + area);
         System.out.println("White pixels: " + ((float) (area * 100) / (width * height)) + "%");
 
-        if (area >= APPR_PERCENT) {
-            return true;
-        }
-
-        return false;
+        return area >= APPR_PERCENT;
 
     }
+
+    public int pixelContainsColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> RGBvalue) throws IOException {
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        Color color;
+        int area = 0;
+
+        for (int r = row; r < (row + width); r++) {
+            for (int c = column; c < (column + height); c++) {
+                color = new Color(bf.getRGB(r, c));
+
+                if (color.getRed() == RGBvalue.getValue0() && color.getGreen() == RGBvalue.getValue1() && color.getBlue() == RGBvalue.getValue2()) {
+                    area++;
+                }
+            }
+        }
+
+        return area;
+
+    }
+
+    public void findRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
+
+        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        BufferedImage bf = ImageIO.read(imageFile);
+
+        Color color;
+        int area = 0;
+
+        for (int r = row; r < (row + width); r++) {
+            for (int c = column; c < (column + height); c++) {
+                color = new Color(bf.getRGB(r, c));
+
+                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
+                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
+                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
+
+                    area++;
+
+                }
+            }
+        }
+
+        System.out.println("Area: " + area);
+    }
+
 }
