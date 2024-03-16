@@ -12,7 +12,9 @@ public class CrimsonProject {
 
     public static void main(String[] args) {
         try {
-            new FindPixels().findRangeColor(1044, 910, 42, 40, new Triplet<>(79, 110, 67), new Triplet<>(90, 113, 70));
+            double start = System.currentTimeMillis();
+            new FindPixels().findRangeColor(1095, 910, 42, 40, new Triplet<>(107, 107, 106), new Triplet<>(110, 110, 109));
+            System.out.println((System.currentTimeMillis() - start)/100 + " secs");
         } catch (IOException ex) {
         }
     }

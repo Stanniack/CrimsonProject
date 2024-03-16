@@ -156,11 +156,18 @@ public class R1920x1080SMALL {
     public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
     public static final int COMPACTCARGO_DEADZONE_X2_W = 444;
     public static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
+    /* ------------------------------------------------------------- */
 
     public static final int LOCATIONTAB_DEADZONE_X1 = 445;
     public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
+    /* ------------------------------------------------------------- */
+    public static final int CANNON_W1 = 42;
+    public static final int CANNON_H1 = 40;
+    public static final int CANNON1_X = 1044;
+    public static final int CANNON2_X = 1095;
+    public static final int CANNONS_Y = 910;
 
 }
 /**
