@@ -200,6 +200,7 @@ public class ExtractOre2 {
                 } // end case 3
 
                 case 4 -> {
+                    
                     /* If true, there is no max cargo neither minering ore */
                     if (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
                         this.amountRect++; // go to case 5
@@ -212,7 +213,6 @@ public class ExtractOre2 {
                         if (approaching == true) {
                             System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
 
-                            flagNoDragScreen = true;
                             this.amountRect--; // go back to case 3
 
                             Thread.sleep(TIMETOWAIT_APPROACHING_MS);
@@ -222,6 +222,8 @@ public class ExtractOre2 {
                             this.amountRect++;
                         }
                     }
+
+                    flagNoDragScreen = true; //!!
 
                     this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
