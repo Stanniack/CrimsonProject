@@ -1,9 +1,11 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
+import com.mycompany.crimsonproject.utils.PIXELRANGE;
 import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.sourceforge.tess4j.TesseractException;
+import org.javatuples.Triplet;
 
 /**
  *
@@ -25,14 +28,11 @@ public class ExtractOre {
     private int amountRect = 0;
     private long flagUntilBeFilled_MS = 0;
     private long flagLockTarget_MS = 0;
-    private int flagUntilBeFilled_AMOUNT = 0;
 
     private static final int LOCKTARGET_MS = 60000;
-    private static final int CANNONS_MS = 15000;
     private static final int SWITCHFLAG = 7;
-    private static final int AMOUNT_APRROACHING_NOTFOUND = 20;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1200000; // 1200 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
@@ -108,7 +108,7 @@ public class ExtractOre {
                             this.timeStartLockTarget = System.currentTimeMillis();
 
                         } else {
-                            System.out.println("Better asteroid is null");
+                            System.out.println("Better asteroid is null\n");
                         }
 
                     } else {
@@ -136,7 +136,7 @@ public class ExtractOre {
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
                         System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
-                                + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000);
+                                + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000 + "\n");
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                             System.out.println("Lock target not found. Restarting script.\n\n");
@@ -149,13 +149,27 @@ public class ExtractOre {
 
                 case 2 -> {
 
-                    /* This case needs attetion, it's a fragile code - Two miner cannons*/
                     this.timeStart = System.currentTimeMillis();
+                    List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
-                    Thread.sleep(CANNONS_MS);
-                    new KeyboardEvents().pressKey(KeyEvent.VK_F1); // cannon 1
-                    Thread.sleep(500);
-                    new KeyboardEvents().pressKey(KeyEvent.VK_F2); // cannon 2
+                    for (int i = 0; i < events.size(); i++) {
+
+                        if (this.isActive(i)) {
+                            new KeyboardEvents().pressKey(events.get(i));
+                            Thread.sleep(2000);
+                            new KeyboardEvents().pressKey(events.get(i));
+                            System.out.println("Cannon had been active. Press 2x cannon " + i + "\n");
+
+                        } else if (this.isCanceled(i)) {
+                            Thread.sleep(500);
+                            new KeyboardEvents().pressKey(events.get(i));
+                            System.out.println("Cannon had been canceled. Wait and press 1x cannon " + i + "\n");
+
+                        } else {
+                            new KeyboardEvents().pressKey(events.get(i));
+                            System.out.println("Just press 1x cannon " + i + "\n");
+                        }
+                    }
 
                     flagNoDragScreen = true;
                     this.amountRect++; // go to case 3
@@ -186,37 +200,30 @@ public class ExtractOre {
                 } // end case 3
 
                 case 4 -> {
-
+                    
                     /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeFilled_AMOUNT > AMOUNT_APRROACHING_NOTFOUND || this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
-                        this.flagUntilBeFilled_AMOUNT = 0;
+                    if (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
                         this.amountRect++; // go to case 5
+
                     } else {
+                        boolean approaching = new FindPixels().countWhitePixels(
+                                R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
+                                R1920x1080SMALL.APPROACHING_W2, R1920x1080SMALL.APPROACHING_H3);
 
-                        Rectangle approaching = sr3.getApproaching_2Wx3H_BlockScreen(
-                                R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_W2,
-                                R1920x1080SMALL.APPROACHING_H1, R1920x1080SMALL.APPROACHING_H2, R1920x1080SMALL.APPROACHING_H3,
-                                R1920x1080SMALL.APPROACHING_DEADZONE_X1, R1920x1080SMALL.APPROACHING_DEADZONE_X2_W,
-                                R1920x1080SMALL.APPROACHING_DEADZONE_Y1, R1920x1080SMALL.APPROACHING_DEADZONE_Y2_H);
+                        if (approaching == true) {
+                            System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
 
-                        if (approaching != null) {
-                            System.out.printf("Rect found (APRROACHING) - Width: %d and height: %d at coordinates (%d, %d)\n",
-                                    approaching.width, approaching.height, approaching.x, approaching.y);
-
-                            flagNoDragScreen = true;
                             this.amountRect--; // go back to case 3
 
                             Thread.sleep(TIMETOWAIT_APPROACHING_MS);
 
                         } else {
-                            System.out.println("Rect (APRROACHING) not found");
-                            System.out.println("Added 1 to amount var until set another ore - Max var tolerance: "
-                                    + this.flagUntilBeFilled_AMOUNT + "/" + AMOUNT_APRROACHING_NOTFOUND + "\n");
-
-                            this.flagUntilBeFilled_AMOUNT += 1;
+                            System.out.println("Rect (APRROACHING) not found\n");
+                            this.amountRect++;
                         }
-
                     }
+
+                    flagNoDragScreen = true; //!!
 
                     this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
@@ -226,8 +233,7 @@ public class ExtractOre {
 
                 case 5 -> {
 
-                    // just find another asteroid and restart script after 'flagUntilBeFilled_MS' secs or get limit of no found approaching
-                    System.out.println("Time limit or Aprroaching limit exceded. Searching for another asteroid.\n");
+                    System.out.println("Searching for another asteroid.\n");
                     flagNoDragScreen = true;
                     this.flagUntilBeFilled_MS = 0;
                     this.amountRect = 0;
@@ -251,6 +257,57 @@ public class ExtractOre {
 
         } while (this.amountRect < SWITCHFLAG);
 
+    }
+
+    private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
+
+        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
+        int flagAttempt = 10;
+        boolean actived;
+
+        for (int j = 0; j < flagAttempt; j++) {
+
+            Thread.sleep(180);
+            new TakeScreenShot().take();
+
+            actived = new FindPixels().findRangeColor(
+                    coordinatesX.get(i), R1920x1080SMALL.CANNONS_Y,
+                    R1920x1080SMALL.CANNON_W1, R1920x1080SMALL.CANNON_H1,
+                    new Triplet<>(PIXELRANGE.ACT_MINRED, PIXELRANGE.ACT_MINGREEN, PIXELRANGE.ACT_MINBLUE),
+                    new Triplet<>(PIXELRANGE.ACT_MAXRED, PIXELRANGE.ACT_MAXGREEN, PIXELRANGE.ACT_MAXBLUE));
+
+            if (actived) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    private boolean isCanceled(int i) throws IOException, InterruptedException, AWTException {
+
+        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
+        int flagAttempt = 5;
+        boolean canceled;
+
+        for (int j = 0; j < flagAttempt; j++) {
+
+            new TakeScreenShot().take();
+
+            canceled = new FindPixels().findRangeColor(
+                    coordinatesX.get(i), R1920x1080SMALL.CANNONS_Y,
+                    R1920x1080SMALL.CANNON_W1, R1920x1080SMALL.CANNON_H1,
+                    new Triplet<>(PIXELRANGE.CANCEL_MINRED, PIXELRANGE.CANCEL_MINGREEN, PIXELRANGE.CANCEL_MINBLUE),
+                    new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
+
+            if (canceled) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
 }

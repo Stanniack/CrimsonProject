@@ -62,7 +62,7 @@ public class SetDestination {
                     /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                     if (!flagNoDragScreen) {
                         this.amountRect--; // return to case 0 to open the location window again
-                        flagNoDragScreen = this.closeLocationWindow();
+                        flagNoDragScreen = this.closeLocationWindow(); // is it necessary?
                     }
                     
                 } // end case 1
@@ -86,7 +86,7 @@ public class SetDestination {
                     // back to case 1 and find the MININGBOT1 or HOMESTATION1  to restart finding WARPARROW/DOCKARROW
                     if (!flagNoDragScreen) {
                         this.amountRect--;
-                        flagNoDragScreen = this.closeLocationWindow();
+                        flagNoDragScreen = this.closeLocationWindow(); // is it necessary?
                     }
                     
                 } // end case 2
