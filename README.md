@@ -34,6 +34,9 @@
 # Alpha 0.22 - 06/03/24
   - Aba de lock Target agora possui tempo de tolerância para resetar o script se caso o botão não for achado.
 
+# Alpha 0.3 - 18/03/24
+  - Agora "Approaching" e canhões são identificados por varredura de pixels.
+
 # Bug fixes
 
 * Alpha 0 - 02/02/24
