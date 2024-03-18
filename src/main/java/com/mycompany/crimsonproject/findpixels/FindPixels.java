@@ -13,21 +13,22 @@ import org.javatuples.Triplet;
  */
 public class FindPixels {
 
+    private final File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+    private BufferedImage bf;
+    private Color color;
+
     private static final int APPR_PERCENT = 25;
 
     public boolean countWhitePixels(int row, int column, int width, int height) throws IOException {
 
-        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        BufferedImage bf = ImageIO.read(imageFile);
-
-        Color color;
+        this.bf = ImageIO.read(this.imageFile);
         int area = 0;
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                color = new Color(bf.getRGB(r, c));
+                this.color = new Color(this.bf.getRGB(r, c));
 
-                if (color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 255) {
+                if (this.color.getRed() == 255 && this.color.getGreen() == 255 && this.color.getBlue() == 255) {
                     area++;
                 }
             }
@@ -41,19 +42,16 @@ public class FindPixels {
 
     public int pixelContainsColorByRange(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
 
-        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        BufferedImage bf = ImageIO.read(imageFile);
-
-        Color color;
+        this.bf = ImageIO.read(this.imageFile);
         int area = 0;
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                color = new Color(bf.getRGB(r, c));
+                this.color = new Color(this.bf.getRGB(r, c));
 
-                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
-                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
-                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
+                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
+                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
+                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
 
                     area++;
 
@@ -66,18 +64,15 @@ public class FindPixels {
 
     public boolean findRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
 
-        File imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        BufferedImage bf = ImageIO.read(imageFile);
-
-        Color color;
+        this.bf = ImageIO.read(this.imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                color = new Color(bf.getRGB(r, c));
+                this.color = new Color(this.bf.getRGB(r, c));
 
-                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
-                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
-                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
+                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
+                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
+                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
 
                     return true;
 
