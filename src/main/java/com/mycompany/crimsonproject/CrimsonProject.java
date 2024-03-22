@@ -13,10 +13,10 @@ public class CrimsonProject {
     public static void main(String[] args) {
         try {
             double start = System.currentTimeMillis();
-            int area = new FindPixels().pixelContainsColorByRange(1044, 910, 42, 40, new Triplet<>(80, 86, 67), new Triplet<>(90, 113, 70));
+            int area = new FindPixels().pixelContainsColorByRange(1044, 910, 42, 40, new Triplet<>(90,77,52), new Triplet<>(90,77,52));
             System.out.println("Area cannon 1: " + area);
             
-            area = new FindPixels().pixelContainsColorByRange(1095, 910, 42, 40, new Triplet<>(80, 86, 67), new Triplet<>(90, 113, 70));
+            area = new FindPixels().pixelContainsColorByRange(1095, 910, 42, 40, new Triplet<>(90,77,52), new Triplet<>(90,77,52));
             System.out.println("Area cannon 2: " + area);
             
             System.out.println((System.currentTimeMillis() - start)/100 + " secs");

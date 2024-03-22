@@ -1,6 +1,7 @@
 package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.scripts.ExtractOre;
+import com.mycompany.crimsonproject.scripts.ExtractOre2;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ public class MainExtractOre {
         try {
 
             Thread.sleep(4000);
-            new ExtractOre().startScript();
+            new ExtractOre2().startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);

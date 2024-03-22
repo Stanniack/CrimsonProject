@@ -83,4 +83,21 @@ public class FindPixels {
         return false;
     }
 
+    public boolean findByColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> RGBcolor) throws IOException {
+
+        this.bf = ImageIO.read(this.imageFile);
+
+        for (int r = row; r < (row + width); r++) {
+            for (int c = column; c < (column + height); c++) {
+                this.color = new Color(this.bf.getRGB(r, c));
+
+                if (this.color.getRed() == RGBcolor.getValue0() && this.color.getGreen() == RGBcolor.getValue1() && this.color.getBlue() == RGBcolor.getValue2()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }

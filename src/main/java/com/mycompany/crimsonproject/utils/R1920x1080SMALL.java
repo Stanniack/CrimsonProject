@@ -163,12 +163,23 @@ public class R1920x1080SMALL {
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
+    
     public static final int CANNON_W1 = 42;
     public static final int CANNON_H1 = 40;
     public static final int CANNON1_X = 1044;
     public static final int CANNON2_X = 1095;
     public static final int CANNONS_Y = 910;
+    /* ------------------------------------------------------------- */
+    
+    public static final int RANGEDCANNON_W1 = 27;
+    public static final int RANGEDCANNON_H1 = 12;
+    public static final int RANGEDCANNON1_X = 1049;
+    public static final int RANGEDCANNON2_X = 1100;
+    public static final int RANGEDCANNONS_Y = 925;
 
+    
+    //C1 (1049, 925, 27, 12)
+    //C2 (1100, 925, 27, 12)
 }
 /**
  *

@@ -18,6 +18,10 @@ public class PIXELRANGE {
     public static final int CANCEL_MAXGREEN = 69;
     public static final int CANCEL_MINBLUE = 16;
     public static final int CANCEL_MAXBLUE = 56;
+    
+    public static final int ALPHA_RED = 104;
+    public static final int ALPHA_GREEN = 102;
+    public static final int ALPHA_BLUE = 56;
    
     
 }
