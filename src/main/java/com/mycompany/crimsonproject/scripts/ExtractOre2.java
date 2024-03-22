@@ -102,7 +102,7 @@ public class ExtractOre2 {
 
                             this.amountRect++; // go to case 1
                             flagNoDragScreen = true;
-                            //new ClickScreenEvents().doubleClick(betterOre.getValue());
+                            new ClickScreenEvents().doubleClick(betterOre.getValue());
 
                             /* Check case 1 of lock target */
                             this.timeStartLockTarget = System.currentTimeMillis();
@@ -129,7 +129,7 @@ public class ExtractOre2 {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
-                        //new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
+                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                         this.amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
@@ -171,7 +171,7 @@ public class ExtractOre2 {
                             Thread.sleep(500);
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
-                            //this.amountRect = 0;
+                            this.amountRect = 0;
 
                         } else {
                             new KeyboardEvents().pressKey(events.get(i));
