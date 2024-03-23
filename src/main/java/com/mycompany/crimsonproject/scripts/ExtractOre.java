@@ -206,9 +206,8 @@ public class ExtractOre {
                         this.amountRect++; // go to case 5
 
                     } else {
-                        boolean approaching = new FindPixels().countWhitePixels(
-                                R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
-                                R1920x1080SMALL.APPROACHING_W2, R1920x1080SMALL.APPROACHING_H3);
+                        boolean approaching = new FindPixels().countWhitePixels(R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
+                                R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_H3);
 
                         if (approaching == true) {
                             System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");

@@ -166,9 +166,8 @@ public class SetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.WHITIN_W1,
-                        R1920x1080SMALL.WHITIN_H1,
+                .getT_WxH_BlockScreen(R1920x1080SMALL.WITHIN_W1,
+                        R1920x1080SMALL.WITHIN_H1,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
                         R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
 

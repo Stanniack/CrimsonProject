@@ -69,7 +69,7 @@ public class CheckCargoDeposit {
                 }
 
                 case 3 -> {
-                    
+
                     if (this.pressUndockButton()) {
                         this.amountRect++;
                         flagNoDragScreen = true;
@@ -100,8 +100,6 @@ public class CheckCargoDeposit {
             return "maxCargo";
 
         } else {
-
-            System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
 
             Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
                     R1920x1080SMALL.MINGCARGO_H1,

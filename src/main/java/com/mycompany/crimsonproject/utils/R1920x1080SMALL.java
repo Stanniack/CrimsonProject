@@ -13,15 +13,6 @@ package com.mycompany.crimsonproject.utils;
  */
 public class R1920x1080SMALL {
 
-    public static final int LOCATIONSYMBOL_W1 = 10;
-    public static final int LOCATIONSYMBOL_H1 = 14;
-    /* This find where the button Location is in the display */
-    public static final int LOCATIONSYMBOL_X1 = 0;
-    public static final int LOCATIONSYMBOL_Y1 = 460;
-    public static final int LOCATIONSYMBOL_X2_W = 50;
-    public static final int LOCATIONSYMBOL_Y2_H = 530;
-    /* ------------------------------------------------------------- */
-
     public static final int MININGBOT1_W1 = 60;
     public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_W3 = 8;
@@ -35,19 +26,14 @@ public class R1920x1080SMALL {
     public static final int HOMESTATION1_H2 = 12; // must be removed!
     /* ------------------------------------------------------------- */
 
-    public static final int WHITIN_W1 = 31;
-    public static final int WHITIN_H1 = 9;
+    public static final int WITHIN_W1 = 31;
+    public static final int WITHIN_H1 = 9;
     public static final int DOCK_W1 = 23;
     public static final int DOCK_H1 = 9;
     /* ------------------------------------------------------------- */
 
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
     public static final int CLOSELOCATIONBUTTON_H1 = 10;
-    /* This find where the button CLOSEBUTTONLOCATION is in the display */
-    public static final int CLOSELOCATIONBUTTON_X1 = 1000;
-    public static final int CLOSELOCATIONBUTTON_Y1 = 250;
-    public static final int CLOSELOCATIONBUTTON_X2_W = 1170;
-    public static final int CLOSELOCATIONBUTTON_Y2_H = 320;
     /* ------------------------------------------------------------- */
 
     // Priority 1: (62, 9); (61, 9)
@@ -121,18 +107,10 @@ public class R1920x1080SMALL {
     /* ------------------------------------------------------------- */
 
     // (122, 16); (121, 14); (121, 25)
-    public static final int APPROACHING_W1 = 122;
-    public static final int APPROACHING_W2 = 121; //
-    public static final int APPROACHING_H1 = 25;
-    public static final int APPROACHING_H2 = 16;
-    public static final int APPROACHING_H3 = 14; //
-    public static final int APPROACHING_X = 899; //
-    public static final int APPROACHING_Y = 787; //
-    /* This find where the word Approaching is in the display */
-    public static final int APPROACHING_DEADZONE_X1 = 885;
-    public static final int APPROACHING_DEADZONE_Y1 = 770;
-    public static final int APPROACHING_DEADZONE_X2_W = 915;
-    public static final int APPROACHING_DEADZONE_Y2_H = 795;
+    public static final int APPROACHING_W1 = 121;
+    public static final int APPROACHING_H3 = 14;
+    public static final int APPROACHING_X = 899;
+    public static final int APPROACHING_Y = 787;
     /* ------------------------------------------------------------- */
 
     // Drag itens deadzone
@@ -163,23 +141,20 @@ public class R1920x1080SMALL {
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
-    
+
     public static final int CANNON_W1 = 42;
     public static final int CANNON_H1 = 40;
     public static final int CANNON1_X = 1044;
     public static final int CANNON2_X = 1095;
     public static final int CANNONS_Y = 910;
     /* ------------------------------------------------------------- */
-    
+
     public static final int RANGEDCANNON_W1 = 27;
     public static final int RANGEDCANNON_H1 = 12;
     public static final int RANGEDCANNON1_X = 1049;
     public static final int RANGEDCANNON2_X = 1100;
     public static final int RANGEDCANNONS_Y = 925;
 
-    
-    //C1 (1049, 925, 27, 12)
-    //C2 (1100, 925, 27, 12)
 }
 /**
  *
