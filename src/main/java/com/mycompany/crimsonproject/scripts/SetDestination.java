@@ -152,6 +152,7 @@ public class SetDestination {
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
             new ClickScreenEvents().rightClickCenterButton(homeStationLabel);
+            
             return true;
 
         } else {
@@ -174,6 +175,7 @@ public class SetDestination {
         if (warpArrow != null) {
             System.out.printf("Rect found (WHITHIN) at case " + this.amountRect + " - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
+            
             return true;
 
         } else {
@@ -197,6 +199,7 @@ public class SetDestination {
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCK) at case " + this.amountRect + " - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
             new ClickScreenEvents().leftClickCenterButton(dockArrow);
+            
             return true;
 
         } else {
