@@ -1,7 +1,7 @@
 package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
-import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
+import com.mycompany.crimsonproject.utils.FULLHD;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -256,33 +256,33 @@ public class SegmentedRegions {
             if ((result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
 
-                if ((result.get(i).width == R1920x1080SMALL.CONDENSED_W1 || result.get(i).width == R1920x1080SMALL.CONDENSED_W2)
-                        && result.get(i).height == R1920x1080SMALL.CONDENSED_H1) {
+                if ((result.get(i).width == FULLHD.CONDENSED_W1 || result.get(i).width == FULLHD.CONDENSED_W2)
+                        && result.get(i).height == FULLHD.CONDENSED_H1) {
                     hm.put("P4:CS - i: " + i, result.get(i));
 
                 }
 
-                if (result.get(i).width == R1920x1080SMALL.SCORDITE_W1
-                        && (result.get(i).height == R1920x1080SMALL.SCORDITE_H1 || result.get(i).height == R1920x1080SMALL.SCORDITE_H2)) {
+                if (result.get(i).width == FULLHD.SCORDITE_W1
+                        && (result.get(i).height == FULLHD.SCORDITE_H1 || result.get(i).height == FULLHD.SCORDITE_H2)) {
                     hm.put("P3:S - i: " + i, result.get(i));
 
                 }
 
-                if ((result.get(i).width == R1920x1080SMALL.DENSE_W1 || result.get(i).width == R1920x1080SMALL.DENSE_W2)
-                        && result.get(i).height == R1920x1080SMALL.DENSE_H1) {
+                if ((result.get(i).width == FULLHD.DENSE_W1 || result.get(i).width == FULLHD.DENSE_W2)
+                        && result.get(i).height == FULLHD.DENSE_H1) {
                     hm.put("P2:DV - i: " + i, result.get(i));
                 }
 
-                if ((result.get(i).width == R1920x1080SMALL.CONCENTRATED_W1 || result.get(i).width == R1920x1080SMALL.CONCENTRATED_W2)
-                        && result.get(i).height == R1920x1080SMALL.CONCENTRATED_H1
-                        || (result.get(i).width == R1920x1080SMALL.CONCENTRATED_W2 || result.get(i).width == R1920x1080SMALL.CONCENTRATED_W3)
-                        && result.get(i).height == R1920x1080SMALL.CONCENTRATED_H2) {
+                if ((result.get(i).width == FULLHD.CONCENTRATED_W1 || result.get(i).width == FULLHD.CONCENTRATED_W2)
+                        && result.get(i).height == FULLHD.CONCENTRATED_H1
+                        || (result.get(i).width == FULLHD.CONCENTRATED_W2 || result.get(i).width == FULLHD.CONCENTRATED_W3)
+                        && result.get(i).height == FULLHD.CONCENTRATED_H2) {
                     hm.put("P1:CV - i: " + i, result.get(i));
                 }
 
-                if (((result.get(i).width == R1920x1080SMALL.VELDSPAR_W1 || result.get(i).width == R1920x1080SMALL.VELDSPAR_W2)
-                        && result.get(i).height == R1920x1080SMALL.VELDSPAR_H1)
-                        || result.get(i).width == R1920x1080SMALL.VELDSPAR_W3 && result.get(i).height == R1920x1080SMALL.VELDSPAR_H2) {
+                if (((result.get(i).width == FULLHD.VELDSPAR_W1 || result.get(i).width == FULLHD.VELDSPAR_W2)
+                        && result.get(i).height == FULLHD.VELDSPAR_H1)
+                        || result.get(i).width == FULLHD.VELDSPAR_W3 && result.get(i).height == FULLHD.VELDSPAR_H2) {
                     hm.put("P0:V - i: " + i, result.get(i));
                 }
             }

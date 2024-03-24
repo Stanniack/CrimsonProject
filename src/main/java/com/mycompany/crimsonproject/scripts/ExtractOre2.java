@@ -6,7 +6,7 @@ import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.PIXELRANGE;
-import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
+import com.mycompany.crimsonproject.utils.FULLHD;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -69,9 +69,8 @@ public class ExtractOre2 {
                     /* Reset Y list coordinates to 1081y */
                     List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
-                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(
-                            R1920x1080SMALL.OVERVIEWMINING_X1, R1920x1080SMALL.OVERVIEWMINING_X2_W,
-                            R1920x1080SMALL.OVERVIEWMINING_Y1, R1920x1080SMALL.OVERVIEWMINING_Y2_H);
+                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
+                            FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
                         System.out.println("Hash map size: " + rectResult.size());
@@ -119,11 +118,10 @@ public class ExtractOre2 {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(
-                            R1920x1080SMALL.LOCKTARGET_W1,
-                            R1920x1080SMALL.LOCKTARGET_H1,
-                            R1920x1080SMALL.LOCKTARGET_DEADZONE_X1, R1920x1080SMALL.LOCKTARGET_DEADZONE_X2_W,
-                            R1920x1080SMALL.LOCKTARGET_DEADZONE_Y1, R1920x1080SMALL.LOCKTARGET_DEADZONE_Y2_H);
+                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(FULLHD.LOCKTARGET_W1,
+                            FULLHD.LOCKTARGET_H1,
+                            FULLHD.LOCKTARGET_DEADZONE_X1, FULLHD.LOCKTARGET_DEADZONE_X2_W,
+                            FULLHD.LOCKTARGET_DEADZONE_Y1, FULLHD.LOCKTARGET_DEADZONE_Y2_H);
 
                     if (lockTargetFromSelectedItem != null) {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -181,11 +179,10 @@ public class ExtractOre2 {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(
-                            R1920x1080SMALL.COMPACTMAXCARGO_W3,
-                            R1920x1080SMALL.COMPACTMAXCARGO_H1,
-                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_X1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_X2_W,
-                            R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y1, R1920x1080SMALL.COMPACTCARGO_DEADZONE_Y2_H);
+                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(FULLHD.COMPACTMAXCARGO_W3,
+                            FULLHD.COMPACTMAXCARGO_H1,
+                            FULLHD.COMPACTCARGO_DEADZONE_X1, FULLHD.COMPACTCARGO_DEADZONE_X2_W,
+                            FULLHD.COMPACTCARGO_DEADZONE_Y1, FULLHD.COMPACTCARGO_DEADZONE_Y2_H);
 
                     /* go to the station and drag itens */
                     if (compactMaxCargo != null) {
@@ -209,8 +206,8 @@ public class ExtractOre2 {
                         this.amountRect++; // go to case 5
 
                     } else {
-                        boolean approaching = new FindPixels().countWhitePixels(R1920x1080SMALL.APPROACHING_X, R1920x1080SMALL.APPROACHING_Y,
-                                R1920x1080SMALL.APPROACHING_W1, R1920x1080SMALL.APPROACHING_H3);
+                        boolean approaching = new FindPixels().countWhitePixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
+                                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3);
 
                         if (approaching == true) {
                             System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
@@ -278,7 +275,7 @@ public class ExtractOre2 {
 
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
-        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
+        List<Integer> coordinatesX = Arrays.asList(FULLHD.CANNON1_X, FULLHD.CANNON2_X);
         int flagAttempt = 10;
         boolean actived;
 
@@ -287,9 +284,8 @@ public class ExtractOre2 {
             Thread.sleep(180);
             new TakeScreenShot().take();
 
-            actived = new FindPixels().findRangeColor(
-                    coordinatesX.get(i), R1920x1080SMALL.CANNONS_Y,
-                    R1920x1080SMALL.CANNON_W1, R1920x1080SMALL.CANNON_H1,
+            actived = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.CANNONS_Y,
+                    FULLHD.CANNON_W1, FULLHD.CANNON_H1,
                     new Triplet<>(PIXELRANGE.ACT_MINRED, PIXELRANGE.ACT_MINGREEN, PIXELRANGE.ACT_MINBLUE),
                     new Triplet<>(PIXELRANGE.ACT_MAXRED, PIXELRANGE.ACT_MAXGREEN, PIXELRANGE.ACT_MAXBLUE));
 
@@ -304,7 +300,7 @@ public class ExtractOre2 {
 
     private boolean isCanceled(int i) throws IOException, InterruptedException, AWTException {
 
-        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.CANNON1_X, R1920x1080SMALL.CANNON2_X);
+        List<Integer> coordinatesX = Arrays.asList(FULLHD.CANNON1_X, FULLHD.CANNON2_X);
         int flagAttempt = 5;
         boolean canceled;
 
@@ -312,9 +308,8 @@ public class ExtractOre2 {
 
             new TakeScreenShot().take();
 
-            canceled = new FindPixels().findRangeColor(
-                    coordinatesX.get(i), R1920x1080SMALL.CANNONS_Y,
-                    R1920x1080SMALL.CANNON_W1, R1920x1080SMALL.CANNON_H1,
+            canceled = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.CANNONS_Y,
+                    FULLHD.CANNON_W1, FULLHD.CANNON_H1,
                     new Triplet<>(PIXELRANGE.CANCEL_MINRED, PIXELRANGE.CANCEL_MINGREEN, PIXELRANGE.CANCEL_MINBLUE),
                     new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
 
@@ -330,7 +325,7 @@ public class ExtractOre2 {
 
     private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
 
-        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.RANGEDCANNON1_X, R1920x1080SMALL.RANGEDCANNON2_X);
+        List<Integer> coordinatesX = Arrays.asList(FULLHD.RANGEDCANNON1_X, FULLHD.RANGEDCANNON2_X);
         int flagAttempt = 10;
         boolean alpha;
 
@@ -339,9 +334,8 @@ public class ExtractOre2 {
             //Thread.sleep(180);
             new TakeScreenShot().take();
 
-            alpha = new FindPixels().findByColor(
-                    coordinatesX.get(i), R1920x1080SMALL.RANGEDCANNONS_Y,
-                    R1920x1080SMALL.RANGEDCANNON_W1, R1920x1080SMALL.RANGEDCANNON_H1,
+            alpha = new FindPixels().findByColor(coordinatesX.get(i), FULLHD.RANGEDCANNONS_Y,
+                    FULLHD.RANGEDCANNON_W1, FULLHD.RANGEDCANNON_H1,
                     new Triplet<>(PIXELRANGE.ALPHA_RED, PIXELRANGE.ALPHA_GREEN, PIXELRANGE.ALPHA_BLUE));
 
             if (alpha) {

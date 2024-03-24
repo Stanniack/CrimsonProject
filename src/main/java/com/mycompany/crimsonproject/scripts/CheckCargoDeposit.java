@@ -3,7 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
+import com.mycompany.crimsonproject.utils.FULLHD;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -88,11 +88,10 @@ public class CheckCargoDeposit {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
-                R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
-                R1920x1080SMALL.MAXCARGO1_H1,
-                R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
-                R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
+        Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(FULLHD.MAXCARGO1_W1, FULLHD.MAXCARGO1_W1,
+                FULLHD.MAXCARGO1_H1,
+                FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
+                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
 
         if (maxCargo != null) {
             System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -102,11 +101,10 @@ public class CheckCargoDeposit {
 
         } else {
 
-            Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
-                    R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
-                    R1920x1080SMALL.MINGCARGO_H1,
-                    R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
-                    R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
+            Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(FULLHD.MINGCARGO_WITHM3_W1, FULLHD.MINGCARGO_WITHOUTM3_W1,
+                    FULLHD.MINGCARGO_H1,
+                    FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
+                    FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
 
             if (minCargo != null) {
                 System.out.printf("Rect found (MINGCARHO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -125,11 +123,10 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(
-                R1920x1080SMALL.HANGAR_W1,
-                R1920x1080SMALL.HANGAR_H1, R1920x1080SMALL.HANGAR_H2,
-                R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
-                R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
+        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
+                FULLHD.HANGAR_H1, FULLHD.HANGAR_H2,
+                FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
+                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -146,9 +143,8 @@ public class CheckCargoDeposit {
 
     private void dragItens() throws AWTException, InterruptedException {
 
-        new ClickScreenEvents().dragItensToIventory(
-                R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
-                R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, 
+        new ClickScreenEvents().dragItensToIventory(FULLHD.DRAGITENS_DEADZONE_X1, FULLHD.DRAGITENS_DEADZONE_X2_W,
+                FULLHD.DRAGITENS_DEADZONE_Y1, FULLHD.DRAGITENS_DEADZONE_Y2_H, 
                 this.hangarButton);
     }
 
@@ -156,11 +152,10 @@ public class CheckCargoDeposit {
 
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle undockButton = sr3
-                .getT_2WxH_BlockScreen(
-                        R1920x1080SMALL.UNDOCK_BUTTON_W1, R1920x1080SMALL.UNDOCK_BUTTON_W2,
-                        R1920x1080SMALL.UNDOCK_BUTTON_H1,
-                        R1920x1080SMALL.UNDOCK_DEADZONE_X1, R1920x1080SMALL.UNDOCK_DEADZONE_X2_W,
-                        R1920x1080SMALL.UNDOCK_DEADZONE_Y1, R1920x1080SMALL.UNDOCK_DEADZONE_Y2_H);
+                .getT_2WxH_BlockScreen(FULLHD.UNDOCK_BUTTON_W1, FULLHD.UNDOCK_BUTTON_W2,
+                        FULLHD.UNDOCK_BUTTON_H1,
+                        FULLHD.UNDOCK_DEADZONE_X1, FULLHD.UNDOCK_DEADZONE_X2_W,
+                        FULLHD.UNDOCK_DEADZONE_Y1, FULLHD.UNDOCK_DEADZONE_Y2_H);
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);

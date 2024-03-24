@@ -4,7 +4,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.R1920x1080SMALL;
+import com.mycompany.crimsonproject.utils.FULLHD;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -121,12 +121,11 @@ public class SetDestination {
 
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle miningBot1Label = sr3
-                .getT_2WxH_BlockScreen(
-                        R1920x1080SMALL.MININGBOT1_W1,
-                        R1920x1080SMALL.MININGBOT1_W2,
-                        R1920x1080SMALL.MININGBOT1_H1,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
+                .getT_2WxH_BlockScreen(FULLHD.MININGBOT1_W1,
+                        FULLHD.MININGBOT1_W2,
+                        FULLHD.MININGBOT1_H1,
+                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
+                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (miningBot1Label != null) {
             System.out.printf("Rect found (MININGBOT1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
@@ -143,11 +142,10 @@ public class SetDestination {
 
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle homeStationLabel = sr3
-                .getT_2WxH_BlockScreen(
-                        R1920x1080SMALL.HOMESTATION1_W1, R1920x1080SMALL.HOMESTATION1_W2,
-                        R1920x1080SMALL.HOMESTATION1_H1,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
+                .getT_2WxH_BlockScreen(FULLHD.HOMESTATION1_W1, FULLHD.HOMESTATION1_W2,
+                        FULLHD.HOMESTATION1_H1,
+                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
+                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
@@ -166,10 +164,10 @@ public class SetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle warpArrow = sr3
-                .getT_WxH_BlockScreen(R1920x1080SMALL.WITHIN_W1,
-                        R1920x1080SMALL.WITHIN_H1,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
+                .getT_WxH_BlockScreen(FULLHD.WITHIN_W1,
+                        FULLHD.WITHIN_H1,
+                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
+                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (warpArrow != null) {
             System.out.printf("Rect found (WHITHIN) at case " + this.amountRect + " - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
@@ -189,11 +187,10 @@ public class SetDestination {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         SegmentedRegions sr3 = new SegmentedRegions();
         Rectangle dockArrow = sr3
-                .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.DOCK_W1,
-                        R1920x1080SMALL.DOCK_H1,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
+                .getT_WxH_BlockScreen(FULLHD.DOCK_W1,
+                        FULLHD.DOCK_H1,
+                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
+                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCK) at case " + this.amountRect + " - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
@@ -214,11 +211,10 @@ public class SetDestination {
         SegmentedRegions sr3 = new SegmentedRegions();
 
         Rectangle closeButtonWindowLocation = sr3
-                .getT_WxH_BlockScreen(
-                        R1920x1080SMALL.CLOSELOCATIONBUTTON_W1,
-                        R1920x1080SMALL.CLOSELOCATIONBUTTON_H1,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_X1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_X2_W,
-                        R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y1, R1920x1080SMALL.LOCATIONTAB_DEADZONE_Y2_H);
+                .getT_WxH_BlockScreen(FULLHD.CLOSELOCATIONBUTTON_W1,
+                        FULLHD.CLOSELOCATIONBUTTON_H1,
+                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
+                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
 
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) at casse " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);

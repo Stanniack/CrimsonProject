@@ -7,7 +7,7 @@ import org.javatuples.Quartet;
 
 /**
  * -> This classe uses font size SMALL of Eve Online
- * 
+ *
  * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
  * + h.
  *
@@ -17,7 +17,7 @@ import org.javatuples.Quartet;
  * BLOCKSCREEN: Rect limitation where to find the recognized rects DEADZONE:
  * Pixel's amount to add in the BLOCKSCREEN for caution or not
  */
-public class R1920x1080SMALL {
+public class FULLHD {
 
     public static final int MININGBOT1_W1 = 60;
     public static final int MININGBOT1_W2 = 59;
@@ -101,8 +101,8 @@ public class R1920x1080SMALL {
     public static final int HANGAR_H2 = 11;
 
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
-    public final Quartet<Integer, Integer, Integer, Integer> invetoryDeadzone = 
-            new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y2_H);
+    public final Quartet<Integer, Integer, Integer, Integer> invetoryDeadzone
+            = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y2_H);
     public static final int INVENTORY_DEADZONE_X1 = 70;
     public static final int INVENTORY_DEADZONE_Y1 = 40;
     public static final int INVENTORY_DEADZONE_X2_W = 570;
