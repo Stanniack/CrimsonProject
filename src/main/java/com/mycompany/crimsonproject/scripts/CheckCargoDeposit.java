@@ -88,7 +88,8 @@ public class CheckCargoDeposit {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
+        Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
+                R1920x1080SMALL.MAXCARGO1_W1, R1920x1080SMALL.MAXCARGO1_W1,
                 R1920x1080SMALL.MAXCARGO1_H1,
                 R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
                 R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
@@ -101,7 +102,8 @@ public class CheckCargoDeposit {
 
         } else {
 
-            Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
+            Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(
+                    R1920x1080SMALL.MINGCARGO_WITHM3_W1, R1920x1080SMALL.MINGCARGO_WITHOUTM3_W1,
                     R1920x1080SMALL.MINGCARGO_H1,
                     R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
                     R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
@@ -123,7 +125,8 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(R1920x1080SMALL.HANGAR_W1,
+        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(
+                R1920x1080SMALL.HANGAR_W1,
                 R1920x1080SMALL.HANGAR_H1, R1920x1080SMALL.HANGAR_H2,
                 R1920x1080SMALL.INVENTORY_DEADZONE_X1, R1920x1080SMALL.INVENTORY_DEADZONE_X2_W,
                 R1920x1080SMALL.INVENTORY_DEADZONE_Y1, R1920x1080SMALL.INVENTORY_DEADZONE_Y2_H);
@@ -143,8 +146,10 @@ public class CheckCargoDeposit {
 
     private void dragItens() throws AWTException, InterruptedException {
 
-        new ClickScreenEvents().dragItensToIventory(R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
-                R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, this.hangarButton);
+        new ClickScreenEvents().dragItensToIventory(
+                R1920x1080SMALL.DRAGITENS_DEADZONE_X1, R1920x1080SMALL.DRAGITENS_DEADZONE_X2_W,
+                R1920x1080SMALL.DRAGITENS_DEADZONE_Y1, R1920x1080SMALL.DRAGITENS_DEADZONE_Y2_H, 
+                this.hangarButton);
     }
 
     private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {

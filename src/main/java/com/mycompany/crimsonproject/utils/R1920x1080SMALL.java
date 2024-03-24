@@ -1,7 +1,13 @@
 package com.mycompany.crimsonproject.utils;
 
+import java.util.Arrays;
+import java.util.List;
+import org.javatuples.Pair;
+import org.javatuples.Quartet;
+
 /**
- *
+ * -> This classe uses font size SMALL of Eve Online
+ * 
  * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
  * + h.
  *
@@ -81,6 +87,7 @@ public class R1920x1080SMALL {
     public static final int LOCKTARGET_DEADZONE_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
+    public final List<Pair<Integer, Integer>> maxCargoWxH = Arrays.asList(new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1), new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
     public static final int MAXCARGO1_W1 = 111;
     public static final int MAXCARGO1_W2 = 110;
     public static final int MAXCARGO1_H1 = 24;
@@ -94,6 +101,8 @@ public class R1920x1080SMALL {
     public static final int HANGAR_H2 = 11;
 
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
+    public final Quartet<Integer, Integer, Integer, Integer> invetoryDeadzone = 
+            new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y2_H);
     public static final int INVENTORY_DEADZONE_X1 = 70;
     public static final int INVENTORY_DEADZONE_Y1 = 40;
     public static final int INVENTORY_DEADZONE_X2_W = 570;
