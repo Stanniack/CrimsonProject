@@ -88,10 +88,7 @@ public class CheckCargoDeposit {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getT_2WxH_BlockScreen(FULLHD.MAXCARGO1_W1, FULLHD.MAXCARGO1_W1,
-                FULLHD.MAXCARGO1_H1,
-                FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
-                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
+        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FULLHD().maxCargoWxH, new FULLHD().invetoryDeadzone);
 
         if (maxCargo != null) {
             System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -107,7 +104,7 @@ public class CheckCargoDeposit {
                     FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
 
             if (minCargo != null) {
-                System.out.printf("Rect found (MINGCARHO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                         minCargo.width, minCargo.height, minCargo.x, minCargo.y);
 
                 return "minCargo";
@@ -123,12 +120,10 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        
-        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().maxCargoWxH, new FULLHD().invetoryDeadzone);
-        /*this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
+        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
                 FULLHD.HANGAR_H1, FULLHD.HANGAR_H2,
                 FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
-                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);*/
+                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -146,7 +141,7 @@ public class CheckCargoDeposit {
     private void dragItens() throws AWTException, InterruptedException {
 
         new ClickScreenEvents().dragItensToIventory(FULLHD.DRAGITENS_DEADZONE_X1, FULLHD.DRAGITENS_DEADZONE_X2_W,
-                FULLHD.DRAGITENS_DEADZONE_Y1, FULLHD.DRAGITENS_DEADZONE_Y2_H, 
+                FULLHD.DRAGITENS_DEADZONE_Y1, FULLHD.DRAGITENS_DEADZONE_Y2_H,
                 this.hangarButton);
     }
 

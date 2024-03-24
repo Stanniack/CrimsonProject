@@ -145,8 +145,8 @@ public class FULLHD {
     /* ------------------------------------------------------------- */
 
     public static final int LOCATIONTAB_DEADZONE_X1 = 445;
-    public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
+    public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 

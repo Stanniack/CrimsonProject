@@ -136,7 +136,7 @@ public class SegmentedRegions {
                     || (result.get(i).width == width2 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                
+
                 return result.get(i);
             }
         }
@@ -160,7 +160,7 @@ public class SegmentedRegions {
                     || (result.get(i).width == width3 && result.get(i).height == height2)
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                
+
                 return result.get(i);
             }
         }
@@ -183,7 +183,7 @@ public class SegmentedRegions {
                     || (result.get(i).width == width2 && (result.get(i).height == height1 || result.get(i).height == height3))
                     && (result.get(i).x >= x && result.get(i).x <= x2)
                     && (result.get(i).y >= y && result.get(i).y <= y2)) {
-                
+
                 return result.get(i);
             }
         }
@@ -287,7 +287,7 @@ public class SegmentedRegions {
                 }
             }
         }
-        
+
         return hm;
     }
 
