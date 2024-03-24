@@ -32,7 +32,7 @@ public class ExtractOre {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
@@ -130,6 +130,7 @@ public class ExtractOre {
                                 lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
 
                         new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
+                        //!! launch and engage drones
                         this.amountRect++; // go to case 2
                         flagNoDragScreen = true;
 
@@ -159,20 +160,22 @@ public class ExtractOre {
                             Thread.sleep(2000);
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Cannon had been active. Press 2x cannon " + i + "\n");
+                            this.amountRect++; // go to case 3
 
                         } else if (this.isCanceled(i)) {
                             Thread.sleep(500);
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Cannon had been canceled. Wait and press 1x cannon " + i + "\n");
+                            this.amountRect++; // go to case 3
 
                         } else {
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Just press 1x cannon " + i + "\n");
+                            this.amountRect++; // go to case 3
                         }
                     }
 
                     flagNoDragScreen = true;
-                    this.amountRect++; // go to case 3
 
                 } // end case 2
 
@@ -233,18 +236,33 @@ public class ExtractOre {
                 case 5 -> {
 
                     System.out.println("Searching for another asteroid.\n");
-                    flagNoDragScreen = true;
+                    // check opacity
+                    List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
+                    for (int i = 0; i < events.size(); i++) {
+
+                        if (this.isAlpha(i)) {
+                            Thread.sleep(500);
+                            new KeyboardEvents().pressKey(events.get(i));
+                            System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
+                            this.amountRect = 0;
+
+                        }
+                    }
+
                     this.flagUntilBeFilled_MS = 0;
                     this.amountRect = 0;
+                    flagNoDragScreen = true;
 
                 } // end case 5
 
                 case 6 -> {
 
-                    flagNoDragScreen = true;
-                    System.out.println("End of mining and go docking!\n");
+                    //!! return drones
                     new SetDestination().startScript(GOTO_HOMESTATION);
+                    System.out.println("End of mining and go docking!\n");
                     this.amountRect++;
+                    flagNoDragScreen = true;
 
                 } // end case 6
 
@@ -266,7 +284,6 @@ public class ExtractOre {
 
         for (int j = 0; j < flagAttempt; j++) {
 
-            System.out.println(j);
             Thread.sleep(180);
             new TakeScreenShot().take();
 
@@ -302,6 +319,32 @@ public class ExtractOre {
                     new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
 
             if (canceled) {
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
+    private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
+
+        List<Integer> coordinatesX = Arrays.asList(R1920x1080SMALL.RANGEDCANNON1_X, R1920x1080SMALL.RANGEDCANNON2_X);
+        int flagAttempt = 10;
+        boolean alpha;
+
+        for (int j = 0; j < flagAttempt; j++) {
+
+            //Thread.sleep(180);
+            new TakeScreenShot().take();
+
+            alpha = new FindPixels().findByColor(
+                    coordinatesX.get(i), R1920x1080SMALL.RANGEDCANNONS_Y,
+                    R1920x1080SMALL.RANGEDCANNON_W1, R1920x1080SMALL.RANGEDCANNON_H1,
+                    new Triplet<>(PIXELRANGE.ALPHA_RED, PIXELRANGE.ALPHA_GREEN, PIXELRANGE.ALPHA_BLUE));
+
+            if (alpha) {
                 return true;
             }
 
