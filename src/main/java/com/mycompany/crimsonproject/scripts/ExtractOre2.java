@@ -32,7 +32,7 @@ public class ExtractOre2 {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 30000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
