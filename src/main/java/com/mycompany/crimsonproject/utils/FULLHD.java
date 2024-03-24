@@ -70,11 +70,10 @@ public class FULLHD {
     public static final int VELDSPAR_W3 = 48;
     public static final int VELDSPAR_H1 = 13;
     public static final int VELDSPAR_H2 = 12;
-
     // This find where the floating overview->mining window is in the display
     public static final int OVERVIEWMINING_X1 = 1230;
-    public static final int OVERVIEWMINING_Y1 = 251;
     public static final int OVERVIEWMINING_X2_W = 1919;
+    public static final int OVERVIEWMINING_Y1 = 251;
     public static final int OVERVIEWMINING_Y2_H = 1079;
     /* ------------------------------------------------------------- */
 
@@ -82,8 +81,8 @@ public class FULLHD {
     public static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
     public static final int LOCKTARGET_DEADZONE_X1 = 1000;
-    public static final int LOCKTARGET_DEADZONE_Y1 = 0;
     public static final int LOCKTARGET_DEADZONE_X2_W = 1919;
+    public static final int LOCKTARGET_DEADZONE_Y1 = 0;
     public static final int LOCKTARGET_DEADZONE_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
@@ -102,10 +101,10 @@ public class FULLHD {
 
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
     public final Quartet<Integer, Integer, Integer, Integer> invetoryDeadzone
-            = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y2_H);
+            = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
     public static final int INVENTORY_DEADZONE_X1 = 70;
-    public static final int INVENTORY_DEADZONE_Y1 = 40;
     public static final int INVENTORY_DEADZONE_X2_W = 570;
+    public static final int INVENTORY_DEADZONE_Y1 = 40;
     public static final int INVENTORY_DEADZONE_Y2_H = 1040;
     /* ------------------------------------------------------------- */
 
@@ -124,8 +123,8 @@ public class FULLHD {
 
     // Drag itens deadzone
     public static final int DRAGITENS_DEADZONE_X1 = 245;
-    public static final int DRAGITENS_DEADZONE_Y1 = 185;
     public static final int DRAGITENS_DEADZONE_X2_W = 530;
+    public static final int DRAGITENS_DEADZONE_Y1 = 185;
     public static final int DRAGITENS_DEADZONE_Y2_H = 985;
     /* ------------------------------------------------------------- */
 
@@ -134,14 +133,14 @@ public class FULLHD {
     public static final int UNDOCK_BUTTON_H1 = 40;
     /* This find where the word Approaching is in the display */
     public static final int UNDOCK_DEADZONE_X1 = 571;
-    public static final int UNDOCK_DEADZONE_Y1 = 0;
     public static final int UNDOCK_DEADZONE_X2_W = 1919;
+    public static final int UNDOCK_DEADZONE_Y1 = 0;
     public static final int UNDOCK_DEADZONE_Y2_H = 1079;
     /* ------------------------------------------------------------- */
 
     public static final int COMPACTCARGO_DEADZONE_X1 = 30;
-    public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
     public static final int COMPACTCARGO_DEADZONE_X2_W = 444;
+    public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
     public static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 

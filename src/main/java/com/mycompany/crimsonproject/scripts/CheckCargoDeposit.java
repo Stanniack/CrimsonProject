@@ -123,10 +123,12 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
+        
+        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().maxCargoWxH, new FULLHD().invetoryDeadzone);
+        /*this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
                 FULLHD.HANGAR_H1, FULLHD.HANGAR_H2,
                 FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
-                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
+                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);*/
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
