@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject.robot;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
+import org.javatuples.Quartet;
 
 /**
  *
@@ -61,14 +62,33 @@ public class ClickScreenEvents extends RobotEvent {
         this.bot.mouseRelease(this.leftClick);
 
     }
-    
-        public void dragItensToIventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
+
+    public void dragItensToIventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
 
         this.bot.mouseMove(x2, y2); // ok
         Thread.sleep(SLEEP_MS); // ok
 
         this.bot.mousePress(this.leftClick); // ok
         this.bot.mouseMove(x1, y1); // ok
+
+        Thread.sleep(SLEEP_MS); //ok
+        this.bot.mouseRelease(this.leftClick); //ok
+
+        this.bot.mousePress(this.leftClick); // n
+
+        this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
+        Thread.sleep(SLEEP_MS); //ok
+        this.bot.mouseRelease(this.leftClick); // ok
+
+    }
+
+    public void dragItensToIventory(Quartet<Integer, Integer, Integer, Integer> dragItensDeadZone, Rectangle rect) throws AWTException, InterruptedException {
+
+        this.bot.mouseMove(dragItensDeadZone.getValue1(), dragItensDeadZone.getValue3()); // ok
+        Thread.sleep(SLEEP_MS); // ok
+
+        this.bot.mousePress(this.leftClick); // ok
+        this.bot.mouseMove(dragItensDeadZone.getValue0(), dragItensDeadZone.getValue2()); // ok
 
         Thread.sleep(SLEEP_MS); //ok
         this.bot.mouseRelease(this.leftClick); //ok

@@ -86,21 +86,23 @@ public class FULLHD {
     public static final int LOCKTARGET_DEADZONE_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
-    public final List<Pair<Integer, Integer>> maxCargoWxH = Arrays.asList(new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1), new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
+    public final List<Pair<Integer, Integer>> listMaxCargoWxH = Arrays.asList(new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1), new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
     public static final int MAXCARGO1_W1 = 111;
     public static final int MAXCARGO1_W2 = 110;
     public static final int MAXCARGO1_H1 = 24;
 
+    public final List<Pair<Integer, Integer>> listMinCargo = Arrays.asList(new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1), new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1));
     public static final int MINGCARGO_WITHM3_W1 = 72;
     public static final int MINGCARGO_WITHOUTM3_W1 = 51;
     public static final int MINGCARGO_H1 = 9;
 
+    public final List<Pair<Integer, Integer>> listHangar = Arrays.asList(new Pair<>(HANGAR_W1, HANGAR_H1), new Pair<>(HANGAR_W1, HANGAR_H2));
     public static final int HANGAR_W1 = 40;
     public static final int HANGAR_H1 = 12;
     public static final int HANGAR_H2 = 11;
 
     /* This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION */
-    public final Quartet<Integer, Integer, Integer, Integer> invetoryDeadzone
+    public final Quartet<Integer, Integer, Integer, Integer> tupleInvetoryDeadzone
             = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
     public static final int INVENTORY_DEADZONE_X1 = 70;
     public static final int INVENTORY_DEADZONE_X2_W = 570;
@@ -122,16 +124,21 @@ public class FULLHD {
     /* ------------------------------------------------------------- */
 
     // Drag itens deadzone
+    public final Quartet<Integer, Integer, Integer, Integer> tupleDragItensDeadZone
+            = new Quartet<>(DRAGITENS_DEADZONE_X1, DRAGITENS_DEADZONE_X2_W, DRAGITENS_DEADZONE_Y1, DRAGITENS_DEADZONE_Y2_H);
     public static final int DRAGITENS_DEADZONE_X1 = 245;
     public static final int DRAGITENS_DEADZONE_X2_W = 530;
     public static final int DRAGITENS_DEADZONE_Y1 = 185;
     public static final int DRAGITENS_DEADZONE_Y2_H = 985;
     /* ------------------------------------------------------------- */
 
+    public final List<Pair<Integer, Integer>> listUndockButton = Arrays.asList(new Pair<>(UNDOCK_BUTTON_W1, UNDOCK_BUTTON_H1), new Pair<>(UNDOCK_BUTTON_W2, UNDOCK_BUTTON_H1));
     public static final int UNDOCK_BUTTON_W1 = 235;
     public static final int UNDOCK_BUTTON_W2 = 234;
     public static final int UNDOCK_BUTTON_H1 = 40;
     /* This find where the word Approaching is in the display */
+    public final Quartet<Integer, Integer, Integer, Integer> tupleUndockDeadZone
+            = new Quartet<>(UNDOCK_DEADZONE_X1, UNDOCK_DEADZONE_X2_W, UNDOCK_DEADZONE_Y1, UNDOCK_DEADZONE_Y2_H);
     public static final int UNDOCK_DEADZONE_X1 = 571;
     public static final int UNDOCK_DEADZONE_X2_W = 1919;
     public static final int UNDOCK_DEADZONE_Y1 = 0;

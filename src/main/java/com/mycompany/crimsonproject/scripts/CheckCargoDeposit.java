@@ -14,9 +14,6 @@ import net.sourceforge.tess4j.TesseractException;
  *
  * @author Devmachine
  *
- * No I.A recognition for stack items in mining cargo and "item hangarButton"
- * Search a word on EVE.exe Left hud: min, fontscale: 100%, EVE fontsize: 13
- * (small), resolution: 1920x1080 Check cargo, drag itens and undock
  */
 public class CheckCargoDeposit {
 
@@ -88,7 +85,7 @@ public class CheckCargoDeposit {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FULLHD().maxCargoWxH, new FULLHD().invetoryDeadzone);
+        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FULLHD().listMaxCargoWxH, new FULLHD().tupleInvetoryDeadzone);
 
         if (maxCargo != null) {
             System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -98,10 +95,7 @@ public class CheckCargoDeposit {
 
         } else {
 
-            Rectangle minCargo = new SegmentedRegions().getT_2WxH_BlockScreen(FULLHD.MINGCARGO_WITHM3_W1, FULLHD.MINGCARGO_WITHOUTM3_W1,
-                    FULLHD.MINGCARGO_H1,
-                    FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
-                    FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
+            Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargo, new FULLHD().tupleInvetoryDeadzone);
 
             if (minCargo != null) {
                 System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -120,10 +114,7 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getT_Wx2H_BlockScreen(FULLHD.HANGAR_W1,
-                FULLHD.HANGAR_H1, FULLHD.HANGAR_H2,
-                FULLHD.INVENTORY_DEADZONE_X1, FULLHD.INVENTORY_DEADZONE_X2_W,
-                FULLHD.INVENTORY_DEADZONE_Y1, FULLHD.INVENTORY_DEADZONE_Y2_H);
+        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().listHangar, new FULLHD().tupleInvetoryDeadzone);
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -139,24 +130,16 @@ public class CheckCargoDeposit {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-
-        new ClickScreenEvents().dragItensToIventory(FULLHD.DRAGITENS_DEADZONE_X1, FULLHD.DRAGITENS_DEADZONE_X2_W,
-                FULLHD.DRAGITENS_DEADZONE_Y1, FULLHD.DRAGITENS_DEADZONE_Y2_H,
-                this.hangarButton);
+        new ClickScreenEvents().dragItensToIventory(new FULLHD().tupleDragItensDeadZone, this.hangarButton);
     }
 
     private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle undockButton = sr3
-                .getT_2WxH_BlockScreen(FULLHD.UNDOCK_BUTTON_W1, FULLHD.UNDOCK_BUTTON_W2,
-                        FULLHD.UNDOCK_BUTTON_H1,
-                        FULLHD.UNDOCK_DEADZONE_X1, FULLHD.UNDOCK_DEADZONE_X2_W,
-                        FULLHD.UNDOCK_DEADZONE_Y1, FULLHD.UNDOCK_DEADZONE_Y2_H);
+        Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButton, new FULLHD().tupleUndockDeadZone);
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
-            new ClickScreenEvents().leftClickCenterButton(undockButton);
+            new ClickScreenEvents().rightClickCenterButton(undockButton);
 
             return true;
 
