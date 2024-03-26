@@ -119,17 +119,11 @@ public class SetDestination {
 
     private boolean miningbot1Label() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle miningBot1Label = sr3
-                .getT_2WxH_BlockScreen(FULLHD.MININGBOT1_W1,
-                        FULLHD.MININGBOT1_W2,
-                        FULLHD.MININGBOT1_H1,
-                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
-                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
+        Rectangle miningBotLabel = new SegmentedRegions().getRectangle(new FULLHD().listMiningBotWxH, new FULLHD().tupleLocationTabDeadZone);
 
-        if (miningBot1Label != null) {
-            System.out.printf("Rect found (MININGBOT1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", miningBot1Label.width, miningBot1Label.height);
-            new ClickScreenEvents().rightClickCenterButton(miningBot1Label);
+        if (miningBotLabel != null) {
+            System.out.printf("Rect found (MININGBOT1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", miningBotLabel.width, miningBotLabel.height);
+            new ClickScreenEvents().rightClickCenterButton(miningBotLabel);
             return true;
 
         } else {
@@ -140,12 +134,7 @@ public class SetDestination {
 
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle homeStationLabel = sr3
-                .getT_2WxH_BlockScreen(FULLHD.HOMESTATION1_W1, FULLHD.HOMESTATION1_W2,
-                        FULLHD.HOMESTATION1_H1,
-                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
-                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
+        Rectangle homeStationLabel = new SegmentedRegions().getRectangle(new FULLHD().listHomeStationWxH, new FULLHD().tupleLocationTabDeadZone);
 
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
@@ -162,12 +151,7 @@ public class SetDestination {
     private boolean whithin() throws IOException, TesseractException, AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle warpArrow = sr3
-                .getT_WxH_BlockScreen(FULLHD.WITHIN_W1,
-                        FULLHD.WITHIN_H1,
-                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
-                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
+        Rectangle warpArrow = new SegmentedRegions().getRectangle(new FULLHD().listWithinWxH, new FULLHD().tupleLocationTabDeadZone);
 
         if (warpArrow != null) {
             System.out.printf("Rect found (WHITHIN) at case " + this.amountRect + " - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
@@ -185,12 +169,7 @@ public class SetDestination {
     private boolean dockArrow() throws IOException, TesseractException, AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        SegmentedRegions sr3 = new SegmentedRegions();
-        Rectangle dockArrow = sr3
-                .getT_WxH_BlockScreen(FULLHD.DOCK_W1,
-                        FULLHD.DOCK_H1,
-                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
-                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
+        Rectangle dockArrow = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, new FULLHD().tupleLocationTabDeadZone);
 
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCK) at case " + this.amountRect + " - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
@@ -208,13 +187,7 @@ public class SetDestination {
     private boolean closeLocationWindow() throws IOException, TesseractException, AWTException, InterruptedException {
 
         /*Close the location window */
-        SegmentedRegions sr3 = new SegmentedRegions();
-
-        Rectangle closeButtonWindowLocation = sr3
-                .getT_WxH_BlockScreen(FULLHD.CLOSELOCATIONBUTTON_W1,
-                        FULLHD.CLOSELOCATIONBUTTON_H1,
-                        FULLHD.LOCATIONTAB_DEADZONE_X1, FULLHD.LOCATIONTAB_DEADZONE_X2_W,
-                        FULLHD.LOCATIONTAB_DEADZONE_Y1, FULLHD.LOCATIONTAB_DEADZONE_Y2_H);
+        Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
 
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) at casse " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);

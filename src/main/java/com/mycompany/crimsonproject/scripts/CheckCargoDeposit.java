@@ -95,7 +95,7 @@ public class CheckCargoDeposit {
 
         } else {
 
-            Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargo, new FULLHD().tupleInvetoryDeadzone);
+            Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInvetoryDeadzone);
 
             if (minCargo != null) {
                 System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -114,7 +114,7 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().listHangar, new FULLHD().tupleInvetoryDeadzone);
+        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().listHangarWxH, new FULLHD().tupleInvetoryDeadzone);
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -135,7 +135,7 @@ public class CheckCargoDeposit {
 
     private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButton, new FULLHD().tupleUndockDeadZone);
+        Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
 
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
