@@ -55,7 +55,6 @@ public class ExtractOre {
 
         do {
 
-            boolean flagNoDragScreen = false;
             Entry<String, Rectangle> betterOre = null;
             this.priorityOreValue = 0;
 
@@ -100,7 +99,6 @@ public class ExtractOre {
                                     + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")\n");
 
                             this.amountRect++; // go to case 1
-                            flagNoDragScreen = true;
                             new ClickScreenEvents().doubleClick(betterOre.getValue());
 
                             /* Check case 1 of lock target */
@@ -130,7 +128,6 @@ public class ExtractOre {
                         new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                         //!! launch and engage drones
                         this.amountRect++; // go to case 2
-                        flagNoDragScreen = true;
 
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
@@ -172,7 +169,6 @@ public class ExtractOre {
                     }
 
                     this.amountRect++; // go to case 3
-                    flagNoDragScreen = true;
 
                 } // end case 2
 
@@ -188,7 +184,6 @@ public class ExtractOre {
                         System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
                                 compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
 
-                        flagNoDragScreen = true;
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
@@ -221,8 +216,6 @@ public class ExtractOre {
                         }
                     }
 
-                    flagNoDragScreen = true; //!!
-
                     this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
                             + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
@@ -242,13 +235,11 @@ public class ExtractOre {
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
                             this.amountRect = 0;
-
                         }
                     }
 
                     this.flagUntilBeFilled_MS = 0;
                     this.amountRect = 0;
-                    flagNoDragScreen = true;
 
                 } // end case 5
 
@@ -258,14 +249,9 @@ public class ExtractOre {
                     new SetDestination().startScript(GOTO_HOMESTATION);
                     System.out.println("End of mining and go docking!\n");
                     this.amountRect++;
-                    flagNoDragScreen = true;
 
                 } // end case 6
 
-            }
-
-            if (!flagNoDragScreen) {
-                new ClickScreenEvents().dragScreen();
             }
 
         } while (this.amountRect < SWITCHFLAG);
@@ -304,6 +290,7 @@ public class ExtractOre {
 
         for (int j = 0; j < flagAttempt; j++) {
 
+            //Thread.sleep(180);
             new TakeScreenShot().take();
 
             canceled = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.CANNONS_Y,

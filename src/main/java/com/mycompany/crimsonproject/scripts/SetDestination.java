@@ -164,7 +164,7 @@ public class SetDestination {
         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
 
         if (closeButtonWindowLocation != null) {
-            System.out.printf("Rect found (CLOSEBUTTONLOCATION) at casse " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
+            System.out.printf("Rect found (CLOSEBUTTONLOCATION) at case " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
             new ClickScreenEvents().leftClickCenterButton(closeButtonWindowLocation);
             return true;
 
