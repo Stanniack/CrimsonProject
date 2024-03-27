@@ -45,17 +45,13 @@ public class SetDestination {
 
                 case 1 -> {
 
-                    if (option == MININGBOT) {
-                        if (this.miningbot1Label()) {
-                            this.amountRect++;
-                            flagNoDragScreen = true;
-                        }
+                    if (option == MININGBOT && this.miningbot1Label()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
 
-                    } else if (option == HOMESTATION) {
-                        if (this.homestationLabel()) {
-                            this.amountRect++;
-                            flagNoDragScreen = true;
-                        }
+                    } else if (option == HOMESTATION && this.homestationLabel()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
 
                     }
 
@@ -69,17 +65,13 @@ public class SetDestination {
 
                 case 2 -> {
 
-                    if (option == MININGBOT) {
-                        if (this.whithin()) {
-                            this.amountRect++;
-                            flagNoDragScreen = true;
-                        }
+                    if (option == MININGBOT && this.whithin()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
 
-                    } else if (option == HOMESTATION) {
-                        if (this.dockArrow()) {
-                            this.amountRect++;
-                            flagNoDragScreen = true;
-                        }
+                    } else if (option == HOMESTATION && this.dockArrow()) {
+                        this.amountRect++;
+                        flagNoDragScreen = true;
 
                     }
 
@@ -113,7 +105,6 @@ public class SetDestination {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_L);
         System.out.println("L clicked at case " + this.amountRect + "\n");
-
         return true;
     }
 
@@ -125,11 +116,10 @@ public class SetDestination {
             System.out.printf("Rect found (MININGBOT1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", miningBotLabel.width, miningBotLabel.height);
             new ClickScreenEvents().rightClickCenterButton(miningBotLabel);
             return true;
-
-        } else {
-            System.out.println("Rect not found (MININGBOT1) case " + this.amountRect + "\n");
-            return false;
         }
+
+        System.out.println("Rect not found (MININGBOT1) case " + this.amountRect + "\n");
+        return false;
     }
 
     private boolean homestationLabel() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -139,13 +129,11 @@ public class SetDestination {
         if (homeStationLabel != null) {
             System.out.printf("Rect found (HOMESTATION1) at case " + this.amountRect + " - Width: %d and height: %d\n\n", homeStationLabel.width, homeStationLabel.height);
             new ClickScreenEvents().rightClickCenterButton(homeStationLabel);
-
             return true;
-
-        } else {
-            System.out.println("Rect not found (HOMESTATION1) at case" + this.amountRect + "\n");
-            return false;
         }
+
+        System.out.println("Rect not found (HOMESTATION1) at case" + this.amountRect + "\n");
+        return false;
     }
 
     private boolean whithin() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -158,12 +146,10 @@ public class SetDestination {
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
 
             return true;
-
-        } else {
-            System.out.println("Rect not found (WHITHIN) at case " + this.amountRect + "\n");
-            return false;
         }
 
+        System.out.println("Rect not found (WHITHIN) at case " + this.amountRect + "\n");
+        return false;
     }
 
     private boolean dockArrow() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -174,14 +160,11 @@ public class SetDestination {
         if (dockArrow != null) {
             System.out.printf("Rect found (DOCK) at case " + this.amountRect + " - Width: %d and height: %d\n\n", dockArrow.width, dockArrow.height);
             new ClickScreenEvents().leftClickCenterButton(dockArrow);
-
             return true;
-
-        } else {
-            System.out.println("Rect not found (DOCK) at case " + this.amountRect + "\n");
-            return false;
         }
 
+        System.out.println("Rect not found (DOCK) at case " + this.amountRect + "\n");
+        return false;
     }
 
     private boolean closeLocationWindow() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -192,13 +175,12 @@ public class SetDestination {
         if (closeButtonWindowLocation != null) {
             System.out.printf("Rect found (CLOSEBUTTONLOCATION) at casse " + this.amountRect + " - Width: %d and height: %d\n\n", closeButtonWindowLocation.width, closeButtonWindowLocation.height);
             new ClickScreenEvents().leftClickCenterButton(closeButtonWindowLocation);
-
             return true;
 
-        } else {
-            System.out.println("Rect not found (CLOSEBUTTONLOCATION) at cases" + this.amountRect + "\n");
-            return false;
         }
+
+        System.out.println("Rect not found (CLOSEBUTTONLOCATION) at cases" + this.amountRect + "\n");
+        return false;
     }
 
 }
