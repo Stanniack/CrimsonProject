@@ -92,21 +92,20 @@ public class CheckCargoDeposit {
                     maxCargo.width, maxCargo.height, maxCargo.x, maxCargo.y);
 
             return "maxCargo";
-
-        } else {
-
-            Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInvetoryDeadzone);
-
-            if (minCargo != null) {
-                System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                        minCargo.width, minCargo.height, minCargo.x, minCargo.y);
-
-                return "minCargo";
-
-            } else {
-                System.out.println("Rect (MINCARGO_VENTURE) not found\n");
-            }
         }
+
+        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
+
+        Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInvetoryDeadzone);
+
+        if (minCargo != null) {
+            System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                    minCargo.width, minCargo.height, minCargo.x, minCargo.y);
+
+            return "minCargo";
+        }
+
+        System.out.println("Rect (MINCARGO_VENTURE) not found\n");
 
         return "notFound";
 
@@ -121,10 +120,9 @@ public class CheckCargoDeposit {
                     this.hangarButton.width, this.hangarButton.height, this.hangarButton.x, this.hangarButton.y);
 
             return true;
-
-        } else {
-            System.out.println("Rect (HANGAR) not found\n");
         }
+
+        System.out.println("Rect (HANGAR) not found\n");
 
         return false;
     }
@@ -142,10 +140,9 @@ public class CheckCargoDeposit {
             new ClickScreenEvents().leftClickCenterButton(undockButton);
 
             return true;
-
-        } else {
-            System.out.println("Rect not found (UNDOCK_BUTTON)\n");
         }
+
+        System.out.println("Rect not found (UNDOCK_BUTTON)\n");
 
         return false;
     }
