@@ -25,7 +25,6 @@ public class CheckCargoDeposit {
 
         while (this.amountRect < SWTICHFLAG) {
 
-            boolean flagNoDragScreen = false;
             new TakeScreenShot().take();
             // Todo connection lost
 
@@ -41,9 +40,6 @@ public class CheckCargoDeposit {
                         } else if (this.verifyCargoHold().equals("minCargo")) {
                             this.amountRect = 3;
                         }
-
-                        flagNoDragScreen = true;
-
                     }
 
                 } // end case 1
@@ -52,7 +48,6 @@ public class CheckCargoDeposit {
 
                     if (this.findHangar()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
                     }
                 }
 
@@ -61,7 +56,6 @@ public class CheckCargoDeposit {
                     this.dragItens();
                     this.amountRect++;
                     this.hangarButton = null;
-                    flagNoDragScreen = true;
 
                 }
 
@@ -69,15 +63,10 @@ public class CheckCargoDeposit {
 
                     if (this.pressUndockButton()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
                     }
                 }
 
             } // end switch
-
-            if (!flagNoDragScreen) {
-                new ClickScreenEvents().dragScreen();
-            }
 
         } // end main loop
 
@@ -125,7 +114,7 @@ public class CheckCargoDeposit {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        new ClickScreenEvents().dragItensToIventory(new FULLHD().tupleDragItensDeadZone, this.hangarButton);
+        new ClickScreenEvents().dragItemsToInventory(new FULLHD().tupleDragItensDeadZone, this.hangarButton);
     }
 
     private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {

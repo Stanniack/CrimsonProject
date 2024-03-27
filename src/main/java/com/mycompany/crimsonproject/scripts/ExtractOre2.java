@@ -157,22 +157,21 @@ public class ExtractOre2 {
                             new KeyboardEvents().pressKey(events.get(i));
                             Thread.sleep(2000);
                             new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("Cannon had been active. Press 2x cannon " + i + "\n");
-                            this.amountRect++; // go to case 3
+                            System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
 
                         } else if (this.isCanceled(i)) {
                             Thread.sleep(500);
                             new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("Cannon had been canceled. Wait and press 1x cannon " + i + "\n");
-                            this.amountRect++; // go to case 3
+                            System.out.println("The Cannon was canceled. Wait and press 1x cannon " + i + "\n");
 
                         } else {
                             new KeyboardEvents().pressKey(events.get(i));
                             System.out.println("Just press 1x cannon " + i + "\n");
-                            this.amountRect++; // go to case 3
                         }
+
                     }
 
+                    this.amountRect++; // go to case 3
                     flagNoDragScreen = true;
 
                 } // end case 2
@@ -292,7 +291,6 @@ public class ExtractOre2 {
             if (actived) {
                 return true;
             }
-
         }
 
         return false;
@@ -316,11 +314,9 @@ public class ExtractOre2 {
             if (canceled) {
                 return true;
             }
-
         }
 
         return false;
-
     }
 
     private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
@@ -341,9 +337,7 @@ public class ExtractOre2 {
             if (alpha) {
                 return true;
             }
-
         }
-
         return false;
     }
 

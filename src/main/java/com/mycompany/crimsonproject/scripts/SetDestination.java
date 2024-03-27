@@ -28,7 +28,7 @@ public class SetDestination {
 
         do {
 
-            boolean flagNoDragScreen = false;
+            boolean descentFlag = true;
             new TakeScreenShot().take();
             // Todo connection lost
 
@@ -37,7 +37,6 @@ public class SetDestination {
                 case 0 -> {
 
                     if (this.openLocation()) {
-                        flagNoDragScreen = true;
                         this.amountRect++;
                     }
 
@@ -47,18 +46,17 @@ public class SetDestination {
 
                     if (option == MININGBOT && this.miningbot1Label()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
+                        descentFlag = false;
 
                     } else if (option == HOMESTATION && this.homestationLabel()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
-
+                        descentFlag = false;
                     }
 
                     /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
-                    if (!flagNoDragScreen) {
+                    if (descentFlag) {
                         this.amountRect--; // return to case 0 to open the location window again
-                        flagNoDragScreen = this.closeLocationWindow(); // is it necessary?
+                        this.closeLocationWindow();
                     }
 
                 } // end case 1
@@ -67,18 +65,17 @@ public class SetDestination {
 
                     if (option == MININGBOT && this.whithin()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
+                        descentFlag = false;
 
                     } else if (option == HOMESTATION && this.dockArrow()) {
                         this.amountRect++;
-                        flagNoDragScreen = true;
-
+                        descentFlag = false;
                     }
 
                     // back to case 1 and find the MININGBOT1 or HOMESTATION1  to restart finding WARPARROW/DOCKARROW
-                    if (!flagNoDragScreen) {
+                    if (descentFlag) {
                         this.amountRect--;
-                        flagNoDragScreen = this.closeLocationWindow(); // is it necessary?
+                        this.closeLocationWindow();
                     }
 
                 } // end case 2
@@ -86,17 +83,12 @@ public class SetDestination {
                 case 3 -> {
 
                     if (this.closeLocationWindow()) {
-                        flagNoDragScreen = true;
                         this.amountRect++;
                     }
 
                 }
 
             } // end case 3
-
-            if (!flagNoDragScreen) {
-                new ClickScreenEvents().dragScreen();
-            }
 
         } while (this.amountRect < SWITCHFLAG);
     }
@@ -144,7 +136,6 @@ public class SetDestination {
         if (warpArrow != null) {
             System.out.printf("Rect found (WHITHIN) at case " + this.amountRect + " - Width: %d and height: %d\n\n", warpArrow.width, warpArrow.height);
             new ClickScreenEvents().leftClickCenterButton(warpArrow);
-
             return true;
         }
 

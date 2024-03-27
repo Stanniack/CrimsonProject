@@ -63,7 +63,7 @@ public class ClickScreenEvents extends RobotEvent {
 
     }
 
-    public void dragItensToIventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
+    public void dragItemsToInventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
 
         this.bot.mouseMove(x2, y2); // ok
         Thread.sleep(SLEEP_MS); // ok
@@ -82,7 +82,7 @@ public class ClickScreenEvents extends RobotEvent {
 
     }
 
-    public void dragItensToIventory(Quartet<Integer, Integer, Integer, Integer> dragItensDeadZone, Rectangle rect) throws AWTException, InterruptedException {
+    public void dragItemsToInventory(Quartet<Integer, Integer, Integer, Integer> dragItensDeadZone, Rectangle rect) throws AWTException, InterruptedException {
 
         this.bot.mouseMove(dragItensDeadZone.getValue1(), dragItensDeadZone.getValue3()); // ok
         Thread.sleep(SLEEP_MS); // ok
