@@ -106,9 +106,7 @@ public class CheckCargoDeposit {
         }
 
         System.out.println("Rect (MINCARGO_VENTURE) not found\n");
-
         return "notFound";
-
     }
 
     private boolean findHangar() throws IOException, TesseractException {
@@ -123,7 +121,6 @@ public class CheckCargoDeposit {
         }
 
         System.out.println("Rect (HANGAR) not found\n");
-
         return false;
     }
 
@@ -138,12 +135,10 @@ public class CheckCargoDeposit {
         if (undockButton != null) {
             System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
             new ClickScreenEvents().leftClickCenterButton(undockButton);
-
             return true;
         }
 
         System.out.println("Rect not found (UNDOCK_BUTTON)\n");
-
         return false;
     }
 
