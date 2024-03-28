@@ -9,15 +9,19 @@ import java.awt.Rectangle;
 import java.io.IOException;
 
 import net.sourceforge.tess4j.TesseractException;
+import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 
 /**
  *
  * @author Devmachine
  *
  */
-public class CheckCargoDeposit {
+public class CheckCargoDeposit implements VerifyRectangle {
 
-    Rectangle hangarButton;
+    private static final int RIGHTCLICK = 0;
+    private static final int LEFTCLICK = 1;
+
+    private Rectangle hangarButton;
     private int amountRect = 0;
     private static final int SWTICHFLAG = 4;
 
@@ -60,8 +64,10 @@ public class CheckCargoDeposit {
                 }
 
                 case 3 -> {
+                    
+                    Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
 
-                    if (this.pressUndockButton()) {
+                    if (this.VerifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                         this.amountRect++;
                     }
                 }
@@ -74,7 +80,7 @@ public class CheckCargoDeposit {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FULLHD().listMaxCargoWxH, new FULLHD().tupleInvetoryDeadzone);
+        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FULLHD().listMaxCargoWxH, new FULLHD().tupleInventoryDeadzone);
 
         if (maxCargo != null) {
             System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -85,7 +91,7 @@ public class CheckCargoDeposit {
 
         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
 
-        Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInvetoryDeadzone);
+        Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInventoryDeadzone);
 
         if (minCargo != null) {
             System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -100,7 +106,7 @@ public class CheckCargoDeposit {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().listHangarWxH, new FULLHD().tupleInvetoryDeadzone);
+        this.hangarButton = new SegmentedRegions().getRectangle(new FULLHD().listHangarWxH, new FULLHD().tupleInventoryDeadzone);
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -117,17 +123,23 @@ public class CheckCargoDeposit {
         new ClickScreenEvents().dragItemsToInventory(new FULLHD().tupleDragItensDeadZone, this.hangarButton);
     }
 
-    private boolean pressUndockButton() throws IOException, TesseractException, AWTException, InterruptedException {
+    @Override
+    public boolean VerifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
-        Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
+        /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
+        if (rectangle != null) {
+            System.out.printf("Rect found (%s): Width: %d and Height: %d\n\n", itemName, rectangle.width, rectangle.height);
 
-        if (undockButton != null) {
-            System.out.printf("Rect found (UNDOCK_BUTTON) - Width: %d and height: %d\n\n", undockButton.width, undockButton.height);
-            new ClickScreenEvents().leftClickCenterButton(undockButton);
+            if (chosenClick == LEFTCLICK) {
+                new ClickScreenEvents().leftClickCenterButton(rectangle);
+            } else {
+                new ClickScreenEvents().rightClickCenterButton(rectangle);
+            }
+
             return true;
         }
 
-        System.out.println("Rect not found (UNDOCK_BUTTON)\n");
+        System.out.printf("Rect not found (%s)\n\n", itemName);
         return false;
     }
 

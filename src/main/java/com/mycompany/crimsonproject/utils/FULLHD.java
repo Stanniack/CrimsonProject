@@ -109,7 +109,7 @@ public class FULLHD {
     public static final int MINGCARGO_H1 = 9;
     /* ------------------------------------------------------------- */
     // This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION
-    public final Quartet<Integer, Integer, Integer, Integer> tupleInvetoryDeadzone
+    public final Quartet<Integer, Integer, Integer, Integer> tupleInventoryDeadzone
             = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
     public static final int INVENTORY_DEADZONE_X1 = 70;
     public static final int INVENTORY_DEADZONE_X2_W = 570;
