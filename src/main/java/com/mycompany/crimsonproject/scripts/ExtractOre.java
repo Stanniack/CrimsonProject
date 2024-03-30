@@ -43,7 +43,6 @@ public class ExtractOre {
     private final Integer DVpriority = 2;
     private final Integer CVpriority = 1;
     private final Integer Vpriority = 0;
-
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
@@ -53,9 +52,6 @@ public class ExtractOre {
 
         do {
 
-            Entry<String, Rectangle> betterOre = null;
-            this.priorityOreValue = 0;
-
             new TakeScreenShot().take();
             // Todo connection lost
 
@@ -63,51 +59,9 @@ public class ExtractOre {
 
                 case 0 -> {
 
-                    /* Reset Y list coordinates to 1081y */
-                    List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
-
-                    HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres_BlockScreen(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
-                            FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
-
-                    if (!rectResult.isEmpty()) {
-                        System.out.println("Hash map size: " + rectResult.size());
-
-                        for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
-
-                            for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
-
-                                if (item.getKey().contains("P" + i) && this.priorityOreValue <= this.priorityList.get(i)) {
-                                    this.priorityOreValue = this.priorityList.get(i);
-
-                                    System.out.println(item.getKey() + ": " + item.getValue().y + "y");
-
-                                    if (item.getValue().y <= closestOreList.get(i)) {
-                                        System.out.println("Temp better ore found: " + item + "\n");
-                                        betterOre = item;
-                                        closestOreList.set(i, item.getValue().y);
-
-                                    }
-                                }
-                            }
-
-                        }
-
-                        if (betterOre != null) {
-                            System.out.println("Closest, better ore found (Y Coordinate): "
-                                    + betterOre.getKey() + " (X,Y) -> (" + betterOre.getValue().x + ", " + betterOre.getValue().y + ")\n");
-
-                            this.amountRect++; // go to case 1
-                            new ClickScreenEvents().doubleClick(betterOre.getValue());
-
-                            /* Check case 1 of lock target */
-                            this.timeStartLockTarget = System.currentTimeMillis();
-
-                        } else {
-                            System.out.println("Better asteroid is null\n");
-                        }
-
-                    } else {
-                        System.out.println("Asteroids not found\n");
+                    if (this.getAteroids()) {
+                        this.timeStartLockTarget = System.currentTimeMillis();
+                        this.amountRect++; // go to case 1
                     }
 
                 } // end case 0
@@ -248,6 +202,54 @@ public class ExtractOre {
 
         } while (this.amountRect < SWITCHFLAG);
 
+    }
+
+    private boolean getAteroids() throws IOException, TesseractException, AWTException, InterruptedException {
+
+        /* Reset Y list coordinates to 1081y */
+        List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
+
+        Entry<String, Rectangle> betterAteroid = null;
+        this.priorityOreValue = 0;
+
+        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres_BlockScreen(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
+                FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
+
+        if (!rectResult.isEmpty()) {
+            System.out.println("Hash map size: " + rectResult.size());
+
+            for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
+
+                for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
+
+                    if (item.getKey().contains("P" + i) && this.priorityOreValue <= this.priorityList.get(i)) {
+                        this.priorityOreValue = this.priorityList.get(i);
+
+                        System.out.println(item.getKey() + ": " + item.getValue().y + "y");
+
+                        if (item.getValue().y <= closestOreList.get(i)) {
+                            System.out.println("Tempoorary better asteroid found: " + item + "\n");
+                            betterAteroid = item;
+                            closestOreList.set(i, item.getValue().y);
+
+                        }
+                    }
+                }
+            }
+
+            
+            if (betterAteroid != null) {
+                System.out.println("CLOSEST, BETTER ASTEROID FOUND (Y Coordinate): "
+                        + betterAteroid.getKey() + " (X,Y) -> (" + betterAteroid.getValue().x + ", " + betterAteroid.getValue().y + ")\n");
+
+                new ClickScreenEvents().doubleClick(betterAteroid.getValue());
+                return true;
+
+            }
+        }
+
+        System.out.println("Closest, better asteroid is null\n");
+        return false;
     }
 
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
