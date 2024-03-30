@@ -95,17 +95,10 @@ public class ExtractOre {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
-
-                    /* go to the station and drag itens */
-                    if (compactMaxCargo != null) {
-                        System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
-
+                    if (this.verifyCompactMaxCargo()) {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
-                        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
                         this.amountRect++; // go to case 4
                     }
 
@@ -240,7 +233,7 @@ public class ExtractOre {
     }
 
     private void verifyMinerCannonAction() throws IOException, InterruptedException, AWTException {
-        
+
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
         for (int i = 0; i < events.size(); i++) {
@@ -261,6 +254,22 @@ public class ExtractOre {
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
         }
+    }
+
+    private boolean verifyCompactMaxCargo() throws IOException, TesseractException {
+
+        Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
+
+        /* go to the station and drag itens */
+        if (compactMaxCargo != null) {
+            System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                    compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
+
+            return true;
+        }
+
+        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
+        return false;
     }
 
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
