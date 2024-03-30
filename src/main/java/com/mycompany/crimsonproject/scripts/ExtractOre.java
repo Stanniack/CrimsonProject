@@ -51,8 +51,6 @@ public class ExtractOre {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
 
-        SegmentedRegions sr3 = new SegmentedRegions();
-
         do {
 
             Entry<String, Rectangle> betterOre = null;
@@ -68,7 +66,7 @@ public class ExtractOre {
                     /* Reset Y list coordinates to 1081y */
                     List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
-                    HashMap<String, Rectangle> rectResult = sr3.getAllOres_BlockScreen(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
+                    HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres_BlockScreen(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
                             FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
 
                     if (!rectResult.isEmpty()) {
@@ -116,10 +114,7 @@ public class ExtractOre {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = sr3.getT_WxH_BlockScreen(FULLHD.LOCKTARGET_W1,
-                            FULLHD.LOCKTARGET_H1,
-                            FULLHD.LOCKTARGET_DEADZONE_X1, FULLHD.LOCKTARGET_DEADZONE_X2_W,
-                            FULLHD.LOCKTARGET_DEADZONE_Y1, FULLHD.LOCKTARGET_DEADZONE_Y2_H);
+                    Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
                     if (lockTargetFromSelectedItem != null) {
                         System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -174,10 +169,7 @@ public class ExtractOre {
 
                 case 3 -> {
 
-                    Rectangle compactMaxCargo = sr3.getT_WxH_BlockScreen(FULLHD.COMPACTMAXCARGO_W3,
-                            FULLHD.COMPACTMAXCARGO_H1,
-                            FULLHD.COMPACTCARGO_DEADZONE_X1, FULLHD.COMPACTCARGO_DEADZONE_X2_W,
-                            FULLHD.COMPACTCARGO_DEADZONE_Y1, FULLHD.COMPACTCARGO_DEADZONE_Y2_H);
+                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
 
                     /* go to the station and drag itens */
                     if (compactMaxCargo != null) {

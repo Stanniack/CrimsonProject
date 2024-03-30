@@ -89,9 +89,12 @@ public class FULLHD {
     public static final int OVERVIEWMINING_Y2_H = 1079;
     /* ------------------------------------------------------------- */
 
+    public final List<Pair<Integer, Integer>> listLockTarget = Arrays.asList(new Pair<>(LOCKTARGET_W1, LOCKTARGET_H1));
     public static final int LOCKTARGET_W1 = 26;
     public static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
+    public final Quartet<Integer, Integer, Integer, Integer> tupleLockTargetDeadZone = 
+            new Quartet<>(LOCKTARGET_DEADZONE_X1, LOCKTARGET_DEADZONE_X2_W, LOCKTARGET_DEADZONE_Y1, LOCKTARGET_DEADZONE_Y2_H);
     public static final int LOCKTARGET_DEADZONE_X1 = 1000;
     public static final int LOCKTARGET_DEADZONE_X2_W = 1919;
     public static final int LOCKTARGET_DEADZONE_Y1 = 0;
@@ -117,9 +120,8 @@ public class FULLHD {
     public static final int INVENTORY_DEADZONE_Y2_H = 1040;
     /* ------------------------------------------------------------- */
 
-    public static final int COMPACTMAXCARGO_W1 = 339;
-    public static final int COMPACTMAXCARGO_W2 = 419;
-    public static final int COMPACTMAXCARGO_W3 = 331; //!!
+    public final List<Pair<Integer, Integer>> listCompactMaxCargo = Arrays.asList(new Pair<>(COMPACTMAXCARGO_W1, COMPACTMAXCARGO_H1));
+    public static final int COMPACTMAXCARGO_W1 = 331;
     public static final int COMPACTMAXCARGO_H1 = 5;
     /* ------------------------------------------------------------- */
 
@@ -152,6 +154,8 @@ public class FULLHD {
     public static final int UNDOCK_DEADZONE_Y2_H = 1079;
     /* ------------------------------------------------------------- */
 
+    public final Quartet<Integer, Integer, Integer, Integer> tupleCompactMaxCargoDeadZone = 
+            new Quartet<>(COMPACTCARGO_DEADZONE_X1, COMPACTCARGO_DEADZONE_X2_W, COMPACTCARGO_DEADZONE_Y1, COMPACTCARGO_DEADZONE_Y2_H);
     public static final int COMPACTCARGO_DEADZONE_X1 = 30;
     public static final int COMPACTCARGO_DEADZONE_X2_W = 444;
     public static final int COMPACTCARGO_DEADZONE_Y1 = 0;
