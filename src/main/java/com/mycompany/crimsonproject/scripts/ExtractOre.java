@@ -32,7 +32,7 @@ public class ExtractOre {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 30000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
@@ -264,6 +264,10 @@ public class ExtractOre {
         }
     }
 
+    private void cannonAction (List<Integer> coordinatesX, boolean action) {
+        
+    }
+    
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(FULLHD.CANNON1_X, FULLHD.CANNON2_X);
@@ -275,7 +279,8 @@ public class ExtractOre {
             Thread.sleep(180);
             new TakeScreenShot().take();
 
-            actived = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.CANNONS_Y,
+            actived = new FindPixels().findRangeColor(
+                    coordinatesX.get(i), FULLHD.CANNONS_Y,
                     FULLHD.CANNON_W1, FULLHD.CANNON_H1,
                     new Triplet<>(PIXELRANGE.ACT_MINRED, PIXELRANGE.ACT_MINGREEN, PIXELRANGE.ACT_MINBLUE),
                     new Triplet<>(PIXELRANGE.ACT_MAXRED, PIXELRANGE.ACT_MAXGREEN, PIXELRANGE.ACT_MAXBLUE));
@@ -299,7 +304,8 @@ public class ExtractOre {
             //Thread.sleep(180);
             new TakeScreenShot().take();
 
-            canceled = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.CANNONS_Y,
+            canceled = new FindPixels().findRangeColor(
+                    coordinatesX.get(i), FULLHD.CANNONS_Y,
                     FULLHD.CANNON_W1, FULLHD.CANNON_H1,
                     new Triplet<>(PIXELRANGE.CANCEL_MINRED, PIXELRANGE.CANCEL_MINGREEN, PIXELRANGE.CANCEL_MINBLUE),
                     new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
