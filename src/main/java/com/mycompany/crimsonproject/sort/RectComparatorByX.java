@@ -13,5 +13,4 @@ public class RectComparatorByX implements Comparator<Rectangle> {
     public int compare(Rectangle o1, Rectangle o2) {
         return Integer.compare(o1.x, o2.x);
     }
-
 }

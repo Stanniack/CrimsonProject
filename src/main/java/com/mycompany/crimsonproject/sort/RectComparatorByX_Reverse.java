@@ -9,15 +9,12 @@ import java.util.Comparator;
  */
 public class RectComparatorByX_Reverse implements Comparator<Rectangle> {
 
-
     @Override
     public int compare(Rectangle o1, Rectangle o2) {
-        if (o1.x > o2.x)
+        if (o1.x > o2.x) {
             return -1;
-       
+        }
+
         return 0;
     }
-    
-    
-    
 }

@@ -9,15 +9,12 @@ import java.util.Comparator;
  */
 public class RectComparatorByY_Reverse implements Comparator<Rectangle> {
 
-
     @Override
     public int compare(Rectangle o1, Rectangle o2) {
-        if (o1.y > o2.y)
+        if (o1.y > o2.y) {
             return -1;
-       
+        }
+
         return 0;
     }
-    
-    
-    
 }

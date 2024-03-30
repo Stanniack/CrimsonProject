@@ -9,13 +9,8 @@ import java.util.Comparator;
  */
 public class RectComparatorByY implements Comparator<Rectangle> {
 
-
     @Override
     public int compare(Rectangle o1, Rectangle o2) {
         return Integer.compare(o1.y, o2.y);
     }
-    
-    
-    
 }
-

@@ -14,7 +14,4 @@ public class HashMapRectComparatorByY implements Comparator<Entry<Integer, Recta
     public int compare(Entry<Integer, Rectangle> o1, Entry<Integer, Rectangle> o2) {
         return Integer.compare(o1.getValue().y, o2.getValue().y);
     }
-
-
-
 }
