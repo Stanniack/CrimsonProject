@@ -50,7 +50,7 @@ public class ExtractOre {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
 
-        do {
+        while (this.amountRect < SWITCHFLAG) {
 
             new TakeScreenShot().take();
             // Todo connection lost
@@ -68,14 +68,7 @@ public class ExtractOre {
 
                 case 1 -> {
 
-                    Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
-
-                    if (lockTargetFromSelectedItem != null) {
-                        System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                                lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
-
-                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
-                        //!! launch and engage drones
+                    if (this.verifyLockTarget()) {
                         this.amountRect++; // go to case 2
 
                     } else {
@@ -200,7 +193,7 @@ public class ExtractOre {
 
             }
 
-        } while (this.amountRect < SWITCHFLAG);
+        } // end while
 
     }
 
@@ -237,7 +230,6 @@ public class ExtractOre {
                 }
             }
 
-            
             if (betterAteroid != null) {
                 System.out.println("CLOSEST, BETTER ASTEROID FOUND (Y Coordinate): "
                         + betterAteroid.getKey() + " (X,Y) -> (" + betterAteroid.getValue().x + ", " + betterAteroid.getValue().y + ")\n");
@@ -249,6 +241,22 @@ public class ExtractOre {
         }
 
         System.out.println("Closest, better asteroid is null\n");
+        return false;
+    }
+
+    private boolean verifyLockTarget() throws IOException, TesseractException, AWTException, InterruptedException {
+
+        Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+
+        if (lockTargetFromSelectedItem != null) {
+            System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                    lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
+
+            new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
+            //!! launch and engage drones
+            return true;
+        }
+
         return false;
     }
 
