@@ -32,7 +32,7 @@ public class ExtractOre {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 30000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
 
     private long timeStartLockTarget = 0;
@@ -58,16 +58,13 @@ public class ExtractOre {
             switch (this.amountRect) {
 
                 case 0 -> {
-
                     if (this.getAteroids()) {
                         this.timeStartLockTarget = System.currentTimeMillis();
                         this.amountRect++; // go to case 1
                     }
-
                 } // end case 0
 
                 case 1 -> {
-
                     if (this.verifyLockTarget()) {
                         this.amountRect++; // go to case 2
 
@@ -82,85 +79,49 @@ public class ExtractOre {
                             this.amountRect = 0; // reset script
                         }
                     }
-
                 } // end case 1
 
                 case 2 -> {
-
                     this.timeStart = System.currentTimeMillis();
                     this.verifyMinerCannonAction();
                     this.amountRect++; // go to case 3
-
                 } // end case 2
 
                 case 3 -> {
-
                     if (this.verifyCompactMaxCargo()) {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
                         this.amountRect++; // go to case 4
                     }
-
                 } // end case 3
 
                 case 4 -> {
-
-                    /* If true, there is no max cargo neither minering ore */
-                    if (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS) {
-                        this.amountRect++; // go to case 5
+                    if (!this.verifyAprroaching() || (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
+                        this.amountRect++; // Approaching not found or time exceded
 
                     } else {
-                        boolean approaching = new FindPixels().countWhitePixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
-                                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3);
-
-                        if (approaching == true) {
-                            System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
-
-                            this.amountRect--; // go back to case 3
-
-                            Thread.sleep(TIMETOWAIT_APPROACHING_MS);
-
-                        } else {
-                            System.out.println("Rect (APRROACHING) not found\n");
-                            this.amountRect++;
+                        if (this.verifyAprroaching()) {
+                            this.amountRect--; // back to case and check maxCargo
                         }
                     }
 
                     this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                     System.out.println("Time added until set another ore: "
                             + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
-
                 } // end case 4
 
                 case 5 -> {
-
-                    System.out.println("Searching for another asteroid.\n");
-                    // check opacity
-                    List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
-
-                    for (int i = 0; i < events.size(); i++) {
-
-                        if (this.isAlpha(i)) {
-                            Thread.sleep(500);
-                            new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
-                            this.amountRect = 0;
-                        }
-                    }
-
+                    this.resetScript();
                     this.flagUntilBeFilled_MS = 0;
                     this.amountRect = 0;
-
                 } // end case 5
 
                 case 6 -> {
-
                     //!! return drones
                     new SetDestination().startScript(GOTO_HOMESTATION);
                     System.out.println("End of mining and go docking!\n");
                     this.amountRect++;
-
                 } // end case 6
 
             }
@@ -270,6 +231,37 @@ public class ExtractOre {
 
         System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
         return false;
+    }
+
+    private boolean verifyAprroaching() throws IOException {
+
+        boolean approaching = new FindPixels().countWhitePixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
+                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3);
+
+        if (approaching == true) {
+            System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
+            return true;
+            //Thread.sleep(TIMETOWAIT_APPROACHING_MS);
+        }
+
+        System.out.println("Rect (APRROACHING) not found\n");
+        return false;
+    }
+
+    private void resetScript() throws IOException, InterruptedException, AWTException {
+
+        System.out.println("Searching for another asteroid.\n");
+        // check opacity
+        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
+        for (int i = 0; i < events.size(); i++) {
+
+            if (this.isAlpha(i)) {
+                Thread.sleep(500);
+                new KeyboardEvents().pressKey(events.get(i));
+                System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
+            }
+        }
     }
 
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
