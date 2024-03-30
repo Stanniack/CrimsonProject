@@ -88,28 +88,7 @@ public class ExtractOre {
                 case 2 -> {
 
                     this.timeStart = System.currentTimeMillis();
-                    List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
-
-                    for (int i = 0; i < events.size(); i++) {
-
-                        if (this.isActive(i)) {
-                            new KeyboardEvents().pressKey(events.get(i));
-                            Thread.sleep(2000);
-                            new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
-
-                        } else if (this.isCanceled(i)) {
-                            Thread.sleep(500);
-                            new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("The Cannon was canceled. Wait and press 1x cannon " + i + "\n");
-
-                        } else {
-                            new KeyboardEvents().pressKey(events.get(i));
-                            System.out.println("Just press 1x cannon " + i + "\n");
-                        }
-
-                    }
-
+                    this.verifyMinerCannonAction();
                     this.amountRect++; // go to case 3
 
                 } // end case 2
@@ -258,6 +237,30 @@ public class ExtractOre {
         }
 
         return false;
+    }
+
+    private void verifyMinerCannonAction() throws IOException, InterruptedException, AWTException {
+        
+        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
+        for (int i = 0; i < events.size(); i++) {
+
+            if (this.isActive(i)) {
+                new KeyboardEvents().pressKey(events.get(i));
+                Thread.sleep(2000);
+                new KeyboardEvents().pressKey(events.get(i));
+                System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
+
+            } else if (this.isCanceled(i)) {
+                Thread.sleep(500);
+                new KeyboardEvents().pressKey(events.get(i));
+                System.out.println("The Cannon was canceled. Wait and press 1x cannon " + i + "\n");
+
+            } else {
+                new KeyboardEvents().pressKey(events.get(i));
+                System.out.println("Just press 1x cannon " + i + "\n");
+            }
+        }
     }
 
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
