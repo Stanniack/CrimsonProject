@@ -162,11 +162,13 @@ public class FULLHD {
     public static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 
-    public static final int CANNON_W1 = 42;
-    public static final int CANNON_H1 = 40;
-    public static final int CANNON1_X = 1044;
-    public static final int CANNON2_X = 1095;
-    public static final int CANNONS_Y = 910;
+    public final List<Pair<Integer, Integer>> listVentureCannonWxH = Arrays.asList(new Pair<>(VENTURECANNON_W1, VENTURECANNON_H1));
+    public static final int VENTURECANNON_W1 = 42;
+    public static final int VENTURECANNON_H1 = 40;
+    public final List<Pair<Integer, Integer>> listVentureCannonCoordinatesX = Arrays.asList(new Pair<>(VENTURECANNON1_X, VENTURECANNON2_X));
+    public static final int VENTURECANNON1_X = 1044;
+    public static final int VENTURECANNON2_X = 1095;
+    public static final int VENTURECANNONS_Y = 910;
     /* ------------------------------------------------------------- */
 
     public static final int RANGEDCANNON_W1 = 27;

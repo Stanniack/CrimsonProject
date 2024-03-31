@@ -58,7 +58,7 @@ public class ExtractOre {
             switch (this.amountRect) {
 
                 case 0 -> {
-                    if (this.getAteroids()) {
+                    if (this.getAsteroids()) {
                         this.timeStartLockTarget = System.currentTimeMillis();
                         this.amountRect++; // go to case 1
                     }
@@ -130,7 +130,7 @@ public class ExtractOre {
 
     }
 
-    private boolean getAteroids() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean getAsteroids() throws IOException, TesseractException, AWTException, InterruptedException {
 
         /* Reset Y list coordinates to 1081y */
         List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
@@ -270,7 +270,7 @@ public class ExtractOre {
     
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
-        List<Integer> coordinatesX = Arrays.asList(FULLHD.CANNON1_X, FULLHD.CANNON2_X);
+        List<Integer> coordinatesX = Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X);
         int flagAttempt = 10;
         boolean actived;
 
@@ -280,8 +280,8 @@ public class ExtractOre {
             new TakeScreenShot().take();
 
             actived = new FindPixels().findRangeColor(
-                    coordinatesX.get(i), FULLHD.CANNONS_Y,
-                    FULLHD.CANNON_W1, FULLHD.CANNON_H1,
+                    coordinatesX.get(i), FULLHD.VENTURECANNONS_Y,
+                    FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1,
                     new Triplet<>(PIXELRANGE.ACT_MINRED, PIXELRANGE.ACT_MINGREEN, PIXELRANGE.ACT_MINBLUE),
                     new Triplet<>(PIXELRANGE.ACT_MAXRED, PIXELRANGE.ACT_MAXGREEN, PIXELRANGE.ACT_MAXBLUE));
 
@@ -295,7 +295,7 @@ public class ExtractOre {
 
     private boolean isCanceled(int i) throws IOException, InterruptedException, AWTException {
 
-        List<Integer> coordinatesX = Arrays.asList(FULLHD.CANNON1_X, FULLHD.CANNON2_X);
+        List<Integer> coordinatesX = Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X);
         int flagAttempt = 5;
         boolean canceled;
 
@@ -304,9 +304,8 @@ public class ExtractOre {
             //Thread.sleep(180);
             new TakeScreenShot().take();
 
-            canceled = new FindPixels().findRangeColor(
-                    coordinatesX.get(i), FULLHD.CANNONS_Y,
-                    FULLHD.CANNON_W1, FULLHD.CANNON_H1,
+            canceled = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.VENTURECANNONS_Y,
+                    FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1,
                     new Triplet<>(PIXELRANGE.CANCEL_MINRED, PIXELRANGE.CANCEL_MINGREEN, PIXELRANGE.CANCEL_MINBLUE),
                     new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
 
