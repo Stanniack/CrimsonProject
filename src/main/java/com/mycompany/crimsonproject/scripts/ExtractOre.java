@@ -72,6 +72,8 @@ public class ExtractOre {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
                         System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
                                 + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000 + "\n");
+                        
+                        new ClickScreenEvents().dragScreen(); // !!
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                             System.out.println("Lock target not found. Restarting script.\n\n");
