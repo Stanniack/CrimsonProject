@@ -72,7 +72,7 @@ public class ExtractOre {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
                         System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
                                 + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000 + "\n");
-                        
+
                         new ClickScreenEvents().dragScreen(); // !!
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
@@ -85,7 +85,7 @@ public class ExtractOre {
 
                 case 2 -> {
                     this.timeStart = System.currentTimeMillis();
-                    this.verifyMinerCannonAction();
+                    this.checkMinerCannonAction();
                     this.amountRect++; // go to case 3
                 } // end case 2
 
@@ -179,23 +179,7 @@ public class ExtractOre {
         return false;
     }
 
-    private boolean verifyLockTarget() throws IOException, TesseractException, AWTException, InterruptedException {
-
-        Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
-
-        if (lockTargetFromSelectedItem != null) {
-            System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                    lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
-
-            new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
-            //!! launch and engage drones
-            return true;
-        }
-
-        return false;
-    }
-
-    private void verifyMinerCannonAction() throws IOException, InterruptedException, AWTException {
+    private void checkMinerCannonAction() throws IOException, InterruptedException, AWTException {
 
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
@@ -217,6 +201,38 @@ public class ExtractOre {
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
         }
+    }
+
+    private void resetScript() throws IOException, InterruptedException, AWTException {
+
+        System.out.println("Searching for another asteroid.\n");
+        // check opacity
+        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
+        for (int i = 0; i < events.size(); i++) {
+
+            if (this.isAlpha(i)) {
+                Thread.sleep(500);
+                new KeyboardEvents().pressKey(events.get(i));
+                System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
+            }
+        }
+    }
+
+    private boolean verifyLockTarget() throws IOException, TesseractException, AWTException, InterruptedException {
+
+        Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+
+        if (lockTargetFromSelectedItem != null) {
+            System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
+                    lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
+
+            new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
+            //!! launch and engage drones
+            return true;
+        }
+
+        return false;
     }
 
     private boolean verifyCompactMaxCargo() throws IOException, TesseractException {
@@ -243,33 +259,16 @@ public class ExtractOre {
         if (approaching == true) {
             System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
             return true;
-            //Thread.sleep(TIMETOWAIT_APPROACHING_MS);
         }
 
         System.out.println("Rect (APRROACHING) not found\n");
         return false;
     }
 
-    private void resetScript() throws IOException, InterruptedException, AWTException {
+    private void cannonAction(List<Integer> coordinatesX, boolean action) {
 
-        System.out.println("Searching for another asteroid.\n");
-        // check opacity
-        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
-
-        for (int i = 0; i < events.size(); i++) {
-
-            if (this.isAlpha(i)) {
-                Thread.sleep(500);
-                new KeyboardEvents().pressKey(events.get(i));
-                System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
-            }
-        }
     }
 
-    private void cannonAction (List<Integer> coordinatesX, boolean action) {
-        
-    }
-    
     private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X);
