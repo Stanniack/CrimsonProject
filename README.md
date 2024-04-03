@@ -38,7 +38,7 @@
   - Agora "Approaching" e canhões são identificados por varredura de pixels.
 
 # Alpha 0.31 - 27/03/24
-  - O mecanismo de empurrar a tela (dragScreen) foi retirado.
+  - O mecanismo de empurrar a tela (dragScreen) começou a ser repadronizado.
 
 # Bug fixes
 
