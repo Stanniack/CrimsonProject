@@ -9,6 +9,5 @@ import java.awt.Rectangle;
  */
 public interface VerifyRectangle {
 
-    boolean VerifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException;
-
+    boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException;
 }

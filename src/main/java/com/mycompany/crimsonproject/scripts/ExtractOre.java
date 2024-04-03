@@ -1,6 +1,7 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
+import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
@@ -23,7 +24,7 @@ import org.javatuples.Triplet;
  *
  * @author Devmachine
  */
-public class ExtractOre {
+public class ExtractOre implements VerifyRectangle {
 
     private int amountRect = 0;
     private long flagUntilBeFilled_MS = 0;
@@ -31,7 +32,6 @@ public class ExtractOre {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
-    private static final int TIMETOWAIT_APPROACHING_MS = 10000; // 10 secs
     private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
 
@@ -65,7 +65,11 @@ public class ExtractOre {
                 } // end case 0
 
                 case 1 -> {
-                    if (this.verifyLockTarget()) {
+                    Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+
+                    if (this.verifyRectangle(lockTargetFromSelectedItem, "LOCKTARGET", 0)) {
+                        //!! launch and engage drones
+                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
                         this.amountRect++; // go to case 2
 
                     } else {
@@ -90,7 +94,9 @@ public class ExtractOre {
                 } // end case 2
 
                 case 3 -> {
-                    if (this.verifyCompactMaxCargo()) {
+                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
+
+                    if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
@@ -99,11 +105,11 @@ public class ExtractOre {
                 } // end case 3
 
                 case 4 -> {
-                    if (!this.verifyAprroaching() || (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
+                    if (!this.checkPixelsAprroaching() || (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
                         this.amountRect++; // Approaching not found or time exceded
 
                     } else {
-                        if (this.verifyAprroaching()) {
+                        if (this.checkPixelsAprroaching()) {
                             this.amountRect--; // back to case and check maxCargo
                         }
                     }
@@ -185,18 +191,14 @@ public class ExtractOre {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isActive(i)) {
+            if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(2000);
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
 
-            } else if (this.isCanceled(i)) {
-                Thread.sleep(500);
-                new KeyboardEvents().pressKey(events.get(i));
-                System.out.println("The Cannon was canceled. Wait and press 1x cannon " + i + "\n");
-
             } else {
+                Thread.sleep(300); // Wait if cannon was canceled
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
@@ -212,46 +214,23 @@ public class ExtractOre {
         for (int i = 0; i < events.size(); i++) {
 
             if (this.isAlpha(i)) {
-                Thread.sleep(500);
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
             }
         }
     }
 
-    private boolean verifyLockTarget() throws IOException, TesseractException, AWTException, InterruptedException {
-
-        Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
-
-        if (lockTargetFromSelectedItem != null) {
-            System.out.printf("Rect found (LOCKTARGET) at case 2 - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                    lockTargetFromSelectedItem.width, lockTargetFromSelectedItem.height, lockTargetFromSelectedItem.x, lockTargetFromSelectedItem.y);
-
-            new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
-            //!! launch and engage drones
+    @Override
+    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+        if (rectangle != null) {
+            System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
             return true;
         }
 
         return false;
     }
 
-    private boolean verifyCompactMaxCargo() throws IOException, TesseractException {
-
-        Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
-
-        /* go to the station and drag itens */
-        if (compactMaxCargo != null) {
-            System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                    compactMaxCargo.width, compactMaxCargo.height, compactMaxCargo.x, compactMaxCargo.y);
-
-            return true;
-        }
-
-        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
-        return false;
-    }
-
-    private boolean verifyAprroaching() throws IOException {
+    private boolean checkPixelsAprroaching() throws IOException {
 
         boolean approaching = new FindPixels().countWhitePixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
                 FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3);
@@ -265,57 +244,19 @@ public class ExtractOre {
         return false;
     }
 
-    private void cannonAction(List<Integer> coordinatesX, boolean action) {
-
-    }
-
-    private boolean isActive(int i) throws IOException, InterruptedException, AWTException {
-
-        List<Integer> coordinatesX = Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X);
+    private boolean isMinerCannonAction(int i, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
         int flagAttempt = 10;
-        boolean actived;
 
         for (int j = 0; j < flagAttempt; j++) {
-
-            Thread.sleep(180);
             new TakeScreenShot().take();
 
-            actived = new FindPixels().findRangeColor(
-                    coordinatesX.get(i), FULLHD.VENTURECANNONS_Y,
-                    FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1,
-                    new Triplet<>(PIXELRANGE.ACT_MINRED, PIXELRANGE.ACT_MINGREEN, PIXELRANGE.ACT_MINBLUE),
-                    new Triplet<>(PIXELRANGE.ACT_MAXRED, PIXELRANGE.ACT_MAXGREEN, PIXELRANGE.ACT_MAXBLUE));
+            return new FindPixels().findRangeColor(coordinatesX.get(i), y,
+                    width, height, tupleMin, tupleMax);
 
-            if (actived) {
-                return true;
-            }
         }
 
         return false;
-    }
 
-    private boolean isCanceled(int i) throws IOException, InterruptedException, AWTException {
-
-        List<Integer> coordinatesX = Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X);
-        int flagAttempt = 5;
-        boolean canceled;
-
-        for (int j = 0; j < flagAttempt; j++) {
-
-            //Thread.sleep(180);
-            new TakeScreenShot().take();
-
-            canceled = new FindPixels().findRangeColor(coordinatesX.get(i), FULLHD.VENTURECANNONS_Y,
-                    FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1,
-                    new Triplet<>(PIXELRANGE.CANCEL_MINRED, PIXELRANGE.CANCEL_MINGREEN, PIXELRANGE.CANCEL_MINBLUE),
-                    new Triplet<>(PIXELRANGE.CANCEL_MAXRED, PIXELRANGE.CANCEL_MAXGREEN, PIXELRANGE.CANCEL_MAXBLUE));
-
-            if (canceled) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
@@ -339,5 +280,4 @@ public class ExtractOre {
         }
         return false;
     }
-
 }

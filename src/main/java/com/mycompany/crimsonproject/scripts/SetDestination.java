@@ -50,12 +50,12 @@ public class SetDestination implements VerifyRectangle {
                     Rectangle miningBotLabel = new SegmentedRegions().getRectangle(new FULLHD().listMiningBotWxH, new FULLHD().tupleLocationTabDeadZone);
                     Rectangle homeStationLabel = new SegmentedRegions().getRectangle(new FULLHD().listHomeStationWxH, new FULLHD().tupleLocationTabDeadZone);
 
-                    if (option == MININGBOT && this.VerifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
+                    if (option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
-                        if (option == HOMESTATION && this.VerifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
+                        if (option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
                             this.amountRect++;
                             descentFlag = false;
                         }
@@ -65,7 +65,7 @@ public class SetDestination implements VerifyRectangle {
                     if (descentFlag) {
                         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
                         this.amountRect--;
-                        this.VerifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                        this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     }
 
                 } // end case 1
@@ -75,12 +75,12 @@ public class SetDestination implements VerifyRectangle {
                     Rectangle within = new SegmentedRegions().getRectangle(new FULLHD().listWithinWxH, new FULLHD().tupleLocationTabDeadZone);
                     Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, new FULLHD().tupleLocationTabDeadZone);
 
-                    if (option == MININGBOT && this.VerifyRectangle(within, "WITHIN", LEFTCLICK)) {
+                    if (option == MININGBOT && this.verifyRectangle(within, "WITHIN", LEFTCLICK)) {
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
-                        if (option == HOMESTATION && this.VerifyRectangle(dock, "DOCK", LEFTCLICK)) {
+                        if (option == HOMESTATION && this.verifyRectangle(dock, "DOCK", LEFTCLICK)) {
                             this.amountRect++;
                             descentFlag = false;
                         }
@@ -90,7 +90,7 @@ public class SetDestination implements VerifyRectangle {
                     if (descentFlag) {
                         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
                         this.amountRect--;
-                        this.VerifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                        this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     }
 
                 } // end case 2
@@ -99,7 +99,7 @@ public class SetDestination implements VerifyRectangle {
 
                     Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
 
-                    if (this.VerifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
+                    if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                         this.amountRect++;
                     }
 
@@ -118,7 +118,7 @@ public class SetDestination implements VerifyRectangle {
     }
 
     @Override
-    public boolean VerifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rectangle != null) {

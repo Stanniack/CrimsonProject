@@ -67,7 +67,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
                     
                     Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
 
-                    if (this.VerifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                    if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                         this.amountRect++;
                     }
                 }
@@ -124,7 +124,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
     }
 
     @Override
-    public boolean VerifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rectangle != null) {
