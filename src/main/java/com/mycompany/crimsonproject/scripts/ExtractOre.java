@@ -34,6 +34,7 @@ public class ExtractOre implements VerifyRectangle {
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
+    private static final int CANNON_SLEEP = 2000;
 
     private long timeStartLockTarget = 0;
     private long timeStart = 0;
@@ -192,13 +193,14 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < events.size(); i++) {
 
             if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
+                Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
-                Thread.sleep(2000);
+                Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
 
             } else {
-                Thread.sleep(300); // Wait if cannon was canceled
+                Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
@@ -255,9 +257,7 @@ public class ExtractOre implements VerifyRectangle {
                     width, height, tupleMin, tupleMax);
 
         }
-
         return false;
-
     }
 
     private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
