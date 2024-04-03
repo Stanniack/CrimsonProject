@@ -248,7 +248,7 @@ public class ExtractOre implements VerifyRectangle {
         int flagAttempt = 10;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep(80);
+            Thread.sleep(180);
             new TakeScreenShot().take();
 
             return new FindPixels().findRangeColor(coordinatesX.get(i), y,
@@ -266,7 +266,7 @@ public class ExtractOre implements VerifyRectangle {
         int flagAttempt = 10;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep(80);
+            Thread.sleep(180);
             new TakeScreenShot().take();
 
             return new FindPixels().findByColor(coordinatesX.get(i), FULLHD.RANGEDCANNONS_Y,
