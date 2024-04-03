@@ -34,12 +34,14 @@ public class FULLHD {
     public static final int WITHIN_H1 = 9;
     
     public final List<Pair<Integer, Integer>> listDockWxH = Arrays.asList(
-            new Pair<>(DOCK_W1, DOCK_H1), new Pair<>(DOCK_W2, DOCK_H1), new Pair<>(DOCK_W3, DOCK_H1), new Pair<>(DOCK_W1, DOCK_H2));
+            new Pair<>(DOCK_W1, DOCK_H1), new Pair<>(DOCK_W2, DOCK_H1), new Pair<>(DOCK_W3, DOCK_H1), new Pair<>(DOCK_W1, DOCK_H2), new Pair<>(DOCK_W4, DOCK_H3));
     public static final int DOCK_W1 = 23;
     public static final int DOCK_W2 = 24;
     public static final int DOCK_W3 = 25;
+    public static final int DOCK_W4 = 46;
     public static final int DOCK_H1 = 9;
     public static final int DOCK_H2 = 10;
+    public static final int DOCK_H3 = 12;
 
     public final List<Pair<Integer, Integer>> listHangarWxH = Arrays.asList(new Pair<>(HANGAR_W1, HANGAR_H1), new Pair<>(HANGAR_W1, HANGAR_H2));
     public static final int HANGAR_W1 = 40;
