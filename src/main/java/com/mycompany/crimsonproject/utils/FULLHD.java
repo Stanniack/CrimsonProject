@@ -110,10 +110,11 @@ public class FULLHD {
     public static final int MAXCARGO1_W2 = 110;
     public static final int MAXCARGO1_H1 = 24;
 
-    public final List<Pair<Integer, Integer>> listMinCargoWxH = Arrays.asList(new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1), new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1));
+    public final List<Pair<Integer, Integer>> listMinCargoWxH = Arrays.asList(new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1), new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1), new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H2));
     public static final int MINGCARGO_WITHM3_W1 = 72;
     public static final int MINGCARGO_WITHOUTM3_W1 = 51;
     public static final int MINGCARGO_H1 = 9;
+    public static final int MINGCARGO_H2 = 10;
     /* ------------------------------------------------------------- */
     // This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION
     public final Quartet<Integer, Integer, Integer, Integer> tupleInventoryDeadzone
