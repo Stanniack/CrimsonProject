@@ -32,7 +32,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 30000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;
 
@@ -256,26 +256,6 @@ public class ExtractOre implements VerifyRectangle {
                     width, height, tupleMin, tupleMax);
 
             if (action) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
-
-        List<Integer> coordinatesX = Arrays.asList(FULLHD.RANGEDCANNON1_X, FULLHD.RANGEDCANNON2_X);
-        int flagAttempt = 7;
-        boolean alpha;
-
-        for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take();
-
-            alpha = new FindPixels().findByColor(coordinatesX.get(i), FULLHD.RANGEDCANNONS_Y,
-                    FULLHD.RANGEDCANNON_W1, FULLHD.RANGEDCANNON_H1,
-                    new Triplet<>(PIXELRANGE.ALPHA_RED, PIXELRANGE.ALPHA_GREEN, PIXELRANGE.ALPHA_BLUE));
-
-            if (alpha) {
                 return true;
             }
         }
