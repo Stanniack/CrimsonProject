@@ -32,7 +32,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 30000; // 1100 secs 1100000 ms
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;
 
@@ -193,7 +193,6 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < events.size(); i++) {
 
             if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
-                Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -215,7 +214,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isAlpha(i)) {
+            if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleAlphaRGB, new PIXELRANGE().tupleAlphaRGB)) {
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
             }
@@ -247,15 +246,18 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private boolean isMinerCannonAction(int i, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-        int flagAttempt = 10;
+        int flagAttempt = 7;
+        boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep(180);
             new TakeScreenShot().take();
 
-            return new FindPixels().findRangeColor(coordinatesX.get(i), y,
+            action = new FindPixels().findRangeColor(coordinatesX.get(i), y,
                     width, height, tupleMin, tupleMax);
 
+            if (action) {
+                return true;
+            }
         }
         return false;
     }
@@ -263,16 +265,19 @@ public class ExtractOre implements VerifyRectangle {
     private boolean isAlpha(int i) throws IOException, InterruptedException, AWTException {
 
         List<Integer> coordinatesX = Arrays.asList(FULLHD.RANGEDCANNON1_X, FULLHD.RANGEDCANNON2_X);
-        int flagAttempt = 10;
+        int flagAttempt = 7;
+        boolean alpha;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep(180);
             new TakeScreenShot().take();
 
-            return new FindPixels().findByColor(coordinatesX.get(i), FULLHD.RANGEDCANNONS_Y,
+            alpha = new FindPixels().findByColor(coordinatesX.get(i), FULLHD.RANGEDCANNONS_Y,
                     FULLHD.RANGEDCANNON_W1, FULLHD.RANGEDCANNON_H1,
                     new Triplet<>(PIXELRANGE.ALPHA_RED, PIXELRANGE.ALPHA_GREEN, PIXELRANGE.ALPHA_BLUE));
 
+            if (alpha) {
+                return true;
+            }
         }
         return false;
     }
