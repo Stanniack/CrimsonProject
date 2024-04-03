@@ -246,10 +246,11 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private boolean isMinerCannonAction(int i, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-        int flagAttempt = 7;
+        int flagAttempt = 11;
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
+            Thread.sleep(180);
             new TakeScreenShot().take();
 
             action = new FindPixels().findRangeColor(coordinatesX.get(i), y,
