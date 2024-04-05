@@ -30,5 +30,10 @@ public class PIXELRANGE {
     public static final int ALPHA_RED = 104;
     public static final int ALPHA_GREEN = 102;
     public static final int ALPHA_BLUE = 56;
+    
+    public final Triplet<Integer, Integer, Integer> tupleFullWhiteRGB = new Triplet<>(FULLWHITE_RED, FULLWHITE_GREEN, FULLWHITE_BLUE);
+    public static final int FULLWHITE_RED = 255;
+    public static final int FULLWHITE_GREEN = 255;
+    public static final int FULLWHITE_BLUE = 255;
 
 }

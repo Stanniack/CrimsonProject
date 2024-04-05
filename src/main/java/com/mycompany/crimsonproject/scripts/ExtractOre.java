@@ -44,7 +44,7 @@ public class ExtractOre implements VerifyRectangle {
     private final Integer DVpriority = 2;
     private final Integer CVpriority = 1;
     private final Integer Vpriority = 0;
-    /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possibly */
+    /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -233,8 +233,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().countWhitePixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
-                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3);
+        boolean approaching = new FindPixels().countPixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
+                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().tupleFullWhiteRGB);
 
         if (approaching == true) {
             System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
@@ -246,11 +246,11 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private boolean isMinerCannonAction(int i, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-        int flagAttempt = 11;
+        int flagAttempt = 7;
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep(180);
+            //Thread.sleep(180);
             new TakeScreenShot().take();
 
             action = new FindPixels().findRangeColor(coordinatesX.get(i), y,

@@ -19,7 +19,7 @@ public class FindPixels {
 
     private static final int APPR_PERCENT = 25;
 
-    public boolean countWhitePixels(int row, int column, int width, int height) throws IOException {
+    public boolean countPixels(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> tuplePixel) throws IOException {
 
         this.bf = ImageIO.read(this.imageFile);
         int area = 0;
@@ -28,14 +28,14 @@ public class FindPixels {
             for (int c = column; c < (column + height); c++) {
                 this.color = new Color(this.bf.getRGB(r, c));
 
-                if (this.color.getRed() == 255 && this.color.getGreen() == 255 && this.color.getBlue() == 255) {
+                if (this.color.getRed() == tuplePixel.getValue0() && this.color.getGreen() == tuplePixel.getValue1() && this.color.getBlue() == tuplePixel.getValue2()) {
                     area++;
                 }
             }
         }
 
-        System.out.println("Total area: " + (width * height) + "\nFilled with white pixels area: " + area);
-        System.out.println("White pixels: " + ((float) (area * 100) / (width * height)) + "%");
+        System.out.println("Total area: " + (width * height) + "\nFilled with given pixels area: " + area);
+        System.out.println("Given pixels: " + ((float) (area * 100) / (width * height)) + "%");
 
         return area >= APPR_PERCENT;
     }
