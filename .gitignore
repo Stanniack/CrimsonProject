@@ -2,3 +2,4 @@
 *screenshot.png
 src/test/java/screenshots/unit/tests/c1.png
 src/test/java/screenshots/unit/tests/c2.png
+*.png

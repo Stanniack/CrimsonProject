@@ -37,7 +37,7 @@ public class IsMinerCannonActionTest {
     public void verifyMinerCannonAlphaPixels() {
 
         boolean isAlpha = false;
-        int row = 1049, column = 925, width = 27, height = 12;
+        int row = 1100, column = 925, width = 27, height = 12;
         Triplet<Integer, Integer, Integer> beginRange = new PIXELRANGE().tupleAlphaRGB;
         Triplet<Integer, Integer, Integer> endRange = new PIXELRANGE().tupleAlphaRGB;
 
