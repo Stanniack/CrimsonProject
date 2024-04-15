@@ -66,12 +66,27 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    Rectangle lockTargetFromSelectedItem = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+                    Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
-                    if (this.verifyRectangle(lockTargetFromSelectedItem, "LOCKTARGET", 0)) {
-                        //!! launch and engage drones
-                        new ClickScreenEvents().leftClickCenterButton(lockTargetFromSelectedItem);
-                        this.amountRect++; // go to case 2
+                    // target identified
+                    if (this.verifyRectangle(target, "TARGET", 0)) {
+
+                        boolean lockTarget = new FindPixels().findByColor(target.x, target.y, target.width, target.height, new PIXELRANGE().tupleLockTargetRGB);
+
+                        // If there is a lock target, just go to next step
+                        if (lockTarget) {
+                            this.amountRect++; // go to case 2
+                            //!! launch and engage drones
+
+                        } else {
+                            boolean freeTarget = new FindPixels().findByColor(target.x, target.y, target.width, target.height, new PIXELRANGE().tupleFreeTargetRGB);
+                            // If there is no lock target but the target is free, click target and go next step
+                            if (freeTarget) {
+                                new ClickScreenEvents().leftClickCenterButton(target);
+                                this.amountRect++; // go to case 2
+                                //!! launch and engage drones
+                            }
+                        }
 
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
@@ -121,7 +136,6 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 4
 
                 case 5 -> {
-                    this.resetScript();
                     this.flagUntilBeFilled_MS = 0;
                     this.amountRect = 0;
                 } // end case 5
@@ -192,7 +206,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
+            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -202,21 +216,6 @@ public class ExtractOre implements VerifyRectangle {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
                 new KeyboardEvents().pressKey(events.get(i));
                 System.out.println("Just press 1x cannon " + i + "\n");
-            }
-        }
-    }
-
-    private void resetScript() throws IOException, InterruptedException, AWTException {
-
-        System.out.println("Searching for another asteroid.\n");
-        // check opacity
-        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
-
-        for (int i = 0; i < events.size(); i++) {
-
-            if (this.isMinerCannonAction(i, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleAlphaRGB, new PIXELRANGE().tupleAlphaRGB)) {
-                new KeyboardEvents().pressKey(events.get(i));
-                System.out.println("Cannon had been opacity. Press 1x cannon and search for another asteroid " + i + "\n");
             }
         }
     }
@@ -245,8 +244,8 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private boolean isMinerCannonAction(int i, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-        int flagAttempt = 7;
+    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
+
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {

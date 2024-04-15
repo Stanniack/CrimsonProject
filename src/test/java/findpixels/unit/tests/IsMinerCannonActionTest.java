@@ -26,7 +26,7 @@ public class IsMinerCannonActionTest {
     @BeforeEach
     public void loadIMage() {
         try {
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\screenshots\\unit\\tests\\", "c1.png");
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\screenshots\\unit\\tests\\", "c2.png");
             this.bf = ImageIO.read(this.imageFile);
         } catch (IOException ex) {
             Logger.getLogger(IsMinerCannonActionTest.class.getName()).log(Level.SEVERE, null, ex);
