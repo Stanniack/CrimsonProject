@@ -40,6 +40,9 @@
 # Alpha v0.3.1 - 27/03/24
   - O mecanismo de empurrar a tela (dragScreen) começou a ser repadronizado.
 
+# Alpha v0.3.2 - 14/04/24
+  - Target agora é selecionado de acordo com a sua situação: Free target, lock target e alpha target, eliminando a necessidade de verificar a opacidade dos canhões.
+
 # Bug fixes
 
 * Alpha v0.0.0 - 02/02/24
