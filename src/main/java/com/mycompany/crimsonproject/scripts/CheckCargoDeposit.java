@@ -43,6 +43,9 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
                         } else if (this.verifyCargoHold().equals("minCargo")) {
                             this.amountRect = 3;
+                            
+                        } else {
+                            new ClickScreenEvents().dragScreen();
                         }
                     }
 
@@ -52,6 +55,8 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
                     if (this.findHangar()) {
                         this.amountRect++;
+                    } else {
+                        new ClickScreenEvents().dragScreen();
                     }
                 }
 
@@ -69,6 +74,8 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
                     if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                         this.amountRect++;
+                    } else {
+                        new ClickScreenEvents().dragScreen();
                     }
                 }
 

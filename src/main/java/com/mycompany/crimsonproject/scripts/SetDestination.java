@@ -66,6 +66,7 @@ public class SetDestination implements VerifyRectangle {
                         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
                         this.amountRect--;
                         this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                        new ClickScreenEvents().dragScreen();
                     }
 
                 } // end case 1
@@ -91,6 +92,7 @@ public class SetDestination implements VerifyRectangle {
                         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
                         this.amountRect--;
                         this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                        new ClickScreenEvents().dragScreen();
                     }
 
                 } // end case 2
