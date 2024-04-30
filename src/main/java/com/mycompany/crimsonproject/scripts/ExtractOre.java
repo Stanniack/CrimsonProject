@@ -85,6 +85,9 @@ public class ExtractOre implements VerifyRectangle {
                                 new ClickScreenEvents().leftClickCenterButton(target);
                                 this.amountRect++; // go to case 2
                                 //!! launch and engage drones
+                            
+                            } else {
+                                System.out.println("Free target not found.");
                             }
                         }
 

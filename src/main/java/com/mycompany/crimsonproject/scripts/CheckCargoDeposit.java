@@ -43,9 +43,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
                         } else if (this.verifyCargoHold().equals("minCargo")) {
                             this.amountRect = 3;
-                            
-                        } else {
-                            new ClickScreenEvents().dragScreen();
+
                         }
                     }
 
@@ -69,7 +67,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
                 }
 
                 case 3 -> {
-                    
+
                     Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
 
                     if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
