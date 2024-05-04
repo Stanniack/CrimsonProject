@@ -31,10 +31,15 @@ public class PIXELRANGE {
     public static final int ALPHA_GREEN = 115;
     public static final int ALPHA_BLUE = 115;
 
-    public final Triplet<Integer, Integer, Integer> tupleFreeTargetRGB = new Triplet<>(FREETARGET_RED, FREETARGET_GREEN, FREETARGET_BLUE);
-    public static final int FREETARGET_RED = 213;
-    public static final int FREETARGET_GREEN = 214;
-    public static final int FREETARGET_BLUE = 214;
+    public final Triplet<Integer, Integer, Integer> minTupleFreeTargetRGB = new Triplet<>(MINFREETARGET_RED, MINFREETARGET_GREEN, MINFREETARGET_BLUE);
+    public static final int MINFREETARGET_RED = 210;
+    public static final int MINFREETARGET_GREEN = 210;
+    public static final int MINFREETARGET_BLUE = 210;
+
+    public final Triplet<Integer, Integer, Integer> maxTupleFreeTargetRGB = new Triplet<>(MAXFREETARGET_RED, MAXFREETARGET_GREEN, MAXFREETARGET_BLUE);
+    public static final int MAXFREETARGET_RED = 255;
+    public static final int MAXFREETARGET_GREEN = 255;
+    public static final int MAXFREETARGET_BLUE = 255;
 
     public final Triplet<Integer, Integer, Integer> tupleLockTargetRGB = new Triplet<>(LOCKGET_RED, LOCKTARGET_GREEN, LOCKTARGET_BLUE);
     public static final int LOCKGET_RED = 255;

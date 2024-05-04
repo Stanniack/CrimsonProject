@@ -79,7 +79,7 @@ public class ExtractOre implements VerifyRectangle {
                             //!! launch and engage drones
 
                         } else {
-                            boolean freeTarget = new FindPixels().findByColor(target.x, target.y, target.width, target.height, new PIXELRANGE().tupleFreeTargetRGB);
+                            boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().minTupleFreeTargetRGB, new PIXELRANGE().maxTupleFreeTargetRGB);
                             // If there is no lock target but the target is free, click target and go next step
                             if (freeTarget) {
                                 new ClickScreenEvents().leftClickCenterButton(target);
