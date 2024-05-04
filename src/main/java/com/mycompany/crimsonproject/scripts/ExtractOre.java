@@ -32,7 +32,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
-    private static final int TIMETOWAIT_TOBEFILLED_MS = 1100000; // 1100 secs 1100000 ms
+    private static final int TIMETOWAIT_TOBEFILLED_MS = 1150000; // 1150 secs 1100000 ms
+    private static final int TIMETOWAIT_CANNON_MS = 1000000; // 1000 secs 1000000 ms
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;
 
@@ -119,6 +120,10 @@ public class ExtractOre implements VerifyRectangle {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
+                        if (this.flagUntilBeFilled_MS > TIMETOWAIT_CANNON_MS) {
+                            new ClickScreenEvents().dragScreen();
+                        }
+                        
                         this.amountRect++; // go to case 4
                     }
                 } // end case 3

@@ -35,7 +35,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
             switch (this.amountRect) {
 
                 case 0 -> {
-
                     if (!this.verifyCargoHold().equals("notFound")) {
 
                         if (this.verifyCargoHold().equals("maxCargo")) {
@@ -50,7 +49,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
                 } // end case 1
 
                 case 1 -> {
-
                     if (this.findHangar()) {
                         this.amountRect++;
                     } else {
@@ -59,15 +57,12 @@ public class CheckCargoDeposit implements VerifyRectangle {
                 }
 
                 case 2 -> {
-
                     this.dragItens();
                     this.amountRect++;
                     this.hangarButton = null;
-
                 }
 
                 case 3 -> {
-
                     Rectangle undockButton = new SegmentedRegions().getRectangle(new FULLHD().listUndockButtonWxH, new FULLHD().tupleUndockDeadZone);
 
                     if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
