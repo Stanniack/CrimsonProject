@@ -71,7 +71,7 @@ public class ExtractOre implements VerifyRectangle {
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
 
-                        boolean lockTarget = new FindPixels().findByColor(target.x, target.y, target.width, target.height, new PIXELRANGE().tupleLockTargetRGB);
+                        boolean lockTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().minTupleLockTargetRGB, new PIXELRANGE().maxTupleLockTargetRGB);
 
                         // If there is a lock target, just go to next step
                         if (lockTarget) {
