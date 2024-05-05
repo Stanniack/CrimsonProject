@@ -27,18 +27,20 @@ import org.javatuples.Triplet;
 public class ExtractOre implements VerifyRectangle {
 
     private int amountRect = 0;
-    private long flagUntilBeFilled_MS = 0;
+    private long flagTimeToBeFilled_MS = 0;
+    private long flagUntilToBeFilled_MS = 0;
     private long flagLockTarget_MS = 0;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_TOBEFILLED_MS = 1150000; // 1150 secs 1100000 ms
-    private static final int TIMETOWAIT_CANNON_MS = 1000000; // 1000 secs 1000000 ms
+    private static final int TIMETOWAIT_CANNON_MS = 1050000; // 1050 secs 1050000 ms
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;
 
     private long timeStartLockTarget = 0;
     private long timeStart = 0;
+    private long timeStart2 = 0;
     private Integer priorityOreValue;
     private final Integer CSpriority = 4;
     private final Integer Spriority = 3;
@@ -51,12 +53,13 @@ public class ExtractOre implements VerifyRectangle {
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
+        this.timeStart2 = System.currentTimeMillis();
 
         while (this.amountRect < SWITCHFLAG) {
 
             new TakeScreenShot().take();
-            // Todo connection lost
 
+            // Todo connection lost
             switch (this.amountRect) {
 
                 case 0 -> {
@@ -86,7 +89,7 @@ public class ExtractOre implements VerifyRectangle {
                                 new ClickScreenEvents().leftClickCenterButton(target);
                                 this.amountRect++; // go to case 2
                                 //!! launch and engage drones
-                            
+
                             } else {
                                 System.out.println("Free target not found.");
                             }
@@ -94,10 +97,8 @@ public class ExtractOre implements VerifyRectangle {
 
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
-                        System.out.println("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: "
-                                + this.flagLockTarget_MS / 1000 + "/" + LOCKTARGET_MS / 1000 + "\n");
-
-                        new ClickScreenEvents().dragScreen(); // !!
+                        System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS/1000, LOCKTARGET_MS/1000);
+                        new ClickScreenEvents().dragScreen(); 
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                             System.out.println("Lock target not found. Restarting script.\n\n");
@@ -120,16 +121,17 @@ public class ExtractOre implements VerifyRectangle {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
 
                     } else {
-                        if (this.flagUntilBeFilled_MS > TIMETOWAIT_CANNON_MS) {
+                        if (this.flagUntilToBeFilled_MS > TIMETOWAIT_CANNON_MS) {
                             new ClickScreenEvents().dragScreen();
                         }
-                        
+
+                        System.out.printf("Time added until start deag screen: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
                         this.amountRect++; // go to case 4
                     }
                 } // end case 3
 
                 case 4 -> {
-                    if (!this.checkPixelsAprroaching() || (this.flagUntilBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
+                    if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
                         this.amountRect++; // Approaching not found or time exceded
 
                     } else {
@@ -138,13 +140,13 @@ public class ExtractOre implements VerifyRectangle {
                         }
                     }
 
-                    this.flagUntilBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
-                    System.out.println("Time added until set another ore: "
-                            + (this.flagUntilBeFilled_MS / 1000) + "/" + (TIMETOWAIT_TOBEFILLED_MS / 1000) + " seconds\n");
+                    this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
+                    this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
+                    System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
                 } // end case 4
 
                 case 5 -> {
-                    this.flagUntilBeFilled_MS = 0;
+                    this.flagTimeToBeFilled_MS = 0;
                     this.amountRect = 0;
                 } // end case 5
 
@@ -205,6 +207,7 @@ public class ExtractOre implements VerifyRectangle {
         }
 
         System.out.println("Closest, better asteroid is null\n");
+        new ClickScreenEvents().dragScreen();
         return false;
     }
 

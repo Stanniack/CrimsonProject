@@ -18,14 +18,14 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 24; i++) {
             try {
 
                 new CheckCargoDeposit().startScript();
-                Thread.sleep(18000);
+                Thread.sleep(20000);
 
                 new SetDestination().startScript(1);
-                Thread.sleep(28000);
+                Thread.sleep(30000);
 
                 new ExtractOre().startScript();
                 Thread.sleep(45000);
