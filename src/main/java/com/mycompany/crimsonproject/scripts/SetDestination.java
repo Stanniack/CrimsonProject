@@ -38,7 +38,6 @@ public class SetDestination implements VerifyRectangle {
             switch (this.amountRect) {
 
                 case 0 -> {
-
                     if (this.openLocation()) {
                         this.amountRect++;
                     }
@@ -46,7 +45,6 @@ public class SetDestination implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-
                     Rectangle miningBotLabel = new SegmentedRegions().getRectangle(new FULLHD().listMiningBotWxH, new FULLHD().tupleLocationTabDeadZone);
                     Rectangle homeStationLabel = new SegmentedRegions().getRectangle(new FULLHD().listHomeStationWxH, new FULLHD().tupleLocationTabDeadZone);
 
@@ -72,7 +70,6 @@ public class SetDestination implements VerifyRectangle {
                 } // end case 1
 
                 case 2 -> {
-
                     Rectangle within = new SegmentedRegions().getRectangle(new FULLHD().listWithinWxH, new FULLHD().tupleLocationTabDeadZone);
                     Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, new FULLHD().tupleLocationTabDeadZone);
 
@@ -98,7 +95,6 @@ public class SetDestination implements VerifyRectangle {
                 } // end case 2
 
                 case 3 -> {
-
                     Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
 
                     if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
