@@ -43,6 +43,10 @@
 # Alpha v0.3.2 - 14/04/24
   - Target agora é selecionado de acordo com a sua situação: Free target, lock target e alpha target, eliminando a necessidade de verificar a opacidade dos canhões.
 
+# Alpha v0.3.3 - 03/05/24
+  - Aumentando range de cores para Lock Target e Free Target, maximizando as chances de acerto do algoritmo;
+  - Determinando tempo para DragScreen caso fique preso na verificação da compactMaxCargo.
+
 # Bug fixes
 
 * Alpha v0.0.0 - 02/02/24
@@ -58,8 +62,8 @@
   - Consertado flag que bugava a identificação de melhor minério de acordo com as regras de negócio. Agora a identificação ocorre normalmente, minera sempre o asteroid de maior prioridade encontrado;
   - Código de se aproximar do Asteroid foi otimizado. Agora a ação é feita por duplo-clique em vez de procurar pela seta e clicar.
 
-<strike>* Alpha v0.3.0 - 24/03/24</strike>
-  <strike>- Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.</strike>
+* Alpha v0.3.0 - 24/03/24
+  <strike>- Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.
    
 
   
