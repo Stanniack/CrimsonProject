@@ -42,8 +42,9 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
                         } else if (this.verifyCargoHold().equals("minCargo")) {
                             this.amountRect = 3;
-
                         }
+                    } else {
+                       new ClickScreenEvents().dragScreen(); 
                     }
 
                 } // end case 1
