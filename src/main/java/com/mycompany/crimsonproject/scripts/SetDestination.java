@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
+import org.javatuples.Quartet;
 
 /**
  *
@@ -18,6 +19,8 @@ import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
  */
 public class SetDestination implements VerifyRectangle {
 
+    private Rectangle miningBotLabel = new Rectangle(0, 0, 0, 0);
+    private Rectangle homeStationLabel = new Rectangle(0, 0, 0, 0);
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
@@ -45,14 +48,15 @@ public class SetDestination implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    Rectangle miningBotLabel = new SegmentedRegions().getRectangle(new FULLHD().listMiningBotWxH, new FULLHD().tupleLocationTabDeadZone);
-                    Rectangle homeStationLabel = new SegmentedRegions().getRectangle(new FULLHD().listHomeStationWxH, new FULLHD().tupleLocationTabDeadZone);
+                    this.miningBotLabel = new SegmentedRegions().getRectangle(new FULLHD().listMiningBotWxH, new FULLHD().tupleLocationTabDeadZone);
 
                     if (option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
+                        this.homeStationLabel = new SegmentedRegions().getRectangle(new FULLHD().listHomeStationWxH, new FULLHD().tupleLocationTabDeadZone);
+
                         if (option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
                             this.amountRect++;
                             descentFlag = false;
@@ -69,14 +73,16 @@ public class SetDestination implements VerifyRectangle {
                 } // end case 1
 
                 case 2 -> {
-                    Rectangle within = new SegmentedRegions().getRectangle(new FULLHD().listWithinWxH, new FULLHD().tupleLocationTabDeadZone);
-                    Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, new FULLHD().tupleLocationTabDeadZone);
 
-                    if (option == MININGBOT && this.verifyRectangle(within, "WITHIN", LEFTCLICK)) {
+                    Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getMiningBotTuple());
+
+                    if (option == MININGBOT && this.verifyRectangle(warpBlock, "WARPBLOCK", LEFTCLICK)) {
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
+                        Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getHomeStationTuple());
+
                         if (option == HOMESTATION && this.verifyRectangle(dock, "DOCK", LEFTCLICK)) {
                             this.amountRect++;
                             descentFlag = false;
@@ -107,6 +113,30 @@ public class SetDestination implements VerifyRectangle {
         } while (this.amountRect < SWITCHFLAG);
     }
 
+    private Quartet<Integer, Integer, Integer, Integer> getMiningBotTuple() {
+        int cursorLenght = 11;
+        int tabDeadZoneW = 245;
+        int tabDeadZoneH = 29;
+        int x1 = this.miningBotLabel.x + this.miningBotLabel.width / 2 + cursorLenght;
+        int x2_w = x1 + tabDeadZoneW;
+        int y1 = this.miningBotLabel.y + this.miningBotLabel.height / 2;
+        int y2_h = y1 + tabDeadZoneH;
+
+        return new Quartet<>(x1, x2_w, y1, y2_h);
+    }
+
+    private Quartet<Integer, Integer, Integer, Integer> getHomeStationTuple() {
+        int cursorLenght = 11;
+        int tabDeadZoneW = 245;
+        int tabDeadZoneH = 29;
+        int x1 = this.homeStationLabel.x + this.homeStationLabel.width / 2 + cursorLenght;
+        int x2_w = x1 + tabDeadZoneW;
+        int y1 = this.homeStationLabel.y + this.homeStationLabel.height / 2;
+        int y2_h = y1 + tabDeadZoneH;
+
+        return new Quartet<>(x1, x2_w, y1, y2_h);
+    }
+
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_L);
@@ -115,16 +145,16 @@ public class SetDestination implements VerifyRectangle {
     }
 
     @Override
-    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean verifyRectangle(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rectangle != null) {
-            System.out.printf("Rect found (%s): Width: %d and Height: %d\n\n", itemName, rectangle.width, rectangle.height);
+        if (rect != null) {
+            System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
 
             if (chosenClick == LEFTCLICK) {
-                new ClickScreenEvents().leftClickCenterButton(rectangle);
+                new ClickScreenEvents().leftClickCenterButton(rect);
             } else {
-                new ClickScreenEvents().rightClickCenterButton(rectangle);
+                new ClickScreenEvents().rightClickCenterButton(rect);
             }
 
             return true;

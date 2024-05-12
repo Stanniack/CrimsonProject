@@ -29,7 +29,7 @@ public class FULLHD {
     public static final int HOMESTATION1_W2 = 74;
     public static final int HOMESTATION1_H1 = 9;
 
-    public final List<Pair<Integer, Integer>> listWithinWxH = Arrays.asList(new Pair<>(WITHIN_W1, WITHIN_H1));
+    public final List<Pair<Integer, Integer>> listWarpWxH = Arrays.asList(new Pair<>(WITHIN_W1, WITHIN_H1));
     public static final int WITHIN_W1 = 31;
     public static final int WITHIN_H1 = 9;
     
@@ -54,10 +54,16 @@ public class FULLHD {
 
     public final Quartet<Integer, Integer, Integer, Integer> tupleLocationTabDeadZone
             = new Quartet<>(LOCATIONTAB_DEADZONE_X1, LOCATIONTAB_DEADZONE_X2_W, LOCATIONTAB_DEADZONE_Y1, LOCATIONTAB_DEADZONE_Y2_H);
+    
     public static final int LOCATIONTAB_DEADZONE_X1 = 445;
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
+    
+    // x1 = miningBotLabel.x + miningBotLabel.width/2 + cursorLenght
+    // x2_w = x1 + tabDeadZoneW
+    // y1 = miningBotLabel.y + miningBotLabel.height/2
+    // y2_h = y1 + tabDeadZoneH
     /* ------------------------------------------------------------- */
 
     // Priority 1: (62, 9); (61, 9)
