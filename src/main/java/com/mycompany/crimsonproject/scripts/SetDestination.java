@@ -19,8 +19,8 @@ import org.javatuples.Quartet;
  */
 public class SetDestination implements VerifyRectangle {
 
-    private Rectangle miningBotLabel = new Rectangle(0, 0, 0, 0);
-    private Rectangle homeStationLabel = new Rectangle(0, 0, 0, 0);
+    private Rectangle miningBotLabel = null;
+    private Rectangle homeStationLabel = null;
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
@@ -114,27 +114,41 @@ public class SetDestination implements VerifyRectangle {
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getMiningBotTuple() {
-        int cursorLenght = 11;
-        int tabDeadZoneW = 245;
-        int tabDeadZoneH = 29;
-        int x1 = this.miningBotLabel.x + this.miningBotLabel.width / 2 + cursorLenght;
-        int x2_w = x1 + tabDeadZoneW;
-        int y1 = this.miningBotLabel.y + this.miningBotLabel.height / 2;
-        int y2_h = y1 + tabDeadZoneH;
+        try {
+            int cursorLenght = 11;
+            int tabDeadZoneW = 245;
+            int tabDeadZoneH = 29;
+            int x1 = this.miningBotLabel.x + this.miningBotLabel.width / 2 + cursorLenght;
+            int x2_w = x1 + tabDeadZoneW;
+            int y1 = this.miningBotLabel.y + this.miningBotLabel.height / 2;
+            int y2_h = y1 + tabDeadZoneH;
 
-        return new Quartet<>(x1, x2_w, y1, y2_h);
+            return new Quartet<>(x1, x2_w, y1, y2_h);
+
+        } catch (NullPointerException ex) {
+
+        }
+
+        return new Quartet<>(0, 0, 0, 0);
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getHomeStationTuple() {
-        int cursorLenght = 11;
-        int tabDeadZoneW = 245;
-        int tabDeadZoneH = 29;
-        int x1 = this.homeStationLabel.x + this.homeStationLabel.width / 2 + cursorLenght;
-        int x2_w = x1 + tabDeadZoneW;
-        int y1 = this.homeStationLabel.y + this.homeStationLabel.height / 2;
-        int y2_h = y1 + tabDeadZoneH;
+        try {
+            int cursorLenght = 11;
+            int tabDeadZoneW = 245;
+            int tabDeadZoneH = 29;
+            int x1 = this.homeStationLabel.x + this.homeStationLabel.width / 2 + cursorLenght;
+            int x2_w = x1 + tabDeadZoneW;
+            int y1 = this.homeStationLabel.y + this.homeStationLabel.height / 2;
+            int y2_h = y1 + tabDeadZoneH;
 
-        return new Quartet<>(x1, x2_w, y1, y2_h);
+            return new Quartet<>(x1, x2_w, y1, y2_h);
+
+        } catch (NullPointerException ex) {
+
+        }
+
+        return new Quartet<>(0, 0, 0, 0);
     }
 
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
