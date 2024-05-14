@@ -132,44 +132,6 @@ public class SetDestination implements VerifyRectangle {
         return new Quartet<>(0, 0, 0, 0);
     }
 
-    private Quartet<Integer, Integer, Integer, Integer> getMiningBotTuple() {
-        try {
-            int cursorLenght = 11;
-            int tabDeadZoneW = 245;
-            int tabDeadZoneH = 29;
-            int x1 = this.miningBotLabel.x + this.miningBotLabel.width / 2 + cursorLenght;
-            int x2_w = x1 + tabDeadZoneW;
-            int y1 = this.miningBotLabel.y + this.miningBotLabel.height / 2;
-            int y2_h = y1 + tabDeadZoneH;
-
-            return new Quartet<>(x1, x2_w, y1, y2_h);
-
-        } catch (NullPointerException ex) {
-
-        }
-
-        return new Quartet<>(0, 0, 0, 0);
-    }
-
-    private Quartet<Integer, Integer, Integer, Integer> getHomeStationTuple() {
-        try {
-            int cursorLenght = 11;
-            int tabDeadZoneW = 245;
-            int tabDeadZoneH = 29;
-            int x1 = this.homeStationLabel.x + this.homeStationLabel.width / 2 + cursorLenght;
-            int x2_w = x1 + tabDeadZoneW;
-            int y1 = this.homeStationLabel.y + this.homeStationLabel.height / 2;
-            int y2_h = y1 + tabDeadZoneH;
-
-            return new Quartet<>(x1, x2_w, y1, y2_h);
-
-        } catch (NullPointerException ex) {
-
-        }
-
-        return new Quartet<>(0, 0, 0, 0);
-    }
-
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_L);
