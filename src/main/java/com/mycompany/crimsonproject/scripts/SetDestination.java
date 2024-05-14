@@ -68,20 +68,20 @@ public class SetDestination implements VerifyRectangle {
                         Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(new FULLHD().listCloseLocationButtonWxH, new FULLHD().tupleLocationTabDeadZone);
                         this.amountRect--;
                         this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                        new ClickScreenEvents().dragScreen();
                     }
 
                 } // end case 1
 
                 case 2 -> {
-
-                    Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getMiningBotTuple());
+                    Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getRectTuple(this.miningBotLabel));
 
                     if (option == MININGBOT && this.verifyRectangle(warpBlock, "WARPBLOCK", LEFTCLICK)) {
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
-                        Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getHomeStationTuple());
+                        Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getRectTuple(this.homeStationLabel));
 
                         if (option == HOMESTATION && this.verifyRectangle(dock, "DOCK", LEFTCLICK)) {
                             this.amountRect++;
@@ -111,6 +111,25 @@ public class SetDestination implements VerifyRectangle {
             } // end case 3
 
         } while (this.amountRect < SWITCHFLAG);
+    }
+
+    private Quartet<Integer, Integer, Integer, Integer> getRectTuple(Rectangle rect) {
+        try {
+            int cursorLenght = 11;
+            int tabDeadZoneW = 245;
+            int tabDeadZoneH = 29;
+            int x1 = rect.x + rect.width / 2 + cursorLenght;
+            int x2_w = x1 + tabDeadZoneW;
+            int y1 = rect.y + rect.height / 2;
+            int y2_h = y1 + tabDeadZoneH;
+
+            return new Quartet<>(x1, x2_w, y1, y2_h);
+
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+
+        return new Quartet<>(0, 0, 0, 0);
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getMiningBotTuple() {
