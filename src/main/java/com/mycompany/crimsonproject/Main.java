@@ -8,7 +8,8 @@ import com.mycompany.crimsonproject.utils.SortBy;
  */
 public class Main {
     public static void main(String[] args) {
-        SortBy sb = SortBy.X;
+        int ms = (int) (100 * Math.random());
+        System.out.println(ms);
     }
     
 }
