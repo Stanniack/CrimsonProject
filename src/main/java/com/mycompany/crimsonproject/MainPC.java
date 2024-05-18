@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject;
 
+import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.SetDestination;
@@ -21,7 +22,7 @@ public class MainPC {
         for (int i = 0; i < 24; i++) {
             try {
 
-                new CheckCargoDeposit().startScript();
+                new CargoDeposit().startScript();
                 Thread.sleep(20000);
 
                 new SetDestination().startScript(1);
