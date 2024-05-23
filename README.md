@@ -47,6 +47,12 @@
   - Aumentando range de cores para Lock Target e Free Target, maximizando as chances de acerto do algoritmo;
   - Determinando tempo para DragScreen caso fique preso na verificação da compactMaxCargo.
 
+# Alpha v0.3.4 - 12/05/24
+  - Afunilamento da área de procura de retângulos em setDestination e generalização do método caso necessários em outras partes do código.
+
+# Alpha v0.3.5 - 17/05/24
+  - Adicionando um script similar ao CheckCargoDeposit (CargoDeposit) mas que não verifica se o mining hold da nave está cheio, apenas transfere a possível carga e sai da estação.
+
 # Bug fixes
 
 * Alpha v0.0.0 - 02/02/24
