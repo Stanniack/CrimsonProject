@@ -75,7 +75,6 @@ public class CargoDeposit implements VerifyRectangle {
             return true;
         }
 
-        System.out.println("Rect (HANGAR) not found\n");
         return false;
     }
 
@@ -99,7 +98,6 @@ public class CargoDeposit implements VerifyRectangle {
             return true;
         }
 
-        System.out.printf("Rect not found (%s)\n\n", itemName);
         return false;
     }
 

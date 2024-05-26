@@ -101,7 +101,7 @@ public class ExtractOre implements VerifyRectangle {
                         new ClickScreenEvents().dragScreen(); 
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
-                            System.out.println("Lock target not found. Restarting script.\n\n");
+                            System.out.println("Restarting script.\n\n");
                             this.flagLockTarget_MS = 0; // reset flag
                             this.amountRect = 0; // reset script
                         }
@@ -125,7 +125,7 @@ public class ExtractOre implements VerifyRectangle {
                             new ClickScreenEvents().dragScreen();
                         }
 
-                        System.out.printf("Time added until start deag screen: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
+                        System.out.printf("Time added until start drag screen: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
                         this.amountRect++; // go to case 4
                     }
                 } // end case 3
@@ -247,11 +247,11 @@ public class ExtractOre implements VerifyRectangle {
                 FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().tupleFullWhiteRGB);
 
         if (approaching == true) {
-            System.out.println("Rect found (APRROACHING) by counting RGB(255,255,255) white pixels\n");
+            System.out.println("Rect found (APRROACHING)\n");
             return true;
         }
 
-        System.out.println("Rect (APRROACHING) not found\n");
+        System.out.println("Rect not found (APRROACHING)\n");
         return false;
     }
 

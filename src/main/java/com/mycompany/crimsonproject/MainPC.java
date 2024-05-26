@@ -23,13 +23,13 @@ public class MainPC {
             try {
 
                 new CargoDeposit().startScript();
-                Thread.sleep(20000);
+                Thread.sleep(8000);
 
                 new SetDestination().startScript(1);
                 Thread.sleep(30000);
 
                 new ExtractOre().startScript();
-                Thread.sleep(30000);
+                Thread.sleep(33000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);

@@ -44,7 +44,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
                             this.amountRect = 3;
                         }
                     } else {
-                       new ClickScreenEvents().dragScreen(); 
+                        new ClickScreenEvents().dragScreen();
                     }
 
                 } // end case 1
@@ -90,8 +90,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
             return "maxCargo";
         }
 
-        System.out.println("Rect (MAXCARGO_VENTURE) not found\n");
-
         Rectangle minCargo = new SegmentedRegions().getRectangle(new FULLHD().listMinCargoWxH, new FULLHD().tupleInventoryDeadzone);
 
         if (minCargo != null) {
@@ -101,7 +99,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
             return "minCargo";
         }
 
-        System.out.println("Rect (MINCARGO_VENTURE) not found\n");
         return "notFound";
     }
 
@@ -116,7 +113,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
             return true;
         }
 
-        System.out.println("Rect (HANGAR) not found\n");
         return false;
     }
 
@@ -140,7 +136,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
             return true;
         }
 
-        System.out.printf("Rect not found (%s)\n\n", itemName);
         return false;
     }
 

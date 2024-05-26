@@ -155,7 +155,6 @@ public class SetDestination implements VerifyRectangle {
             return true;
         }
 
-        System.out.printf("Rect not found (%s)\n\n", itemName);
         return false;
     }
 
