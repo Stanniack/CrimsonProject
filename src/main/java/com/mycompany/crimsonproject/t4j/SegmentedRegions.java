@@ -2,7 +2,6 @@ package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.FULLHD;
-import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,10 +22,10 @@ import org.javatuples.Quartet;
  */
 public class SegmentedRegions {
 
-    Tesseract instance;
-    BufferedImage bf;
+    private final Tesseract instance;
+    private BufferedImage bf;
 
-    File imageFile;
+    private File imageFile;
 
     public SegmentedRegions() {
 
@@ -39,10 +38,10 @@ public class SegmentedRegions {
 
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> blockscreen) throws IOException, TesseractException {
         try {
-            this.bf = ImageIO.read(imageFile);
+            this.bf = ImageIO.read(this.imageFile);
         } catch (NullPointerException ex) {
             this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
-            this.bf = ImageIO.read(imageFile);
+            this.bf = ImageIO.read(this.imageFile);
         }
 
         /* First searching: Words */
@@ -67,16 +66,16 @@ public class SegmentedRegions {
     public HashMap<String, Rectangle> getAllOres_BlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
         try {
-            this.bf = ImageIO.read(imageFile);
+            this.bf = ImageIO.read(this.imageFile);
         } catch (NullPointerException ex) {
             this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
-            this.bf = ImageIO.read(imageFile);
+            this.bf = ImageIO.read(this.imageFile);
         }
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        List<Rectangle> result = this.instance.getSegmentedRegions(bf, level);
+        List<Rectangle> result = this.instance.getSegmentedRegions(this.bf, level);
 
         /* Sort from lower to bigger Y coordinate */
         Collections.sort(result, new RectComparatorByY());
