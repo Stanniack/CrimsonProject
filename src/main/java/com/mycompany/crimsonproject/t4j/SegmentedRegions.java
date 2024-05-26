@@ -28,26 +28,26 @@ public class SegmentedRegions {
     private File imageFile;
 
     public SegmentedRegions() {
-
         this.instance = new Tesseract();
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");
         this.instance.setVariable("user_defined_dpi", "300");
-        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
     }
 
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> blockscreen) throws IOException, TesseractException {
-        try {
-            this.bf = ImageIO.read(this.imageFile);
-        } catch (NullPointerException ex) {
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
-            this.bf = ImageIO.read(this.imageFile);
-        }
-
+        List<Rectangle> result = null;
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        List<Rectangle> result = this.instance.getSegmentedRegions(bf, level);
+        try {
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+            this.bf = ImageIO.read(this.imageFile);
+            this.instance.getSegmentedRegions(bf, level);
+        } catch (NullPointerException ex) {
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            this.bf = ImageIO.read(this.imageFile);
+            this.instance.getSegmentedRegions(bf, level);
+        }
 
         for (Rectangle rect : result) {
             for (Pair<Integer, Integer> pair : listOfWidthAndHeight) {
@@ -65,12 +65,8 @@ public class SegmentedRegions {
 
     public HashMap<String, Rectangle> getAllOres_BlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
-        try {
-            this.bf = ImageIO.read(this.imageFile);
-        } catch (NullPointerException ex) {
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
-            this.bf = ImageIO.read(this.imageFile);
-        }
+        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        this.bf = ImageIO.read(this.imageFile);
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
