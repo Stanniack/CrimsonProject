@@ -43,10 +43,13 @@ public class SegmentedRegions {
             this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
             this.bf = ImageIO.read(this.imageFile);
             this.instance.getSegmentedRegions(bf, level);
+            result = this.instance.getSegmentedRegions(this.bf, level);
         } catch (NullPointerException ex) {
+            ex.printStackTrace();
             this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
             this.bf = ImageIO.read(this.imageFile);
             this.instance.getSegmentedRegions(bf, level);
+            result = this.instance.getSegmentedRegions(this.bf, level);
         }
 
         for (Rectangle rect : result) {
