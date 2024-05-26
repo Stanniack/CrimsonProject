@@ -69,7 +69,7 @@
   - Código de se aproximar do Asteroid foi otimizado. Agora a ação é feita por duplo-clique em vez de procurar pela seta e clicar.
 
 * Alpha v0.3.0 - 24/03/24
-  <strike>- Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.
+  - Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.
    
 
   
