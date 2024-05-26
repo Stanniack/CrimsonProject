@@ -38,7 +38,12 @@ public class SegmentedRegions {
     }
 
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> blockscreen) throws IOException, TesseractException {
-        this.bf = ImageIO.read(imageFile);
+        try {
+            this.bf = ImageIO.read(imageFile);
+        } catch (NullPointerException ex) {
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            this.bf = ImageIO.read(imageFile);
+        }
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
@@ -61,7 +66,12 @@ public class SegmentedRegions {
 
     public HashMap<String, Rectangle> getAllOres_BlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
 
-        this.bf = ImageIO.read(imageFile);
+        try {
+            this.bf = ImageIO.read(imageFile);
+        } catch (NullPointerException ex) {
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            this.bf = ImageIO.read(imageFile);
+        }
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
