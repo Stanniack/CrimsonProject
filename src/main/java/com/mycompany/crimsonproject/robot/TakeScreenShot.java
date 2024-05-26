@@ -24,8 +24,8 @@ public class TakeScreenShot extends RobotEvent {
         BufferedImage bf = this.bot.createScreenCapture(rectangle);
         ImageIO.write(bf, "png", new File(path));
 
-        System.out.println("Screenshot created in path: " + path);
-        System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
+        //System.out.println("Screenshot created in path: " + path);
+        //System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
 
     }
 

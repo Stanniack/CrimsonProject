@@ -34,8 +34,8 @@ public class FindPixels {
             }
         }
 
-        System.out.println("Total area: " + (width * height) + "\nFilled with given pixels area: " + area);
-        System.out.println("Given pixels: " + ((float) (area * 100) / (width * height)) + "%");
+        //System.out.println("Total area: " + (width * height) + "\nFilled with given pixels area: " + area);
+        //System.out.println("Given pixels: " + ((float) (area * 100) / (width * height)) + "%");
 
         return area >= APPR_PERCENT;
     }

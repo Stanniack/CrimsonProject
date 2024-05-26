@@ -125,14 +125,14 @@ public class ExtractOre implements VerifyRectangle {
                             new ClickScreenEvents().dragScreen();
                         }
 
-                        System.out.printf("Time added until start drag screen: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
+                        //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
                         this.amountRect++; // go to case 4
                     }
                 } // end case 3
 
                 case 4 -> {
                     if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOWAIT_TOBEFILLED_MS)) {
-                        this.amountRect++; // Approaching not found or time exceded
+                        this.amountRect++; // Approaching not found or time exceeded
 
                     } else {
                         if (this.checkPixelsAprroaching()) {
@@ -142,7 +142,7 @@ public class ExtractOre implements VerifyRectangle {
 
                     this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
                     this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
-                    System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
+                    //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
                 } // end case 4
 
                 case 5 -> {
@@ -247,7 +247,7 @@ public class ExtractOre implements VerifyRectangle {
                 FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().tupleFullWhiteRGB);
 
         if (approaching == true) {
-            System.out.println("Rect found (APRROACHING)\n");
+            //System.out.println("Rect found (APRROACHING)\n");
             return true;
         }
 
