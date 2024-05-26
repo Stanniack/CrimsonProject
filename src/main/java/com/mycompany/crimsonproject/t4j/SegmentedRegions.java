@@ -29,6 +29,7 @@ public class SegmentedRegions {
     File imageFile;
 
     public SegmentedRegions() {
+
         this.instance = new Tesseract();
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");
