@@ -66,7 +66,17 @@ public class SegmentedRegions {
         return null;
     }
 
-    public HashMap<String, Rectangle> getAllOres_BlockScreen(int x, int x2, int y, int y2) throws IOException, TesseractException {
+    /**
+     *
+     * @param x is the first horizental coordinate on the screen
+     * @param x2_w is the final horizental coordinate where x and x2 are the scope for the loop to pass
+     * @param y is the first vertical coordinate on the screen
+     * @param y2_h is the final vertical coordinate where y and y2 are the scope for the loop to pass
+     * @return the method return all asteroid found by priority: V0 is the lower priority and Vn is the highest priority
+     * @throws java.io.IOException
+     * @throws net.sourceforge.tess4j.TesseractException
+     */
+    public HashMap<String, Rectangle> getAllOres(int x, int x2_w, int y, int y2_h) throws IOException, TesseractException {
 
         this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         this.bf = ImageIO.read(this.imageFile);
@@ -84,8 +94,8 @@ public class SegmentedRegions {
         for (int i = 0; i < result.size(); i++) {
 
             /* If into block screen list ores area */
-            if ((result.get(i).x >= x && result.get(i).x <= x2)
-                    && (result.get(i).y >= y && result.get(i).y <= y2)) {
+            if ((result.get(i).x >= x && result.get(i).x <= x2_w)
+                    && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
 
                 if ((result.get(i).width == FULLHD.CONDENSED_W1 || result.get(i).width == FULLHD.CONDENSED_W2)
                         && result.get(i).height == FULLHD.CONDENSED_H1) {
