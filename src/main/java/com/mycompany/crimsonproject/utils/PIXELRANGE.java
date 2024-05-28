@@ -55,5 +55,15 @@ public class PIXELRANGE {
     public static final int FULLWHITE_RED = 255;
     public static final int FULLWHITE_GREEN = 255;
     public static final int FULLWHITE_BLUE = 255;
+    
+    public final Triplet<Integer, Integer, Integer> maxTupleNpcPlayerRGB = new Triplet<>(MINPLAYERNPCCOLOR_RED, MINPLAYERNPCCOLOR_GREEN, MINPLAYERNPCCOLOR_BLUE);
+    public static final int MINPLAYERNPCCOLOR_RED = 101;
+    public static final int MINPLAYERNPCCOLOR_GREEN = 101;
+    public static final int MINPLAYERNPCCOLOR_BLUE = 101;
+    
+    public final Triplet<Integer, Integer, Integer> minTupleNpcPlayerRGB = new Triplet<>(MAXPLAYERNPCCOLOR_RED, MAXPLAYERNPCCOLOR_GREEN, MAXPLAYERNPCCOLOR_BLUE);
+    public static final int MAXPLAYERNPCCOLOR_RED = 105;
+    public static final int MAXPLAYERNPCCOLOR_GREEN = 107;
+    public static final int MAXPLAYERNPCCOLOR_BLUE = 107;
 
 }

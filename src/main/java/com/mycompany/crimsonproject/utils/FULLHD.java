@@ -99,21 +99,35 @@ public class FULLHD {
     // y2_h = y1 + tabDeadZoneH
     /* ------------------------------------------------------------- */
     // Priority 1: (62, 9); (61, 9)
+    public final List<Pair<Integer, Integer>> listCondensedScordite = Arrays.asList(
+            new Pair<>(CONDENSED_W1, CONDENSED_H1), 
+            new Pair<>(CONDENSED_W2, CONDENSED_H1));
     public static final int CONDENSED_W1 = 62;
     public static final int CONDENSED_W2 = 61;
     public static final int CONDENSED_H1 = 9;
 
     // Priority 2: (42,9); (42,10)
+    public final List<Pair<Integer, Integer>> listScordite = Arrays.asList(
+            new Pair<>(SCORDITE_W1, SCORDITE_H1), 
+            new Pair<>(SCORDITE_W1, SCORDITE_H2));
     public static final int SCORDITE_W1 = 42;
     public static final int SCORDITE_H1 = 9;
     public static final int SCORDITE_H2 = 10;
 
     // Priotity 3: (34, 9); (33, 9)
+    public final List<Pair<Integer, Integer>> listDenseVeldspar = Arrays.asList(
+            new Pair<>(DENSE_W1, DENSE_H1), 
+            new Pair<>(DENSE_W2, DENSE_H1));
     public static final int DENSE_W1 = 34;
     public static final int DENSE_W2 = 33;
     public static final int DENSE_H1 = 9;
 
     // Priority 4: (73, 10); (72, 10); (72, 9); (71, 9)
+    public final List<Pair<Integer, Integer>> listConcentratedVeldspar = Arrays.asList(
+            new Pair<>(CONCENTRATED_W1, CONCENTRATED_H1), 
+            new Pair<>(CONCENTRATED_W2, CONCENTRATED_H1),
+            new Pair<>(CONCENTRATED_W2, CONCENTRATED_H2),
+            new Pair<>(CONCENTRATED_W3, CONCENTRATED_H2));
     public static final int CONCENTRATED_W1 = 73;
     public static final int CONCENTRATED_W2 = 72;
     public static final int CONCENTRATED_W3 = 71;
@@ -121,6 +135,10 @@ public class FULLHD {
     public static final int CONCENTRATED_H2 = 9;
 
     // Priority 5: (50, 13); (49, 13); (48, 12)
+    public final List<Pair<Integer, Integer>> listVeldspar = Arrays.asList(
+            new Pair<>(VELDSPAR_W1, VELDSPAR_H1), 
+            new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
+            new Pair<>(VELDSPAR_W3, VELDSPAR_H2));
     public static final int VELDSPAR_W1 = 50;
     public static final int VELDSPAR_W2 = 49;
     public static final int VELDSPAR_W3 = 48;
