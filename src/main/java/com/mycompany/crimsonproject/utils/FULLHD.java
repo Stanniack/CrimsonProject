@@ -98,6 +98,21 @@ public class FULLHD {
     // y1 = miningBotLabel.y + miningBotLabel.height/2
     // y2_h = y1 + tabDeadZoneH
     /* ------------------------------------------------------------- */
+    public final List<Pair<Integer, Integer>> listAllAsteroids = Arrays.asList(
+            new Pair<>(CONDENSED_W1, CONDENSED_H1),
+            new Pair<>(CONDENSED_W2, CONDENSED_H1),
+            new Pair<>(SCORDITE_W1, SCORDITE_H1),
+            new Pair<>(SCORDITE_W1, SCORDITE_H2),
+            new Pair<>(DENSE_W1, DENSE_H1),
+            new Pair<>(DENSE_W2, DENSE_H1),
+            new Pair<>(CONCENTRATED_W1, CONCENTRATED_H1),
+            new Pair<>(CONCENTRATED_W2, CONCENTRATED_H1),
+            new Pair<>(CONCENTRATED_W2, CONCENTRATED_H2),
+            new Pair<>(CONCENTRATED_W3, CONCENTRATED_H2),
+            new Pair<>(VELDSPAR_W1, VELDSPAR_H1),
+            new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
+            new Pair<>(VELDSPAR_W3, VELDSPAR_H2));
+    
     // Priority 1: (62, 9); (61, 9)
     public final List<Pair<Integer, Integer>> listCondensedScordite = Arrays.asList(
             new Pair<>(CONDENSED_W1, CONDENSED_H1), 

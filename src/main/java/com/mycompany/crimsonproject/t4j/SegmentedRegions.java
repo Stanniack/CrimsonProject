@@ -170,47 +170,80 @@ public class SegmentedRegions {
             /* If into block screen list ores area */
             if ((result.get(i).x >= x && result.get(i).x <= x2_w)
                     && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
-                
-                
 
-                if (((result.get(i).width == FULLHD.CONDENSED_W1 || result.get(i).width == FULLHD.CONDENSED_W2)
-                        && result.get(i).height == FULLHD.CONDENSED_H1) 
-                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P4:CS - i: " + i, result.get(i));  //
-
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listCondensedScordite) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                        hm.put("P4:CS - i: " + i, result.get(i));
+                    }
                 }
 
-                if ((result.get(i).width == FULLHD.SCORDITE_W1
-                        && (result.get(i).height == FULLHD.SCORDITE_H1 || result.get(i).height == FULLHD.SCORDITE_H2))
-                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P3:S - i: " + i, result.get(i));
-
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listScordite) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                        hm.put("P3:S - i: " + i, result.get(i));
+                    }
                 }
 
-                if (((result.get(i).width == FULLHD.DENSE_W1 || result.get(i).width == FULLHD.DENSE_W2)
-                        && result.get(i).height == FULLHD.DENSE_H1)
-                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P2:DV - i: " + i, result.get(i));
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listDenseVeldspar) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                        hm.put("P2:DV - i: " + i, result.get(i));
+                    }
                 }
 
-                if (((result.get(i).width == FULLHD.CONCENTRATED_W1 || result.get(i).width == FULLHD.CONCENTRATED_W2)
-                        && result.get(i).height == FULLHD.CONCENTRATED_H1
-                        || (result.get(i).width == FULLHD.CONCENTRATED_W2 || result.get(i).width == FULLHD.CONCENTRATED_W3)
-                        && result.get(i).height == FULLHD.CONCENTRATED_H2)
-                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P1:CV - i: " + i, result.get(i));
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listConcentratedVeldspar) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                        hm.put("P1:CV - i: " + i, result.get(i));
+                    }
                 }
 
-                if ((((result.get(i).width == FULLHD.VELDSPAR_W1 || result.get(i).width == FULLHD.VELDSPAR_W2)
-                        && result.get(i).height == FULLHD.VELDSPAR_H1)
-                        || result.get(i).width == FULLHD.VELDSPAR_W3 && result.get(i).height == FULLHD.VELDSPAR_H2)
-                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P0:V - i: " + i, result.get(i));
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listVeldspar) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                        hm.put("P0:V - i: " + i, result.get(i));
+                    }
                 }
             }
         }
 
         return hm;
     }
+
+    /*public HashMap<String, Rectangle> getAllOres3(int x, int x2_w, int y, int y2_h) throws IOException, TesseractException {
+
+        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        this.bf = ImageIO.read(this.imageFile);
+
+        // First searching: Words
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        List<Rectangle> result = this.instance.getSegmentedRegions(this.bf, level);
+
+        // Sort from lower to bigger Y coordinate
+        Collections.sort(result, new RectComparatorByY());
+
+        HashMap<String, Rectangle> hm = new HashMap<>();
+
+        for (int i = 0; i < result.size(); i++) {
+
+            // If into block screen list ores area 
+            if ((result.get(i).x >= x && result.get(i).x <= x2_w)
+                    && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
+
+                for (Pair<Integer, Integer> asteroid : new FULLHD().listAsteroids) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+
+                    }
+                }
+
+                if (((result.get(i).width == FULLHD.CONDENSED_W1 || result.get(i).width == FULLHD.CONDENSED_W2)
+                        && result.get(i).height == FULLHD.CONDENSED_H1)
+                        && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                    hm.put("P4:CS - i: " + i, result.get(i));  //
+
+                }
+
+            }
+        }
+
+        return hm; 
+    } */
 
 }
