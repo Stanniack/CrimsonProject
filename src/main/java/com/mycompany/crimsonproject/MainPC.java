@@ -19,17 +19,17 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 20; i++) {
             try {
 
                 new CargoDeposit().startScript();
-                Thread.sleep(10000);
+                Thread.sleep(12000);
 
                 new SetDestination().startScript(1);
                 Thread.sleep(30000);
 
                 new ExtractOre().startScript();
-                Thread.sleep(33000);
+                Thread.sleep(50000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
