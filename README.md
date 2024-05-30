@@ -70,6 +70,9 @@
 
 * Alpha v0.3.0 - 24/03/24
   - Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.
+  
+ * Alpha v0.3.5 - 26/05/24
+  - Tratando exceção de NullPointerException do Tesseract quando o método getSegmentedRegions não encontra nenhum retângulo, retornando NULL e parando o algoritmo.
    
 
   
