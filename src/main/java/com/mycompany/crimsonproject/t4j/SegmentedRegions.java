@@ -36,7 +36,18 @@ public class SegmentedRegions {
         this.instance.setVariable("user_defined_dpi", "300");
     }
 
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> blockscreen) throws IOException, TesseractException {
+    /**
+     *
+     * @param listOfWidthAndHeight list containing pair of tuples with the width
+     * and height
+     * @param tupleBlockScreen a tuple of 4 containing the right coordinates of
+     * screen to search the rectangles
+     * @return If there is a rectangle compatible with the input, it will return
+     * rectangle or return NULL
+     * @throws IOException
+     * @throws TesseractException
+     */
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException {
         List<Rectangle> result = null;
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
@@ -57,9 +68,47 @@ public class SegmentedRegions {
         for (Rectangle rect : result) {
             for (Pair<Integer, Integer> pair : listOfWidthAndHeight) {
                 if ((rect.width == pair.getValue0() && rect.height == pair.getValue1())
-                        && (rect.x >= blockscreen.getValue0() && rect.x <= blockscreen.getValue1())
-                        && (rect.y >= blockscreen.getValue2() && rect.y <= blockscreen.getValue3())) {
+                        && (rect.x >= tupleBlockScreen.getValue0() && rect.x <= tupleBlockScreen.getValue1())
+                        && (rect.y >= tupleBlockScreen.getValue2() && rect.y <= tupleBlockScreen.getValue3())) {
 
+                    return rect;
+                }
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param listOfWidthAndHeight list containing pair of tuples with the width
+     * and height
+     * @return If there is a rectangle compatible with the input, it will return
+     * rectangle or return NULL
+     * @throws IOException
+     * @throws TesseractException
+     */
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException {
+        List<Rectangle> result = null;
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        try {
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+            this.bf = ImageIO.read(this.imageFile);
+            this.instance.getSegmentedRegions(bf, level);
+            result = this.instance.getSegmentedRegions(this.bf, level);
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            this.bf = ImageIO.read(this.imageFile);
+            this.instance.getSegmentedRegions(bf, level);
+            result = this.instance.getSegmentedRegions(this.bf, level);
+        }
+
+        for (Rectangle rect : result) {
+            for (Pair<Integer, Integer> pair : listOfWidthAndHeight) {
+                if ((rect.width == pair.getValue0() && rect.height == pair.getValue1())) {
                     return rect;
                 }
             }
@@ -164,7 +213,7 @@ public class SegmentedRegions {
         Collections.sort(result, new RectComparatorByY());
 
         HashMap<String, Rectangle> hm = new HashMap<>();
-        
+
         /* Margin of error to search tuple NPC/PLAYER */
         int moe = 2;
 
@@ -175,35 +224,35 @@ public class SegmentedRegions {
                     && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listCondensedScordite) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() 
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
                             && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                         hm.put("P4:CS - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listScordite) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() 
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
                             && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                         hm.put("P3:S - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listDenseVeldspar) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() 
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
                             && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                         hm.put("P2:DV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listConcentratedVeldspar) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() 
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
                             && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                         hm.put("P1:CV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listVeldspar) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() 
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
                             && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                         hm.put("P0:V - i: " + i, result.get(i));
                     }
@@ -253,5 +302,4 @@ public class SegmentedRegions {
 
         return hm; 
     } */
-
 }
