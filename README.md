@@ -16,11 +16,8 @@
 * Não possui interface gráfica, uma vez que é apenas uma versão Alpha de testes
 
 # Alpha v0.1.0 - 02/02/24
-
-  * Prioridade dos minérios invertidos (De menor para o maior), assim podendo adicionar outros minérios sem muita alteração no código
-    - 5 tipos de minérios: Veldspar, Concentrated V., Dense V., Scordite, Condensed S.
-
-  * As demais funcionalidades são iguais ao do Alpha 0
+  - Prioridade dos minérios invertidos (De menor para o maior), assim podendo adicionar outros minérios sem muita alteração no código;
+  - 5 tipos de minérios: Veldspar, Concentrated V., Dense V., Scordite, Condensed S.
 
 # Alpha v0.2.0 - 27/02/24
    - As funcionalidades do Alpha 0.1 continuam as mesmas;
@@ -70,6 +67,9 @@
 
 * Alpha v0.3.0 - 24/03/24
   - Corrigindo algoritmo de verificação de canhão em modo opacidade, colocando no case correto, impedindo um looping infinito.
+
+* Alpha v0.3.5 - 26/05/24
+  - Tratando exceção de NullPointerException do Tesseract quando o método getSegmentedRegions não encontra nenhum retângulo, retornando NULL e parando o algoritmo.
    
 
   
