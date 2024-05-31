@@ -9,6 +9,10 @@ import org.javatuples.Quartet;
  * @author Devmachine
  */
 public class ClickScreenEvents extends RobotEvent {
+    
+    public Rectangle returnButtonCenter (Rectangle rect) {
+        return new Rectangle(rect.x + rect.width / 2, rect.y + rect.height / 2);
+    }
 
     public void leftClickCenterButton(Rectangle rect) throws AWTException, InterruptedException {
 
