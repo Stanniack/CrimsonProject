@@ -18,17 +18,29 @@ import org.javatuples.Quartet;
  * Pixel's amount to add in the BLOCKSCREEN for caution or not
  */
 public class FULLHD {
-    
-    public final List<Pair<Integer, Integer>> listInformation = Arrays.asList(new Pair<>(INFORMATION_W1, INFORMATION_H1));
+
+    public final List<Pair<Integer, Integer>> listLostConnection = Arrays.asList(
+            new Pair<>(LOSTCONNECTION_W1, LOSTCONNECTION_H1),
+            new Pair<>(LOSTCONNECTION_W2, LOSTCONNECTION_H1));
+    public static final int LOSTCONNECTION_W1 = 98;
+    public static final int LOSTCONNECTION_W2 = 97;
+    public static final int LOSTCONNECTION_H1 = 17;
+
+    public final List<Pair<Integer, Integer>> listInformation = Arrays.asList(
+            new Pair<>(INFORMATION_W1, INFORMATION_H1));
     public static final int INFORMATION_W1 = 106;
     public static final int INFORMATION_H1 = 17;
 
-    public final List<Pair<Integer, Integer>> listMiningBotWxH = Arrays.asList(new Pair<>(MININGBOT1_W1, MININGBOT1_H1), new Pair<>(MININGBOT1_W2, MININGBOT1_H1));
+    public final List<Pair<Integer, Integer>> listMiningBotWxH = Arrays.asList(
+            new Pair<>(MININGBOT1_W1, MININGBOT1_H1), 
+            new Pair<>(MININGBOT1_W2, MININGBOT1_H1));
     public static final int MININGBOT1_W1 = 60;
     public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_H1 = 9;
 
-    public final List<Pair<Integer, Integer>> listHomeStationWxH = Arrays.asList(new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1), new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1));
+    public final List<Pair<Integer, Integer>> listHomeStationWxH = Arrays.asList(
+            new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1), 
+            new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1));
     public static final int HOMESTATION1_W1 = 75;
     public static final int HOMESTATION1_W2 = 74;
     public static final int HOMESTATION1_H1 = 9;
@@ -79,7 +91,7 @@ public class FULLHD {
     public static final int BLOCLDOCK_H3 = 12;
 
     public final List<Pair<Integer, Integer>> listHangarWxH = Arrays.asList(
-            new Pair<>(HANGAR_W1, HANGAR_H1), 
+            new Pair<>(HANGAR_W1, HANGAR_H1),
             new Pair<>(HANGAR_W1, HANGAR_H2));
     public static final int HANGAR_W1 = 40;
     public static final int HANGAR_H1 = 12;
@@ -90,7 +102,7 @@ public class FULLHD {
     public static final int CLOSELOCATIONBUTTON_W1 = 10;
     public static final int CLOSELOCATIONBUTTON_H1 = 10;
 
-    public final Quartet<Integer, Integer, Integer, Integer> tupleLocationTabDeadZone 
+    public final Quartet<Integer, Integer, Integer, Integer> tupleLocationTabDeadZone
             = new Quartet<>(LOCATIONTAB_DEADZONE_X1, LOCATIONTAB_DEADZONE_X2_W, LOCATIONTAB_DEADZONE_Y1, LOCATIONTAB_DEADZONE_Y2_H);
     public static final int LOCATIONTAB_DEADZONE_X1 = 445;
     public static final int LOCATIONTAB_DEADZONE_X2_W = 889;
@@ -116,10 +128,10 @@ public class FULLHD {
             new Pair<>(VELDSPAR_W1, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W3, VELDSPAR_H2));
-    
+
     // Priority 1: (62, 9); (61, 9)
     public final List<Pair<Integer, Integer>> listCondensedScordite = Arrays.asList(
-            new Pair<>(CONDENSED_W1, CONDENSED_H1), 
+            new Pair<>(CONDENSED_W1, CONDENSED_H1),
             new Pair<>(CONDENSED_W2, CONDENSED_H1));
     public static final int CONDENSED_W1 = 62;
     public static final int CONDENSED_W2 = 61;
@@ -127,7 +139,7 @@ public class FULLHD {
 
     // Priority 2: (42,9); (42,10)
     public final List<Pair<Integer, Integer>> listScordite = Arrays.asList(
-            new Pair<>(SCORDITE_W1, SCORDITE_H1), 
+            new Pair<>(SCORDITE_W1, SCORDITE_H1),
             new Pair<>(SCORDITE_W1, SCORDITE_H2));
     public static final int SCORDITE_W1 = 42;
     public static final int SCORDITE_H1 = 9;
@@ -135,7 +147,7 @@ public class FULLHD {
 
     // Priotity 3: (34, 9); (33, 9)
     public final List<Pair<Integer, Integer>> listDenseVeldspar = Arrays.asList(
-            new Pair<>(DENSE_W1, DENSE_H1), 
+            new Pair<>(DENSE_W1, DENSE_H1),
             new Pair<>(DENSE_W2, DENSE_H1));
     public static final int DENSE_W1 = 34;
     public static final int DENSE_W2 = 33;
@@ -143,7 +155,7 @@ public class FULLHD {
 
     // Priority 4: (73, 10); (72, 10); (72, 9); (71, 9)
     public final List<Pair<Integer, Integer>> listConcentratedVeldspar = Arrays.asList(
-            new Pair<>(CONCENTRATED_W1, CONCENTRATED_H1), 
+            new Pair<>(CONCENTRATED_W1, CONCENTRATED_H1),
             new Pair<>(CONCENTRATED_W2, CONCENTRATED_H1),
             new Pair<>(CONCENTRATED_W2, CONCENTRATED_H2),
             new Pair<>(CONCENTRATED_W3, CONCENTRATED_H2));
@@ -155,7 +167,7 @@ public class FULLHD {
 
     // Priority 5: (50, 13); (49, 13); (48, 12)
     public final List<Pair<Integer, Integer>> listVeldspar = Arrays.asList(
-            new Pair<>(VELDSPAR_W1, VELDSPAR_H1), 
+            new Pair<>(VELDSPAR_W1, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W3, VELDSPAR_H2));
     public static final int VELDSPAR_W1 = 50;
@@ -184,15 +196,15 @@ public class FULLHD {
     /* ------------------------------------------------------------- */
 
     public final List<Pair<Integer, Integer>> listMaxCargoWxH = Arrays.asList(
-            new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1), 
+            new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1),
             new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
     public static final int MAXCARGO1_W1 = 111;
     public static final int MAXCARGO1_W2 = 110;
     public static final int MAXCARGO1_H1 = 24;
 
     public final List<Pair<Integer, Integer>> listMinCargoWxH = Arrays.asList(
-            new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1), 
-            new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1), 
+            new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1),
+            new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1),
             new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H2));
     public static final int MINGCARGO_WITHM3_W1 = 72;
     public static final int MINGCARGO_WITHOUTM3_W1 = 51;
@@ -231,7 +243,7 @@ public class FULLHD {
     /* ------------------------------------------------------------- */
 
     public final List<Pair<Integer, Integer>> listUndockButtonWxH = Arrays.asList(
-            new Pair<>(UNDOCK_BUTTON_W1, UNDOCK_BUTTON_H1), 
+            new Pair<>(UNDOCK_BUTTON_W1, UNDOCK_BUTTON_H1),
             new Pair<>(UNDOCK_BUTTON_W2, UNDOCK_BUTTON_H1));
     public static final int UNDOCK_BUTTON_W1 = 235;
     public static final int UNDOCK_BUTTON_W2 = 234;

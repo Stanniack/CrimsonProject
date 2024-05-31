@@ -8,6 +8,5 @@ import java.awt.Rectangle;
  * @author Devmachine
  */
 public interface VerifyRectangle {
-
     boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException;
 }

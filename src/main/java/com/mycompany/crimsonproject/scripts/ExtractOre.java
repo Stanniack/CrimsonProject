@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Triplet;
+import org.javatuples.Pair;
 
 /**
  *
@@ -50,7 +51,7 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
-    public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
+    public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
         this.timeStart2 = System.currentTimeMillis();
@@ -58,8 +59,7 @@ public class ExtractOre implements VerifyRectangle {
         while (this.amountRect < SWITCHFLAG) {
 
             new TakeScreenShot().take();
-            this.verifyInvalidTarget();
-            // Todo connection lost
+            this.verifyInvalidTarget(new FULLHD().listInformation, 195, "Invalid target found.");
 
             switch (this.amountRect) {
 
@@ -162,6 +162,8 @@ public class ExtractOre implements VerifyRectangle {
 
         } // end while
 
+        return true;
+
     }
 
     private boolean getAsteroids() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -234,6 +236,7 @@ public class ExtractOre implements VerifyRectangle {
 
     @Override
     public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+
         if (rectangle != null) {
             System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
             return true;
@@ -274,15 +277,32 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private void verifyInvalidTarget() throws IOException, TesseractException, AWTException, InterruptedException {
-        int moe = 195;
+    public void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, int moe, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
+        boolean isClicked = false;
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(new FULLHD().listInformation);
+            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects);
             rect.y += moe;
             new ClickScreenEvents().leftClickCenterButton(rect);
-            System.out.println("Invalid target found.\n");
+            System.out.println(msg + "\n");
+            isClicked = true;
         } catch (NullPointerException ex) {
+        }
+
+        if (isClicked) {
+            boolean isIdentified = true;
+            
+            while (isIdentified) {
+                Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+
+                if (this.verifyRectangle(target, "TARGET", 0)) {
+                    new ClickScreenEvents().leftClickCenterButton(target);
+                    isIdentified = false;
+                } else {
+                    new ClickScreenEvents().dragScreen();
+                }
+            }
+
         }
 
     }
