@@ -22,7 +22,7 @@ import org.javatuples.Quartet;
  *
  * @author Devmachine
  */
-public class SegmentedRegions {
+    public class SegmentedRegions {
 
     private final Tesseract instance;
     private BufferedImage bf;

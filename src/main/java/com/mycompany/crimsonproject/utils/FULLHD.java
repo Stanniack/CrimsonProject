@@ -18,6 +18,10 @@ import org.javatuples.Quartet;
  * Pixel's amount to add in the BLOCKSCREEN for caution or not
  */
 public class FULLHD {
+    
+    public final List<Pair<Integer, Integer>> listInformation = Arrays.asList(new Pair<>(INFORMATION_W1, INFORMATION_H1));
+    public static final int INFORMATION_W1 = 106;
+    public static final int INFORMATION_H1 = 17;
 
     public final List<Pair<Integer, Integer>> listMiningBotWxH = Arrays.asList(new Pair<>(MININGBOT1_W1, MININGBOT1_H1), new Pair<>(MININGBOT1_W2, MININGBOT1_H1));
     public static final int MININGBOT1_W1 = 60;

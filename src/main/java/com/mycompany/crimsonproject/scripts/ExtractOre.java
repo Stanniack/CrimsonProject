@@ -58,8 +58,9 @@ public class ExtractOre implements VerifyRectangle {
         while (this.amountRect < SWITCHFLAG) {
 
             new TakeScreenShot().take();
-
+            this.verifyInvalidTarget();
             // Todo connection lost
+
             switch (this.amountRect) {
 
                 case 0 -> {
@@ -97,8 +98,8 @@ public class ExtractOre implements VerifyRectangle {
 
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
-                        System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS/1000, LOCKTARGET_MS/1000);
-                        new ClickScreenEvents().dragScreen(); 
+                        System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
+                        new ClickScreenEvents().dragScreen();
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                             System.out.println("Restarting script.\n\n");
@@ -271,5 +272,18 @@ public class ExtractOre implements VerifyRectangle {
             }
         }
         return false;
+    }
+
+    private void verifyInvalidTarget() throws IOException, TesseractException, AWTException, InterruptedException {
+        int moe = 195;
+
+        try {
+            Rectangle rect = new SegmentedRegions().getRectangle(new FULLHD().listInformation);
+            rect.y += moe;
+            new ClickScreenEvents().leftClickCenterButton(rect);
+            System.out.println("Invalid target found.\n");
+        } catch (NullPointerException ex) {
+        }
+
     }
 }
