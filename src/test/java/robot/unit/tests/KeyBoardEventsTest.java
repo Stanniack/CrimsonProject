@@ -5,8 +5,8 @@ import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class KeyBoardEventsTest {
 
-    @Before
+    @BeforeEach
     public void sleep() {
         try {
             Thread.sleep(5000);
