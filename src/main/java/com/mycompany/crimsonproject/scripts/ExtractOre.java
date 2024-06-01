@@ -282,6 +282,7 @@ public class ExtractOre implements VerifyRectangle {
 
         try {
             Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FULLHD().tupleInvalidTargetDeadZone);
+            System.out.println("Invalid target found: " + rect.toString());
 
             if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().tupleMinInfoRGB, new PIXELRANGE().tupleMaxInfoRGB)) {
                 rect.y += moe;
