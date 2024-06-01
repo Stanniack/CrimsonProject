@@ -282,16 +282,20 @@ public class ExtractOre implements VerifyRectangle {
 
         try {
             Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects);
-            rect.y += moe;
-            new ClickScreenEvents().leftClickCenterButton(rect);
+
+            if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().tupleMinInfoRGB, new PIXELRANGE().tupleMaxInfoRGB)) {
+                rect.y += moe;
+                new ClickScreenEvents().leftClickCenterButton(rect);
+                isClicked = true;
+            }
+
             System.out.println(msg + "\n");
-            isClicked = true;
         } catch (NullPointerException ex) {
         }
 
         if (isClicked) {
             boolean isIdentified = true;
-            
+
             while (isIdentified) {
                 Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
@@ -299,6 +303,7 @@ public class ExtractOre implements VerifyRectangle {
                     new ClickScreenEvents().leftClickCenterButton(target);
                     isIdentified = false;
                 } else {
+                    System.out.println("LOOPANDO");
                     new ClickScreenEvents().dragScreen();
                 }
             }

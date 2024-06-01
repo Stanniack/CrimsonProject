@@ -8,6 +8,15 @@ import org.javatuples.Triplet;
  */
 public class PIXELRANGE {
 
+    public final Triplet<Integer, Integer, Integer> tupleMinInfoRGB = new Triplet<>(INFO_MINRED, INFO_MINGREEN, INFO_MINBLUE);
+    public final Triplet<Integer, Integer, Integer> tupleMaxInfoRGB = new Triplet<>(INFO_MAXRED, INFO_MAXGREEN, INFO_MAXBLUE);
+    public static final int INFO_MINRED = 200;
+    public static final int INFO_MINGREEN = 200;
+    public static final int INFO_MINBLUE = 200;
+    public static final int INFO_MAXRED = 230;
+    public static final int INFO_MAXGREEN = 230;
+    public static final int INFO_MAXBLUE = 230;
+    
     public final Triplet<Integer, Integer, Integer> tupleMinACTRGB = new Triplet<>(ACT_MINRED, ACT_MINGREEN, ACT_MINBLUE);
     public final Triplet<Integer, Integer, Integer> tupleMaxACTRGB = new Triplet<>(ACT_MAXRED, ACT_MAXGREEN, ACT_MAXBLUE);
     public static final int ACT_MINRED = 80;
