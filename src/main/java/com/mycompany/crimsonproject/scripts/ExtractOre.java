@@ -59,7 +59,7 @@ public class ExtractOre implements VerifyRectangle {
         while (this.amountRect < SWITCHFLAG) {
 
             new TakeScreenShot().take();
-            this.verifyInvalidTarget(new FULLHD().listInformation, 195, "Invalid target found.");
+            this.verifyInvalidTarget(new FULLHD().listInvalidTarget, 195, "Invalid target found.");
 
             switch (this.amountRect) {
 
@@ -281,7 +281,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean isClicked = false;
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects);
+            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FULLHD().tupleInvalidTargetDeadZone);
 
             if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().tupleMinInfoRGB, new PIXELRANGE().tupleMaxInfoRGB)) {
                 rect.y += moe;
@@ -303,7 +303,6 @@ public class ExtractOre implements VerifyRectangle {
                     new ClickScreenEvents().leftClickCenterButton(target);
                     isIdentified = false;
                 } else {
-                    System.out.println("LOOPANDO");
                     new ClickScreenEvents().dragScreen();
                 }
             }

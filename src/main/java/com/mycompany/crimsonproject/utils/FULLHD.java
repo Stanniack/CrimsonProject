@@ -26,20 +26,27 @@ public class FULLHD {
     public static final int LOSTCONNECTION_W2 = 97;
     public static final int LOSTCONNECTION_H1 = 17;
 
-    public final List<Pair<Integer, Integer>> listInformation = Arrays.asList(
-            new Pair<>(INFORMATION_W1, INFORMATION_H1));
-    public static final int INFORMATION_W1 = 106;
-    public static final int INFORMATION_H1 = 17;
+    public final List<Pair<Integer, Integer>> listInvalidTarget = Arrays.asList(
+            new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1));
+    public static final int INVALIDTARGET_W1 = 106;
+    public static final int INVALIDTARGET_H1 = 17;
+
+    public final Quartet<Integer, Integer, Integer, Integer> tupleInvalidTargetDeadZone
+            = new Quartet<>(INVALIDTARGET_DEADZONE_X1, INVALIDTARGET_DEADZONE_X2_W, INVALIDTARGET_DEADZONE_Y1, INVALIDTARGET_DEADZONE_Y2_H);
+    public static final int INVALIDTARGET_DEADZONE_X1 = 751;
+    public static final int INVALIDTARGET_DEADZONE_X2_W = 951;
+    public static final int INVALIDTARGET_DEADZONE_Y1 = 420;
+    public static final int INVALIDTARGET_DEADZONE_Y2_H = 470;
 
     public final List<Pair<Integer, Integer>> listMiningBotWxH = Arrays.asList(
-            new Pair<>(MININGBOT1_W1, MININGBOT1_H1), 
+            new Pair<>(MININGBOT1_W1, MININGBOT1_H1),
             new Pair<>(MININGBOT1_W2, MININGBOT1_H1));
     public static final int MININGBOT1_W1 = 60;
     public static final int MININGBOT1_W2 = 59;
     public static final int MININGBOT1_H1 = 9;
 
     public final List<Pair<Integer, Integer>> listHomeStationWxH = Arrays.asList(
-            new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1), 
+            new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
             new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1));
     public static final int HOMESTATION1_W1 = 75;
     public static final int HOMESTATION1_W2 = 74;
@@ -109,10 +116,6 @@ public class FULLHD {
     public static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     public static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
 
-    // x1 = miningBotLabel.x + miningBotLabel.width/2 + cursorLenght
-    // x2_w = x1 + tabDeadZoneW
-    // y1 = miningBotLabel.y + miningBotLabel.height/2
-    // y2_h = y1 + tabDeadZoneH
     /* ------------------------------------------------------------- */
     public final List<Pair<Integer, Integer>> listAllAsteroids = Arrays.asList(
             new Pair<>(CONDENSED_W1, CONDENSED_H1),
