@@ -19,13 +19,6 @@ import org.javatuples.Quartet;
  */
 public class FULLHD {
 
-    public final List<Pair<Integer, Integer>> listLostConnection = Arrays.asList(
-            new Pair<>(LOSTCONNECTION_W1, LOSTCONNECTION_H1),
-            new Pair<>(LOSTCONNECTION_W2, LOSTCONNECTION_H1));
-    public static final int LOSTCONNECTION_W1 = 98;
-    public static final int LOSTCONNECTION_W2 = 97;
-    public static final int LOSTCONNECTION_H1 = 17;
-
     public final List<Pair<Integer, Integer>> listInvalidTarget = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1));
     public static final int INVALIDTARGET_W1 = 106;
