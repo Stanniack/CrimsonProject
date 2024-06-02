@@ -8,6 +8,15 @@ import org.javatuples.Triplet;
  */
 public class PIXELRANGE {
 
+    public final Triplet<Integer, Integer, Integer> tupleMinDestinationRGB = new Triplet<>(DESTINATION_MINRED, DESTINATION_MINGREEN, DESTINATION_MINBLUE);
+    public final Triplet<Integer, Integer, Integer> tupleMaxDestinationRGB = new Triplet<>(DESTINATION_MAXRED, DESTINATION_MAXGREEN, DESTINATION_MAXBLUE);
+    public static final int DESTINATION_MINRED = 178;
+    public static final int DESTINATION_MINGREEN = 179;
+    public static final int DESTINATION_MINBLUE = 179;
+    public static final int DESTINATION_MAXRED = 200;
+    public static final int DESTINATION_MAXGREEN = 200;
+    public static final int DESTINATION_MAXBLUE = 200;
+
     public final Triplet<Integer, Integer, Integer> tupleMinInfoRGB = new Triplet<>(INFO_MINRED, INFO_MINGREEN, INFO_MINBLUE);
     public final Triplet<Integer, Integer, Integer> tupleMaxInfoRGB = new Triplet<>(INFO_MAXRED, INFO_MAXGREEN, INFO_MAXBLUE);
     public static final int INFO_MINRED = 200;
@@ -16,7 +25,7 @@ public class PIXELRANGE {
     public static final int INFO_MAXRED = 230;
     public static final int INFO_MAXGREEN = 230;
     public static final int INFO_MAXBLUE = 230;
-    
+
     public final Triplet<Integer, Integer, Integer> tupleMinACTRGB = new Triplet<>(ACT_MINRED, ACT_MINGREEN, ACT_MINBLUE);
     public final Triplet<Integer, Integer, Integer> tupleMaxACTRGB = new Triplet<>(ACT_MAXRED, ACT_MAXGREEN, ACT_MAXBLUE);
     public static final int ACT_MINRED = 80;
@@ -64,12 +73,12 @@ public class PIXELRANGE {
     public static final int FULLWHITE_RED = 255;
     public static final int FULLWHITE_GREEN = 255;
     public static final int FULLWHITE_BLUE = 255;
-    
+
     public final Triplet<Integer, Integer, Integer> maxTupleNpcPlayerRGB = new Triplet<>(MINPLAYERNPCCOLOR_RED, MINPLAYERNPCCOLOR_GREEN, MINPLAYERNPCCOLOR_BLUE);
     public static final int MINPLAYERNPCCOLOR_RED = 101;
     public static final int MINPLAYERNPCCOLOR_GREEN = 101;
     public static final int MINPLAYERNPCCOLOR_BLUE = 101;
-    
+
     public final Triplet<Integer, Integer, Integer> minTupleNpcPlayerRGB = new Triplet<>(MAXPLAYERNPCCOLOR_RED, MAXPLAYERNPCCOLOR_GREEN, MAXPLAYERNPCCOLOR_BLUE);
     public static final int MAXPLAYERNPCCOLOR_RED = 105;
     public static final int MAXPLAYERNPCCOLOR_GREEN = 107;

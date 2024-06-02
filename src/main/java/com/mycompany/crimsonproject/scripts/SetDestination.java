@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
@@ -11,13 +12,16 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
+import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
+import com.mycompany.crimsonproject.utils.PIXELRANGE;
 import org.javatuples.Quartet;
+import org.javatuples.Triplet;
 
 /**
  *
  * @author Devmachine
  */
-public class SetDestination implements VerifyRectangle {
+public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private Rectangle miningBotLabel = null;
     private Rectangle homeStationLabel = null;
@@ -36,7 +40,6 @@ public class SetDestination implements VerifyRectangle {
 
             boolean descentFlag = true;
             new TakeScreenShot().take();
-            // Todo connection lost
 
             switch (this.amountRect) {
 
@@ -76,14 +79,16 @@ public class SetDestination implements VerifyRectangle {
                 case 2 -> {
                     Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getRectTuple(this.miningBotLabel));
 
-                    if (option == MININGBOT && this.verifyRectangle(warpBlock, "WARPBLOCK", LEFTCLICK)) {
+                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB)) {
+                        //System.out.println(new FindPixels().findRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.amountRect++;
                         descentFlag = false;
 
                     } else {
                         Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getRectTuple(this.homeStationLabel));
 
-                        if (option == HOMESTATION && this.verifyRectangle(dock, "DOCK", LEFTCLICK)) {
+                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB)) {
+                            //System.out.println(new FindPixels().findRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                             this.amountRect++;
                             descentFlag = false;
                         }
@@ -141,7 +146,7 @@ public class SetDestination implements VerifyRectangle {
 
     @Override
     public boolean verifyRectangle(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
-
+        
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
@@ -158,4 +163,23 @@ public class SetDestination implements VerifyRectangle {
         return false;
     }
 
+    @Override
+    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> tupleBegin, Triplet<Integer, Integer, Integer> tupleEnd) throws AWTException, InterruptedException, IOException {
+        
+        /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
+        if (rect != null && new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
+            System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
+
+            if (chosenClick == LEFTCLICK) {
+                new ClickScreenEvents().leftClickCenterButton(rect);
+            } else {
+                new ClickScreenEvents().rightClickCenterButton(rect);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+    
 }
