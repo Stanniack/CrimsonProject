@@ -27,6 +27,8 @@ import org.javatuples.Pair;
  */
 public class ExtractOre implements VerifyRectangle {
 
+    private Rectangle target = null;
+
     private int amountRect = 0;
     private long flagTimeToBeFilled_MS = 0;
     private long flagUntilToBeFilled_MS = 0;
@@ -71,7 +73,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+                    this.target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
@@ -299,11 +301,10 @@ public class ExtractOre implements VerifyRectangle {
             boolean isIdentified = true;
 
             while (isIdentified) {
-                Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
-                if (this.verifyRectangle(target, "TARGET", 0)) {
-                    System.out.println("Invalid locked target found: " + target.toString());
-                    new ClickScreenEvents().leftClickCenterButton(target);
+                if (this.target != null) {
+                    System.out.println("Invalid locked target found: " + this.target.toString());
+                    new ClickScreenEvents().leftClickCenterButton(this.target);
                     isIdentified = false;
                 } else {
                     new ClickScreenEvents().dragScreen();
