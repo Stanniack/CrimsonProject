@@ -143,6 +143,10 @@ public class PIXELRANGE {
     public Triplet<Integer, Integer, Integer> getMinTupleNpcPlayerRGB() {
         return minTupleNpcPlayerRGB;
     }
+
+    public Triplet<Integer, Integer, Integer> getTupleMinInfoRGB() {
+        return tupleMinInfoRGB;
+    }
     
     
 
