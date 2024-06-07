@@ -17,7 +17,7 @@ import org.javatuples.Quartet;
  * BLOCKSCREEN: Rect limitation where to find the recognized rects DEADZONE:
  * Pixel's amount to add in the BLOCKSCREEN for caution or not
  */
-public class Fullhd {
+public class TestFullhd {
 
     public static int getOVERVIEWMINING_X1() {
         return OVERVIEWMINING_X1;
