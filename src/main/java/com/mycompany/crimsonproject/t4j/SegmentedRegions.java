@@ -225,35 +225,35 @@ import org.javatuples.Quartet;
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listCondensedScordite) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().getMinTupleNpcPlayerRGB(), new PIXELRANGE().getMaxTupleNpcPlayerRGB())) {
                         hm.put("P4:CS - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listScordite) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().getMinTupleNpcPlayerRGB(), new PIXELRANGE().getMaxTupleNpcPlayerRGB())) {
                         hm.put("P3:S - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listDenseVeldspar) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().getMinTupleNpcPlayerRGB(), new PIXELRANGE().getMaxTupleNpcPlayerRGB())) {
                         hm.put("P2:DV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listConcentratedVeldspar) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().getMinTupleNpcPlayerRGB(), new PIXELRANGE().getMaxTupleNpcPlayerRGB())) {
                         hm.put("P1:CV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : new FULLHD().listVeldspar) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
+                            && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, new PIXELRANGE().getMinTupleNpcPlayerRGB(), new PIXELRANGE().getMaxTupleNpcPlayerRGB())) {
                         hm.put("P0:V - i: " + i, result.get(i));
                     }
                 }

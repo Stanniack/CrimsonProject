@@ -79,7 +79,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 case 2 -> {
                     Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getRectTuple(this.miningBotLabel));
 
-                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB)) {
+                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, new PIXELRANGE().getTupleMinDestinationRGB(), new PIXELRANGE().getTupleMaxDestinationRGB())) {
                         //System.out.println(new FindPixels().findRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.amountRect++;
                         descentFlag = false;
@@ -87,7 +87,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     } else {
                         Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getRectTuple(this.homeStationLabel));
 
-                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB)) {
+                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, new PIXELRANGE().getTupleMinDestinationRGB(), new PIXELRANGE().getTupleMaxDestinationRGB())) {
                             //System.out.println(new FindPixels().findRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                             this.amountRect++;
                             descentFlag = false;

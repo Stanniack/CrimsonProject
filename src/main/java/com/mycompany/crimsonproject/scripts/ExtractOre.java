@@ -78,7 +78,7 @@ public class ExtractOre implements VerifyRectangle {
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
 
-                        boolean lockTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().minTupleLockTargetRGB, new PIXELRANGE().maxTupleLockTargetRGB);
+                        boolean lockTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().getMinTupleLockTargetRGB(), new PIXELRANGE().getMaxTupleLockTargetRGB());
 
                         // If there is a lock target, just go to next step
                         if (lockTarget) {
@@ -86,7 +86,7 @@ public class ExtractOre implements VerifyRectangle {
                             //!! launch and engage drones
 
                         } else {
-                            boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().minTupleFreeTargetRGB, new PIXELRANGE().maxTupleFreeTargetRGB);
+                            boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().getMinTupleFreeTargetRGB(), new PIXELRANGE().getMaxTupleFreeTargetRGB());
                             // If there is no lock target but the target is free, click target and go next step
                             if (freeTarget) {
                                 new ClickScreenEvents().leftClickCenterButton(target);
@@ -223,7 +223,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().tupleMinACTRGB, new PIXELRANGE().tupleMaxACTRGB)) {
+            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().getTupleMinACTRGB(), new PIXELRANGE().getTupleMaxACTRGB())) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -251,7 +251,7 @@ public class ExtractOre implements VerifyRectangle {
     private boolean checkPixelsAprroaching() throws IOException {
 
         boolean approaching = new FindPixels().countPixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
-                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().tupleFullWhiteRGB);
+                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().getTupleFullWhiteRGB());
 
         if (approaching == true) {
             //System.out.println("Rect found (APRROACHING)\n");
@@ -287,7 +287,7 @@ public class ExtractOre implements VerifyRectangle {
             Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FULLHD().tupleInvalidTargetDeadZone);
             System.out.println("Invalid target found: " + rect.toString());
 
-            if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().tupleMinInfoRGB, new PIXELRANGE().tupleMaxInfoRGB)) {
+            if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().getTupleMinInfoRGB(), new PIXELRANGE().getTupleMaxInfoRGB())) {
                 rect.y += moe;
                 new ClickScreenEvents().leftClickCenterButton(rect);
                 isClicked = true;

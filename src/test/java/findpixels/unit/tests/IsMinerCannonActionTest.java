@@ -38,8 +38,8 @@ public class IsMinerCannonActionTest {
 
         boolean isAlpha = false;
         int row = 1100, column = 925, width = 27, height = 12;
-        Triplet<Integer, Integer, Integer> beginRange = new PIXELRANGE().tupleAlphaRGB;
-        Triplet<Integer, Integer, Integer> endRange = new PIXELRANGE().tupleAlphaRGB;
+        Triplet<Integer, Integer, Integer> beginRange = new PIXELRANGE().getTupleAlphaRGB();
+        Triplet<Integer, Integer, Integer> endRange = new PIXELRANGE().getTupleAlphaRGB();
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
