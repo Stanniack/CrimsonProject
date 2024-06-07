@@ -13,7 +13,7 @@ import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
-import com.mycompany.crimsonproject.utils.PIXELRANGE;
+import com.mycompany.crimsonproject.utils.PixelRange;
 import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 
@@ -23,6 +23,7 @@ import org.javatuples.Triplet;
  */
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
+    private PixelRange pr;
     private Rectangle miningBotLabel = null;
     private Rectangle homeStationLabel = null;
     private static final int RIGHTCLICK = 0;
@@ -33,6 +34,10 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private static final int SWITCHFLAG = 4;
 
     private int amountRect = 0;
+    
+    public SetDestination() {
+        this.pr = new PixelRange();
+    }
 
     public void startScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
 
@@ -79,7 +84,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 case 2 -> {
                     Rectangle warpBlock = new SegmentedRegions().getRectangle(new FULLHD().listWarpWxH, this.getRectTuple(this.miningBotLabel));
 
-                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, new PIXELRANGE().getTupleMinDestinationRGB(), new PIXELRANGE().getTupleMaxDestinationRGB())) {
+                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.pr.getMinDestinationRGB(), this.pr.getMaxDestinationRGB())) {
                         //System.out.println(new FindPixels().findRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.amountRect++;
                         descentFlag = false;
@@ -87,7 +92,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     } else {
                         Rectangle dock = new SegmentedRegions().getRectangle(new FULLHD().listDockWxH, this.getRectTuple(this.homeStationLabel));
 
-                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, new PIXELRANGE().getTupleMinDestinationRGB(), new PIXELRANGE().getTupleMaxDestinationRGB())) {
+                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.pr.getMinDestinationRGB(), this.pr.getMaxDestinationRGB())) {
                             //System.out.println(new FindPixels().findRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                             this.amountRect++;
                             descentFlag = false;

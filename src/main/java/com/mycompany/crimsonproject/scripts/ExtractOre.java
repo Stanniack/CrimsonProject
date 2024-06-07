@@ -6,7 +6,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.PIXELRANGE;
+import com.mycompany.crimsonproject.utils.PixelRange;
 import com.mycompany.crimsonproject.utils.FULLHD;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -26,6 +26,8 @@ import org.javatuples.Pair;
  * @author Devmachine
  */
 public class ExtractOre implements VerifyRectangle {
+
+    private PixelRange pr = null;
 
     private Rectangle target = null;
 
@@ -53,6 +55,10 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
+    public ExtractOre() {
+        this.pr = new PixelRange();
+    }
+
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
         new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
@@ -78,7 +84,7 @@ public class ExtractOre implements VerifyRectangle {
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
 
-                        boolean lockTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().getMinTupleLockTargetRGB(), new PIXELRANGE().getMaxTupleLockTargetRGB());
+                        boolean lockTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, this.pr.getMinLockTargetRGB(), this.pr.getMaxLockTargetRGB());
 
                         // If there is a lock target, just go to next step
                         if (lockTarget) {
@@ -86,7 +92,7 @@ public class ExtractOre implements VerifyRectangle {
                             //!! launch and engage drones
 
                         } else {
-                            boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, new PIXELRANGE().getMinTupleFreeTargetRGB(), new PIXELRANGE().getMaxTupleFreeTargetRGB());
+                            boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, this.pr.getMinFreeTargetRGB(), this.pr.getMaxFreeTargetRGB());
                             // If there is no lock target but the target is free, click target and go next step
                             if (freeTarget) {
                                 new ClickScreenEvents().leftClickCenterButton(target);
@@ -223,7 +229,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, new PIXELRANGE().getTupleMinACTRGB(), new PIXELRANGE().getTupleMaxACTRGB())) {
+            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -251,7 +257,7 @@ public class ExtractOre implements VerifyRectangle {
     private boolean checkPixelsAprroaching() throws IOException {
 
         boolean approaching = new FindPixels().countPixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
-                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, new PIXELRANGE().getTupleFullWhiteRGB());
+                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, this.pr.getFullWhiteRGB());
 
         if (approaching == true) {
             //System.out.println("Rect found (APRROACHING)\n");
@@ -287,7 +293,7 @@ public class ExtractOre implements VerifyRectangle {
             Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FULLHD().tupleInvalidTargetDeadZone);
             System.out.println("Invalid target found: " + rect.toString());
 
-            if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, new PIXELRANGE().getTupleMinInfoRGB(), new PIXELRANGE().getTupleMaxInfoRGB())) {
+            if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, this.pr.getMinInfoRGB(), this.pr.getMaxInfoRGB())) {
                 rect.y += moe;
                 new ClickScreenEvents().leftClickCenterButton(rect);
                 isClicked = true;
