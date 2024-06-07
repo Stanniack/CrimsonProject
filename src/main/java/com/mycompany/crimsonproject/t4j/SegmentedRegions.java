@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
-import com.mycompany.crimsonproject.utils.TestFullhd;
+import com.mycompany.crimsonproject.utils.FullHd;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -28,11 +28,11 @@ import org.javatuples.Quartet;
     private BufferedImage bf;
     private File imageFile;
     private RGBrange rgbr;
-    private TestFullhd fhd;
+    private FullHd fhd;
 
     public SegmentedRegions() {
         this.rgbr = new RGBrange();
-        this.fhd = new TestFullhd();
+        this.fhd = new FullHd();
         this.instance = new Tesseract();
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");
@@ -218,14 +218,14 @@ import org.javatuples.Quartet;
             if ((result.get(i).x >= x && result.get(i).x <= x2_w)
                     && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
 
-                for (Pair<Integer, Integer> asteroid : new TestFullhd().listAsteroids) {
+                for (Pair<Integer, Integer> asteroid : new FullHd().listAsteroids) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
 
                     }
                 }
 
-                if (((result.get(i).width == TestFullhd.CONDENSED_W1 || result.get(i).width == TestFullhd.CONDENSED_W2)
-                        && result.get(i).height == TestFullhd.CONDENSED_H1)
+                if (((result.get(i).width == FullHd.CONDENSED_W1 || result.get(i).width == FullHd.CONDENSED_W2)
+                        && result.get(i).height == FullHd.CONDENSED_H1)
                         && !new FindPixels().findRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
                     hm.put("P4:CS - i: " + i, result.get(i));  //
 
