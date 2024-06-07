@@ -183,7 +183,7 @@ public class ExtractOre implements VerifyRectangle {
         Entry<String, Rectangle> betterAteroid = null;
         this.priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres2(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
+        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
                 FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
 
         if (!rectResult.isEmpty()) {
