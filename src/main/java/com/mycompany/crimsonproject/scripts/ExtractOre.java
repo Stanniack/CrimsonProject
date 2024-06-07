@@ -147,6 +147,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 4
 
                 case 5 -> {
+                    this.flagUntilToBeFilled_MS = 0;
                     this.flagTimeToBeFilled_MS = 0;
                     this.amountRect = 0;
                 } // end case 5
@@ -301,6 +302,7 @@ public class ExtractOre implements VerifyRectangle {
                 Rectangle target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
 
                 if (this.verifyRectangle(target, "TARGET", 0)) {
+                    System.out.println("Invalid locked target found: " + target.toString());
                     new ClickScreenEvents().leftClickCenterButton(target);
                     isIdentified = false;
                 } else {
