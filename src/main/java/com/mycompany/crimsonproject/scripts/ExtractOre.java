@@ -7,7 +7,7 @@ import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.PixelRange;
-import com.mycompany.crimsonproject.utils.FULLHD;
+import com.mycompany.crimsonproject.utils.FullHd;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -28,6 +28,7 @@ import org.javatuples.Pair;
 public class ExtractOre implements VerifyRectangle {
 
     private PixelRange pr = null;
+    private FullHd fhd = null;
 
     private Rectangle target = null;
 
@@ -57,6 +58,7 @@ public class ExtractOre implements VerifyRectangle {
 
     public ExtractOre() {
         this.pr = new PixelRange();
+        this.fhd = new FullHd();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -66,8 +68,10 @@ public class ExtractOre implements VerifyRectangle {
 
         while (this.amountRect < SWITCHFLAG) {
 
+            // Call method
             new TakeScreenShot().take();
-            this.verifyInvalidTarget(new FULLHD().listInvalidTarget, 195, "Invalid target found.");
+            // Call method
+            this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
 
             switch (this.amountRect) {
 
@@ -79,7 +83,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    this.target = new SegmentedRegions().getRectangle(new FULLHD().listLockTarget, new FULLHD().tupleLockTargetDeadZone);
+                    this.target = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
 
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
@@ -124,7 +128,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 2
 
                 case 3 -> {
-                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(new FULLHD().listCompactMaxCargo, new FULLHD().tupleCompactMaxCargoDeadZone);
+                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
 
                     if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
                         this.amountRect = 6; // go to case 6 - docking and drag itens to main station
@@ -183,8 +187,8 @@ public class ExtractOre implements VerifyRectangle {
         Entry<String, Rectangle> betterAteroid = null;
         this.priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(FULLHD.OVERVIEWMINING_X1, FULLHD.OVERVIEWMINING_X2_W,
-                FULLHD.OVERVIEWMINING_Y1, FULLHD.OVERVIEWMINING_Y2_H);
+        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(FullHd.getOVERVIEWMINING_X1(), FullHd.getOVERVIEWMINING_X2_W(),
+                FullHd.getOVERVIEWMINING_Y1(), FullHd.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
             System.out.println("Hash map size: " + rectResult.size());
@@ -229,7 +233,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 7, Arrays.asList(FULLHD.VENTURECANNON1_X, FULLHD.VENTURECANNON2_X), FULLHD.VENTURECANNONS_Y, FULLHD.VENTURECANNON_W1, FULLHD.VENTURECANNON_H1, this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
+            if (this.isMinerCannonAction(i, 7, Arrays.asList(FullHd.getVENTURECANNON1_X(), FullHd.getVENTURECANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -256,8 +260,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().countPixels(FULLHD.APPROACHING_X, FULLHD.APPROACHING_Y,
-                FULLHD.APPROACHING_W1, FULLHD.APPROACHING_H3, this.pr.getFullWhiteRGB());
+        boolean approaching = new FindPixels().countPixels(FullHd.getAPPROACHING_X(), FullHd.getAPPROACHING_Y(),
+                FullHd.getAPPROACHING_W1(), FullHd.getAPPROACHING_H3(), this.pr.getFullWhiteRGB());
 
         if (approaching == true) {
             //System.out.println("Rect found (APRROACHING)\n");
@@ -290,7 +294,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean isClicked = false;
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FULLHD().tupleInvalidTargetDeadZone);
+            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FullHd().getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
             if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, this.pr.getMinInfoRGB(), this.pr.getMaxInfoRGB())) {
