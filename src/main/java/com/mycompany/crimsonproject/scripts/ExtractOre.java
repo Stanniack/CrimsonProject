@@ -30,8 +30,6 @@ public class ExtractOre implements VerifyRectangle {
     private RGBrange pr = null;
     private FullHd rgbr = null;
 
-    private Rectangle target = null;
-
     private int amountRect = 0;
     private long flagTimeToBeFilled_MS = 0;
     private long flagUntilToBeFilled_MS = 0;
@@ -83,7 +81,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    this.target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
+                    Rectangle target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
 
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
@@ -311,13 +309,15 @@ public class ExtractOre implements VerifyRectangle {
             boolean isIdentified = true;
 
             while (isIdentified) {
+                Rectangle target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
 
-                if (this.target != null) {
-                    System.out.println("Invalid locked target found: " + this.target.toString());
-                    new ClickScreenEvents().leftClickCenterButton(this.target);
+                if (target != null) {
+                    System.out.println("Invalid locked target found: " + target.toString());
+                    new ClickScreenEvents().leftClickCenterButton(target);
                     isIdentified = false;
                 } else {
-                    new ClickScreenEvents().dragScreen();
+                    this.amountRect = 6;
+                    System.out.println("Invalid locked target not found, ending script.");
                 }
             }
 
