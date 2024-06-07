@@ -315,6 +315,7 @@ public class ExtractOre implements VerifyRectangle {
                     System.out.println("Invalid locked target found: " + target.toString());
                     new ClickScreenEvents().leftClickCenterButton(target);
                     isIdentified = false;
+                    this.amountRect = 0; //!!
                 } else {
                     this.amountRect = 6;
                     System.out.println("Invalid locked target not found, ending script.");
