@@ -6,7 +6,7 @@ import org.javatuples.Triplet;
  *
  * @author Devmachine
  */
-public class PixelRange {
+public class RGBrange {
 
     private final Triplet<Integer, Integer, Integer> minDestinationRGB = new Triplet<>(DESTINATION_MINRED, DESTINATION_MINGREEN, DESTINATION_MINBLUE);
     private final Triplet<Integer, Integer, Integer> maxDestinationRGB = new Triplet<>(DESTINATION_MAXRED, DESTINATION_MAXGREEN, DESTINATION_MAXBLUE);

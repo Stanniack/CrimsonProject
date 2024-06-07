@@ -6,8 +6,8 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.PixelRange;
-import com.mycompany.crimsonproject.utils.FullHd;
+import com.mycompany.crimsonproject.utils.RGBrange;
+import com.mycompany.crimsonproject.utils.Fullhd;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -27,8 +27,8 @@ import org.javatuples.Pair;
  */
 public class ExtractOre implements VerifyRectangle {
 
-    private PixelRange pr = null;
-    private FullHd fhd = null;
+    private RGBrange pr = null;
+    private Fullhd fhd = null;
 
     private Rectangle target = null;
 
@@ -57,8 +57,8 @@ public class ExtractOre implements VerifyRectangle {
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
     public ExtractOre() {
-        this.pr = new PixelRange();
-        this.fhd = new FullHd();
+        this.pr = new RGBrange();
+        this.fhd = new Fullhd();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -187,8 +187,8 @@ public class ExtractOre implements VerifyRectangle {
         Entry<String, Rectangle> betterAteroid = null;
         this.priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(FullHd.getOVERVIEWMINING_X1(), FullHd.getOVERVIEWMINING_X2_W(),
-                FullHd.getOVERVIEWMINING_Y1(), FullHd.getOVERVIEWMINING_Y2_H());
+        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(Fullhd.getOVERVIEWMINING_X1(), Fullhd.getOVERVIEWMINING_X2_W(),
+                Fullhd.getOVERVIEWMINING_Y1(), Fullhd.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
             System.out.println("Hash map size: " + rectResult.size());
@@ -233,7 +233,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 7, Arrays.asList(FullHd.getVENTURECANNON1_X(), FullHd.getVENTURECANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
+            if (this.isMinerCannonAction(i, 7, Arrays.asList(Fullhd.getVENTURECANNON1_X(), Fullhd.getVENTURECANNON2_X()), Fullhd.getRANGEDCANNONS_Y(), Fullhd.getVENTURECANNON_W1(), Fullhd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
                 new KeyboardEvents().pressKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().pressKey(events.get(i));
@@ -260,8 +260,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().countPixels(FullHd.getAPPROACHING_X(), FullHd.getAPPROACHING_Y(),
-                FullHd.getAPPROACHING_W1(), FullHd.getAPPROACHING_H3(), this.pr.getFullWhiteRGB());
+        boolean approaching = new FindPixels().countPixels(Fullhd.getAPPROACHING_X(), Fullhd.getAPPROACHING_Y(),
+                Fullhd.getAPPROACHING_W1(), Fullhd.getAPPROACHING_H3(), this.pr.getFullWhiteRGB());
 
         if (approaching == true) {
             //System.out.println("Rect found (APRROACHING)\n");

@@ -5,7 +5,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.FullHd;
+import com.mycompany.crimsonproject.utils.Fullhd;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
-import com.mycompany.crimsonproject.utils.PixelRange;
+import com.mycompany.crimsonproject.utils.RGBrange;
 import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 
@@ -23,8 +23,8 @@ import org.javatuples.Triplet;
  */
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
-    private FullHd fhd = null;
-    private PixelRange pr;
+    private Fullhd fhd = null;
+    private RGBrange pr;
     private Rectangle miningBotLabel = null;
     private Rectangle homeStationLabel = null;
     private static final int RIGHTCLICK = 0;
@@ -37,8 +37,8 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private int amountRect = 0;
 
     public SetDestination() {
-        this.pr = new PixelRange();
-        this.fhd = new FullHd();
+        this.pr = new RGBrange();
+        this.fhd = new Fullhd();
     }
 
     public void startScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {

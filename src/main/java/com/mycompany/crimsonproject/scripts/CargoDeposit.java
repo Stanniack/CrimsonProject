@@ -3,7 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.FullHd;
+import com.mycompany.crimsonproject.utils.Fullhd;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
  */
 public class CargoDeposit implements VerifyRectangle {
 
-    private FullHd fhd;
+    private Fullhd fhd;
     
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
@@ -28,7 +28,7 @@ public class CargoDeposit implements VerifyRectangle {
     private static final int SWTICHFLAG = 3;
 
     public CargoDeposit() {
-        this.fhd = new FullHd();
+        this.fhd = new Fullhd();
     }
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {

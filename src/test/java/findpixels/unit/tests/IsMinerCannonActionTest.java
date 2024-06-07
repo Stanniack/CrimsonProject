@@ -1,6 +1,6 @@
 package findpixels.unit.tests;
 
-import com.mycompany.crimsonproject.utils.PixelRange;
+import com.mycompany.crimsonproject.utils.RGBrange;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,8 +38,8 @@ public class IsMinerCannonActionTest {
 
         boolean isAlpha = false;
         int row = 1100, column = 925, width = 27, height = 12;
-        Triplet<Integer, Integer, Integer> beginRange = new PixelRange().getAlphaRGB();
-        Triplet<Integer, Integer, Integer> endRange = new PixelRange().getAlphaRGB();
+        Triplet<Integer, Integer, Integer> beginRange = new RGBrange().getAlphaRGB();
+        Triplet<Integer, Integer, Integer> endRange = new RGBrange().getAlphaRGB();
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
