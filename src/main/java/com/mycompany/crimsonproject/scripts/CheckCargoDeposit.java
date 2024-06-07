@@ -18,12 +18,18 @@ import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
  */
 public class CheckCargoDeposit implements VerifyRectangle {
 
+    private FullHd fhd;
+
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
 
     private Rectangle hangarButton;
     private int amountRect = 0;
     private static final int SWTICHFLAG = 4;
+
+    public CheckCargoDeposit() {
+        this.fhd = new FullHd();
+    }
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
@@ -64,7 +70,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
                 }
 
                 case 3 -> {
-                    Rectangle undockButton = new SegmentedRegions().getRectangle(new FullHd().getUndockButtonWxHlist(), new FullHd().getUndockDeadZone());
+                    Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
 
                     if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                         this.amountRect++;
@@ -72,7 +78,6 @@ public class CheckCargoDeposit implements VerifyRectangle {
                         new ClickScreenEvents().dragScreen();
                     }
                 }
-
 
             } // end switch
 
@@ -82,7 +87,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
     private String verifyCargoHold() throws IOException, TesseractException {
 
-        Rectangle maxCargo = new SegmentedRegions().getRectangle(new FullHd().getMaxCargoWxHList(), new FullHd().getInventoryDeadzone());
+        Rectangle maxCargo = new SegmentedRegions().getRectangle(this.fhd.getMaxCargoWxHList(), this.fhd.getInventoryDeadzone());
 
         if (maxCargo != null) {
             System.out.printf("Rect found (MAXCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -91,7 +96,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
             return "maxCargo";
         }
 
-        Rectangle minCargo = new SegmentedRegions().getRectangle(new FullHd().getMinCargoWxHList(), new FullHd().getInventoryDeadzone());
+        Rectangle minCargo = new SegmentedRegions().getRectangle(this.fhd.getMinCargoWxHList(), this.fhd.getInventoryDeadzone());
 
         if (minCargo != null) {
             System.out.printf("Rect found (MINGCARGO_VENTURE) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -105,7 +110,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getRectangle(new FullHd().getHangarWxHlist(), new FullHd().getInventoryDeadzone());
+        this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -118,7 +123,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        new ClickScreenEvents().dragItemsToInventory(new FullHd().getDragItensDeadZoneList(), this.hangarButton);
+        new ClickScreenEvents().dragItemsToInventory(this.fhd.getDragItensDeadZoneList(), this.hangarButton);
     }
 
     @Override

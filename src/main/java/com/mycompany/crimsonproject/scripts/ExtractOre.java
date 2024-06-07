@@ -294,7 +294,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean isClicked = false;
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, new FullHd().getInvalidTargetDeadZoneList());
+            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, this.fhd.getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
             if (new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, this.pr.getMinInfoRGB(), this.pr.getMaxInfoRGB())) {

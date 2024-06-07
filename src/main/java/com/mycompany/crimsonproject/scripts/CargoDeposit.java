@@ -18,12 +18,18 @@ import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
  */
 public class CargoDeposit implements VerifyRectangle {
 
+    private FullHd fhd;
+    
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
 
     private Rectangle hangarButton;
     private int amountRect = 0;
     private static final int SWTICHFLAG = 3;
+
+    public CargoDeposit() {
+        this.fhd = new FullHd();
+    }
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
@@ -49,7 +55,7 @@ public class CargoDeposit implements VerifyRectangle {
                 }
 
                 case 2 -> {
-                    Rectangle undockButton = new SegmentedRegions().getRectangle(new FullHd().getUndockButtonWxHlist(), new FullHd().getUndockDeadZone());
+                    Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
 
                     if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                         this.amountRect++;
@@ -57,7 +63,6 @@ public class CargoDeposit implements VerifyRectangle {
                         new ClickScreenEvents().dragScreen();
                     }
                 }
-
 
             } // end switch
 
@@ -67,7 +72,7 @@ public class CargoDeposit implements VerifyRectangle {
 
     private boolean findHangar() throws IOException, TesseractException {
 
-        this.hangarButton = new SegmentedRegions().getRectangle(new FullHd().getHangarWxHlist(), new FullHd().getInventoryDeadzone());
+        this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
 
         if (this.hangarButton != null) {
             System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
@@ -80,7 +85,7 @@ public class CargoDeposit implements VerifyRectangle {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        new ClickScreenEvents().dragItemsToInventory(new FullHd().getDragItensDeadZoneList(), this.hangarButton);
+        new ClickScreenEvents().dragItemsToInventory(this.fhd.getDragItensDeadZoneList(), this.hangarButton);
     }
 
     @Override
