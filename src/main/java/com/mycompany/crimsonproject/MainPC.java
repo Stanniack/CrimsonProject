@@ -19,7 +19,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 36; i++) {
             try {
 
                 new CargoDeposit().startScript();
