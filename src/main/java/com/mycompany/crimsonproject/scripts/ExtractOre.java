@@ -275,7 +275,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            Thread.sleep((int) (100 * Math.random()));
+            Thread.sleep((int) (250 * Math.random()));
             new TakeScreenShot().take();
 
             action = new FindPixels().findRangeColor(coordinatesX.get(i), y,
