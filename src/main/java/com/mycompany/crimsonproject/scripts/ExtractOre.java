@@ -120,7 +120,6 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 1
 
                 case 2 -> {
-                    Thread.sleep(10000); // test !!!!! 
                     this.timeStart = System.currentTimeMillis();
                     this.checkMinerCannonAction();
                     this.amountRect++; // go to case 3
