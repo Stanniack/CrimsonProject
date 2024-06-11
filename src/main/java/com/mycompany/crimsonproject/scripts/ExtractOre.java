@@ -307,11 +307,14 @@ public class ExtractOre implements VerifyRectangle {
 
         if (isClicked) {
 
-            Rectangle target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
+            Rectangle locktarget = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
+            // if target
+            // else if attr target
+            // amountRect =6
 
-            if (target != null) {
-                System.out.println("Invalid locked target found: " + target.toString());
-                new ClickScreenEvents().leftClickCenterButton(target);
+            if (locktarget != null) {
+                System.out.println("Invalid locked target found: " + locktarget.toString());
+                new ClickScreenEvents().leftClickCenterButton(locktarget);
                 this.amountRect = 0; //!!
             } else {
                 this.amountRect = 6;

@@ -165,7 +165,7 @@ public class FullHd {
     private final List<Pair<Integer, Integer>> hangarWxHlist = Arrays.asList(
             new Pair<>(HANGAR_W1, HANGAR_H1),
             new Pair<>(HANGAR_W1, HANGAR_H2));
-    private static final int HANGAR_W1 = 40;
+    private static final int HANGAR_W1 = 34;
     private static final int HANGAR_H1 = 12;
     private static final int HANGAR_H2 = 11;
 
