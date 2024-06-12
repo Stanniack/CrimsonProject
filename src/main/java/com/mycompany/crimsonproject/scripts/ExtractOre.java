@@ -61,7 +61,7 @@ public class ExtractOre implements VerifyRectangle {
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        new KeyboardEvents().pressKey(KeyEvent.VK_F3); // afterburner
+        new KeyboardEvents().clickKey(KeyEvent.VK_F3); // afterburner
         this.timeStart2 = System.currentTimeMillis();
 
         while (this.amountRect < SWITCHFLAG) {
@@ -91,7 +91,6 @@ public class ExtractOre implements VerifyRectangle {
                         // If there is a lock target, just go to next step
                         if (lockTarget) {
                             this.amountRect++; // go to case 2
-                            //!! launch and engage drones
 
                         } else {
                             boolean freeTarget = new FindPixels().findRangeColor(target.x, target.y, target.width, target.height, this.pr.getMinFreeTargetRGB(), this.pr.getMaxFreeTargetRGB());
@@ -99,8 +98,6 @@ public class ExtractOre implements VerifyRectangle {
                             if (freeTarget) {
                                 new ClickScreenEvents().leftClickCenterButton(target);
                                 this.amountRect++; // go to case 2
-                                //!! launch and engage drones
-
                             } else {
                                 System.out.println("Free target not found.");
                             }
@@ -121,6 +118,8 @@ public class ExtractOre implements VerifyRectangle {
 
                 case 2 -> {
                     this.timeStart = System.currentTimeMillis();
+                    //!! launch and engage drones
+                    this.launchDrones(); //!!!!
                     this.checkMinerCannonAction();
                     this.amountRect++; // go to case 3
                 } // end case 2
@@ -163,7 +162,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 5
 
                 case 6 -> {
-                    //!! return drones
+                    this.returnDrones();
                     new SetDestination().startScript(GOTO_HOMESTATION);
                     System.out.println("End of mining and go docking!\n");
                     this.amountRect++;
@@ -232,14 +231,14 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < events.size(); i++) {
 
             if (this.isMinerCannonAction(i, 7, Arrays.asList(FullHd.getVENTURECANNON1_X(), FullHd.getVENTURECANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
-                new KeyboardEvents().pressKey(events.get(i));
+                new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
-                new KeyboardEvents().pressKey(events.get(i));
+                new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
 
             } else {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
-                new KeyboardEvents().pressKey(events.get(i));
+                new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
         }
@@ -288,7 +287,7 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    public void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, int moe, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
+    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, int moe, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
         boolean isClicked = false;
 
         try {
@@ -324,4 +323,14 @@ public class ExtractOre implements VerifyRectangle {
         }
 
     }
+
+    private void launchDrones() throws AWTException, InterruptedException {
+        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
+        new KeyboardEvents().clickKey(KeyEvent.VK_F);
+    }
+    
+    private void returnDrones() throws AWTException, InterruptedException {
+        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
+    }
+
 }

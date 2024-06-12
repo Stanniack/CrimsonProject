@@ -116,7 +116,8 @@ public class FullHd {
 
     private final List<Pair<Integer, Integer>> homeStationWxHlist = Arrays.asList(
             new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
-            new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1));
+            new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1),
+            new Pair<>(HOMESTATION1_W3, HOMESTATION1_H2));
     private static final int HOMESTATION1_W1 = 75;
     private static final int HOMESTATION1_W2 = 74;
     private static final int HOMESTATION1_W3 = 91;
@@ -464,12 +465,6 @@ public class FullHd {
         return ventureCannonWxHlist;
     }
     
-    
-    
-    
-    
-    
-
 }
 /**
  *

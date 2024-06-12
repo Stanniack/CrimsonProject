@@ -146,7 +146,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        new KeyboardEvents().pressKey(KeyEvent.VK_L);
+        new KeyboardEvents().clickKey(KeyEvent.VK_L);
         //System.out.println("Window location open by shortcut L\n");
         return true;
     }
