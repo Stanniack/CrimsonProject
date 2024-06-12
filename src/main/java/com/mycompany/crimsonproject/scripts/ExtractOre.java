@@ -118,9 +118,8 @@ public class ExtractOre implements VerifyRectangle {
 
                 case 2 -> {
                     this.timeStart = System.currentTimeMillis();
-                    //!! launch and engage drones
-                    this.launchDrones(); //!!!!
                     this.checkMinerCannonAction();
+                    this.launchDrones(); //!!!!
                     this.amountRect++; // go to case 3
                 } // end case 2
 
@@ -325,7 +324,9 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void launchDrones() throws AWTException, InterruptedException {
+        int timeSleep_MS = 2000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
+        Thread.sleep(timeSleep_MS);
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
     }
     
