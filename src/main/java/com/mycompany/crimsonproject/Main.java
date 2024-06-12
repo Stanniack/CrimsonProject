@@ -15,7 +15,9 @@ public class Main {
     public static void main(String[] args) {
         try {
             Thread.sleep(4000);
-            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
+            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
+            Thread.sleep(2000);
+            new KeyboardEvents().clickKey(KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
