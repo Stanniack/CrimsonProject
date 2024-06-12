@@ -105,17 +105,23 @@ public class FullHd {
 
     private final List<Pair<Integer, Integer>> miningBotWxH = Arrays.asList(
             new Pair<>(MININGBOT1_W1, MININGBOT1_H1),
-            new Pair<>(MININGBOT1_W2, MININGBOT1_H1));
+            new Pair<>(MININGBOT1_W2, MININGBOT1_H1),
+            new Pair<>(MININGBOT1_W3, MININGBOT1_H2));
     private static final int MININGBOT1_W1 = 60;
     private static final int MININGBOT1_W2 = 59;
+    private static final int MININGBOT1_W3 = 76;
+    private static final int MININGBOT1_H2 = 12;
     private static final int MININGBOT1_H1 = 9;
+    
 
     private final List<Pair<Integer, Integer>> homeStationWxHlist = Arrays.asList(
             new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
             new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1));
     private static final int HOMESTATION1_W1 = 75;
     private static final int HOMESTATION1_W2 = 74;
+    private static final int HOMESTATION1_W3 = 91;
     private static final int HOMESTATION1_H1 = 9;
+    private static final int HOMESTATION1_H2 = 12;
 
     private final List<Pair<Integer, Integer>> warpWxHlist = Arrays.asList(
             new Pair<>(WITHIN_W1, WITHIN_H1),
