@@ -325,7 +325,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void launchDrones() throws AWTException, InterruptedException {
-        int timeSleep_MS = 2000;
+        int timeSleep_MS = 3000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
         Thread.sleep(timeSleep_MS);
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
@@ -336,6 +336,6 @@ public class ExtractOre implements VerifyRectangle {
     }
     
     private long defineMinerCannonTime_MS() {
-        return 100000;
+        return 7000;
     }
 }
