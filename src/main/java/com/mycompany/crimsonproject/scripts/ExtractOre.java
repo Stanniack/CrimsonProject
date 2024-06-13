@@ -118,7 +118,7 @@ public class ExtractOre implements VerifyRectangle {
 
                 case 2 -> {
                     this.timeStart = System.currentTimeMillis();
-                    Thread.sleep(100000); // time to wait Strip Miner 1 (Average 30km - 15km cannon strip minner)
+                    Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
                     this.checkMinerCannonAction();
                     this.launchDrones(); //!!!!
                     this.amountRect++; // go to case 3
@@ -334,5 +334,8 @@ public class ExtractOre implements VerifyRectangle {
     private void returnDrones() throws AWTException, InterruptedException {
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
     }
-
+    
+    private long defineMinerCannonTime_MS() {
+        return 100000;
+    }
 }
