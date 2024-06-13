@@ -19,78 +19,6 @@ import org.javatuples.Quartet;
  */
 public class FullHd {
 
-    public static int getOVERVIEWMINING_X1() {
-        return OVERVIEWMINING_X1;
-    }
-
-    public static int getOVERVIEWMINING_X2_W() {
-        return OVERVIEWMINING_X2_W;
-    }
-
-    public static int getOVERVIEWMINING_Y1() {
-        return OVERVIEWMINING_Y1;
-    }
-
-    public static int getOVERVIEWMINING_Y2_H() {
-        return OVERVIEWMINING_Y2_H;
-    }
-
-    public static int getAPPROACHING_W1() {
-        return APPROACHING_W1;
-    }
-
-    public static int getAPPROACHING_H3() {
-        return APPROACHING_H3;
-    }
-
-    public static int getAPPROACHING_X() {
-        return APPROACHING_X;
-    }
-
-    public static int getAPPROACHING_Y() {
-        return APPROACHING_Y;
-    }
-
-    public static int getVENTURECANNONS_Y() {
-        return VENTURECANNONS_Y;
-    }
-
-    public static int getRANGEDCANNON_W1() {
-        return RANGEDCANNON_W1;
-    }
-
-    public static int getRANGEDCANNON_H1() {
-        return RANGEDCANNON_H1;
-    }
-
-    public static int getRANGEDCANNON1_X() {
-        return RANGEDCANNON1_X;
-    }
-
-    public static int getRANGEDCANNON2_X() {
-        return RANGEDCANNON2_X;
-    }
-
-    public static int getRANGEDCANNONS_Y() {
-        return RANGEDCANNONS_Y;
-    }
-
-    public static int getVENTURECANNON_W1() {
-        return VENTURECANNON_W1;
-    }
-
-    public static int getVENTURECANNON_H1() {
-        return VENTURECANNON_H1;
-    }
-
-    public static int getVENTURECANNON1_X() {
-        return VENTURECANNON1_X;
-    }
-
-    public static int getVENTURECANNON2_X() {
-        return VENTURECANNON2_X;
-    }
-
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1));
     private static final int INVALIDTARGET_W1 = 106;
@@ -112,7 +40,6 @@ public class FullHd {
     private static final int MININGBOT1_W3 = 76;
     private static final int MININGBOT1_H2 = 12;
     private static final int MININGBOT1_H1 = 9;
-    
 
     private final List<Pair<Integer, Integer>> homeStationWxHlist = Arrays.asList(
             new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
@@ -352,7 +279,7 @@ public class FullHd {
     private static final int VENTURECANNON2_X = 1095;
     private static final int VENTURECANNONS_Y = 910;
     /* ------------------------------------------------------------- */
-    
+
     private static final int RANGEDCANNON_W1 = 27;
     private static final int RANGEDCANNON_H1 = 12;
     private static final int RANGEDCANNON1_X = 1049;
@@ -466,11 +393,77 @@ public class FullHd {
     public List<Pair<Integer, Integer>> getVentureCannonWxHlist() {
         return ventureCannonWxHlist;
     }
-    
+
+    public static int getOVERVIEWMINING_X1() {
+        return OVERVIEWMINING_X1;
+    }
+
+    public static int getOVERVIEWMINING_X2_W() {
+        return OVERVIEWMINING_X2_W;
+    }
+
+    public static int getOVERVIEWMINING_Y1() {
+        return OVERVIEWMINING_Y1;
+    }
+
+    public static int getOVERVIEWMINING_Y2_H() {
+        return OVERVIEWMINING_Y2_H;
+    }
+
+    public static int getAPPROACHING_W1() {
+        return APPROACHING_W1;
+    }
+
+    public static int getAPPROACHING_H3() {
+        return APPROACHING_H3;
+    }
+
+    public static int getAPPROACHING_X() {
+        return APPROACHING_X;
+    }
+
+    public static int getAPPROACHING_Y() {
+        return APPROACHING_Y;
+    }
+
+    public static int getVENTURECANNONS_Y() {
+        return VENTURECANNONS_Y;
+    }
+
+    public static int getRANGEDCANNON_W1() {
+        return RANGEDCANNON_W1;
+    }
+
+    public static int getRANGEDCANNON_H1() {
+        return RANGEDCANNON_H1;
+    }
+
+    public static int getRANGEDCANNON1_X() {
+        return RANGEDCANNON1_X;
+    }
+
+    public static int getRANGEDCANNON2_X() {
+        return RANGEDCANNON2_X;
+    }
+
+    public static int getRANGEDCANNONS_Y() {
+        return RANGEDCANNONS_Y;
+    }
+
+    public static int getVENTURECANNON_W1() {
+        return VENTURECANNON_W1;
+    }
+
+    public static int getVENTURECANNON_H1() {
+        return VENTURECANNON_H1;
+    }
+
+    public static int getVENTURECANNON1_X() {
+        return VENTURECANNON1_X;
+    }
+
+    public static int getVENTURECANNON2_X() {
+        return VENTURECANNON2_X;
+    }
+
 }
-/**
- *
- * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
- * + h.
- *
- */
