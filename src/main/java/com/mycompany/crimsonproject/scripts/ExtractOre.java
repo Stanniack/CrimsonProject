@@ -229,7 +229,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 7, Arrays.asList(FullHd.getVENTURECANNON1_X(), FullHd.getVENTURECANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
+            if (this.isMinerCannonAction(i, 11, Arrays.asList(FullHd.getVENTURECANNON1_X(), FullHd.getVENTURECANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinActivedMinerCannonRGB(), this.pr.getMaxActivedMinerCannonRGB())) {
                 new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(events.get(i));
