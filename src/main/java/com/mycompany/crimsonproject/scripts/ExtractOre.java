@@ -118,9 +118,9 @@ public class ExtractOre implements VerifyRectangle {
 
                 case 2 -> {
                     this.timeStart = System.currentTimeMillis();
+                    this.launchDrones(); //!!!!
                     Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
                     this.checkMinerCannonAction();
-                    this.launchDrones(); //!!!!
                     this.amountRect++; // go to case 3
                 } // end case 2
 
