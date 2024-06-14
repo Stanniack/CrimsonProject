@@ -51,8 +51,8 @@ public class ExtractOre implements VerifyRectangle {
     private final Integer DVpriority = 2;
     private final Integer CVpriority = 3;
     private final Integer Vpriority = 4;
-    /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possible */
-    private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
+    /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
+    private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
     public ExtractOre() {
         this.pr = new RGBrange();
@@ -200,7 +200,7 @@ public class ExtractOre implements VerifyRectangle {
                         System.out.println(item.getKey() + ": " + item.getValue().y + "y");
 
                         if (item.getValue().y <= closestOreList.get(i)) {
-                            System.out.println("Tempoorary better asteroid found: " + item + "\n");
+                            System.out.println("Temporary better asteroid found: " + item + "\n");
                             betterAteroid = item;
                             closestOreList.set(i, item.getValue().y);
 
