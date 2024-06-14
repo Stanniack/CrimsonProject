@@ -46,11 +46,11 @@ public class ExtractOre implements VerifyRectangle {
     private long timeStart = 0;
     private long timeStart2 = 0;
     private Integer priorityOreValue;
-    private final Integer CSpriority = 4;
-    private final Integer Spriority = 3;
+    private final Integer CSpriority = 0;
+    private final Integer Spriority = 1;
     private final Integer DVpriority = 2;
-    private final Integer CVpriority = 1;
-    private final Integer Vpriority = 0;
+    private final Integer CVpriority = 3;
+    private final Integer Vpriority = 4;
     /* These lists must be ordered by priority, from highest to lowest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(Vpriority, CVpriority, DVpriority, Spriority, CSpriority);
 
