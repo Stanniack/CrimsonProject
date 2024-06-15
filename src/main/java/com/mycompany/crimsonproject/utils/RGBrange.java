@@ -28,12 +28,12 @@ public class RGBrange {
 
     private final Triplet<Integer, Integer, Integer> minActivedMinerCannonRGB = new Triplet<>(ACT_MINRED, ACT_MINGREEN, ACT_MINBLUE);
     private final Triplet<Integer, Integer, Integer> maxActivedMinerCannonRGB = new Triplet<>(ACT_MAXRED, ACT_MAXGREEN, ACT_MAXBLUE);
-    private static final int ACT_MINRED = 80;
-    private static final int ACT_MAXRED = 90;
-    private static final int ACT_MINGREEN = 86;
+    private static final int ACT_MINRED = 90; 
+    private static final int ACT_MAXRED = 95;
+    private static final int ACT_MINGREEN = 93;
     private static final int ACT_MAXGREEN = 113;
-    private static final int ACT_MINBLUE = 67;
-    private static final int ACT_MAXBLUE = 70;
+    private static final int ACT_MINBLUE = 71;
+    private static final int ACT_MAXBLUE = 76;
 
     private final Triplet<Integer, Integer, Integer> minCancelMinerCannonRGB = new Triplet<>(CANCEL_MINRED, CANCEL_MINGREEN, CANCEL_MINBLUE);
     private final Triplet<Integer, Integer, Integer> maxCancelMinerCannonRGB = new Triplet<>(CANCEL_MAXRED, CANCEL_MAXGREEN, CANCEL_MAXBLUE);

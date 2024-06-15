@@ -26,7 +26,7 @@ public class MainPC {
                 Thread.sleep(12000);
 
                 new SetDestination().startScript(1);
-                Thread.sleep(30000);
+                Thread.sleep(40000);
 
                 new ExtractOre().startScript();
                 Thread.sleep(50000);
