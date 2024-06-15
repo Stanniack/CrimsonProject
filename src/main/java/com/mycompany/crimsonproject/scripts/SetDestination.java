@@ -84,7 +84,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 } // end case 1
 
                 case 2 -> {
-                    Rectangle warpBlock = new SegmentedRegions().getRectangle(this.fhd.getWarpWxHlist(), this.getRectTuple(this.miningBotLabel));
+                    Rectangle warpBlock = new SegmentedRegions().getRectangle(this.fhd.getWarpWxHlist(), this.getFunnelRectTuple(this.miningBotLabel));
 
                     if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                         //System.out.println(new FindPixels().findRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
@@ -92,7 +92,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                         descentFlag = false;
 
                     } else {
-                        Rectangle dock = new SegmentedRegions().getRectangle(this.fhd.getDockWxHlist(), this.getRectTuple(this.homeStationLabel));
+                        Rectangle dock = new SegmentedRegions().getRectangle(this.fhd.getDockWxHlist(), this.getFunnelRectTuple(this.homeStationLabel));
 
                         if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                             //System.out.println(new FindPixels().findRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
@@ -125,7 +125,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
         } while (this.amountRect < SWITCHFLAG);
     }
 
-    private Quartet<Integer, Integer, Integer, Integer> getRectTuple(Rectangle rect) {
+    private Quartet<Integer, Integer, Integer, Integer> getFunnelRectTuple(Rectangle rect) {
         try {
             int cursorLenght = 11;
             int tabDeadZoneW = 245;
