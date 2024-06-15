@@ -345,6 +345,6 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private long defineMinerCannonTime_MS() {
-        return 7000;
+        return 0;
     }
 }
