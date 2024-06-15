@@ -23,7 +23,7 @@ public class MainPC {
             try {
 
                 new CargoDeposit().startScript();
-                Thread.sleep(12000);
+                Thread.sleep(18000);
 
                 new SetDestination().startScript(1);
                 Thread.sleep(40000);
