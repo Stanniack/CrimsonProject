@@ -9,8 +9,8 @@ import org.javatuples.Quartet;
  * @author Devmachine
  */
 public class ClickScreenEvents extends RobotEvent {
-    
-    public Rectangle returnButtonCenter (Rectangle rect) {
+
+    public Rectangle returnButtonCenter(Rectangle rect) {
         return new Rectangle(rect.x + rect.width / 2, rect.y + rect.height / 2);
     }
 
@@ -67,40 +67,21 @@ public class ClickScreenEvents extends RobotEvent {
 
     }
 
-    public void dragItemsToInventory(int x1, int x2, int y1, int y2, Rectangle rect) throws AWTException, InterruptedException {
-
-        this.bot.mouseMove(x2, y2); // ok
-        Thread.sleep(SLEEP_MS); // ok
-
-        this.bot.mousePress(this.leftClick); // ok
-        this.bot.mouseMove(x1, y1); // ok
-
-        Thread.sleep(SLEEP_MS); //ok
-        this.bot.mouseRelease(this.leftClick); //ok
-
-        this.bot.mousePress(this.leftClick); // n
-
-        this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
-        Thread.sleep(SLEEP_MS); //ok
-        this.bot.mouseRelease(this.leftClick); // ok
-
-    }
-
     public void dragItemsToInventory(Quartet<Integer, Integer, Integer, Integer> dragItensDeadZone, Rectangle rect) throws AWTException, InterruptedException {
 
         this.bot.mouseMove(dragItensDeadZone.getValue1(), dragItensDeadZone.getValue3()); // ok
-        Thread.sleep(SLEEP_MS); // ok
+        Thread.sleep(SLEEP_MS3); // ok
 
         this.bot.mousePress(this.leftClick); // ok
         this.bot.mouseMove(dragItensDeadZone.getValue0(), dragItensDeadZone.getValue2()); // ok
 
-        Thread.sleep(SLEEP_MS); //ok
+        Thread.sleep(SLEEP_MS3); //ok
         this.bot.mouseRelease(this.leftClick); //ok
 
         this.bot.mousePress(this.leftClick); // n
 
         this.bot.mouseMove(rect.x + rect.width / 2, rect.y + rect.height / 2); // ok
-        Thread.sleep(SLEEP_MS); //ok
+        Thread.sleep(SLEEP_MS3); //ok
         this.bot.mouseRelease(this.leftClick); // ok
 
     }
