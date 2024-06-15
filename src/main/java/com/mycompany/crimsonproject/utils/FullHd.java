@@ -20,9 +20,15 @@ import org.javatuples.Quartet;
 public class FullHd {
 
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
-            new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1));
+            new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
+            new Pair<>(INVALIDTARGET_W2, INVALIDTARGET_H2),
+            new Pair<>(INVALIDTARGET_W3, INVALIDTARGET_H3));
     private static final int INVALIDTARGET_W1 = 106;
+    private static final int INVALIDTARGET_W2 = 200;
+    private static final int INVALIDTARGET_W3 = 101;
     private static final int INVALIDTARGET_H1 = 17;
+    private static final int INVALIDTARGET_H2 = 50;
+    private static final int INVALIDTARGET_H3 = 16;
 
     private final Quartet<Integer, Integer, Integer, Integer> invalidTargetDeadZoneList
             = new Quartet<>(INVALIDTARGET_DEADZONE_X1, INVALIDTARGET_DEADZONE_X2_W, INVALIDTARGET_DEADZONE_Y1, INVALIDTARGET_DEADZONE_Y2_H);

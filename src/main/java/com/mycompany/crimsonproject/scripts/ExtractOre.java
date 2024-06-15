@@ -189,6 +189,7 @@ public class ExtractOre implements VerifyRectangle {
 
         if (!rectResult.isEmpty()) {
             System.out.println("Hash map size: " + rectResult.size());
+            System.out.println("All Asteroids: " + rectResult.toString());
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
