@@ -27,6 +27,7 @@ import org.javatuples.Pair;
  */
 public class ExtractOre implements VerifyRectangle {
 
+    private Rectangle target;
     private RGBrange pr = null;
     private FullHd rgbr = null;
 
@@ -38,7 +39,7 @@ public class ExtractOre implements VerifyRectangle {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOWAIT_TOBEFILLED_MS = 645500; // Retriver: 1904000; Venture + Miner II: 645500; Venture + Gaussian: 718000
-    private static final int TIMETOWAIT_CANNON_MS = 695500; 
+    private static final int TIMETOWAIT_CANNON_MS = 695500;
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;
 
@@ -81,7 +82,7 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 0
 
                 case 1 -> {
-                    Rectangle target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
+                    target = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
 
                     // target identified
                     if (this.verifyRectangle(target, "TARGET", 0)) {
@@ -308,14 +309,21 @@ public class ExtractOre implements VerifyRectangle {
         if (isClicked) {
 
             Rectangle locktarget = new SegmentedRegions().getRectangle(this.rgbr.getLockTargetList(), this.rgbr.getTupleLockTargetDeadZone());
-            // if target
-            // else if attr target
-            // amountRect =6
 
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
                 new ClickScreenEvents().leftClickCenterButton(locktarget);
                 this.amountRect = 0; //!!
+                
+            } else if (this.target != null) {
+                int asteroidTarget = 36;
+                this.target.x += asteroidTarget;
+                boolean lockAsteroidTarget = new FindPixels().findRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.pr.getMinLockTargetRGB(), this.pr.getMaxLockTargetRGB());
+                if (lockAsteroidTarget) {
+                    new ClickScreenEvents().leftClickCenterButton(this.target);
+                    this.amountRect = 0; //!!
+                }
+                
             } else {
                 this.amountRect = 6;
                 System.out.println("Invalid locked target not found, ending script.");
@@ -331,11 +339,11 @@ public class ExtractOre implements VerifyRectangle {
         Thread.sleep(timeSleep_MS);
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
     }
-    
+
     private void returnDrones() throws AWTException, InterruptedException {
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
     }
-    
+
     private long defineMinerCannonTime_MS() {
         return 7000;
     }
