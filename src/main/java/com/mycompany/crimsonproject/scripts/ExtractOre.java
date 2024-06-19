@@ -71,6 +71,10 @@ public class ExtractOre implements VerifyRectangle {
             new TakeScreenShot().take();
             // Call method
             this.verifyInvalidTarget(this.rgbr.getInvalidTargetList(), 195, "Invalid target found.");
+            // Check cannons 
+            if (this.amountRect > 2) {
+                this.checkMinerCannonOutSwitch();
+            }
 
             switch (this.amountRect) {
 
@@ -170,9 +174,6 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 6
 
             }
-            
-            // Check cannons 
-            this.checkMinerCannonOutSwitch();
 
         } // end while
 
@@ -256,13 +257,14 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (!this.isMinerCannonAction(i, 31, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFnCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), this.pr.getMinStripActiveMinerRGB(), this.pr.getMaxStripActiveMinerRGB())) {
+            if (!this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFnCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), this.pr.getMinStripActiveMinerRGB(), this.pr.getMaxStripActiveMinerRGB())) {
                 new KeyboardEvents().clickKey(events.get(i));
+                System.out.println("\nCannon was deactived. Activing again.\n");
 
             }
         }
-        
-        System.out.println("Method time to be executioned: " + (System.currentTimeMillis() - start)/1000);
+
+        //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
     }
 
     @Override
