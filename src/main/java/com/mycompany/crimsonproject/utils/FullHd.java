@@ -19,6 +19,14 @@ import org.javatuples.Quartet;
  */
 public class FullHd {
 
+    public static int getSTRIPMINERCANNON_W1() {
+        return STRIPMINERCANNON_W1;
+    }
+
+    public static int getSTRIPMINERCANNON_H1() {
+        return STRIPMINERCANNON_H1;
+    }
+
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
             new Pair<>(INVALIDTARGET_W2, INVALIDTARGET_H2),
@@ -291,11 +299,8 @@ public class FullHd {
     private static final int FnCANNONS_Y = 910;
     /* ------------------------------------------------------------- */
 
-    private static final int RANGEDCANNON_W1 = 27;
-    private static final int RANGEDCANNON_H1 = 12;
-    private static final int RANGEDCANNON1_X = 1049;
-    private static final int RANGEDCANNON2_X = 1100;
-    private static final int RANGEDCANNONS_Y = 925;
+    //!!!!!!!!!!
+    private static final int RANGEDVENTURECANNONS_Y = 925;
 
     public List<Pair<Integer, Integer>> getInvalidTargetList() {
         return invalidTargetList;
@@ -441,24 +446,8 @@ public class FullHd {
         return FnCANNONS_Y;
     }
 
-    public static int getRANGEDCANNON_W1() {
-        return RANGEDCANNON_W1;
-    }
-
-    public static int getRANGEDCANNON_H1() {
-        return RANGEDCANNON_H1;
-    }
-
-    public static int getRANGEDCANNON1_X() {
-        return RANGEDCANNON1_X;
-    }
-
-    public static int getRANGEDCANNON2_X() {
-        return RANGEDCANNON2_X;
-    }
-
-    public static int getRANGEDCANNONS_Y() {
-        return RANGEDCANNONS_Y;
+    public static int getRANGEDVENTURECANNONS_Y() {
+        return RANGEDVENTURECANNONS_Y;
     }
 
     public static int getVENTURECANNON_W1() {

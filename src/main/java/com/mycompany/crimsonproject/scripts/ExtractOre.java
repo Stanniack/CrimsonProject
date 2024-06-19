@@ -232,7 +232,8 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (this.isMinerCannonAction(i, 11, Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X()), FullHd.getRANGEDCANNONS_Y(), FullHd.getVENTURECANNON_W1(), FullHd.getVENTURECANNON_H1(), this.pr.getMinStripActiveMinerRGB(), this.pr.getMaxStripActiveMinerRGB())) {
+            //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
+            if (this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFnCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), this.pr.getMinStripActiveMinerRGB(), this.pr.getMaxStripActiveMinerRGB())) {
                 new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(events.get(i));
@@ -279,8 +280,7 @@ public class ExtractOre implements VerifyRectangle {
             Thread.sleep((int) (250 * Math.random()));
             new TakeScreenShot().take();
 
-            action = new FindPixels().findRangeColor(coordinatesX.get(i), y,
-                    width, height, tupleMin, tupleMax);
+            action = new FindPixels().findRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
 
             if (action) {
                 return true;
@@ -314,7 +314,7 @@ public class ExtractOre implements VerifyRectangle {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
                 new ClickScreenEvents().leftClickCenterButton(locktarget);
                 this.amountRect = 0; //!!
-                
+
             } else if (this.target != null) {
                 int asteroidTarget = 36;
                 this.target.x += asteroidTarget;
@@ -323,7 +323,7 @@ public class ExtractOre implements VerifyRectangle {
                     new ClickScreenEvents().leftClickCenterButton(this.target);
                     this.amountRect = 0; //!!
                 }
-                
+
             } else {
                 this.amountRect = 6;
                 System.out.println("Invalid locked target not found, ending script.");
