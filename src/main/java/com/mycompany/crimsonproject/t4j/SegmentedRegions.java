@@ -22,13 +22,13 @@ import org.javatuples.Quartet;
  *
  * @author Devmachine
  */
-    public class SegmentedRegions {
+public class SegmentedRegions {
 
     private final Tesseract instance;
     private BufferedImage bf;
     private File imageFile;
-    private RGBrange rgbr;
-    private FullHd fhd;
+    private final RGBrange rgbr;
+    private final FullHd fhd;
 
     public SegmentedRegions() {
         this.rgbr = new RGBrange();
@@ -37,6 +37,16 @@ import org.javatuples.Quartet;
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");
         this.instance.setVariable("user_defined_dpi", "300");
+    }
+
+    private List<Rectangle> getSegmentedFile() throws IOException, TesseractException {
+        /* First searching: Words */
+        int level = TessPageIteratorLevel.RIL_WORD;
+
+        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        this.bf = ImageIO.read(this.imageFile);
+        this.instance.getSegmentedRegions(this.bf, level);
+        return this.instance.getSegmentedRegions(this.bf, level);
     }
 
     /**
@@ -49,24 +59,17 @@ import org.javatuples.Quartet;
      * rectangle or return NULL
      * @throws IOException
      * @throws TesseractException
+     * @throws java.lang.InterruptedException
      */
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, InterruptedException {
-        List<Rectangle> result = null;
-        /* First searching: Words */
-        int level = TessPageIteratorLevel.RIL_WORD;
+        List<Rectangle> result;
 
         try {
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-            this.bf = ImageIO.read(this.imageFile);
-            this.instance.getSegmentedRegions(bf, level);
-            result = this.instance.getSegmentedRegions(this.bf, level);
+            result = this.getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
             Thread.sleep(20000);
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-            this.bf = ImageIO.read(this.imageFile);
-            this.instance.getSegmentedRegions(bf, level);
-            result = this.instance.getSegmentedRegions(this.bf, level);
+            result = this.getSegmentedFile();
         }
 
         for (Rectangle rect : result) {
@@ -91,9 +94,10 @@ import org.javatuples.Quartet;
      * rectangle or return NULL
      * @throws IOException
      * @throws TesseractException
+     * @throws java.lang.InterruptedException
      */
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, InterruptedException {
-        List<Rectangle> result = null;
+        List<Rectangle> result;
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
