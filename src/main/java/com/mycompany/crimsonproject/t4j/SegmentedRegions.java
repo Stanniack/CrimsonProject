@@ -50,7 +50,7 @@ import org.javatuples.Quartet;
      * @throws IOException
      * @throws TesseractException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, InterruptedException {
         List<Rectangle> result = null;
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
@@ -62,7 +62,8 @@ import org.javatuples.Quartet;
             result = this.instance.getSegmentedRegions(this.bf, level);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            Thread.sleep(20000);
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
             this.bf = ImageIO.read(this.imageFile);
             this.instance.getSegmentedRegions(bf, level);
             result = this.instance.getSegmentedRegions(this.bf, level);
@@ -91,7 +92,7 @@ import org.javatuples.Quartet;
      * @throws IOException
      * @throws TesseractException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, InterruptedException {
         List<Rectangle> result = null;
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
@@ -103,7 +104,8 @@ import org.javatuples.Quartet;
             result = this.instance.getSegmentedRegions(this.bf, level);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "test.png");
+            Thread.sleep(20000);
+            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
             this.bf = ImageIO.read(this.imageFile);
             this.instance.getSegmentedRegions(bf, level);
             result = this.instance.getSegmentedRegions(this.bf, level);
