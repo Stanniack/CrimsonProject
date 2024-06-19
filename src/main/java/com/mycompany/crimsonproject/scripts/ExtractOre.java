@@ -170,6 +170,9 @@ public class ExtractOre implements VerifyRectangle {
                 } // end case 6
 
             }
+            
+            // Check cannons 
+            this.checkMinerCannonOutSwitch();
 
         } // end while
 
@@ -245,6 +248,21 @@ public class ExtractOre implements VerifyRectangle {
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
         }
+    }
+
+    private void checkMinerCannonOutSwitch() throws InterruptedException, AWTException, IOException {
+        Long start = System.currentTimeMillis();
+        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
+        for (int i = 0; i < events.size(); i++) {
+
+            if (!this.isMinerCannonAction(i, 31, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFnCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), this.pr.getMinStripActiveMinerRGB(), this.pr.getMaxStripActiveMinerRGB())) {
+                new KeyboardEvents().clickKey(events.get(i));
+
+            }
+        }
+        
+        System.out.println("Method time to be executioned: " + (System.currentTimeMillis() - start)/1000);
     }
 
     @Override

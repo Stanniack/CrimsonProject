@@ -46,6 +46,7 @@ public class SegmentedRegions {
         this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         this.bf = ImageIO.read(this.imageFile);
         this.instance.getSegmentedRegions(this.bf, level);
+        
         return this.instance.getSegmentedRegions(this.bf, level);
     }
 
