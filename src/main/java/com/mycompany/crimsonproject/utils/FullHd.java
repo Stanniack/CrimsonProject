@@ -279,11 +279,16 @@ public class FullHd {
             new Pair<>(VENTURECANNON_W1, VENTURECANNON_H1));
     private static final int VENTURECANNON_W1 = 42;
     private static final int VENTURECANNON_H1 = 40;
+    
+    private final List<Pair<Integer, Integer>> stripMinerCannonWxHlit = Arrays.asList(new Pair<>(STRIPMINERCANNON_W1, STRIPMINERCANNON_H1));
+    private static final int STRIPMINERCANNON_W1 = 42;
+    private static final int STRIPMINERCANNON_H1 = 7;
+    
     private final List<Pair<Integer, Integer>> ventureXcannonCoordinates = Arrays.asList(
-            new Pair<>(VENTURECANNON1_X, VENTURECANNON2_X));
-    private static final int VENTURECANNON1_X = 1044;
-    private static final int VENTURECANNON2_X = 1095;
-    private static final int VENTURECANNONS_Y = 910;
+            new Pair<>(F1CANNON1_X, F2CANNON2_X));
+    private static final int F1CANNON1_X = 1044;
+    private static final int F2CANNON2_X = 1095;
+    private static final int FnCANNONS_Y = 910;
     /* ------------------------------------------------------------- */
 
     private static final int RANGEDCANNON_W1 = 27;
@@ -432,8 +437,8 @@ public class FullHd {
         return APPROACHING_Y;
     }
 
-    public static int getVENTURECANNONS_Y() {
-        return VENTURECANNONS_Y;
+    public static int getFnCANNONS_Y() {
+        return FnCANNONS_Y;
     }
 
     public static int getRANGEDCANNON_W1() {
@@ -464,12 +469,16 @@ public class FullHd {
         return VENTURECANNON_H1;
     }
 
-    public static int getVENTURECANNON1_X() {
-        return VENTURECANNON1_X;
+    public static int getF1CANNON1_X() {
+        return F1CANNON1_X;
     }
 
-    public static int getVENTURECANNON2_X() {
-        return VENTURECANNON2_X;
+    public static int getF2CANNON2_X() {
+        return F2CANNON2_X;
+    }
+
+    public List<Pair<Integer, Integer>> getStripMinerCannonWxHlit() {
+        return stripMinerCannonWxHlit;
     }
 
 }
