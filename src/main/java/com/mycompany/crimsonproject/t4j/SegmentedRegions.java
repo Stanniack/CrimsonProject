@@ -1,9 +1,11 @@
 package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
+import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.FullHd;
 import com.mycompany.crimsonproject.utils.RGBrange;
+import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -46,7 +48,7 @@ public class SegmentedRegions {
         this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         this.bf = ImageIO.read(this.imageFile);
         this.instance.getSegmentedRegions(this.bf, level);
-        
+
         return this.instance.getSegmentedRegions(this.bf, level);
     }
 
@@ -62,7 +64,7 @@ public class SegmentedRegions {
      * @throws TesseractException
      * @throws java.lang.InterruptedException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, InterruptedException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, InterruptedException, AWTException {
         List<Rectangle> result;
 
         try {
@@ -70,6 +72,7 @@ public class SegmentedRegions {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
             Thread.sleep(20000);
+            new TakeScreenShot().take();
             result = this.getSegmentedFile();
         }
 
@@ -97,23 +100,16 @@ public class SegmentedRegions {
      * @throws TesseractException
      * @throws java.lang.InterruptedException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, InterruptedException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, InterruptedException, AWTException {
         List<Rectangle> result;
-        /* First searching: Words */
-        int level = TessPageIteratorLevel.RIL_WORD;
 
         try {
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-            this.bf = ImageIO.read(this.imageFile);
-            this.instance.getSegmentedRegions(bf, level);
-            result = this.instance.getSegmentedRegions(this.bf, level);
+            result = this.getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
             Thread.sleep(20000);
-            this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-            this.bf = ImageIO.read(this.imageFile);
-            this.instance.getSegmentedRegions(bf, level);
-            result = this.instance.getSegmentedRegions(this.bf, level);
+            new TakeScreenShot().take();
+            result = this.getSegmentedFile();
         }
 
         for (Rectangle rect : result) {
