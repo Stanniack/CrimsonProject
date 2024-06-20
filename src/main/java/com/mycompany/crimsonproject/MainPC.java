@@ -28,7 +28,10 @@ public class MainPC {
                 new SetDestination().startScript(1);
                 Thread.sleep(50000);
 
-                new ExtractOre().startScript();
+                boolean isFalse = new ExtractOre().startScript();
+                if (!isFalse) {
+                    break;
+                }
                 Thread.sleep(70000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
