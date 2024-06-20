@@ -87,7 +87,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     Rectangle warpBlock = new SegmentedRegions().getRectangle(this.fhd.getWarpWxHlist(), this.getFunnelRectTuple(this.miningBotLabel));
 
                     if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                        //System.out.println(new FindPixels().findRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
+                        //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.amountRect++;
                         descentFlag = false;
 
@@ -95,7 +95,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                         Rectangle dock = new SegmentedRegions().getRectangle(this.fhd.getDockWxHlist(), this.getFunnelRectTuple(this.homeStationLabel));
 
                         if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                            //System.out.println(new FindPixels().findRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
+                            //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                             this.amountRect++;
                             descentFlag = false;
                         }
@@ -174,7 +174,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> tupleBegin, Triplet<Integer, Integer, Integer> tupleEnd) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && new FindPixels().findRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
+        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
 
             if (chosenClick == LEFTCLICK) {

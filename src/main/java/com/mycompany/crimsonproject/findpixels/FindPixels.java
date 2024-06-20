@@ -19,7 +19,7 @@ public class FindPixels {
 
     private static final int APPR_PERCENT = 25;
 
-    public boolean countPixels(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> tuplePixel) throws IOException {
+    public boolean countPixelsByColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> tuplePixel) throws IOException {
 
         this.bf = ImageIO.read(this.imageFile);
         int area = 0;
@@ -61,7 +61,7 @@ public class FindPixels {
         return area;
     }
 
-    public boolean findRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
+    public boolean findByRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
 
         this.bf = ImageIO.read(this.imageFile);
 
