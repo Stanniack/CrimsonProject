@@ -24,7 +24,7 @@ import org.javatuples.Triplet;
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private FullHd fhd = null;
-    private RGBrange rgbr;
+    private final RGBrange rgbr;
     private Rectangle miningBotLabel = null;
     private Rectangle homeStationLabel = null;
     private static final int RIGHTCLICK = 0;
