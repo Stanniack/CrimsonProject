@@ -70,7 +70,7 @@ public class CargoDeposit implements VerifyRectangle {
 
     } // end method
 
-    private boolean findHangar() throws IOException, TesseractException, InterruptedException {
+    private boolean findHangar() throws IOException, TesseractException, InterruptedException, AWTException {
 
         this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
 

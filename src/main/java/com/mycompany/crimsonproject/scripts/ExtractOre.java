@@ -38,7 +38,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
-    private static final int TIMETOSETASTEROID_MS = 700000;
+    private static final int TIMETOSETASTEROID_MS = 1000000;
     private static final int TIMETOSTARTDRAGSCREEN_MS = 1745600;
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 2000;

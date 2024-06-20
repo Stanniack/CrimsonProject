@@ -85,7 +85,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
     } // end method
 
-    private String verifyCargoHold() throws IOException, TesseractException, InterruptedException {
+    private String verifyCargoHold() throws IOException, TesseractException, InterruptedException, AWTException {
 
         Rectangle maxCargo = new SegmentedRegions().getRectangle(this.fhd.getMaxCargoWxHList(), this.fhd.getInventoryDeadzone());
 
@@ -108,7 +108,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
         return "notFound";
     }
 
-    private boolean findHangar() throws IOException, TesseractException, InterruptedException {
+    private boolean findHangar() throws IOException, TesseractException, InterruptedException, AWTException {
 
         this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
 
