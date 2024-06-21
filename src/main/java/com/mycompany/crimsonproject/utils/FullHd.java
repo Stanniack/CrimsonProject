@@ -285,15 +285,16 @@ public class FullHd {
     private static final int VENTURECANNON_W1 = 42;
     private static final int VENTURECANNON_H1 = 40;
 
+    //(1042, 950, 46, 8)
     private final List<Pair<Integer, Integer>> stripMinerCannonWxHlit = Arrays.asList(new Pair<>(STRIPMINERCANNON_W1, STRIPMINERCANNON_H1));
-    private static final int STRIPMINERCANNON_W1 = 42;
-    private static final int STRIPMINERCANNON_H1 = 7;
+    private static final int STRIPMINERCANNON_W1 = 46;
+    private static final int STRIPMINERCANNON_H1 = 8;
 
     private final List<Pair<Integer, Integer>> ventureXcannonCoordinates = Arrays.asList(
             new Pair<>(F1CANNON1_X, F2CANNON2_X));
-    private static final int F1CANNON1_X = 1044;
-    private static final int F2CANNON2_X = 1095;
-    private static final int FnCANNONS_Y = 910;
+    private static final int F1CANNON1_X = 1042;
+    private static final int F2CANNON2_X = 1092;
+    private static final int FnCANNONS_Y = 950;
     /* ------------------------------------------------------------- */
 
     //!!!!!!!!!!
