@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenShot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -10,16 +11,20 @@ import java.io.IOException;
 
 import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
+import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
+import com.mycompany.crimsonproject.utils.RGBrange;
+import org.javatuples.Triplet;
 
 /**
  *
  * @author Devmachine
  *
  */
-public class CargoDeposit implements VerifyRectangle {
+public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     private final FullHd fhd;
-    
+    private final RGBrange rgbr;
+
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
 
@@ -29,6 +34,7 @@ public class CargoDeposit implements VerifyRectangle {
 
     public CargoDeposit() {
         this.fhd = new FullHd();
+        this.rgbr = new RGBrange();
     }
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
@@ -41,7 +47,9 @@ public class CargoDeposit implements VerifyRectangle {
             switch (this.amountRect) {
 
                 case 0 -> {
-                    if (this.findHangar()) {
+                    this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
+                    
+                    if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                         this.amountRect++;
                     } else {
                         new ClickScreenEvents().dragScreen();
@@ -70,20 +78,6 @@ public class CargoDeposit implements VerifyRectangle {
 
     } // end method
 
-    private boolean findHangar() throws IOException, TesseractException, InterruptedException, AWTException {
-
-        this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
-
-        if (this.hangarButton != null) {
-            System.out.printf("Rect found (HANGAR) - Width: %d and height: %d at coordinates (%d, %d)\n\n",
-                    this.hangarButton.width, this.hangarButton.height, this.hangarButton.x, this.hangarButton.y);
-
-            return true;
-        }
-
-        return false;
-    }
-
     private void dragItens() throws AWTException, InterruptedException {
         new ClickScreenEvents().dragItemsToInventory(this.fhd.getDragItensDeadZoneList(), this.hangarButton);
     }
@@ -104,6 +98,18 @@ public class CargoDeposit implements VerifyRectangle {
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> tupleBegin, Triplet<Integer, Integer, Integer> tupleEnd) throws AWTException, InterruptedException, IOException {
+
+        /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
+        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
+            System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
+
+            return true;
+        }
         return false;
     }
 
