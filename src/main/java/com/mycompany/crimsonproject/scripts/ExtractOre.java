@@ -41,7 +41,7 @@ public class ExtractOre implements VerifyRectangle {
     private static final int TIMETOSETASTEROID_MS = 1000000;
     private static final int TIMETOSTARTDRAGSCREEN_MS = 1945600;
     private static final int GOTO_HOMESTATION = 0;
-    private static final int CANNON_SLEEP = 2000;
+    private static final int CANNON_SLEEP = 1500;
 
     private long timeStartLockTarget = 0;
     private long timeStart = 0;
@@ -193,8 +193,7 @@ public class ExtractOre implements VerifyRectangle {
                 FullHd.getOVERVIEWMINING_Y1(), FullHd.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
-            System.out.println("Hash map size: " + rectResult.size());
-            System.out.println("All Asteroids: " + rectResult.toString());
+            System.out.println("All Asteroids: " + rectResult.size());
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
