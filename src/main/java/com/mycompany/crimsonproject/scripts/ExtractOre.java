@@ -197,8 +197,7 @@ public class ExtractOre implements VerifyRectangle {
                 FullHd.getOVERVIEWMINING_Y1(), FullHd.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
-            System.out.println("Hash map size: " + rectResult.size());
-            System.out.println("All Asteroids: " + rectResult.toString());
+            System.out.println("All Asteroids: " + rectResult.size());
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
