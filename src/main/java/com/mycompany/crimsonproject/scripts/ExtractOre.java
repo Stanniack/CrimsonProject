@@ -39,9 +39,9 @@ public class ExtractOre implements VerifyRectangle {
     private static final int LOCKTARGET_MS = 60000;
     private static final int SWITCHFLAG = 7;
     private static final int TIMETOSETASTEROID_MS = 1000000;
-    private static final int TIMETOSTARTDRAGSCREEN_MS = 1945600;
+    private static final int TIMETOSTARTDRAGSCREEN_MS = 2200000; //1945600
     private static final int GOTO_HOMESTATION = 0;
-    private static final int CANNON_SLEEP = 2000;
+    private static final int CANNON_SLEEP = 1500;
 
     private long timeStartLockTarget = 0;
     private long timeStart = 0;
@@ -74,6 +74,10 @@ public class ExtractOre implements VerifyRectangle {
             // Call method
             if (this.verifyShipLife()) {
                 return false;
+            }
+            
+            if (this.amountRect > 2) {
+                this.checkMinerCannonOutSwitch();
             }
 
             switch (this.amountRect) {
@@ -257,7 +261,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (!this.isMinerCannonAction(i, 31, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), this.rgbr.getMinStripActiveMinerRGB(), this.rgbr.getMaxStripActiveMinerRGB())) {
+            if (!this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
                 new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("\nCannon was deactived. Activating again.\n");
                 System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
