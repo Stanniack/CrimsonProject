@@ -50,6 +50,15 @@
 # Alpha v0.3.5 - 17/05/24
   - Adicionando um script similar ao CheckCargoDeposit (CargoDeposit) mas que não verifica se o mining hold da nave está cheio, apenas transfere a possível carga e sai da estação.
 
+# Alpha v0.3.6 - 01/06/24
+  - Adicionando um método para verificar targets que não sejam asteroids (1ª versão ainda em testes).
+
+# Alpha v0.3.7 - 12/06/24
+  - Introduzindo drones mineradores: Launch, engage and return.
+
+# Alpha v0.3.8 - 20/06/24
+  - Introduzindo método que verifica se a nave está sendo atacada (1ª versão).
+
 # Bug fixes
 
 * Alpha v0.0.0 - 02/02/24
@@ -70,6 +79,12 @@
 
 * Alpha v0.3.5 - 26/05/24
   - Tratando exceção de NullPointerException do Tesseract quando o método getSegmentedRegions não encontra nenhum retângulo, retornando NULL e parando o algoritmo.
+
+* Alpha v0.3.6 - 07/06/24
+  - Aprimorando método invalidTarget em ExtractOre
+
+* Alpha v0.3.7 - 19/06/24
+  - Tratando exceção de NullPointerException do Tesseract quando o método getSegmentedRegions não encontra nenhum retângulo, adicionando sleep na captura do erro e procurando novamente a imagem.
    
 
   
