@@ -83,14 +83,14 @@ public class RGBrange {
     private static final int FULLWHITE_GREEN = 255;
     private static final int FULLWHITE_BLUE = 255;
 
-    private final Triplet<Integer, Integer, Integer> minNpcPlayerRGB = new Triplet<>(MAXPLAYERNPCCOLOR_RED, MAXPLAYERNPCCOLOR_GREEN, MAXPLAYERNPCCOLOR_BLUE);
-    private final Triplet<Integer, Integer, Integer> maxNpcPlayerRGB = new Triplet<>(MINPLAYERNPCCOLOR_RED, MINPLAYERNPCCOLOR_GREEN, MINPLAYERNPCCOLOR_BLUE);
-    private static final int MAXPLAYERNPCCOLOR_RED = 105;
-    private static final int MAXPLAYERNPCCOLOR_GREEN = 107;
-    private static final int MAXPLAYERNPCCOLOR_BLUE = 107;
+    private final Triplet<Integer, Integer, Integer> minNpcPlayerRGB = new Triplet<>(MINPLAYERNPCCOLOR_RED, MINPLAYERNPCCOLOR_GREEN, MINPLAYERNPCCOLOR_BLUE);
+    private final Triplet<Integer, Integer, Integer> maxNpcPlayerRGB = new Triplet<>(MAXPLAYERNPCCOLOR_RED, MAXPLAYERNPCCOLOR_GREEN, MAXPLAYERNPCCOLOR_BLUE);
     private static final int MINPLAYERNPCCOLOR_RED = 101;
     private static final int MINPLAYERNPCCOLOR_GREEN = 101;
     private static final int MINPLAYERNPCCOLOR_BLUE = 101;
+    private static final int MAXPLAYERNPCCOLOR_RED = 105;
+    private static final int MAXPLAYERNPCCOLOR_GREEN = 107;
+    private static final int MAXPLAYERNPCCOLOR_BLUE = 107;
 
     public Triplet<Integer, Integer, Integer> getMinDestinationRGB() {
         return minDestinationRGB;

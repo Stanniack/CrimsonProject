@@ -163,36 +163,31 @@ public class SegmentedRegions {
                     && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
 
                 for (Pair<Integer, Integer> asteroid : this.fhd.getCondensedScorditeList()) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, this.rgbr.getMinNpcPlayerRGB(), this.rgbr.getMaxNpcPlayerRGB())) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P0:CS - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : this.fhd.getListScordite()) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, this.rgbr.getMinNpcPlayerRGB(), this.rgbr.getMaxNpcPlayerRGB())) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P1:S - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : this.fhd.getDenseVeldsparList()) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, this.rgbr.getMinNpcPlayerRGB(), this.rgbr.getMaxNpcPlayerRGB())) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P2:DV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : this.fhd.getConcentratedVeldsparList()) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, this.rgbr.getMinNpcPlayerRGB(), this.rgbr.getMaxNpcPlayerRGB())) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P3:CV - i: " + i, result.get(i));
                     }
                 }
 
                 for (Pair<Integer, Integer> asteroid : this.fhd.getVeldsparList()) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()
-                            && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width + moe, result.get(i).height + moe, this.rgbr.getMinNpcPlayerRGB(), this.rgbr.getMaxNpcPlayerRGB())) {
+                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P4:V - i: " + i, result.get(i));
                     }
                 }

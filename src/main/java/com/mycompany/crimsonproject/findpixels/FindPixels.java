@@ -73,7 +73,7 @@ public class FindPixels {
                         && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
                         && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
 
-                    System.out.println(this.color.toString());
+                    //System.out.println(this.color.toString());
                     return true;
                 }
             }
