@@ -75,7 +75,7 @@ public class ExtractOre implements VerifyRectangle {
             if (this.verifyShipLife()) {
                 return false;
             }
-            
+
             if (this.amountRect > 2) {
                 this.checkMinerCannonOutSwitch();
             }
@@ -255,7 +255,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void checkMinerCannonOutSwitch() throws InterruptedException, AWTException, IOException {
-        //Long start = System.currentTimeMillis();
+        Long start = System.currentTimeMillis();
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
         for (int i = 0; i < events.size(); i++) {
@@ -263,11 +263,41 @@ public class ExtractOre implements VerifyRectangle {
             if (!this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
                 new KeyboardEvents().clickKey(events.get(i));
                 //System.out.println("\nCannon was deactived. Activating again.\n");
-                //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
-
+                System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs in " + i + " tries");
             }
         }
 
+    }
+
+    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
+
+        boolean action;
+
+        for (int j = 0; j < flagAttempt; j++) {
+            new TakeScreenShot().take();
+
+            action = new FindPixels().findByRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
+
+            if (action) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int minGreen, int maxGreen) throws InterruptedException, AWTException, IOException {
+
+        boolean action;
+
+        for (int j = 0; j < flagAttempt; j++) {
+            new TakeScreenShot().take();
+
+            action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
+            if (action) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -294,38 +324,6 @@ public class ExtractOre implements VerifyRectangle {
         System.out.println("Rect not found (APRROACHING)\n");
         return false;
     }
-
-    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-
-        boolean action;
-
-        for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take();
-
-            action = new FindPixels().findByRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
-
-            if (action) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-        private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int minGreen, int maxGreen) throws InterruptedException, AWTException, IOException {
-
-        boolean action;
-
-        for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take();
-
-            action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
-            if (action) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, int moe, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
         boolean isClicked = false;
