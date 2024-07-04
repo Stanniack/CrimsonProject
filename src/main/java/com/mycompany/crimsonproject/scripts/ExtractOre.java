@@ -114,7 +114,7 @@ public class ExtractOre implements VerifyRectangle {
 
                     } else {
                         this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
-                        System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
+                        //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
                         new ClickScreenEvents().dragScreen();
 
                         if (this.flagLockTarget_MS > LOCKTARGET_MS) {
