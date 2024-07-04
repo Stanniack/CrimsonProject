@@ -255,15 +255,15 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void checkMinerCannonOutSwitch() throws InterruptedException, AWTException, IOException {
-        Long start = System.currentTimeMillis();
+        //Long start = System.currentTimeMillis();
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
         for (int i = 0; i < events.size(); i++) {
 
             if (!this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
                 new KeyboardEvents().clickKey(events.get(i));
-                System.out.println("\nCannon was deactived. Activating again.\n");
-                System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
+                //System.out.println("\nCannon was deactived. Activating again.\n");
+                //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
 
             }
         }
