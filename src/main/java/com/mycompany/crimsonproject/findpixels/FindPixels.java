@@ -98,8 +98,8 @@ public class FindPixels {
 
         return false;
     }
-    
-        public boolean findByGreenColor(int row, int column, int width, int height, int minGreen, int maxGreen) throws IOException {
+
+    public boolean findByGreenColor(int row, int column, int width, int height, int minGreen, int maxGreen) throws IOException {
 
         this.bf = ImageIO.read(this.imageFile);
 
@@ -112,7 +112,6 @@ public class FindPixels {
                 }
             }
         }
-
         return false;
     }
 

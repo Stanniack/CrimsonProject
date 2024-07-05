@@ -26,7 +26,6 @@ public class TakeScreenShot extends RobotEvent {
 
         //System.out.println("Screenshot created in path: " + path);
         //System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
-
     }
 
 }
