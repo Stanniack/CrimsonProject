@@ -13,8 +13,8 @@ import java.util.logging.Logger;
  */
 abstract class RobotEvent {
     
-    protected static final int SLEEP_MS = 50; 
-    protected static final int SLEEP_MS2 = 100;
+    protected static final int SLEEP_MS = 100; 
+    protected static final int SLEEP_MS2 = 150;
     protected static final int SLEEP_MS3 = 300;
     
     protected final int leftClick = InputEvent.BUTTON1_DOWN_MASK;
