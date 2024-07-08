@@ -274,7 +274,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take();
+            new TakeScreenShot().take2();
 
             action = new FindPixels().findByRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
 
@@ -290,7 +290,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take();
+            new TakeScreenShot().take2();
 
             action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
             if (action) {
