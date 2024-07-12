@@ -40,7 +40,7 @@ public class MainPC {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            new TextLogs().minPerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", "Route " + i + ": " + (System.currentTimeMillis() - start) / 1000 + " seconds\n");
+            new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", "Route " + i + ": " + (System.currentTimeMillis() - start) / 1000 + " seconds\n");
         }
 
     }

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class TextLogs {
 
-    public void minPerRoute(String path, String message) {
+    public void timePerRoute(String path, String message) {
         boolean exists = new File(path).exists();
 
         try {
