@@ -29,10 +29,12 @@ public class KeyboardEvents extends RobotEvent {
         Thread.sleep(SLEEP_MS);
         this.bot.keyPress(keyEvent1);
         this.bot.keyPress(keyEvent2);
+        this.bot.keyPress(keyEvent3);
         
         Thread.sleep(SLEEP_MS);
         this.bot.keyRelease(keyEvent1);
         this.bot.keyRelease(keyEvent2);
+        this.bot.keyRelease(keyEvent3);
         
     }
 

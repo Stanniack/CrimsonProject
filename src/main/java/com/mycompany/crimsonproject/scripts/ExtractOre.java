@@ -377,9 +377,14 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void returnDrones() throws AWTException, InterruptedException {
+        this.reuturnAndOrbitDrones();
         int waitDrones_MS = 5000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
         Thread.sleep(waitDrones_MS);
+    }
+
+    public void reuturnAndOrbitDrones() throws AWTException, InterruptedException {
+        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);         
     }
 
     private long defineMinerCannonTime_MS() {
