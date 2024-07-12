@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject;
 
+import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.CheckCargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
@@ -19,7 +20,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 1; i++) {
             Long start = System.currentTimeMillis();
             try {
 
@@ -39,7 +40,7 @@ public class MainPC {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            System.out.println("\n--------------------------------------Mins PER ROUTE: " + (System.currentTimeMillis() - start) / 1000 / 60);
+            new TextLogs().minPerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", "Route " + i + ": " + (System.currentTimeMillis() - start) / 1000 + " seconds\n");
         }
 
     }
