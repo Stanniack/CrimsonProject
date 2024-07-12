@@ -1,7 +1,7 @@
 package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
-import com.mycompany.crimsonproject.robot.TakeScreenShot;
+import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.FullHd;
 import com.mycompany.crimsonproject.utils.RGBrange;
@@ -73,7 +73,7 @@ public class SegmentedRegions {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
             Thread.sleep(20000);
-            new TakeScreenShot().take();
+            new TakeScreenshot().take();
             result = this.getSegmentedFile();
         }
 
@@ -110,7 +110,7 @@ public class SegmentedRegions {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
             Thread.sleep(20000);
-            new TakeScreenShot().take();
+            new TakeScreenshot().take();
             result = this.getSegmentedFile();
         }
 

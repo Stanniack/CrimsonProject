@@ -1,7 +1,7 @@
 package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
-import com.mycompany.crimsonproject.robot.TakeScreenShot;
+import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.FullHd;
 import java.awt.AWTException;
@@ -35,7 +35,7 @@ public class CheckCargoDeposit implements VerifyRectangle {
 
         while (this.amountRect < SWTICHFLAG) {
 
-            new TakeScreenShot().take();
+            new TakeScreenshot().take();
             // Todo connection lost
 
             switch (this.amountRect) {

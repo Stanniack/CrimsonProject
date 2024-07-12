@@ -4,7 +4,7 @@ import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
-import com.mycompany.crimsonproject.robot.TakeScreenShot;
+import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import com.mycompany.crimsonproject.utils.FullHd;
@@ -68,7 +68,7 @@ public class ExtractOre implements VerifyRectangle {
         while (this.amountRect < SWITCHFLAG) {
 
             // Call method
-            new TakeScreenShot().take();
+            new TakeScreenshot().take();
             // Call method
             this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
             // Call method
@@ -274,7 +274,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take2();
+            new TakeScreenshot().take2();
 
             action = new FindPixels().findByRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
 
@@ -290,7 +290,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean action;
 
         for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenShot().take2();
+            new TakeScreenshot().take2();
 
             action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
             if (action) {
