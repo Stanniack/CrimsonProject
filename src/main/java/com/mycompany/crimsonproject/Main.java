@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Thread.sleep(4000);
-            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
+            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
             Thread.sleep(2000);
             new KeyboardEvents().clickKey(KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
