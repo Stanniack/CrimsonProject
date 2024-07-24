@@ -259,7 +259,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (!this.isMinerCannonAction(i, 31, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
+            if (!this.isMinerCannonAction(i, 17, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
                 new KeyboardEvents().clickKey(events.get(i));
                 //System.out.println("\nCannon was deactived. Activating again.\n");
 
@@ -384,7 +384,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     public void returnAndOrbitDrones() throws AWTException, InterruptedException {
-        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);         
+        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
     }
 
     private long defineMinerCannonTime_MS() {
