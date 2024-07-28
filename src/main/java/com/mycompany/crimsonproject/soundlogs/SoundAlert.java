@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.soundlogs;
 
+import com.mycompany.crimsonproject.utils.MathTools;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class SoundAlert {
                     Clip clip = (Clip) AudioSystem.getLine(info);
                     clip.open(sound);
                     clip.start();
-                    Thread.sleep((long) new SoundAlert().getSoundDurationSecs(sound) * 1000);
+                    Thread.sleep((long) new MathTools().getSoundFileTimeInSec(sound) * 1000);
                     clip.close();
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException ex) {
                     Logger.getLogger(SoundAlert.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +59,7 @@ public class SoundAlert {
                     clip.open(sound);
                     clip.loop(loopCount);
                     clip.start();
-                    Thread.sleep((long) new SoundAlert().getSoundDurationSecs(sound) * 1000 * loopCount);
+                    Thread.sleep((long) new MathTools().getSoundFileTimeInSec(sound) * 1000 * loopCount);
                     clip.close();
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException ex) {
                     Logger.getLogger(SoundAlert.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,9 +71,5 @@ public class SoundAlert {
         t1.start();
         System.out.println("And the world goes on...");
 
-    }
-
-    private float getSoundDurationSecs(AudioInputStream sound) {
-        return sound.getFrameLength() / sound.getFormat().getFrameRate();
     }
 }
