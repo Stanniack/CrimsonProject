@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author DevMachine
  */
-public class TakeScreenshot extends RobotEvent {
+public class TakeScreenshot2 extends RobotEvent {
 
     public void take() throws InterruptedException, AWTException, IOException {
         Thread.sleep(SLEEP_MS2);
