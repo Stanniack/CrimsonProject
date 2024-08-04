@@ -244,6 +244,7 @@ public class ExtractOre implements VerifyRectangle {
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
+                this.engageDrones(); // engage drones again
 
             } else {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
@@ -373,6 +374,10 @@ public class ExtractOre implements VerifyRectangle {
         int timeSleep_MS = 3000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
         Thread.sleep(timeSleep_MS);
+        new KeyboardEvents().clickKey(KeyEvent.VK_F);
+    }
+
+    private void engageDrones() throws AWTException, InterruptedException {
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
     }
 
