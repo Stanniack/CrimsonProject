@@ -43,7 +43,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     public void startScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
 
-        do {
+        while (this.amountRect < SWITCHFLAG) {
 
             boolean descentFlag = true;
             new TakeScreenshot().take();
@@ -122,7 +122,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
             } // end case 3
 
-        } while (this.amountRect < SWITCHFLAG);
+        }
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getFunnelRectTuple(Rectangle rect) {

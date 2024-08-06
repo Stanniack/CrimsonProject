@@ -80,109 +80,114 @@ public class ExtractOre implements VerifyRectangle {
                 this.checkMinerCannonOutSwitch();
             }
 
-            switch (this.amountRect) {
+            // call method
+            this.flowScript();
 
-                case 0 -> {
-                    if (this.getAsteroids()) {
-                        this.timeStartLockTarget = System.currentTimeMillis();
-                        this.amountRect++; // go to case 1
-                    }
-                } // end case 0
-
-                case 1 -> {
-                    target = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
-
-                    // target identified
-                    if (this.verifyRectangle(target, "TARGET", 0)) {
-
-                        boolean lockTarget = new FindPixels().findByRangeColor(target.x, target.y, target.width, target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB());
-
-                        // If there is a lock target, just go to next step
-                        if (lockTarget) {
-                            this.amountRect++; // go to case 2
-
-                        } else {
-                            boolean freeTarget = new FindPixels().findByRangeColor(target.x, target.y, target.width, target.height, this.rgbr.getMinFreeTargetRGB(), this.rgbr.getMaxFreeTargetRGB());
-                            // If there is no lock target but the target is free, click target and go next step
-                            if (freeTarget) {
-                                new ClickScreenEvents().leftClickCenterButton(target);
-                                this.amountRect++; // go to case 2
-                            } else {
-                                System.out.println("Free target not found.");
-                            }
-                        }
-
-                    } else {
-                        this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
-                        //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
-                        new ClickScreenEvents().dragScreen();
-
-                        if (this.flagLockTarget_MS > LOCKTARGET_MS) {
-                            System.out.println("Restarting script.\n\n");
-                            this.flagLockTarget_MS = 0; // reset flag
-                            this.amountRect = 0; // reset script
-                        }
-                    }
-                } // end case 1
-
-                case 2 -> {
-                    this.timeStart = System.currentTimeMillis();
-                    this.launchDrones(); //!!!!
-                    Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
-                    this.checkMinerCannonAction();
-                    this.amountRect++; // go to case 3
-                } // end case 2
-
-                case 3 -> {
-                    Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
-
-                    if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
-                        this.amountRect = 6; // go to case 6 - docking and drag itens to main station
-
-                    } else {
-                        if (this.flagUntilToBeFilled_MS > TIMETOSTARTDRAGSCREEN_MS) {
-                            new ClickScreenEvents().dragScreen();
-                        }
-
-                        //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
-                        this.amountRect++; // go to case 4
-                    }
-                } // end case 3
-
-                case 4 -> {
-                    if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOSETASTEROID_MS)) {
-                        this.amountRect++; // Approaching not found or time exceeded
-
-                    } else {
-                        if (this.checkPixelsAprroaching()) {
-                            this.amountRect--; // back to case and check maxCargo
-                        }
-                    }
-
-                    this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
-                    this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
-                    //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
-                } // end case 4
-
-                case 5 -> {
-                    this.flagUntilToBeFilled_MS = 0;
-                    this.flagTimeToBeFilled_MS = 0;
-                    this.amountRect = 0;
-                } // end case 5
-
-                case 6 -> {
-                    this.returnDrones();
-                    new SetDestination().startScript(GOTO_HOMESTATION);
-                    System.out.println("End of mining and go docking!\n");
-                    this.amountRect++;
-                } // end case 6
-
-            }
-
-        } // end while
+        }
 
         return true;
 
+    }
+
+    private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
+        switch (this.amountRect) {
+
+            case 0 -> {
+                if (this.getAsteroids()) {
+                    this.timeStartLockTarget = System.currentTimeMillis();
+                    this.amountRect++; // go to case 1
+                }
+            } // end case 0
+
+            case 1 -> {
+                target = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
+
+                // target identified
+                if (this.verifyRectangle(target, "TARGET", 0)) {
+
+                    boolean lockTarget = new FindPixels().findByRangeColor(target.x, target.y, target.width, target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB());
+
+                    // If there is a lock target, just go to next step
+                    if (lockTarget) {
+                        this.amountRect++; // go to case 2
+
+                    } else {
+                        boolean freeTarget = new FindPixels().findByRangeColor(target.x, target.y, target.width, target.height, this.rgbr.getMinFreeTargetRGB(), this.rgbr.getMaxFreeTargetRGB());
+                        // If there is no lock target but the target is free, click target and go next step
+                        if (freeTarget) {
+                            new ClickScreenEvents().leftClickCenterButton(target);
+                            this.amountRect++; // go to case 2
+                        } else {
+                            System.out.println("Free target not found.");
+                        }
+                    }
+
+                } else {
+                    this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
+                    //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
+                    new ClickScreenEvents().dragScreen();
+
+                    if (this.flagLockTarget_MS > LOCKTARGET_MS) {
+                        System.out.println("Restarting script.\n\n");
+                        this.flagLockTarget_MS = 0; // reset flag
+                        this.amountRect = 0; // reset script
+                    }
+                }
+            } // end case 1
+
+            case 2 -> {
+                this.timeStart = System.currentTimeMillis();
+                this.launchDrones(); //!!!!
+                Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
+                this.checkMinerCannonAction();
+                this.amountRect++; // go to case 3
+            } // end case 2
+
+            case 3 -> {
+                Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
+
+                if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
+                    this.amountRect = 6; // go to case 6 - docking and drag itens to main station
+
+                } else {
+                    if (this.flagUntilToBeFilled_MS > TIMETOSTARTDRAGSCREEN_MS) {
+                        new ClickScreenEvents().dragScreen();
+                    }
+
+                    //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
+                    this.amountRect++; // go to case 4
+                }
+            } // end case 3
+
+            case 4 -> {
+                if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOSETASTEROID_MS)) {
+                    this.amountRect++; // Approaching not found or time exceeded
+
+                } else {
+                    if (this.checkPixelsAprroaching()) {
+                        this.amountRect--; // back to case and check maxCargo
+                    }
+                }
+
+                this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
+                this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
+                //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
+            } // end case 4
+
+            case 5 -> {
+                this.flagUntilToBeFilled_MS = 0;
+                this.flagTimeToBeFilled_MS = 0;
+                this.amountRect = 0;
+            } // end case 5
+
+            case 6 -> {
+                this.returnDrones();
+                new SetDestination().startScript(GOTO_HOMESTATION);
+                System.out.println("End of mining and go docking!\n");
+                this.amountRect++;
+            } // end case 6
+
+        }
     }
 
     private boolean getAsteroids() throws IOException, TesseractException, AWTException, InterruptedException {
