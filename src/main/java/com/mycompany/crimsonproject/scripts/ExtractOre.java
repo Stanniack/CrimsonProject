@@ -182,7 +182,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 6 -> {
                 this.returnDrones();
-                new SetDestination().startScript(GOTO_HOMESTATION);
+                new SetDestination(GOTO_HOMESTATION).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.amountRect++;
             } // end case 6
@@ -412,7 +412,7 @@ public class ExtractOre implements VerifyRectangle {
         if (isBeingAttacked) {
             System.out.println("\nYOUR SHIP IS BEING ATTACKED, RETURNING HOME STATION AND ENDING SCRIPT!\n");
             this.returnDrones();
-            new SetDestination().startScript(GOTO_HOMESTATION);
+            new SetDestination(GOTO_HOMESTATION).startScript();
         }
 
         return isBeingAttacked;

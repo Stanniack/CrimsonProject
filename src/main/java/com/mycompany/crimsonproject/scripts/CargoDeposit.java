@@ -40,43 +40,45 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
         while (this.amountRect < SWTICHFLAG) {
-
-            new TakeScreenshot().take();
             // Todo connection lost
+            new TakeScreenshot().take();
+            this.flowScript();
+        }
 
-            switch (this.amountRect) {
+    }
 
-                case 0 -> {
-                    this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
-                    
-                    if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                        this.amountRect++;
-                    } else {
-                        new ClickScreenEvents().dragScreen();
-                    }
-                }
+    private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
 
-                case 1 -> {
-                    this.dragItens();
+        switch (this.amountRect) {
+
+            case 0 -> {
+                this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
+
+                if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                     this.amountRect++;
-                    this.hangarButton = null;
+                } else {
+                    new ClickScreenEvents().dragScreen();
                 }
+            }
 
-                case 2 -> {
-                    Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
+            case 1 -> {
+                this.dragItens();
+                this.amountRect++;
+                this.hangarButton = null;
+            }
 
-                    if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
-                        this.amountRect++;
-                    } else {
-                        new ClickScreenEvents().dragScreen();
-                    }
+            case 2 -> {
+                Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
+
+                if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                    this.amountRect++;
+                } else {
+                    new ClickScreenEvents().dragScreen();
                 }
+            }
 
-            } // end switch
-
-        } // end main loop
-
-    } // end method
+        } // end switch
+    }
 
     private void dragItens() throws AWTException, InterruptedException {
         new ClickScreenEvents().dragItemsToInventory(this.fhd.getDragItensDeadZoneList(), this.hangarButton);

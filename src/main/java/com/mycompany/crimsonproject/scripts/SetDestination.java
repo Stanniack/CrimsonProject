@@ -23,6 +23,7 @@ import org.javatuples.Triplet;
  */
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
+    private final int option;
     private FullHd fhd = null;
     private final RGBrange rgbr;
     private Rectangle miningBotLabel = null;
@@ -36,93 +37,100 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private int amountRect = 0;
 
-    public SetDestination() {
+    public SetDestination(int option) {
+        this.option = option;
         this.rgbr = new RGBrange();
         this.fhd = new FullHd();
     }
 
-    public void startScript(int option) throws IOException, TesseractException, AWTException, InterruptedException {
+    public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
         while (this.amountRect < SWITCHFLAG) {
+            // Todo connection lost 
+            this.flowScript();
+        }
 
-            boolean descentFlag = true;
-            new TakeScreenshot().take();
+    }
 
-            switch (this.amountRect) {
+    private void flowScript() throws InterruptedException, AWTException, IOException, TesseractException {
 
-                case 0 -> {
-                    if (this.openLocation()) {
-                        this.amountRect++;
-                    }
+        new TakeScreenshot().take();
 
-                } // end case 0
+        boolean descentFlag = true;
 
-                case 1 -> {
-                    this.miningBotLabel = new SegmentedRegions().getRectangle(this.fhd.getMiningBotWxH(), this.fhd.getTupleLocationTabDeadZone());
+        switch (this.amountRect) {
 
-                    if (option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
-                        this.amountRect++;
-                        descentFlag = false;
-
-                    } else {
-                        this.homeStationLabel = new SegmentedRegions().getRectangle(this.fhd.getHomeStationWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-
-                        if (option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
-                            this.amountRect++;
-                            descentFlag = false;
-                        }
-                    }
-
-                    /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
-                    if (descentFlag) {
-                        Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-                        this.amountRect--;
-                        this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
-                        new ClickScreenEvents().dragScreen();
-                    }
-
-                } // end case 1
-
-                case 2 -> {
-                    Rectangle warpBlock = new SegmentedRegions().getRectangle(this.fhd.getWarpWxHlist(), this.getFunnelRectTuple(this.miningBotLabel));
-
-                    if (option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                        //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
-                        this.amountRect++;
-                        descentFlag = false;
-
-                    } else {
-                        Rectangle dock = new SegmentedRegions().getRectangle(this.fhd.getDockWxHlist(), this.getFunnelRectTuple(this.homeStationLabel));
-
-                        if (option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                            //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
-                            this.amountRect++;
-                            descentFlag = false;
-                        }
-                    }
-
-                    // back to case 1 and find the MININGBOT1 or HOMESTATION1 to restart finding WITHIN/DOCK
-                    if (descentFlag) {
-                        Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-                        this.amountRect--;
-                        this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
-                        new ClickScreenEvents().dragScreen();
-                    }
-
-                } // end case 2
-
-                case 3 -> {
-                    Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-
-                    if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
-                        this.amountRect++;
-                    }
-
+            case 0 -> {
+                if (this.openLocation()) {
+                    this.amountRect++;
                 }
 
-            } // end case 3
+            } // end case 0
 
-        }
+            case 1 -> {
+                this.miningBotLabel = new SegmentedRegions().getRectangle(this.fhd.getMiningBotWxH(), this.fhd.getTupleLocationTabDeadZone());
+
+                if (this.option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
+                    this.amountRect++;
+                    descentFlag = false;
+
+                } else {
+                    this.homeStationLabel = new SegmentedRegions().getRectangle(this.fhd.getHomeStationWxHlist(), this.fhd.getTupleLocationTabDeadZone());
+
+                    if (this.option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
+                        this.amountRect++;
+                        descentFlag = false;
+                    }
+                }
+
+                /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
+                if (descentFlag) {
+                    Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
+                    this.amountRect--;
+                    this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                    new ClickScreenEvents().dragScreen();
+                }
+
+            } // end case 1
+
+            case 2 -> {
+                Rectangle warpBlock = new SegmentedRegions().getRectangle(this.fhd.getWarpWxHlist(), this.getFunnelRectTuple(this.miningBotLabel));
+
+                if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
+                    //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
+                    this.amountRect++;
+                    descentFlag = false;
+
+                } else {
+                    Rectangle dock = new SegmentedRegions().getRectangle(this.fhd.getDockWxHlist(), this.getFunnelRectTuple(this.homeStationLabel));
+
+                    if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
+                        //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
+                        this.amountRect++;
+                        descentFlag = false;
+                    }
+                }
+
+                // back to case 1 and find the MININGBOT1 or HOMESTATION1 to restart finding WITHIN/DOCK
+                if (descentFlag) {
+                    Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
+                    this.amountRect--;
+                    this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
+                    new ClickScreenEvents().dragScreen();
+                }
+
+            } // end case 2
+
+            case 3 -> {
+                Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
+
+                if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
+                    this.amountRect++;
+                }
+
+            }
+
+        } // while
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getFunnelRectTuple(Rectangle rect) {
