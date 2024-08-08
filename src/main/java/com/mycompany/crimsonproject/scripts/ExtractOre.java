@@ -67,15 +67,18 @@ public class ExtractOre implements VerifyRectangle {
 
         while (this.amountRect < SWITCHFLAG) {
 
-            // Call method
+            // Call method priority MAX
             new TakeScreenshot().take();
+            
             // Call method
             this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
+            
             // Call method
             if (this.verifyShipLife()) {
                 return false;
             }
 
+            //Call method
             if (this.amountRect > 2) {
                 this.checkMinerCannonOutSwitch();
             }
