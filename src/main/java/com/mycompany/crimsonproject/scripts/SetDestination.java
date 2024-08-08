@@ -33,9 +33,9 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
     // it depends the amount of switch cases
-    private static final int SWITCHFLAG = 4;
+    private static final int STEPS = 4;
 
-    private int amountRect = 0;
+    private int walkThrough = 0;
 
     public SetDestination(int option) {
         this.option = option;
@@ -45,7 +45,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        while (this.amountRect < SWITCHFLAG) {
+        while (this.walkThrough < STEPS) {
             // Call method priority MAX
             new TakeScreenshot().take();
 
@@ -62,11 +62,11 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
         boolean descentFlag = true;
 
-        switch (this.amountRect) {
+        switch (this.walkThrough) {
 
             case 0 -> {
                 if (this.openLocation()) {
-                    this.amountRect++;
+                    this.walkThrough++;
                 }
 
             } // end case 0
@@ -75,14 +75,14 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 this.miningBotLabel = new SegmentedRegions().getRectangle(this.fhd.getMiningBotWxH(), this.fhd.getTupleLocationTabDeadZone());
 
                 if (this.option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
-                    this.amountRect++;
+                    this.walkThrough++;
                     descentFlag = false;
 
                 } else {
                     this.homeStationLabel = new SegmentedRegions().getRectangle(this.fhd.getHomeStationWxHlist(), this.fhd.getTupleLocationTabDeadZone());
 
                     if (this.option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
-                        this.amountRect++;
+                        this.walkThrough++;
                         descentFlag = false;
                     }
                 }
@@ -90,7 +90,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                 if (descentFlag) {
                     Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-                    this.amountRect--;
+                    this.walkThrough--;
                     this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     new ClickScreenEvents().dragScreen();
                 }
@@ -102,7 +102,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
                 if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                     //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
-                    this.amountRect++;
+                    this.walkThrough++;
                     descentFlag = false;
 
                 } else {
@@ -110,7 +110,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
                     if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                         //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
-                        this.amountRect++;
+                        this.walkThrough++;
                         descentFlag = false;
                     }
                 }
@@ -118,7 +118,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 // back to case 1 and find the MININGBOT1 or HOMESTATION1 to restart finding WITHIN/DOCK
                 if (descentFlag) {
                     Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
-                    this.amountRect--;
+                    this.walkThrough--;
                     this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     new ClickScreenEvents().dragScreen();
                 }
@@ -129,7 +129,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
 
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
-                    this.amountRect++;
+                    this.walkThrough++;
                 }
 
             }

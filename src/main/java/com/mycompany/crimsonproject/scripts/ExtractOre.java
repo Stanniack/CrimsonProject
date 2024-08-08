@@ -31,13 +31,13 @@ public class ExtractOre implements VerifyRectangle {
     private RGBrange rgbr = null;
     private FullHd fhd = null;
 
-    private int amountRect = 0;
+    private int walkThrough = 0;
     private long flagTimeToBeFilled_MS = 0;
     private long flagUntilToBeFilled_MS = 0;
     private long flagLockTarget_MS = 0;
 
     private static final int LOCKTARGET_MS = 60000;
-    private static final int SWITCHFLAG = 6;
+    private static final int STEPS = 6;
     private static final int TIMETOSETASTEROID_MS = 1000000;
     private static final int TIMETOSTARTDRAGSCREEN_MS = 2200000; //1945600
     private static final int GOTO_HOMESTATION = 0;
@@ -65,7 +65,7 @@ public class ExtractOre implements VerifyRectangle {
         new KeyboardEvents().clickKey(KeyEvent.VK_F3); // afterburner
         this.timeStart2 = System.currentTimeMillis();
 
-        while (this.amountRect < SWITCHFLAG) {
+        while (this.walkThrough < STEPS) {
 
             // Call method priority MAX
             new TakeScreenshot().take();
@@ -79,7 +79,7 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             //Call method
-            if (this.amountRect > 2) {
+            if (this.walkThrough > 2) {
                 this.checkMinerCannonOutSwitch();
             }
 
@@ -93,12 +93,12 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
-        switch (this.amountRect) {
+        switch (this.walkThrough) {
 
             case 0 -> {
                 if (this.getAsteroids()) {
                     this.timeStartLockTarget = System.currentTimeMillis();
-                    this.amountRect++; // go to case 1
+                    this.walkThrough++; // go to case 1
                 }
             } // end case 0
 
@@ -112,14 +112,14 @@ public class ExtractOre implements VerifyRectangle {
 
                     // If there is a lock target, just go to next step
                     if (lockTarget) {
-                        this.amountRect++; // go to case 2
+                        this.walkThrough++; // go to case 2
 
                     } else {
                         boolean freeTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTargetRGB(), this.rgbr.getMaxFreeTargetRGB());
                         // If there is no lock target but the target is free, click target and go next step
                         if (freeTarget) {
                             new ClickScreenEvents().leftClickCenterButton(this.target);
-                            this.amountRect++; // go to case 2
+                            this.walkThrough++; // go to case 2
                         } else {
                             System.out.println("Free target not found.");
                         }
@@ -133,7 +133,7 @@ public class ExtractOre implements VerifyRectangle {
                     if (this.flagLockTarget_MS > LOCKTARGET_MS) {
                         System.out.println("Restarting script.\n\n");
                         this.flagLockTarget_MS = 0; // reset flag
-                        this.amountRect = 0; // reset script
+                        this.walkThrough = 0; // reset script
                     }
                 }
             } // end case 1
@@ -143,19 +143,19 @@ public class ExtractOre implements VerifyRectangle {
                 this.launchDrones(); //!!!!
                 Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
                 this.checkMinerCannonAction();
-                this.amountRect++; // go to case 3
+                this.walkThrough++; // go to case 3
             } // end case 2
 
             case 3 -> {
                 Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
 
                 if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
-                    this.amountRect = 6; // go to case 6 - docking and drag itens to main station
+                    this.walkThrough = 6; // go to case 6 - docking and drag itens to main station
 
                 } else if (this.flagUntilToBeFilled_MS > TIMETOSTARTDRAGSCREEN_MS) {
                     new ClickScreenEvents().dragScreen();
                     //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
-                    this.amountRect++; // go to case 4
+                    this.walkThrough++; // go to case 4
                 }
             } // end case 3
 
@@ -163,10 +163,10 @@ public class ExtractOre implements VerifyRectangle {
                 if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOSETASTEROID_MS)) {
                     this.flagUntilToBeFilled_MS = 0; // Reset flag
                     this.flagTimeToBeFilled_MS = 0; // Reset flag
-                    this.amountRect = 0; // Approaching not found or time exceeded, restart search for asteroids
+                    this.walkThrough = 0; // Approaching not found or time exceeded, restart search for asteroids
 
                 } else if (this.checkPixelsAprroaching()) {
-                    this.amountRect--; // back to case and check maxCargo
+                    this.walkThrough--; // back to case and check maxCargo
                 }
 
                 this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
@@ -178,7 +178,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.returnDrones();
                 new SetDestination(GOTO_HOMESTATION).startScript();
                 System.out.println("End of mining and go docking!\n");
-                this.amountRect++;
+                this.walkThrough++;
             } // end case 5
 
         }
@@ -349,7 +349,7 @@ public class ExtractOre implements VerifyRectangle {
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
                 new ClickScreenEvents().leftClickCenterButton(locktarget);
-                this.amountRect = 0; //!!
+                this.walkThrough = 0; //!!
 
             } else if (this.target != null) {
                 int asteroidTarget = 36;
@@ -357,11 +357,11 @@ public class ExtractOre implements VerifyRectangle {
                 boolean lockAsteroidTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB());
                 if (lockAsteroidTarget) {
                     new ClickScreenEvents().leftClickCenterButton(this.target);
-                    this.amountRect = 0; //!!
+                    this.walkThrough = 0; //!!
                 }
 
             } else {
-                this.amountRect = 6;
+                this.walkThrough = 6;
                 System.out.println("Invalid locked target not found, ending script.");
             }
 

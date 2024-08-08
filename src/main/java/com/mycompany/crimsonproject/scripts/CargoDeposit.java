@@ -29,8 +29,8 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     private static final int LEFTCLICK = 1;
 
     private Rectangle hangarButton;
-    private int amountRect = 0;
-    private static final int SWTICHFLAG = 3;
+    private int walkThrough = 0;
+    private static final int STEPS = 3;
 
     public CargoDeposit() {
         this.fhd = new FullHd();
@@ -39,7 +39,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
-        while (this.amountRect < SWTICHFLAG) {
+        while (this.walkThrough < STEPS) {
             
             // Call method priority max
             new TakeScreenshot().take();
@@ -55,13 +55,13 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
 
-        switch (this.amountRect) {
+        switch (this.walkThrough) {
 
             case 0 -> {
                 this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
 
                 if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
-                    this.amountRect++;
+                    this.walkThrough++;
                 } else {
                     new ClickScreenEvents().dragScreen();
                 }
@@ -69,7 +69,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
             case 1 -> {
                 this.dragItens();
-                this.amountRect++;
+                this.walkThrough++;
                 this.hangarButton = null;
             }
 
@@ -77,7 +77,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
                 Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
 
                 if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
-                    this.amountRect++;
+                    this.walkThrough++;
                 } else {
                     new ClickScreenEvents().dragScreen();
                 }
