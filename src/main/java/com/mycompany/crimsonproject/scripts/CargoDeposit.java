@@ -40,8 +40,14 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
         while (this.amountRect < SWTICHFLAG) {
-            // Todo connection lost
+            
+            // Call method priority max
             new TakeScreenshot().take();
+            
+            // Todo connection lost
+            // TODO
+            
+            // Call method
             this.flowScript();
         }
 
