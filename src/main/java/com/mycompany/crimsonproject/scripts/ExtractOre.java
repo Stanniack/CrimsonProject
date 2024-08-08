@@ -66,6 +66,8 @@ public class ExtractOre implements VerifyRectangle {
         this.timeStart2 = System.currentTimeMillis();
 
         while (this.walkThrough < STEPS) {
+            // Todo connection lost 
+            // TODO
 
             // Call method priority MAX
             new TakeScreenshot().take();
@@ -93,6 +95,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
+
         switch (this.walkThrough) {
 
             case 0 -> {
@@ -154,9 +157,11 @@ public class ExtractOre implements VerifyRectangle {
 
                 } else if (this.flagUntilToBeFilled_MS > startDRAGSCREEN_MS) {
                     new ClickScreenEvents().dragScreen();
-                    //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
-                    this.walkThrough++; // go to case 4
+
                 }
+
+                //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
+                this.walkThrough++; // go to case 4
             } // end case 3
 
             case 4 -> {
