@@ -38,8 +38,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int STEPS = 6;
-    private static final int TIMETOSETASTEROID_MS = 1000000;
-    private static final int TIMETOSTARTDRAGSCREEN_MS = 2200000; //1945600
+    private static final int setANOTHERASTEROID_MS = 1000000;
+    private static final int startDRAGSCREEN_MS = 2200000;
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 1500;
 
@@ -150,9 +150,9 @@ public class ExtractOre implements VerifyRectangle {
                 Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
 
                 if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
-                    this.walkThrough = 6; // go to case 6 - docking and drag itens to main station
+                    this.walkThrough = 5; // go to case 6 - docking and drag itens to main station
 
-                } else if (this.flagUntilToBeFilled_MS > TIMETOSTARTDRAGSCREEN_MS) {
+                } else if (this.flagUntilToBeFilled_MS > startDRAGSCREEN_MS) {
                     new ClickScreenEvents().dragScreen();
                     //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
                     this.walkThrough++; // go to case 4
@@ -160,7 +160,7 @@ public class ExtractOre implements VerifyRectangle {
             } // end case 3
 
             case 4 -> {
-                if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > TIMETOSETASTEROID_MS)) {
+                if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > setANOTHERASTEROID_MS)) {
                     this.flagUntilToBeFilled_MS = 0; // Reset flag
                     this.flagTimeToBeFilled_MS = 0; // Reset flag
                     this.walkThrough = 0; // Approaching not found or time exceeded, restart search for asteroids
