@@ -155,10 +155,10 @@ public class ExtractOre implements VerifyRectangle {
 
                 } else if (this.flagUntilToBeFilled_MS > startDRAGSCREEN_MS) {
                     new ClickScreenEvents().dragScreen();
+                    this.walkThrough++; // go to case 4
                 }
 
                 //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
-                this.walkThrough++; // go to case 4
             }
 
             case 4 -> {
@@ -175,6 +175,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                 //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
             }
+            
             case 5 -> {
                 this.returnDrones();
                 new SetDestination(GOTO_HOMESTATION).startScript();
