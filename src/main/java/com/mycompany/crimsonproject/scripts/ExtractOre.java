@@ -106,26 +106,23 @@ public class ExtractOre implements VerifyRectangle {
             } // end case 0
 
             case 1 -> {
+                // Search for target
                 this.target = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
 
-                // target identified
                 if (this.verifyRectangle(this.target, "TARGET", 0)) {
+                    // target identified
 
-                    boolean lockTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB());
+                    if (new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB())) {
+                        // If there is a lock target, just go to next step
+                        this.walkThrough++; // go to case 2
 
-                    // If there is a lock target, just go to next step
-                    if (lockTarget) {
+                    } else if (new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTargetRGB(), this.rgbr.getMaxFreeTargetRGB())) {
+                        // If the target is free, click target and go next step
+                        new ClickScreenEvents().leftClickCenterButton(this.target);
                         this.walkThrough++; // go to case 2
 
                     } else {
-                        boolean freeTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTargetRGB(), this.rgbr.getMaxFreeTargetRGB());
-                        // If there is no lock target but the target is free, click target and go next step
-                        if (freeTarget) {
-                            new ClickScreenEvents().leftClickCenterButton(this.target);
-                            this.walkThrough++; // go to case 2
-                        } else {
-                            System.out.println("Free target not found.");
-                        }
+                        System.out.println("Lock target and free target not found.");
                     }
 
                 } else {
@@ -139,30 +136,30 @@ public class ExtractOre implements VerifyRectangle {
                         this.walkThrough = 0; // reset script
                     }
                 }
-            } // end case 1
+
+            }
 
             case 2 -> {
                 this.timeStart = System.currentTimeMillis();
-                this.launchDrones(); //!!!!
+                this.launchDrones();
                 Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
                 this.checkMinerCannonAction();
                 this.walkThrough++; // go to case 3
-            } // end case 2
+            }
 
             case 3 -> {
                 Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
 
                 if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
-                    this.walkThrough = 5; // go to case 6 - docking and drag itens to main station
+                    this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else if (this.flagUntilToBeFilled_MS > startDRAGSCREEN_MS) {
                     new ClickScreenEvents().dragScreen();
-
                 }
 
                 //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
                 this.walkThrough++; // go to case 4
-            } // end case 3
+            }
 
             case 4 -> {
                 if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > setANOTHERASTEROID_MS)) {
@@ -177,15 +174,13 @@ public class ExtractOre implements VerifyRectangle {
                 this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
                 this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
                 //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
-            } // end case 4
-
+            }
             case 5 -> {
                 this.returnDrones();
                 new SetDestination(GOTO_HOMESTATION).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
-            } // end case 5
-
+            }
         }
     }
 
@@ -215,7 +210,6 @@ public class ExtractOre implements VerifyRectangle {
                             //System.out.println("Temporary better asteroid found: " + item + "\n");
                             betterAteroid = item;
                             closestOreList.set(i, item.getValue().y);
-
                         }
                     }
                 }
@@ -227,7 +221,6 @@ public class ExtractOre implements VerifyRectangle {
 
                 new ClickScreenEvents().doubleClick(betterAteroid.getValue());
                 return true;
-
             }
         }
 
