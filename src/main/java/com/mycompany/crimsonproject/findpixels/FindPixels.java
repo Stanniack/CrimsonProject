@@ -39,9 +39,9 @@ public class FindPixels {
         return area >= APPR_PERCENT;
     }
 
-    public int pixelContainsColorByRange(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
+    public int pixelContainsColorByRange(File imageFile, int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
 
-        this.bf = ImageIO.read(this.imageFile);
+        this.bf = ImageIO.read(imageFile);
         int area = 0;
 
         for (int r = row; r < (row + width); r++) {
@@ -74,6 +74,27 @@ public class FindPixels {
                         && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
 
                     //System.out.println(this.color.toString());
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean findByRangeColor(File imageFile, int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
+
+        this.bf = ImageIO.read(imageFile);
+
+        for (int r = row; r < (row + width); r++) {
+            for (int c = column; c < (column + height); c++) {
+                this.color = new Color(this.bf.getRGB(r, c));
+
+                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
+                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
+                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
+
+                    System.out.println(this.color.toString());
                     return true;
                 }
             }
