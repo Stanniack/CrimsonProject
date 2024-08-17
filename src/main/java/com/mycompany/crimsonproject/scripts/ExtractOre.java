@@ -76,10 +76,9 @@ public class ExtractOre implements VerifyRectangle {
             this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
 
             // Call method
-            if (this.verifyShipLife()) {
+            /*if (this.verifyShipLife()) {
                 return false;
-            }
-
+            }*/
             //Call method
             if (this.walkThrough > 2) {
                 this.checkMinerCannonOutSwitch();
@@ -239,7 +238,11 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < events.size(); i++) {
 
             //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
-            if (this.isMinerCannonAction(i, 11, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
+            if (this.isMinerCannonAction(i, 11,
+                    (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
+                    FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
+                    new Triplet<>(118, 167, 129), new Triplet<>(146, 174, 161))) {
+
                 new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(events.get(i));
@@ -260,14 +263,16 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (!this.isMinerCannonAction(i, 17, (Arrays.asList(FullHd.getF1CANNON1_X(), FullHd.getF2CANNON2_X())), FullHd.getFNCANNONS_Y(), FullHd.getSTRIPMINERCANNON_W1(), FullHd.getSTRIPMINERCANNON_H1(), 115, 133)) {
-                new KeyboardEvents().clickKey(events.get(i));
-                //System.out.println("\nCannon was deactived. Activating again.\n");
+            if (!this.isMinerCannonAction(i, 17,
+                    (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
+                    FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
+                    new Triplet<>(118, 167, 129), new Triplet<>(146, 174, 161))) {
 
+                new KeyboardEvents().clickKey(events.get(i));
+                System.out.println("\nCannon was deactived. Activating again.\n");
             }
         }
         //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
-
     }
 
     private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
@@ -308,7 +313,6 @@ public class ExtractOre implements VerifyRectangle {
             System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
             return true;
         }
-
         return false;
     }
 
@@ -321,7 +325,6 @@ public class ExtractOre implements VerifyRectangle {
             //System.out.println("Rect found (APRROACHING)\n");
             return true;
         }
-
         System.out.println("Rect not found (APRROACHING)\n");
         return false;
     }
@@ -365,9 +368,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.walkThrough = 6;
                 System.out.println("Invalid locked target not found, ending script.");
             }
-
         }
-
     }
 
     private void launchDrones() throws AWTException, InterruptedException {
@@ -409,7 +410,6 @@ public class ExtractOre implements VerifyRectangle {
             this.returnDrones();
             new SetDestination(GOTO_HOMESTATION).startScript();
         }
-
         return isBeingAttacked;
     }
 

@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
+import com.mycompany.crimsonproject.sort.HashMapRectComparatorByX;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.FullHd;
 import com.mycompany.crimsonproject.utils.RGBrange;

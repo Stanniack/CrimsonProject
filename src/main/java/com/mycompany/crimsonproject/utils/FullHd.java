@@ -19,6 +19,18 @@ import org.javatuples.Quartet;
  */
 public class FullHd {
 
+    public static int getF1VENTURE1_X() {
+        return F1VENTURE1_X;
+    }
+
+    public static int getF2VENTURE2_X() {
+        return F2VENTURE2_X;
+    }
+
+    public static int getFNVENTURE_Y() {
+        return FNVENTURE_Y;
+    }
+
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
             new Pair<>(INVALIDTARGET_W2, INVALIDTARGET_H2),
@@ -280,27 +292,22 @@ public class FullHd {
     private static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 
-    private final List<Pair<Integer, Integer>> ventureCannonWxHlist = Arrays.asList(
-            new Pair<>(VENTURECANNON_W1, VENTURECANNON_H1));
     private static final int VENTURECANNON_W1 = 42;
-    private static final int VENTURECANNON_H1 = 40;
+    private static final int VENTURECANNON_H1 = 46;
 
-    //(1042, 950, 46, 8)
-    private final List<Pair<Integer, Integer>> stripMinerCannonWxHlit = Arrays.asList(new Pair<>(STRIPMINERCANNON_W1, STRIPMINERCANNON_H1));
-    private static final int STRIPMINERCANNON_W1 = 15;
-    private static final int STRIPMINERCANNON_H1 = 3;
+    private static final int CANNON_W1 = 15;
+    private static final int CANNON_H1 = 3;
 
-    private final List<Pair<Integer, Integer>> ventureXcannonCoordinates = Arrays.asList(
-            new Pair<>(F1CANNON1_X, F2CANNON2_X));
     private static final int F1CANNON1_X = 1057;
-    private static final int F2CANNON2_X = 1057 + 51;
+    private static final int F2CANNON2_X = F1CANNON1_X + 51;
     private static final int FNCANNONS_Y = 914;
-    //(1047, 950, 35, 8)
+
+    private static final int F1VENTURE1_X = 1044;
+    private static final int F2VENTURE2_X = F1VENTURE1_X + 51;
+    private static final int FNVENTURE_Y = 912;
+
+    //1044 + 51, 912
     /* ------------------------------------------------------------- */
-
-    //!!!!!!!!!!
-    private static final int RANGEDVENTURECANNONS_Y = 925;
-
     public List<Pair<Integer, Integer>> getInvalidTargetList() {
         return invalidTargetList;
     }
@@ -401,14 +408,6 @@ public class FullHd {
         return compactMaxCargoDeadZone;
     }
 
-    public List<Pair<Integer, Integer>> getVentureXcannonCoordinates() {
-        return ventureXcannonCoordinates;
-    }
-
-    public List<Pair<Integer, Integer>> getVentureCannonWxHlist() {
-        return ventureCannonWxHlist;
-    }
-
     public static int getOVERVIEWMINING_X1() {
         return OVERVIEWMINING_X1;
     }
@@ -445,10 +444,6 @@ public class FullHd {
         return FNCANNONS_Y;
     }
 
-    public static int getRANGEDVENTURECANNONS_Y() {
-        return RANGEDVENTURECANNONS_Y;
-    }
-
     public static int getVENTURECANNON_W1() {
         return VENTURECANNON_W1;
     }
@@ -465,16 +460,12 @@ public class FullHd {
         return F2CANNON2_X;
     }
 
-    public List<Pair<Integer, Integer>> getStripMinerCannonWxHlit() {
-        return stripMinerCannonWxHlit;
+    public static int getCANNON_W1() {
+        return CANNON_W1;
     }
 
-    public static int getSTRIPMINERCANNON_W1() {
-        return STRIPMINERCANNON_W1;
-    }
-
-    public static int getSTRIPMINERCANNON_H1() {
-        return STRIPMINERCANNON_H1;
+    public static int getCANNON_H1() {
+        return CANNON_H1;
     }
 
     public static int getBEINGATTACKED_X1() {
