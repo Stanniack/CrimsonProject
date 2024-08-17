@@ -241,7 +241,7 @@ public class ExtractOre implements VerifyRectangle {
             if (this.isMinerCannonAction(i, 11,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
-                    new Triplet<>(118, 167, 129), new Triplet<>(146, 174, 161))) {
+                    new RGBrange().getMaxGreenVenture(), new RGBrange().getMaxGreenVenture())) {
 
                 new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
@@ -266,7 +266,7 @@ public class ExtractOre implements VerifyRectangle {
             if (!this.isMinerCannonAction(i, 17,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
-                    new Triplet<>(118, 167, 129), new Triplet<>(146, 174, 161))) {
+                    new RGBrange().getMaxGreenVenture(), new RGBrange().getMaxGreenVenture())) {
 
                 new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("\nCannon was deactived. Activating again.\n");

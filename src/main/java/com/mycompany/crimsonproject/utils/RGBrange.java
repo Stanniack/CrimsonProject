@@ -36,8 +36,8 @@ public class RGBrange {
     private static final int INFO_MAXGREEN = 230;
     private static final int INFO_MAXBLUE = 230;
 
-    private final Triplet<Integer, Integer, Integer> minActivedMinerCannonRGB = new Triplet<>(ACT_MINRED, ACT_MINGREEN, ACT_MINBLUE);
-    private final Triplet<Integer, Integer, Integer> maxActivedMinerCannonRGB = new Triplet<>(ACT_MAXRED, ACT_MAXGREEN, ACT_MAXBLUE);
+    private final Triplet<Integer, Integer, Integer> minGreenVenture = new Triplet<>(ACT_MINRED, ACT_MINGREEN, ACT_MINBLUE);
+    private final Triplet<Integer, Integer, Integer> maxGreenVenture = new Triplet<>(ACT_MAXRED, ACT_MAXGREEN, ACT_MAXBLUE);
     private static final int ACT_MINRED = 80;
     private static final int ACT_MAXRED = 90;
     private static final int ACT_MINGREEN = 86;
@@ -104,12 +104,12 @@ public class RGBrange {
         return maxInfoRGB;
     }
 
-    public Triplet<Integer, Integer, Integer> getMinActivedMinerCannonRGB() {
-        return minActivedMinerCannonRGB;
+    public Triplet<Integer, Integer, Integer> getMinGreenVenture() {
+        return minGreenVenture;
     }
 
-    public Triplet<Integer, Integer, Integer> getMaxActivedMinerCannonRGB() {
-        return maxActivedMinerCannonRGB;
+    public Triplet<Integer, Integer, Integer> getMaxGreenVenture() {
+        return maxGreenVenture;
     }
 
     public Triplet<Integer, Integer, Integer> getAlphaRGB() {
