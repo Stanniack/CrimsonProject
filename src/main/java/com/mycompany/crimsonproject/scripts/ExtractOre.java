@@ -241,7 +241,7 @@ public class ExtractOre implements VerifyRectangle {
             if (this.isMinerCannonAction(i, 11,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
-                    new RGBrange().getMaxGreenVenture(), new RGBrange().getMaxGreenVenture())) {
+                    100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(events.get(i));
                 Thread.sleep(CANNON_SLEEP);
@@ -266,7 +266,7 @@ public class ExtractOre implements VerifyRectangle {
             if (!this.isMinerCannonAction(i, 17,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
-                    new RGBrange().getMaxGreenVenture(), new RGBrange().getMaxGreenVenture())) {
+                    100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(events.get(i));
                 System.out.println("\nCannon was deactived. Activating again.\n");
@@ -299,6 +299,21 @@ public class ExtractOre implements VerifyRectangle {
             new TakeScreenshot().take2();
 
             action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
+            if (action) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
+
+        boolean action;
+
+        for (int j = 0; j < flagAttempt; j++) {
+            new TakeScreenshot().take2();
+
+            action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
             if (action) {
                 return true;
             }
