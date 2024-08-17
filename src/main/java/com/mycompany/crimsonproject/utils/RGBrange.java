@@ -46,8 +46,8 @@ public class RGBrange {
     private static final int ACT_MAXBLUE = 70;
 
     //76, 85, 62 -> 79, 114, 67
-    private final Triplet<Integer, Integer, Integer> minStripActiveMinerRGB = new Triplet<>(ACTSTRIPMINER_MINRED, ACTSTRIPMINER_MINGREEN, ACTSTRIPMINER_MINBLUE);
-    private final Triplet<Integer, Integer, Integer> maxStripActiveMinerRGB = new Triplet<>(ACTSTRIPMINER_MAXRED, ACTSTRIPMINER_MAXGREEN, ACTSTRIPMINER_MAXBLUE);
+    private final Triplet<Integer, Integer, Integer> minGreenStrip = new Triplet<>(ACTSTRIPMINER_MINRED, ACTSTRIPMINER_MINGREEN, ACTSTRIPMINER_MINBLUE);
+    private final Triplet<Integer, Integer, Integer> maxGreenStrip = new Triplet<>(ACTSTRIPMINER_MAXRED, ACTSTRIPMINER_MAXGREEN, ACTSTRIPMINER_MAXBLUE);
     private static final int ACTSTRIPMINER_MINRED = 76;
     private static final int ACTSTRIPMINER_MAXRED = 79;
     private static final int ACTSTRIPMINER_MINGREEN = 85;
@@ -148,12 +148,12 @@ public class RGBrange {
         return minInfoRGB;
     }
 
-    public Triplet<Integer, Integer, Integer> getMinStripActiveMinerRGB() {
-        return minStripActiveMinerRGB;
+    public Triplet<Integer, Integer, Integer> getMinGreenStrip() {
+        return minGreenStrip;
     }
 
-    public Triplet<Integer, Integer, Integer> getMaxStripActiveMinerRGB() {
-        return maxStripActiveMinerRGB;
+    public Triplet<Integer, Integer, Integer> getMaxGreenStrip() {
+        return maxGreenStrip;
     }
 
     public Triplet<Integer, Integer, Integer> getMinBeingAttackedRGB() {
