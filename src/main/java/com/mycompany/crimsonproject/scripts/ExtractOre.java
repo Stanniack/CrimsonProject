@@ -291,21 +291,6 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int minGreen, int maxGreen) throws InterruptedException, AWTException, IOException {
-
-        boolean action;
-
-        for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenshot().take2();
-
-            action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, minGreen, maxGreen);
-            if (action) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
 
         boolean action;
