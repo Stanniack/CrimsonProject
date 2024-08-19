@@ -152,9 +152,6 @@ public class SegmentedRegions {
 
         HashMap<String, Rectangle> hm = new HashMap<>();
 
-        /* Margin of error to search tuple NPC/PLAYER */
-        int moe = 2;
-
         for (int i = 0; i < result.size(); i++) {
 
             /* If into block screen list ores area */
