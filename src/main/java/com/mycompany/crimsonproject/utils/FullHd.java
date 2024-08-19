@@ -19,18 +19,6 @@ import org.javatuples.Quartet;
  */
 public class FullHd {
 
-    public static int getF1VENTURE1_X() {
-        return F1VENTURE1_X;
-    }
-
-    public static int getF2VENTURE2_X() {
-        return F2VENTURE2_X;
-    }
-
-    public static int getFNVENTURE_Y() {
-        return FNVENTURE_Y;
-    }
-
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
             new Pair<>(INVALIDTARGET_W2, INVALIDTARGET_H2),
@@ -484,4 +472,15 @@ public class FullHd {
         return BEINGATTACKED_H1;
     }
 
+    public static int getF1VENTURE1_X() {
+        return F1VENTURE1_X;
+    }
+
+    public static int getF2VENTURE2_X() {
+        return F2VENTURE2_X;
+    }
+
+    public static int getFNVENTURE_Y() {
+        return FNVENTURE_Y;
+    }
 }
