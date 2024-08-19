@@ -5,6 +5,7 @@ import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
+import com.mycompany.crimsonproject.soundlogs.SoundAlert;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import com.mycompany.crimsonproject.utils.FullHd;
@@ -77,6 +78,7 @@ public class ExtractOre implements VerifyRectangle {
 
             //Call method
             this.attackRats();
+
             //Call method
             if (this.walkThrough > 2) {
                 this.checkMinerCannonOutSwitch();
@@ -382,7 +384,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private void returnDrones() throws AWTException, InterruptedException {
         this.returnAndOrbitDrones();
-        int waitDrones_MS = 5000;
+        int waitDrones_MS = 8000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
         Thread.sleep(waitDrones_MS);
     }
@@ -403,10 +405,11 @@ public class ExtractOre implements VerifyRectangle {
 
         return new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB());
     }
-    
+
     public void attackRats() throws IOException, TesseractException, AWTException, InterruptedException {
         if (this.verifyShipLife()) {
             this.engageDrones();
+            new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
         }
     }
 
