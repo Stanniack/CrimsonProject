@@ -1,9 +1,10 @@
-package com.mycompany.crimsonproject;
+        package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.SetDestination;
+import com.mycompany.crimsonproject.soundlogs.SoundAlert;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -27,13 +28,13 @@ public class MainPC {
                 Thread.sleep(18000);
 
                 new SetDestination(1).startScript();
-                Thread.sleep(60000);
+                Thread.sleep(55000);
 
                 boolean isFalse = new ExtractOre().startScript();
                 if (!isFalse) {
                     break;
                 }
-                Thread.sleep(60000);
+                Thread.sleep(55000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,6 +42,9 @@ public class MainPC {
 
             new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", "Route " + i + ": " + (System.currentTimeMillis() - start) / 1000 + " seconds\n");
         }
+        
+        //end of mining
+        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 5);
 
     }
 }
