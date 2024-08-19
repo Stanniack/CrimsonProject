@@ -7,7 +7,7 @@ package com.mycompany.crimsonproject.soundlogs;
 public class MainAudio {
 
     public static void main(String[] args) {
-        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\sound.wav", 4);
+        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 1);
     }
 
 }

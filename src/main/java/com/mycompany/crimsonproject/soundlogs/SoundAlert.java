@@ -39,10 +39,7 @@ public class SoundAlert {
             }
 
         });
-
         t1.start();
-        System.out.println("And the world goes on...");
-
     }
 
     public void start(String pathSound, int loopCount) {
@@ -69,7 +66,5 @@ public class SoundAlert {
         });
 
         t1.start();
-        System.out.println("And the world goes on...");
-
     }
 }
