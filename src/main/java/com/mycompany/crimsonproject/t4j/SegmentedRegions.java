@@ -1,8 +1,6 @@
 package com.mycompany.crimsonproject.t4j;
 
-import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
-import com.mycompany.crimsonproject.sort.HashMapRectComparatorByX;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.utils.FullHd;
 import com.mycompany.crimsonproject.utils.RGBrange;
@@ -197,44 +195,4 @@ public class SegmentedRegions {
 
         return hm;
     }
-
-    /*public HashMap<String, Rectangle> getAllOres3(int x, int x2_w, int y, int y2_h) throws IOException, TesseractException {
-
-        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        this.bf = ImageIO.read(this.imageFile);
-
-        // First searching: Words
-        int level = TessPageIteratorLevel.RIL_WORD;
-
-        List<Rectangle> result = this.instance.getSegmentedRegions(this.bf, level);
-
-        // Sort from lower to bigger Y coordinate
-        Collections.sort(result, new RectComparatorByY());
-
-        HashMap<String, Rectangle> hm = new HashMap<>();
-
-        for (int i = 0; i < result.size(); i++) {
-
-            // If into block screen list ores area 
-            if ((result.get(i).x >= x && result.get(i).x <= x2_w)
-                    && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
-
-                for (Pair<Integer, Integer> asteroid : new FullHd().listAsteroids) {
-                    if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1() && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-
-                    }
-                }
-
-                if (((result.get(i).width == FullHd.CONDENSED_W1 || result.get(i).width == FullHd.CONDENSED_W2)
-                        && result.get(i).height == FullHd.CONDENSED_H1)
-                        && !new FindPixels().findByRangeColor(result.get(i).x, result.get(i).y, result.get(i).width, result.get(i).height, new PIXELRANGE().minTupleNpcPlayerRGB, new PIXELRANGE().maxTupleNpcPlayerRGB)) {
-                    hm.put("P4:CS - i: " + i, result.get(i));  //
-
-                }
-
-            }
-        }
-
-        return hm; 
-    } */
 }
