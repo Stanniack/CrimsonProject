@@ -75,10 +75,8 @@ public class ExtractOre implements VerifyRectangle {
             // Call method
             this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
 
-            // Call method
-            /*if (this.verifyShipLife()) {
-                return false;
-            }*/
+            //Call method
+            this.attackRats();
             //Call method
             if (this.walkThrough > 2) {
                 this.checkMinerCannonOutSwitch();
