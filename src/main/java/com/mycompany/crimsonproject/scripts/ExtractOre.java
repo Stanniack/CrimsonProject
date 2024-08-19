@@ -403,14 +403,13 @@ public class ExtractOre implements VerifyRectangle {
         int width = FullHd.getBEINGATTACKED_W1();
         int height = FullHd.getBEINGATTACKED_H1();
 
-        boolean isBeingAttacked = new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB());
-
-        if (isBeingAttacked) {
-            System.out.println("\nYOUR SHIP IS BEING ATTACKED, RETURNING HOME STATION AND ENDING SCRIPT!\n");
-            this.returnDrones();
-            new SetDestination(GOTO_HOMESTATION).startScript();
+        return new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB());
+    }
+    
+    public void attackRats() throws IOException, TesseractException, AWTException, InterruptedException {
+        if (this.verifyShipLife()) {
+            this.engageDrones();
         }
-        return isBeingAttacked;
     }
 
 }
