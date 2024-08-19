@@ -120,7 +120,7 @@ public class FindPixels {
         return false;
     }
 
-    public boolean findByGreenColor(int row, int column, int width, int height, int minGreen, int maxGreen) throws IOException {
+    public boolean findByGreenColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
 
         this.bf = ImageIO.read(this.imageFile);
 
@@ -128,23 +128,7 @@ public class FindPixels {
             for (int c = column; c < (column + height); c++) {
                 this.color = new Color(this.bf.getRGB(r, c));
 
-                if (this.color.getGreen() >= minGreen && this.color.getGreen() <= maxGreen) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-        public boolean findByGreenColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
-
-        this.bf = ImageIO.read(this.imageFile);
-
-        for (int r = row; r < (row + width); r++) {
-            for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
-
-                if (this.color.getRed()<= red && this.color.getGreen() >= green && this.color.getBlue()<= blue) {
+                if (this.color.getRed() <= red && this.color.getGreen() >= green && this.color.getBlue() <= blue) {
                     return true;
                 }
             }
