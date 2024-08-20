@@ -20,7 +20,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             Long start = System.currentTimeMillis();
             try {
 
@@ -28,23 +28,23 @@ public class MainPC {
                 Thread.sleep(18000);
 
                 new SetDestination(1).startScript();
-                Thread.sleep(55000);
+                Thread.sleep(62000);
 
                 boolean isFalse = new ExtractOre().startScript();
                 if (!isFalse) {
                     break;
                 }
-                Thread.sleep(55000);
+                Thread.sleep(62000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", "Route " + i + ": " + (System.currentTimeMillis() - start) / 1000 + " seconds\n");
+            new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", Long.toString((System.currentTimeMillis() - start) / 1000));
         }
         
         //end of mining
-        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 5);
+        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 6);
 
     }
 }
