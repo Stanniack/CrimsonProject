@@ -244,7 +244,7 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < cannons.size(); i++) {
 
             //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
-            if (this.isCannonActivated(i, 11,
+            if (this.isCannonActivated(i, 5,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
@@ -269,13 +269,13 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            if (!this.isCannonActivated(i, 17,
+            if (!this.isCannonActivated(i, 5,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("\nCannon " + i + 1 + " was deactived. Activating again.\n");
+                System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.\n");
                 deactivedCannons++;
             }
         }
