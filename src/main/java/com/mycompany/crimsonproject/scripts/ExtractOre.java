@@ -142,7 +142,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.timeStart = System.currentTimeMillis();
                 this.launchDrones();
                 Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
-                this.checkMinerCannonAction();
+                this.checkCannonAction();
                 this.walkThrough++; // go to case 3
             }
 
@@ -231,7 +231,7 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private void checkMinerCannonAction() throws IOException, InterruptedException, AWTException {
+    private void checkCannonAction() throws IOException, InterruptedException, AWTException {
 
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
