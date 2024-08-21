@@ -163,15 +163,15 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 4 -> {
-                // if: check approaching is true -> continue mining
-                // else if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
+                // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
+                // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
-                if (this.checkPixelsAprroaching()) {
-                    this.walkThrough--; // back to case and check maxCargo
-
-                } else if (this.flagSetAnotherAst_MS > setANOTHERASTEROID_MS && this.isCannonActivatedOutSwitch() == 2) {
+                if (this.flagSetAnotherAst_MS > setANOTHERASTEROID_MS && this.isCannonActivatedOutSwitch() == 2) {
                     this.flagSetAnotherAst_MS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
+
+                } else if (this.checkPixelsAprroaching()) {
+                    this.walkThrough--; // back to case and check maxCargo
 
                 } else {
                     this.flagUntilToBeFilled_MS = 0; // Reset flag
