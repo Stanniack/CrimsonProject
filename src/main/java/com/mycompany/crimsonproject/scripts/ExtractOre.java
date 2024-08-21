@@ -169,7 +169,7 @@ public class ExtractOre implements VerifyRectangle {
                 if (this.checkPixelsAprroaching()) {
                     this.walkThrough--; // back to case and check maxCargo
 
-                } else if (this.flagSetAnotherAst_MS > setANOTHERASTEROID_MS && !this.isCannonActivatedOutSwitch()) {
+                } else if (this.flagSetAnotherAst_MS > setANOTHERASTEROID_MS && this.isCannonActivatedOutSwitch() == 2) {
                     this.flagSetAnotherAst_MS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
@@ -239,9 +239,9 @@ public class ExtractOre implements VerifyRectangle {
 
     private void checkCannonAction() throws IOException, InterruptedException, AWTException {
 
-        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+        List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
-        for (int i = 0; i < events.size(); i++) {
+        for (int i = 0; i < cannons.size(); i++) {
 
             //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
             if (this.isCannonActivated(i, 11,
@@ -249,36 +249,37 @@ public class ExtractOre implements VerifyRectangle {
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
 
-                new KeyboardEvents().clickKey(events.get(i));
+                new KeyboardEvents().clickKey(cannons.get(i));
                 Thread.sleep(CANNON_SLEEP);
-                new KeyboardEvents().clickKey(events.get(i));
+                new KeyboardEvents().clickKey(cannons.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
                 this.engageDrones(); // engage drones again
 
             } else {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
-                new KeyboardEvents().clickKey(events.get(i));
+                new KeyboardEvents().clickKey(cannons.get(i));
                 System.out.println("Just press 1x cannon " + i + "\n");
             }
         }
     }
 
-    private boolean isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
-        List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+    private int isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
+        List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+        int deactivedCannons = 0;
 
-        for (int i = 0; i < events.size(); i++) {
+        for (int i = 0; i < cannons.size(); i++) {
 
             if (!this.isCannonActivated(i, 17,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
 
-                new KeyboardEvents().clickKey(events.get(i));
-                //System.out.println("\nCannon was deactived. Activating again.\n");
-                return false;
+                new KeyboardEvents().clickKey(cannons.get(i));
+                System.out.println("\nCannon " + i + 1 + " was deactived. Activating again.\n");
+                deactivedCannons++;
             }
         }
-        return true;
+        return deactivedCannons;
     }
 
     private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
