@@ -77,7 +77,7 @@ public class ExtractOre implements VerifyRectangle {
             this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
 
             //Call method
-            this.attackRats();
+            this.verifyShipLife();
 
             //Call method
             if (this.walkThrough > 2) {
@@ -269,7 +269,7 @@ public class ExtractOre implements VerifyRectangle {
                     100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(events.get(i));
-                System.out.println("\nCannon was deactived. Activating again.\n");
+                //System.out.println("\nCannon was deactived. Activating again.\n");
             }
         }
         //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
@@ -397,20 +397,14 @@ public class ExtractOre implements VerifyRectangle {
         return 0;
     }
 
-    public boolean verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
+    public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
         int row = FullHd.getBEINGATTACKED_X1();
         int column = FullHd.getBEINGATTACKED_Y1();
         int width = FullHd.getBEINGATTACKED_W1();
         int height = FullHd.getBEINGATTACKED_H1();
 
-        return new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB());
-    }
-
-    public void attackRats() throws IOException, TesseractException, AWTException, InterruptedException {
-        if (this.verifyShipLife()) {
-            this.engageDrones();
+        if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB())) {
             new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
         }
     }
-
 }
