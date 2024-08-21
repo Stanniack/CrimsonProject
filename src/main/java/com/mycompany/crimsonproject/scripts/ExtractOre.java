@@ -81,7 +81,7 @@ public class ExtractOre implements VerifyRectangle {
 
             //Call method
             if (this.walkThrough > 2) {
-                this.checkMinerCannonOutSwitch();
+                this.isCannonActivatedOutSwitch();
             }
 
             // call method
@@ -238,7 +238,7 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < events.size(); i++) {
 
             //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
-            if (this.isMinerCannonAction(i, 11,
+            if (this.isCannonActivated(i, 11,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
@@ -257,13 +257,13 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    private void checkMinerCannonOutSwitch() throws InterruptedException, AWTException, IOException {
+    private void isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
         //Long start = System.currentTimeMillis();
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
         for (int i = 0; i < events.size(); i++) {
 
-            if (!this.isMinerCannonAction(i, 17,
+            if (!this.isCannonActivated(i, 17,
                     (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
                     FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
                     100, 125, 100)) {
@@ -275,7 +275,7 @@ public class ExtractOre implements VerifyRectangle {
         //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
     }
 
-    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
+    private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
 
         boolean action;
 
@@ -291,7 +291,7 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private boolean isMinerCannonAction(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
+    private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
 
         boolean action;
 
