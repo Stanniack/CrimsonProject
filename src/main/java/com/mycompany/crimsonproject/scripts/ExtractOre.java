@@ -33,7 +33,7 @@ public class ExtractOre implements VerifyRectangle {
     private FullHd fhd = null;
 
     private int walkThrough = 0;
-    private long flagTimeToBeFilled_MS = 0;
+    private long flagSetAnotherAst_MS = 0;
     private long flagUntilToBeFilled_MS = 0;
     private long flagLockTarget_MS = 0;
 
@@ -163,17 +163,23 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 4 -> {
-                if (!this.checkPixelsAprroaching() || (this.flagTimeToBeFilled_MS > setANOTHERASTEROID_MS)) {
-                    this.flagUntilToBeFilled_MS = 0; // Reset flag
-                    this.flagTimeToBeFilled_MS = 0; // Reset flag
-                    this.walkThrough = 0; // Approaching not found or time exceeded, restart search for asteroids
-
-                } else if (this.checkPixelsAprroaching()) {
+                // if: check approaching is true -> continue mining
+                // else if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
+                // else ship is not mining -> reset mining
+                if (this.checkPixelsAprroaching()) {
                     this.walkThrough--; // back to case and check maxCargo
+
+                } else if (this.flagSetAnotherAst_MS > setANOTHERASTEROID_MS && !this.isCannonActivatedOutSwitch()) {
+                    this.flagSetAnotherAst_MS = 0; // Reset flag
+                    this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
+
+                } else {
+                    this.flagUntilToBeFilled_MS = 0; // Reset flag
+                    this.walkThrough = 0; // Approaching not found, the ship is not mining
                 }
 
                 this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
-                this.flagTimeToBeFilled_MS = (System.currentTimeMillis() - this.timeStart);
+                this.flagSetAnotherAst_MS = (System.currentTimeMillis() - this.timeStart);
                 //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
             }
 
