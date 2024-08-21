@@ -257,8 +257,7 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    private void isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
-        //Long start = System.currentTimeMillis();
+    private boolean isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
         List<Integer> events = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
         for (int i = 0; i < events.size(); i++) {
@@ -270,9 +269,10 @@ public class ExtractOre implements VerifyRectangle {
 
                 new KeyboardEvents().clickKey(events.get(i));
                 //System.out.println("\nCannon was deactived. Activating again.\n");
+                return false;
             }
         }
-        //System.out.println("\nMethod time to be executioned: " + (System.currentTimeMillis() - start) / 1000 + " secs\n");
+        return true;
     }
 
     private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
@@ -322,7 +322,6 @@ public class ExtractOre implements VerifyRectangle {
                 FullHd.getAPPROACHING_W1(), FullHd.getAPPROACHING_H3(), this.rgbr.getFullWhiteRGB());
 
         if (approaching == true) {
-            //System.out.println("Rect found (APRROACHING)\n");
             return true;
         }
         System.out.println("Rect not found (APRROACHING)\n");
