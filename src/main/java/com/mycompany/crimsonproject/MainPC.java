@@ -20,7 +20,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(4000);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 9; i++) {
             Long start = System.currentTimeMillis();
             try {
 
@@ -40,7 +40,7 @@ public class MainPC {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", Long.toString((System.currentTimeMillis() - start) / 1000));
+            new TextLogs().timePerRoute("C:\\Users\\Flavio\\Desktop\\spr.txt", Long.toString((System.currentTimeMillis() - start) / 1000) + "\n");
         }
         
         //end of mining
