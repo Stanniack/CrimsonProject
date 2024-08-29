@@ -89,9 +89,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
                 /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
                 if (descentFlag) {
-                    Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
                     this.walkThrough--;
-                    this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     new ClickScreenEvents().dragScreen();
                 }
 
@@ -117,9 +115,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
                 // back to case 1 and find the MININGBOT1 or HOMESTATION1 to restart finding WITHIN/DOCK
                 if (descentFlag) {
-                    Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.fhd.getCloseLocationButtonWxHlist(), this.fhd.getTupleLocationTabDeadZone());
                     this.walkThrough--;
-                    this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK);
                     new ClickScreenEvents().dragScreen();
                 }
 
@@ -155,7 +151,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     }
 
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
-
         new KeyboardEvents().clickKey(KeyEvent.VK_L);
         //System.out.println("Window location open by shortcut L\n");
         return true;
