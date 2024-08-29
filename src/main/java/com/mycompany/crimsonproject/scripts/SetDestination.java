@@ -131,7 +131,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
-
             }
 
         } // while
@@ -152,7 +151,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-
         return new Quartet<>(0, 0, 0, 0);
     }
 
@@ -175,10 +173,8 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             } else {
                 new ClickScreenEvents().rightClickCenterButton(rect);
             }
-
             return true;
         }
-
         return false;
     }
 
@@ -194,10 +190,8 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             } else {
                 new ClickScreenEvents().rightClickCenterButton(rect);
             }
-
             return true;
         }
-
         return false;
     }
 
