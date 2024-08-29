@@ -30,7 +30,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private Rectangle target;
     private RGBrange rgbr = null;
-    private FullHd fhd = null;
+    private FullHd resolution = null;
 
     private int walkThrough = 0;
     private long flagSetAnotherAst_MS = 0;
@@ -58,7 +58,7 @@ public class ExtractOre implements VerifyRectangle {
 
     public ExtractOre() {
         this.rgbr = new RGBrange();
-        this.fhd = new FullHd();
+        this.resolution = new FullHd();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -74,7 +74,7 @@ public class ExtractOre implements VerifyRectangle {
             new TakeScreenshot().take();
 
             // Call method
-            this.verifyInvalidTarget(this.fhd.getInvalidTargetList(), 195, "Invalid target found.");
+            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), 195, "Invalid target found.");
 
             //Call method
             this.verifyShipLife();
@@ -106,7 +106,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 1 -> {
                 // Search for target
-                this.target = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
+                this.target = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getTupleLockTargetDeadZone());
 
                 if (this.verifyRectangle(this.target, "TARGET", 0)) {
                     // target identified
@@ -147,7 +147,7 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 3 -> {
-                Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.fhd.getCompactMaxCargoList(), this.fhd.getCompactMaxCargoDeadZone());
+                Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZone());
 
                 if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
@@ -339,7 +339,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean isClicked = false;
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, this.fhd.getInvalidTargetDeadZoneList());
+            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, this.resolution.getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
             if (new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, this.rgbr.getMinInfoRGB(), this.rgbr.getMaxInfoRGB())) {
@@ -354,7 +354,7 @@ public class ExtractOre implements VerifyRectangle {
 
         if (isClicked) {
 
-            Rectangle locktarget = new SegmentedRegions().getRectangle(this.fhd.getLockTargetList(), this.fhd.getTupleLockTargetDeadZone());
+            Rectangle locktarget = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getTupleLockTargetDeadZone());
 
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
