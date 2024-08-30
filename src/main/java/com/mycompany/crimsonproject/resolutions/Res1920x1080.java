@@ -1,4 +1,4 @@
-package com.mycompany.crimsonproject.utils;
+package com.mycompany.crimsonproject.resolutions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,7 @@ import org.javatuples.Pair;
 import org.javatuples.Quartet;
 
 /**
- * -> This classe uses font size SMALL of Eve Online
+ * This class uses font size SMALL and scale resolution 100% 1920x1080 of Eve Online
  *
  * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
  * + h.
@@ -14,10 +14,11 @@ import org.javatuples.Quartet;
  * BLOSCKSCREEN calculator with DEADZONE: x1 = x; x2 = x + w + DEADZONE; y1 = y;
  * y2 = y + h + DEADZONE.
  *
- * BLOCKSCREEN: Rect limitation where to find the recognized rects DEADZONE:
- * Pixel's amount to add in the BLOCKSCREEN for caution or not
+ * BLOCKSCREEN: Rect limitation where to find the recognized rects 
+ * DEADZONE:
+ * 0ixels amount to add in the BLOCKSCREEN for caution or not
  */
-public class FullHd {
+public class Res1920x1080 {
 
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),

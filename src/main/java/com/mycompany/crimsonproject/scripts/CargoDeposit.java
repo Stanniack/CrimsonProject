@@ -4,7 +4,7 @@ import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.utils.FullHd;
+import com.mycompany.crimsonproject.resolutions.Res1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import org.javatuples.Triplet;
  */
 public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
-    private final FullHd fhd;
+    private final Res1920x1080 fhd;
     private final RGBrange rgbr;
 
     private static final int RIGHTCLICK = 0;
@@ -33,7 +33,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     private static final int STEPS = 3;
 
     public CargoDeposit() {
-        this.fhd = new FullHd();
+        this.fhd = new Res1920x1080();
         this.rgbr = new RGBrange();
     }
 

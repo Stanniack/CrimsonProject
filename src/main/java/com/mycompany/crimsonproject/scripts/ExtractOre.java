@@ -8,7 +8,7 @@ import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.soundlogs.SoundAlert;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.RGBrange;
-import com.mycompany.crimsonproject.utils.FullHd;
+import com.mycompany.crimsonproject.resolutions.Res1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -30,7 +30,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private Rectangle target;
     private RGBrange rgbr = null;
-    private FullHd resolution = null;
+    private Res1920x1080 resolution = null;
 
     private int walkThrough = 0;
     private long flagSetAnotherAst_MS = 0;
@@ -58,7 +58,7 @@ public class ExtractOre implements VerifyRectangle {
 
     public ExtractOre() {
         this.rgbr = new RGBrange();
-        this.resolution = new FullHd();
+        this.resolution = new Res1920x1080();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -200,8 +200,8 @@ public class ExtractOre implements VerifyRectangle {
         Entry<String, Rectangle> betterAteroid = null;
         this.priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(FullHd.getOVERVIEWMINING_X1(), FullHd.getOVERVIEWMINING_X2_W(),
-                FullHd.getOVERVIEWMINING_Y1(), FullHd.getOVERVIEWMINING_Y2_H());
+        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(Res1920x1080.getOVERVIEWMINING_X1(), Res1920x1080.getOVERVIEWMINING_X2_W(),
+                Res1920x1080.getOVERVIEWMINING_Y1(), Res1920x1080.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
             System.out.println("All Asteroids: " + rectResult.size());
@@ -245,8 +245,8 @@ public class ExtractOre implements VerifyRectangle {
 
             //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
             if (this.isCannonActivated(i, 5,
-                    (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
-                    FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
+                    (Arrays.asList(Res1920x1080.getF1VENTURE1_X(), Res1920x1080.getF2VENTURE2_X())), Res1920x1080.getFNVENTURE_Y(),
+                    Res1920x1080.getVENTURECANNON_H1(), Res1920x1080.getVENTURECANNON_W1(),
                     100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
@@ -270,8 +270,8 @@ public class ExtractOre implements VerifyRectangle {
         for (int i = 0; i < cannons.size(); i++) {
 
             if (!this.isCannonActivated(i, 5,
-                    (Arrays.asList(FullHd.getF1VENTURE1_X(), FullHd.getF2VENTURE2_X())), FullHd.getFNVENTURE_Y(),
-                    FullHd.getVENTURECANNON_H1(), FullHd.getVENTURECANNON_W1(),
+                    (Arrays.asList(Res1920x1080.getF1VENTURE1_X(), Res1920x1080.getF2VENTURE2_X())), Res1920x1080.getFNVENTURE_Y(),
+                    Res1920x1080.getVENTURECANNON_H1(), Res1920x1080.getVENTURECANNON_W1(),
                     100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
@@ -325,8 +325,8 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().countPixelsByColor(FullHd.getAPPROACHING_X(), FullHd.getAPPROACHING_Y(),
-                FullHd.getAPPROACHING_W1(), FullHd.getAPPROACHING_H3(), this.rgbr.getFullWhiteRGB());
+        boolean approaching = new FindPixels().countPixelsByColor(Res1920x1080.getAPPROACHING_X(), Res1920x1080.getAPPROACHING_Y(),
+                Res1920x1080.getAPPROACHING_W1(), Res1920x1080.getAPPROACHING_H3(), this.rgbr.getFullWhiteRGB());
 
         if (approaching == true) {
             return true;
@@ -404,10 +404,10 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
-        int row = FullHd.getBEINGATTACKED_X1();
-        int column = FullHd.getBEINGATTACKED_Y1();
-        int width = FullHd.getBEINGATTACKED_W1();
-        int height = FullHd.getBEINGATTACKED_H1();
+        int row = Res1920x1080.getBEINGATTACKED_X1();
+        int column = Res1920x1080.getBEINGATTACKED_Y1();
+        int width = Res1920x1080.getBEINGATTACKED_W1();
+        int height = Res1920x1080.getBEINGATTACKED_H1();
 
         if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB())) {
             new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
