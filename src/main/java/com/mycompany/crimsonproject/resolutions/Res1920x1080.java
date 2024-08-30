@@ -6,7 +6,7 @@ import org.javatuples.Pair;
 import org.javatuples.Quartet;
 
 /**
- * This class uses font size SMALL and scale resolution 100% 1920x1080 of Eve Online
+ * This class uses EVE font size SMALL and scale resolution 100% 1920x1080
  *
  * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
  * + h.
