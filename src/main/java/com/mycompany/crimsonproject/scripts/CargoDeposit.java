@@ -22,7 +22,7 @@ import org.javatuples.Triplet;
  */
 public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
-    private final Res1920x1080 fhd;
+    private final Res1920x1080 resolution;
     private final RGBrange rgbr;
 
     private static final int RIGHTCLICK = 0;
@@ -33,7 +33,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     private static final int STEPS = 3;
 
     public CargoDeposit() {
-        this.fhd = new Res1920x1080();
+        this.resolution = new Res1920x1080();
         this.rgbr = new RGBrange();
     }
 
@@ -42,7 +42,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
         while (this.walkThrough < STEPS) {
             // Call method
             // Todo connection lost
-            
+
             // Call method
             new TakeScreenshot().take();
 
@@ -57,7 +57,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
         switch (this.walkThrough) {
 
             case 0 -> {
-                this.hangarButton = new SegmentedRegions().getRectangle(this.fhd.getHangarWxHlist(), this.fhd.getInventoryDeadzone());
+                this.hangarButton = new SegmentedRegions().getRectangle(this.resolution.getHangarWxHlist(), this.resolution.getInventoryDeadzone());
 
                 if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                     this.walkThrough++;
@@ -73,7 +73,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 2 -> {
-                Rectangle undockButton = new SegmentedRegions().getRectangle(this.fhd.getUndockButtonWxHlist(), this.fhd.getUndockDeadZone());
+                Rectangle undockButton = new SegmentedRegions().getRectangle(this.resolution.getUndockButtonWxHlist(), this.resolution.getUndockDeadZone());
 
                 if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                     this.walkThrough++;
@@ -86,7 +86,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        new ClickScreenEvents().dragItemsToInventory(this.fhd.getDragItensDeadZoneList(), this.hangarButton);
+        new ClickScreenEvents().dragItemsToInventory(this.resolution.getDragItensDeadZoneList(), this.hangarButton);
     }
 
     @Override
