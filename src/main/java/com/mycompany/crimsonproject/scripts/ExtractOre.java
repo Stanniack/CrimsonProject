@@ -357,6 +357,17 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
+    public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
+        int row = Res1920x1080.getBEINGATTACKED_X1();
+        int column = Res1920x1080.getBEINGATTACKED_Y1();
+        int width = Res1920x1080.getBEINGATTACKED_W1();
+        int height = Res1920x1080.getBEINGATTACKED_H1();
+
+        if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB())) {
+            new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
+        }
+    }
+
     private void activePropulsion() throws AWTException, InterruptedException {
         new KeyboardEvents().clickKey(KeyEvent.VK_F3);
     }
@@ -383,14 +394,4 @@ public class ExtractOre implements VerifyRectangle {
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
     }
 
-    public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
-        int row = Res1920x1080.getBEINGATTACKED_X1();
-        int column = Res1920x1080.getBEINGATTACKED_Y1();
-        int width = Res1920x1080.getBEINGATTACKED_W1();
-        int height = Res1920x1080.getBEINGATTACKED_H1();
-
-        if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttackedRGB(), this.rgbr.getMaxBeingAttackedRGB())) {
-            new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
-        }
-    }
 }
