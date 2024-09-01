@@ -36,11 +36,13 @@ public class ExtractOre implements VerifyRectangle {
     private long flagSetAnotherAst_MS = 0;
     private long flagUntilToBeFilled_MS = 0;
     private long flagLockTarget_MS = 0;
+    private final int amountCannons = 2;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int STEPS = 6;
-    private static final int setAnotherAsteroid_MS = 120000;
-    private static final int startDragonScreen_MS = 2200000;
+    private static final int setAnotherAsteroidMS = 120000;
+    private static final int startDragonScreenMS = 2200000;
+
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 1500;
 
@@ -152,7 +154,7 @@ public class ExtractOre implements VerifyRectangle {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
-                    if (this.flagUntilToBeFilled_MS > startDragonScreen_MS) {
+                    if (this.flagUntilToBeFilled_MS > startDragonScreenMS) {
                         new ClickScreenEvents().dragScreen();
                     }
                     this.walkThrough++; // go to case 4
@@ -165,7 +167,7 @@ public class ExtractOre implements VerifyRectangle {
                 // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
-                if (this.flagSetAnotherAst_MS > setAnotherAsteroid_MS && this.isCannonActivatedOutSwitch() == 2) {
+                if (this.flagSetAnotherAst_MS > setAnotherAsteroidMS && this.isCannonActivatedOutSwitch() == this.amountCannons) {
                     this.flagSetAnotherAst_MS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
