@@ -159,7 +159,6 @@ public class ExtractOre implements VerifyRectangle {
                     }
                     this.walkThrough++; // go to case 4
                 }
-
                 //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
             }
 
@@ -244,7 +243,6 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            //int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax)
             if (this.isCannonActivated(i, 5,
                     (Arrays.asList(Res1920x1080.getF1VENTURE1_X(), Res1920x1080.getF2VENTURE2_X())), Res1920x1080.getFNVENTURE_Y(),
                     Res1920x1080.getVENTURECANNON_H1(), Res1920x1080.getVENTURECANNON_W1(),
@@ -281,22 +279,6 @@ public class ExtractOre implements VerifyRectangle {
             }
         }
         return deactivedCannons;
-    }
-
-    private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, Triplet<Integer, Integer, Integer> tupleMin, Triplet<Integer, Integer, Integer> tupleMax) throws InterruptedException, AWTException, IOException {
-
-        boolean action;
-
-        for (int j = 0; j < flagAttempt; j++) {
-            new TakeScreenshot().take2();
-
-            action = new FindPixels().findByRangeColor(coordinatesX.get(i), y, width, height, tupleMin, tupleMax);
-
-            if (action) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
