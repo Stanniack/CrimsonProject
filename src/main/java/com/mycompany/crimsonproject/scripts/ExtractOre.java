@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.sourceforge.tess4j.TesseractException;
-import org.javatuples.Triplet;
 import org.javatuples.Pair;
 
 /**
@@ -65,7 +64,8 @@ public class ExtractOre implements VerifyRectangle {
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        new KeyboardEvents().clickKey(KeyEvent.VK_F3); // afterburner
+        // Call method: Active propulsion
+        this.activePropulsion();
         this.timeStart2 = System.currentTimeMillis();
 
         while (this.walkThrough < STEPS) {
@@ -86,13 +86,10 @@ public class ExtractOre implements VerifyRectangle {
                 this.checkCannonsAction();
             }
 
-            // call method
+            // Call method
             this.flowScript();
-
         }
-
         return true;
-
     }
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
@@ -358,6 +355,10 @@ public class ExtractOre implements VerifyRectangle {
                 System.out.println("Invalid locked target not found, ending script.");
             }
         }
+    }
+
+    private void activePropulsion() throws AWTException, InterruptedException {
+        new KeyboardEvents().clickKey(KeyEvent.VK_F3);
     }
 
     private void launchDrones() throws AWTException, InterruptedException {
