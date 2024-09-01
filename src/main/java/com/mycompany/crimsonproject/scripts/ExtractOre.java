@@ -108,8 +108,6 @@ public class ExtractOre implements VerifyRectangle {
                 this.target = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getTupleLockTargetDeadZone());
 
                 if (this.verifyRectangle(this.target, "TARGET", 0)) {
-                    // target identified
-
                     if (new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB())) {
                         // If there is a lock target, just go to next step
                         this.walkThrough++; // go to case 2
@@ -333,7 +331,6 @@ public class ExtractOre implements VerifyRectangle {
         }
 
         if (isClicked) {
-
             Rectangle locktarget = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getTupleLockTargetDeadZone());
 
             if (locktarget != null) {
@@ -345,11 +342,11 @@ public class ExtractOre implements VerifyRectangle {
                 int asteroidTarget = 36;
                 this.target.x += asteroidTarget;
                 boolean lockAsteroidTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTargetRGB(), this.rgbr.getMaxLockTargetRGB());
+
                 if (lockAsteroidTarget) {
                     new ClickScreenEvents().leftClickCenterButton(this.target);
                     this.walkThrough = 0; //!!
                 }
-
             } else {
                 this.walkThrough = 6;
                 System.out.println("Invalid locked target not found, ending script.");
