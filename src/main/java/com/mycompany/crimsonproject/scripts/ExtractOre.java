@@ -83,7 +83,7 @@ public class ExtractOre implements VerifyRectangle {
 
             //Call method
             if (this.walkThrough > 2) {
-                this.isCannonActivatedOutSwitch();
+                this.checkCannonsAction();
             }
 
             // call method
@@ -143,7 +143,7 @@ public class ExtractOre implements VerifyRectangle {
             case 2 -> {
                 this.timeStart = System.currentTimeMillis();
                 this.launchDrones();
-                this.checkCannonAction();
+                this.activeCannons();
                 this.walkThrough++; // go to case 3
             }
 
@@ -166,7 +166,7 @@ public class ExtractOre implements VerifyRectangle {
                 // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
-                if (this.flagSetAnotherAst_MS > setAnotherAsteroidMS && this.isCannonActivatedOutSwitch() == this.amountCannons) {
+                if (this.flagSetAnotherAst_MS > setAnotherAsteroidMS && this.checkCannonsAction() == this.amountCannons) {
                     this.flagSetAnotherAst_MS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
@@ -237,7 +237,7 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private void checkCannonAction() throws IOException, InterruptedException, AWTException {
+    private void activeCannons() throws IOException, InterruptedException, AWTException {
 
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
 
@@ -262,7 +262,7 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    private int isCannonActivatedOutSwitch() throws InterruptedException, AWTException, IOException {
+    private int checkCannonsAction() throws InterruptedException, AWTException, IOException {
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
         int deactivedCannons = 0;
 
@@ -361,9 +361,9 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     private void launchDrones() throws AWTException, InterruptedException {
-        int timeSleep_MS = 3000;
+        int timeSleepMS = 3000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
-        Thread.sleep(timeSleep_MS);
+        Thread.sleep(timeSleepMS);
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
     }
 
@@ -373,9 +373,9 @@ public class ExtractOre implements VerifyRectangle {
 
     private void returnDrones() throws AWTException, InterruptedException {
         this.returnAndOrbitDrones();
-        int waitDrones_MS = 8000;
+        int waitDronesMS = 8000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
-        Thread.sleep(waitDrones_MS);
+        Thread.sleep(waitDronesMS);
     }
 
     public void returnAndOrbitDrones() throws AWTException, InterruptedException {
