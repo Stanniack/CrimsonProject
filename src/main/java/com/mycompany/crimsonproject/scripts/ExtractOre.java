@@ -141,8 +141,7 @@ public class ExtractOre implements VerifyRectangle {
             case 2 -> {
                 this.timeStart = System.currentTimeMillis();
                 this.launchDrones();
-                /*Thread.sleep(this.defineMinerCannonTime_MS()); // time to wait miner cannon
-                this.checkCannonAction();*/
+                this.checkCannonAction();
                 this.walkThrough++; // go to case 3
             }
 
@@ -397,10 +396,6 @@ public class ExtractOre implements VerifyRectangle {
 
     public void returnAndOrbitDrones() throws AWTException, InterruptedException {
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
-    }
-
-    private long defineMinerCannonTime_MS() {
-        return 0;
     }
 
     public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
