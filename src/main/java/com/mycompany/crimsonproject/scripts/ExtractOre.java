@@ -32,15 +32,17 @@ public class ExtractOre implements VerifyRectangle {
     private Res1920x1080 resolution = null;
 
     private int walkThrough = 0;
-    private long flagSetAnotherAst_MS = 0;
-    private long flagUntilToBeFilled_MS = 0;
-    private long flagLockTarget_MS = 0;
+    private long flagSetAnotherAstMS = 0;
+    private long flagUntilToBeFilledMS = 0;
+    private long flagDeactivePropulsionMS = 0;
+    private long flagLockTargetMS = 0;
     private final int amountCannons = 2;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int STEPS = 6;
-    private static final int setAnotherAsteroidMS = 120000;
-    private static final int startDragonScreenMS = 2200000;
+    private static final int SETANOTHERAST_MS = 180000;
+    private static final int DEACTIVEPROP_MS = 120000;
+    private static final int STARTDRAGSCREEN_MS = 2200000;
 
     private static final int GOTO_HOMESTATION = 0;
     private static final int CANNON_SLEEP = 1500;
@@ -64,8 +66,6 @@ public class ExtractOre implements VerifyRectangle {
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        // Call method: Active propulsion
-        this.activePropulsion();
         this.timeStart2 = System.currentTimeMillis();
 
         while (this.walkThrough < STEPS) {
@@ -98,6 +98,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 0 -> {
                 if (this.getAsteroids()) {
+                    this.propulsion();
                     this.timeStartLockTarget = System.currentTimeMillis();
                     this.walkThrough++; // go to case 1
                 }
@@ -122,13 +123,13 @@ public class ExtractOre implements VerifyRectangle {
                     }
 
                 } else {
-                    this.flagLockTarget_MS = System.currentTimeMillis() - this.timeStartLockTarget;
+                    this.flagLockTargetMS = System.currentTimeMillis() - this.timeStartLockTarget;
                     //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
                     new ClickScreenEvents().dragScreen();
 
-                    if (this.flagLockTarget_MS > LOCKTARGET_MS) {
+                    if (this.flagLockTargetMS > LOCKTARGET_MS) {
                         System.out.println("Restarting script.\n\n");
-                        this.flagLockTarget_MS = 0; // reset flag
+                        this.flagLockTargetMS = 0; // reset flag
                         this.walkThrough = 0; // reset script
                     }
                 }
@@ -149,7 +150,7 @@ public class ExtractOre implements VerifyRectangle {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
-                    if (this.flagUntilToBeFilled_MS > startDragonScreenMS) {
+                    if (this.flagUntilToBeFilledMS > STARTDRAGSCREEN_MS) {
                         new ClickScreenEvents().dragScreen();
                     }
                     this.walkThrough++; // go to case 4
@@ -161,21 +162,26 @@ public class ExtractOre implements VerifyRectangle {
                 // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
-                if (this.flagSetAnotherAst_MS > setAnotherAsteroidMS && this.checkCannonsAction() == this.amountCannons) {
-                    this.flagSetAnotherAst_MS = 0; // Reset flag
+                if (this.flagSetAnotherAstMS > SETANOTHERAST_MS && this.checkCannonsAction() == this.amountCannons) {
+                    this.flagSetAnotherAstMS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
                 } else if (this.checkPixelsAprroaching()) {
                     this.walkThrough--; // back to case and check maxCargo
 
                 } else {
-                    this.flagUntilToBeFilled_MS = 0; // Reset flag
+                    this.flagUntilToBeFilledMS = 0; // Reset flag
                     this.walkThrough = 0; // Approaching not found, the ship is not mining
                 }
+                
+                // check propulsion
+                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS) {
+                    this.propulsion();
+                }
 
-                this.flagUntilToBeFilled_MS = (System.currentTimeMillis() - this.timeStart2);
-                this.flagSetAnotherAst_MS = (System.currentTimeMillis() - this.timeStart);
-                //System.out.printf("Time added until set another ore: %d/%d secs\n\n", this.flagTimeToBeFilled_MS/1000, TIMETOWAIT_TOBEFILLED_MS/1000);
+                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStart2);
+                this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStart);
+                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStart2);
             }
 
             case 5 -> {
@@ -365,7 +371,7 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    private void activePropulsion() throws AWTException, InterruptedException {
+    private void propulsion() throws AWTException, InterruptedException {
         new KeyboardEvents().clickKey(KeyEvent.VK_F3);
     }
 
