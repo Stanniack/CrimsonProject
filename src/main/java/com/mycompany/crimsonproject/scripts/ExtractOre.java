@@ -50,6 +50,7 @@ public class ExtractOre implements VerifyRectangle {
     private long timeStartLockTarget = 0;
     private long timeStart = 0;
     private long timeStart2 = 0;
+    private long timeStart3 = 0;
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
     private final Integer Spriority = 1;
@@ -98,7 +99,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 0 -> {
                 if (this.getAsteroids()) {
-                    this.flagDeactivePropulsionMS = 0;
+                    this.timeStart3 = System.currentTimeMillis();
                     this.propulsion();
                     this.timeStartLockTarget = System.currentTimeMillis();
                     this.walkThrough++; // go to case 1
@@ -177,13 +178,14 @@ public class ExtractOre implements VerifyRectangle {
                 
                 // check propulsion
                 if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS) {
+                    System.out.println(flagDeactivePropulsionMS/1000);
                     this.propulsion();
-                    
+                    this.flagDeactivePropulsionMS = 0;
                 }
 
-                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStart2);
                 this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStart);
-                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStart2);
+                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStart2);
+                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStart3);
             }
 
             case 5 -> {
