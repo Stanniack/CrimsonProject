@@ -177,6 +177,7 @@ public class ExtractOre implements VerifyRectangle {
                 // check propulsion
                 if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS) {
                     this.propulsion();
+                    this.flagDeactivePropulsionMS = 0;
                 }
 
                 this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStart2);
