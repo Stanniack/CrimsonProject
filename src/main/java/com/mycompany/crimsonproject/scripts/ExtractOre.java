@@ -37,6 +37,7 @@ public class ExtractOre implements VerifyRectangle {
     private long flagDeactivePropulsionMS = 0;
     private long flagLockTargetMS = 0;
     private final int amountCannons = 2;
+    private boolean isAnotherAst;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int STEPS = 6;
@@ -48,9 +49,9 @@ public class ExtractOre implements VerifyRectangle {
     private static final int CANNON_SLEEP = 1500;
 
     private long timeStartLockTarget = 0;
-    private long timeStart = 0;
-    private long timeStart2 = 0;
-    private long timeStart3 = 0;
+    private long timeStartSetAnotherAst = 0;
+    private long timeStartFilled = 0;
+    private long timeStartProp = 0;
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
     private final Integer Spriority = 1;
@@ -67,7 +68,7 @@ public class ExtractOre implements VerifyRectangle {
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        this.timeStart2 = System.currentTimeMillis();
+        this.timeStartFilled = System.currentTimeMillis();
 
         while (this.walkThrough < STEPS) {
             // Todo connection lost 
@@ -99,9 +100,10 @@ public class ExtractOre implements VerifyRectangle {
 
             case 0 -> {
                 if (this.getAsteroids()) {
-                    this.timeStart3 = System.currentTimeMillis();
-                    this.propulsion();
                     this.timeStartLockTarget = System.currentTimeMillis();
+                    this.timeStartProp = System.currentTimeMillis();
+                    this.isAnotherAst = true;
+                    this.propulsion();
                     this.walkThrough++; // go to case 1
                 }
             } // end case 0
@@ -139,7 +141,7 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 2 -> {
-                this.timeStart = System.currentTimeMillis();
+                this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.launchDrones();
                 this.activeCannons();
                 this.walkThrough++; // go to case 3
@@ -161,6 +163,10 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 4 -> {
+                this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStartSetAnotherAst);
+                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStartFilled);
+                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStartProp);
+                
                 // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
@@ -175,17 +181,12 @@ public class ExtractOre implements VerifyRectangle {
                     this.flagUntilToBeFilledMS = 0; // Reset flag
                     this.walkThrough = 0; // Approaching not found, the ship is not mining
                 }
-                
+
                 // check propulsion
                 if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS) {
-                    System.out.println(flagDeactivePropulsionMS/1000);
                     this.propulsion();
                     this.flagDeactivePropulsionMS = 0;
                 }
-
-                this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStart);
-                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStart2);
-                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStart3);
             }
 
             case 5 -> {
