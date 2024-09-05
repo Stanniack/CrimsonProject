@@ -183,9 +183,9 @@ public class ExtractOre implements VerifyRectangle {
                 }
 
                 // check propulsion
-                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS) {
+                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS && this.isAnotherAst == true) {
                     this.propulsion();
-                    this.flagDeactivePropulsionMS = 0;
+                    this.isAnotherAst = false;
                 }
             }
 
