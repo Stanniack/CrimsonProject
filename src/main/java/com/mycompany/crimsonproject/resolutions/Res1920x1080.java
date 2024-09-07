@@ -154,8 +154,10 @@ public class Res1920x1080 {
     // Priority 2: (42,9); (42,10)
     private final List<Pair<Integer, Integer>> listScordite = Arrays.asList(
             new Pair<>(SCORDITE_W1, SCORDITE_H1),
-            new Pair<>(SCORDITE_W1, SCORDITE_H2));
+            new Pair<>(SCORDITE_W1, SCORDITE_H2),
+            new Pair<>(SCORDITE_W2, SCORDITE_H2));
     private static final int SCORDITE_W1 = 42;
+    private static final int SCORDITE_W2 = 43;
     private static final int SCORDITE_H1 = 9;
     private static final int SCORDITE_H2 = 10;
 
