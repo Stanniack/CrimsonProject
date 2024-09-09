@@ -171,14 +171,12 @@ public class ExtractOre implements VerifyRectangle {
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
                 if (this.flagSetAnotherAstMS > SETANOTHERAST_MS && this.checkCannonsAction() == this.amountCannons) {
-                    this.flagSetAnotherAstMS = 0; // Reset flag
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
                 } else if (this.checkPixelsAprroaching()) {
                     this.walkThrough--; // back to case and check maxCargo
 
                 } else {
-                    this.flagUntilToBeFilledMS = 0; // Reset flag
                     this.walkThrough = 0; // Approaching not found, the ship is not mining
                 }
 
