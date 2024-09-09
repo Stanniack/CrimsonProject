@@ -17,7 +17,7 @@ public class FindPixels {
     private BufferedImage bf;
     private Color color;
 
-    private static final int APPR_PERCENT = 25;
+    private static final int APPR_AMOUNT = 25;
 
     public boolean countPixelsByColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> tuplePixel) throws IOException {
 
@@ -36,7 +36,7 @@ public class FindPixels {
 
         //System.out.println("Total area: " + (width * height) + "\nFilled with given pixels area: " + area);
         //System.out.println("Given pixels: " + ((float) (area * 100) / (width * height)) + "%");
-        return area >= APPR_PERCENT;
+        return area >= APPR_AMOUNT;
     }
 
     public int pixelContainsColorByRange(File imageFile, int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
