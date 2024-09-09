@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject.t4j;
 
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
-import com.mycompany.crimsonproject.resolutions.Res1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -29,11 +29,11 @@ public class SegmentedRegions {
     private BufferedImage bf;
     private File imageFile;
     private final RGBrange rgbr;
-    private final Res1920x1080 fhd;
+    private final R1920x1080 fhd;
 
     public SegmentedRegions() {
         this.rgbr = new RGBrange();
-        this.fhd = new Res1920x1080();
+        this.fhd = new R1920x1080();
         this.instance = new Tesseract();
         this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         this.instance.setLanguage("eng");

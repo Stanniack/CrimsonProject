@@ -18,7 +18,7 @@ import org.javatuples.Quartet;
  * DEADZONE:
  * 0ixels amount to add in the BLOCKSCREEN for caution or not
  */
-public class Res1920x1080 {
+public class R1920x1080 {
 
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),

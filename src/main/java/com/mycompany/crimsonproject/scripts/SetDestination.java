@@ -5,7 +5,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.resolutions.Res1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -24,7 +24,7 @@ import org.javatuples.Triplet;
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private final int option;
-    private Res1920x1080 resolution = null;
+    private R1920x1080 resolution = null;
     private final RGBrange rgbr;
     private Rectangle miningBotLabel = null;
     private Rectangle homeStationLabel = null;
@@ -40,7 +40,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     public SetDestination(int option) {
         this.option = option;
         this.rgbr = new RGBrange();
-        this.resolution = new Res1920x1080();
+        this.resolution = new R1920x1080();
     }
 
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
