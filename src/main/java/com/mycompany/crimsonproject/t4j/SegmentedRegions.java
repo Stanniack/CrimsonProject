@@ -85,7 +85,6 @@ public class SegmentedRegions {
                     return rect;
                 }
             }
-
         }
         return null;
     }
@@ -119,7 +118,6 @@ public class SegmentedRegions {
                     return rect;
                 }
             }
-
         }
         return null;
     }
