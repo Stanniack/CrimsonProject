@@ -164,7 +164,7 @@ public class SegmentedRegions {
                     }
                 }
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getListScordite()) {
+                for (Pair<Integer, Integer> asteroid : this.fhd.getScorditeList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P1:S - i: " + i, result.get(i));
                     }

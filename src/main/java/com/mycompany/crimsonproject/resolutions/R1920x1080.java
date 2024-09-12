@@ -43,7 +43,7 @@ public class R1920x1080 {
     private static final int BEINGATTACKED_W1 = 24;
     private static final int BEINGATTACKED_H1 = 19;
 
-    private final List<Pair<Integer, Integer>> miningBotWxH = Arrays.asList(
+    private final List<Pair<Integer, Integer>> miningBotList = Arrays.asList(
             new Pair<>(MININGBOT1_W1, MININGBOT1_H1),
             new Pair<>(MININGBOT1_W2, MININGBOT1_H1),
             new Pair<>(MININGBOT1_W3, MININGBOT1_H2));
@@ -53,7 +53,7 @@ public class R1920x1080 {
     private static final int MININGBOT1_H2 = 12;
     private static final int MININGBOT1_H1 = 9;
 
-    private final List<Pair<Integer, Integer>> homeStationWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> homeStationList = Arrays.asList(
             new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
             new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1),
             new Pair<>(HOMESTATION1_W3, HOMESTATION1_H2));
@@ -63,7 +63,7 @@ public class R1920x1080 {
     private static final int HOMESTATION1_H1 = 9;
     private static final int HOMESTATION1_H2 = 12;
 
-    private final List<Pair<Integer, Integer>> warpWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> warpList = Arrays.asList(
             new Pair<>(WITHIN_W1, WITHIN_H1),
             new Pair<>(ALLRECT_W1, ALLRECT_H1),
             new Pair<>(WARPARROW_W1, WARPARROW_H1),
@@ -89,7 +89,7 @@ public class R1920x1080 {
     private static final int WARPTOWITHIN_W1 = 80;
     private static final int WARPTOWITHIN_H1 = 12;
 
-    private final List<Pair<Integer, Integer>> dockWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> dockList = Arrays.asList(
             new Pair<>(DOCK_W0, DOCK_H1),
             new Pair<>(DOCK_W1, DOCK_H1),
             new Pair<>(DOCK_W2, DOCK_H1),
@@ -108,14 +108,14 @@ public class R1920x1080 {
     private static final int BLOCKDOCK_H3 = 12;
     private static final int BLOCLDOCK_H3 = 12;
 
-    private final List<Pair<Integer, Integer>> hangarWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> hangarList = Arrays.asList(
             new Pair<>(HANGAR_W1, HANGAR_H1),
             new Pair<>(HANGAR_W1, HANGAR_H2));
     private static final int HANGAR_W1 = 34;
     private static final int HANGAR_H1 = 12;
     private static final int HANGAR_H2 = 11;
 
-    private final List<Pair<Integer, Integer>> closeLocationButtonWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> closeLocationButtonList = Arrays.asList(
             new Pair<>(CLOSELOCATIONBUTTON_W1, CLOSELOCATIONBUTTON_H1));
     private static final int CLOSELOCATIONBUTTON_W1 = 10;
     private static final int CLOSELOCATIONBUTTON_H1 = 10;
@@ -152,7 +152,7 @@ public class R1920x1080 {
     private static final int CONDENSED_H1 = 9;
 
     // Priority 2: (42,9); (42,10)
-    private final List<Pair<Integer, Integer>> listScordite = Arrays.asList(
+    private final List<Pair<Integer, Integer>> scorditeList = Arrays.asList(
             new Pair<>(SCORDITE_W1, SCORDITE_H1),
             new Pair<>(SCORDITE_W1, SCORDITE_H2),
             new Pair<>(SCORDITE_W2, SCORDITE_H2));
@@ -211,14 +211,14 @@ public class R1920x1080 {
     private static final int LOCKTARGET_DEADZONE_Y2_H = 200;
     /* ------------------------------------------------------------- */
 
-    private final List<Pair<Integer, Integer>> maxCargoWxHList = Arrays.asList(
+    private final List<Pair<Integer, Integer>> maxCargoList = Arrays.asList(
             new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1),
             new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
     private static final int MAXCARGO1_W1 = 111;
     private static final int MAXCARGO1_W2 = 110;
     private static final int MAXCARGO1_H1 = 24;
 
-    private final List<Pair<Integer, Integer>> minCargoWxHList = Arrays.asList(
+    private final List<Pair<Integer, Integer>> minCargoList = Arrays.asList(
             new Pair<>(MINGCARGO_WITHM3_W1, MINGCARGO_H1),
             new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H1),
             new Pair<>(MINGCARGO_WITHOUTM3_W1, MINGCARGO_H2));
@@ -260,7 +260,7 @@ public class R1920x1080 {
     private static final int DRAGITENS_DEADZONE_Y2_H = 985;
     /* ------------------------------------------------------------- */
 
-    private final List<Pair<Integer, Integer>> undockButtonWxHlist = Arrays.asList(
+    private final List<Pair<Integer, Integer>> undockButtonList = Arrays.asList(
             new Pair<>(UNDOCK_BUTTON_W1, UNDOCK_BUTTON_H1),
             new Pair<>(UNDOCK_BUTTON_W2, UNDOCK_BUTTON_H1));
     private static final int UNDOCK_BUTTON_W1 = 235;
@@ -307,28 +307,28 @@ public class R1920x1080 {
         return invalidTargetDeadZoneList;
     }
 
-    public List<Pair<Integer, Integer>> getMiningBotWxH() {
-        return miningBotWxH;
+    public List<Pair<Integer, Integer>> getMiningBotList() {
+        return miningBotList;
     }
 
-    public List<Pair<Integer, Integer>> getHomeStationWxHlist() {
-        return homeStationWxHlist;
+    public List<Pair<Integer, Integer>> getHomeStationList() {
+        return homeStationList;
     }
 
-    public List<Pair<Integer, Integer>> getWarpWxHlist() {
-        return warpWxHlist;
+    public List<Pair<Integer, Integer>> getWarpList() {
+        return warpList;
     }
 
-    public List<Pair<Integer, Integer>> getDockWxHlist() {
-        return dockWxHlist;
+    public List<Pair<Integer, Integer>> getDockList() {
+        return dockList;
     }
 
-    public List<Pair<Integer, Integer>> getHangarWxHlist() {
-        return hangarWxHlist;
+    public List<Pair<Integer, Integer>> getHangarList() {
+        return hangarList;
     }
 
-    public List<Pair<Integer, Integer>> getCloseLocationButtonWxHlist() {
-        return closeLocationButtonWxHlist;
+    public List<Pair<Integer, Integer>> getCloseLocationButtonList() {
+        return closeLocationButtonList;
     }
 
     public Quartet<Integer, Integer, Integer, Integer> getTupleLocationTabDeadZone() {
@@ -343,8 +343,8 @@ public class R1920x1080 {
         return condensedScorditeList;
     }
 
-    public List<Pair<Integer, Integer>> getListScordite() {
-        return listScordite;
+    public List<Pair<Integer, Integer>> getScorditeList() {
+        return scorditeList;
     }
 
     public List<Pair<Integer, Integer>> getDenseVeldsparList() {
@@ -367,12 +367,12 @@ public class R1920x1080 {
         return tupleLockTargetDeadZone;
     }
 
-    public List<Pair<Integer, Integer>> getMaxCargoWxHList() {
-        return maxCargoWxHList;
+    public List<Pair<Integer, Integer>> getMaxCargoList() {
+        return maxCargoList;
     }
 
-    public List<Pair<Integer, Integer>> getMinCargoWxHList() {
-        return minCargoWxHList;
+    public List<Pair<Integer, Integer>> getMinCargoList() {
+        return minCargoList;
     }
 
     public Quartet<Integer, Integer, Integer, Integer> getInventoryDeadzone() {
@@ -387,8 +387,8 @@ public class R1920x1080 {
         return dragItensDeadZoneList;
     }
 
-    public List<Pair<Integer, Integer>> getUndockButtonWxHlist() {
-        return undockButtonWxHlist;
+    public List<Pair<Integer, Integer>> getUndockButtonList() {
+        return undockButtonList;
     }
 
     public Quartet<Integer, Integer, Integer, Integer> getUndockDeadZone() {
