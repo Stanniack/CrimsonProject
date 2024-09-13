@@ -14,11 +14,26 @@ import org.javatuples.Quartet;
  * BLOSCKSCREEN calculator with DEADZONE: x1 = x; x2 = x + w + DEADZONE; y1 = y;
  * y2 = y + h + DEADZONE.
  *
- * BLOCKSCREEN: Rect limitation where to find the recognized rects 
- * DEADZONE:
+ * BLOCKSCREEN: Rect limitation where to find the recognized rects DEADZONE:
  * 0ixels amount to add in the BLOCKSCREEN for caution or not
  */
 public class R1920x1080 {
+
+    public static int getCHECKPATH_X1() {
+        return CHECKPATH_X1;
+    }
+
+    public static int getCHECKPATH_W1() {
+        return CHECKPATH_W1;
+    }
+
+    public static int getCHECKPATH_Y1() {
+        return CHECKPATH_Y1;
+    }
+
+    public static int getCHECKPATH_H1() {
+        return CHECKPATH_H1;
+    }
 
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
@@ -143,7 +158,6 @@ public class R1920x1080 {
             new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W3, VELDSPAR_H2));
 
-    // Priority 1: (62, 9); (61, 9)
     private final List<Pair<Integer, Integer>> condensedScorditeList = Arrays.asList(
             new Pair<>(CONDENSED_W1, CONDENSED_H1),
             new Pair<>(CONDENSED_W2, CONDENSED_H1));
@@ -151,7 +165,6 @@ public class R1920x1080 {
     private static final int CONDENSED_W2 = 61;
     private static final int CONDENSED_H1 = 9;
 
-    // Priority 2: (42,9); (42,10)
     private final List<Pair<Integer, Integer>> scorditeList = Arrays.asList(
             new Pair<>(SCORDITE_W1, SCORDITE_H1),
             new Pair<>(SCORDITE_W1, SCORDITE_H2),
@@ -161,7 +174,6 @@ public class R1920x1080 {
     private static final int SCORDITE_H1 = 9;
     private static final int SCORDITE_H2 = 10;
 
-    // Priotity 3: (34, 9); (33, 9)
     private final List<Pair<Integer, Integer>> denseVeldsparList = Arrays.asList(
             new Pair<>(DENSE_W1, DENSE_H1),
             new Pair<>(DENSE_W2, DENSE_H1));
@@ -169,7 +181,6 @@ public class R1920x1080 {
     private static final int DENSE_W2 = 33;
     private static final int DENSE_H1 = 9;
 
-    // Priority 4: (73, 10); (72, 10); (72, 9); (71, 9)
     private final List<Pair<Integer, Integer>> concentratedVeldsparList = Arrays.asList(
             new Pair<>(CONCENTRATED_W1, CONCENTRATED_H1),
             new Pair<>(CONCENTRATED_W2, CONCENTRATED_H1),
@@ -181,7 +192,6 @@ public class R1920x1080 {
     private static final int CONCENTRATED_H1 = 10;
     private static final int CONCENTRATED_H2 = 9;
 
-    // Priority 5: (50, 13); (49, 13); (48, 12)
     private final List<Pair<Integer, Integer>> veldsparList = Arrays.asList(
             new Pair<>(VELDSPAR_W1, VELDSPAR_H1),
             new Pair<>(VELDSPAR_W2, VELDSPAR_H1),
@@ -244,11 +254,10 @@ public class R1920x1080 {
     private static final int COMPACTMAXCARGO_H1 = 5;
     /* ------------------------------------------------------------- */
 
-    // (122, 16); (121, 14); (121, 25)
+    private static final int APPROACHING_X1 = 899;
+    private static final int APPROACHING_Y1 = 787;
     private static final int APPROACHING_W1 = 121;
-    private static final int APPROACHING_H3 = 14;
-    private static final int APPROACHING_X = 899;
-    private static final int APPROACHING_Y = 787;
+    private static final int APPROACHING_H1 = 14;
     /* ------------------------------------------------------------- */
 
     // Drag itens deadzone
@@ -283,6 +292,12 @@ public class R1920x1080 {
     private static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 
+    private static final int CHECKPATH_X1 = 760;
+    private static final int CHECKPATH_Y1 = 760;
+    private static final int CHECKPATH_W1 = 395;
+    private static final int CHECKPATH_H1 = 100;
+    /* ------------------------------------------------------------- */
+
     private static final int VENTURECANNON_W1 = 42;
     private static final int VENTURECANNON_H1 = 46;
 
@@ -297,7 +312,6 @@ public class R1920x1080 {
     private static final int F2VENTURE2_X = F1VENTURE1_X + 51;
     private static final int FNVENTURE_Y = 912;
 
-    //1044 + 51, 912
     /* ------------------------------------------------------------- */
     public List<Pair<Integer, Integer>> getInvalidTargetList() {
         return invalidTargetList;
@@ -419,16 +433,16 @@ public class R1920x1080 {
         return APPROACHING_W1;
     }
 
-    public static int getAPPROACHING_H3() {
-        return APPROACHING_H3;
+    public static int getAPPROACHING_H1() {
+        return APPROACHING_H1;
     }
 
-    public static int getAPPROACHING_X() {
-        return APPROACHING_X;
+    public static int getAPPROACHING_X1() {
+        return APPROACHING_X1;
     }
 
-    public static int getAPPROACHING_Y() {
-        return APPROACHING_Y;
+    public static int getAPPROACHING_Y1() {
+        return APPROACHING_Y1;
     }
 
     public static int getFNCANNONS_Y() {
@@ -486,4 +500,5 @@ public class R1920x1080 {
     public static int getFNVENTURE_Y() {
         return FNVENTURE_Y;
     }
+
 }
