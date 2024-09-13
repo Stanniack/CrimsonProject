@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
+import org.javatuples.Triplet;
 
 /**
  *
@@ -312,8 +313,10 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().countPixelsByColor(R1920x1080.getAPPROACHING_X(), R1920x1080.getAPPROACHING_Y(),
-                R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H3(), this.rgbr.getFullWhiteRGB());
+        boolean approaching = new FindPixels().findByColor(
+                R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
+                R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(), 
+                new Triplet<>(255, 255, 255));
 
         if (approaching == true) {
             return true;
