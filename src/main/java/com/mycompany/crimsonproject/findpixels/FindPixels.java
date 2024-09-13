@@ -33,9 +33,6 @@ public class FindPixels {
                 }
             }
         }
-
-        //System.out.println("Total area: " + (width * height) + "\nFilled with given pixels area: " + area);
-        //System.out.println("Given pixels: " + ((float) (area * 100) / (width * height)) + "%");
         return area >= APPR_AMOUNT;
     }
 
@@ -51,13 +48,10 @@ public class FindPixels {
                 if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
                         && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
                         && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
-
                     area++;
-
                 }
             }
         }
-
         return area;
     }
 
@@ -73,12 +67,10 @@ public class FindPixels {
                         && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
                         && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
 
-                    //System.out.println(this.color.toString());
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -99,7 +91,6 @@ public class FindPixels {
                 }
             }
         }
-
         return false;
     }
 
@@ -116,7 +107,6 @@ public class FindPixels {
                 }
             }
         }
-
         return false;
     }
 
@@ -135,8 +125,8 @@ public class FindPixels {
         }
         return false;
     }
-    
-        public boolean findByGreenColor(File imageFile, int row, int column, int width, int height, int red, int green, int blue) throws IOException {
+
+    public boolean findByGreenColor(File imageFile, int row, int column, int width, int height, int red, int green, int blue) throws IOException {
 
         this.bf = ImageIO.read(imageFile);
 
