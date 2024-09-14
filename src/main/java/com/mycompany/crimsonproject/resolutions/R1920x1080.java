@@ -292,10 +292,10 @@ public class R1920x1080 {
     private static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
     /* ------------------------------------------------------------- */
 
-    private static final int CHECKPATH_X1 = 760;
-    private static final int CHECKPATH_Y1 = 760;
-    private static final int CHECKPATH_W1 = 395;
-    private static final int CHECKPATH_H1 = 100;
+    private static final int CHECKPATH_X1 = 865;
+    private static final int CHECKPATH_Y1 = 787;
+    private static final int CHECKPATH_W1 = 190;
+    private static final int CHECKPATH_H1 = 14;
     /* ------------------------------------------------------------- */
 
     private static final int VENTURECANNON_W1 = 42;
