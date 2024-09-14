@@ -1,9 +1,10 @@
 package com.mycompany.crimsonproject.robot;
 
-import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public class TakeScreenshot extends RobotEvent {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
             BufferedImage bf = this.bot.createScreenCapture(rectangle);
+
             ImageIO.write(bf, "png", new File(path));
 
         } catch (InterruptedException | IOException ex) {
@@ -40,7 +42,28 @@ public class TakeScreenshot extends RobotEvent {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
             BufferedImage bf = this.bot.createScreenCapture(rectangle);
+
             ImageIO.write(bf, "png", new File(path));
+
+        } catch (IOException ex) {
+            Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void takeSRGB() {
+
+        try {
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
+
+            Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+
+            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+
+            // Convert image to SRGB
+            ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+            BufferedImage sRGBImage = op.filter(bf, null);
+
+            ImageIO.write(sRGBImage, "png", new File(path));
 
         } catch (IOException ex) {
             Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
