@@ -60,7 +60,7 @@ public class TakeScreenshot extends RobotEvent {
             BufferedImage bf = this.bot.createScreenCapture(rectangle);
 
             // Convert image to SRGB
-            ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+            ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_sRGB), null);
             BufferedImage sRGBImage = op.filter(bf, null);
 
             ImageIO.write(sRGBImage, "png", new File(path));
