@@ -55,7 +55,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             // Call method
             this.flowScript();
         }
-
     }
 
     private void flowScript() throws InterruptedException, AWTException, IOException, TesseractException {
@@ -128,6 +127,24 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     this.walkThrough++;
                 }
             }
+
+            /*case 4 -> {
+                boolean isWarping = true;
+                int waitForWarpMS = 5000;
+                Thread.sleep(waitForWarpMS);
+
+                while (isWarping) {
+                    new TakeScreenshot().takeSRGB();
+                    isWarping = new FindPixels().greaterThanRGB(
+                            R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
+                            R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
+                            255, 255, 255);
+                    System.out.println(isWarping);
+                }
+
+                Thread.sleep(this.option == HOMESTATION ? 1000 : 1000);
+                this.walkThrough++;
+            }*/
 
         } // while
     }
