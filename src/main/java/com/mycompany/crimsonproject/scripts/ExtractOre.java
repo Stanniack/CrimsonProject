@@ -145,6 +145,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.launchDrones();
                 this.activeCannons();
+                this.engageDrones(); // engage drones
                 this.walkThrough++; // go to case 3
             }
 
@@ -160,14 +161,13 @@ public class ExtractOre implements VerifyRectangle {
                     }
                     this.walkThrough++; // go to case 4
                 }
-                //System.out.printf("Time added until start drag screen to search maxCargo: %d/%d secs\n\n", this.flagUntilToBeFilled_MS / 1000, TIMETOWAIT_CANNON_MS / 1000);
             }
 
             case 4 -> {
                 this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStartSetAnotherAst);
                 this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStartFilled);
                 this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStartProp);
-                
+
                 // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                 // else if: check approaching is true -> continue mining
                 // else ship is not mining -> reset mining
@@ -257,7 +257,6 @@ public class ExtractOre implements VerifyRectangle {
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(cannons.get(i));
                 System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
-                this.engageDrones(); // engage drones again
 
             } else {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
@@ -315,7 +314,7 @@ public class ExtractOre implements VerifyRectangle {
 
         boolean approaching = new FindPixels().findByColor(
                 R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
-                R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(), 
+                R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(),
                 new Triplet<>(255, 255, 255));
 
         if (approaching == true) {
