@@ -190,7 +190,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 5 -> {
                 this.returnDrones();
-                new SetDestination(GOTO_HOMESTATION).startScript();
+                new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
             }
