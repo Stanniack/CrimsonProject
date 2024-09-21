@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject;
 
+import com.mycompany.crimsonproject.resolutions.R1920x1080;
 import com.mycompany.crimsonproject.scripts.SetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class MainSetDestination {
         try {
 
             Thread.sleep(4000);
-            new SetDestination(GOTO_MININGBOT).startScript();
+            //new SetDestination(new R1920x1080().getMiningBotList(), GOTO_MININGBOT).startScript();
+            new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION).startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
