@@ -35,6 +35,9 @@ public class R1920x1080 {
         return CHECKPATH_H1;
     }
 
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> invalidTargetList = Arrays.asList(
             new Pair<>(INVALIDTARGET_W1, INVALIDTARGET_H1),
             new Pair<>(INVALIDTARGET_W2, INVALIDTARGET_H2),
@@ -52,12 +55,16 @@ public class R1920x1080 {
     private static final int INVALIDTARGET_DEADZONE_X2_W = 951;
     private static final int INVALIDTARGET_DEADZONE_Y1 = 420;
     private static final int INVALIDTARGET_DEADZONE_Y2_H = 470;
-
+    /**
+     * *****************************************************************************
+     */
     private static final int BEINGATTACKED_X1 = 1006;
     private static final int BEINGATTACKED_Y1 = 960;
     private static final int BEINGATTACKED_W1 = 24;
     private static final int BEINGATTACKED_H1 = 19;
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> miningBotList = Arrays.asList(
             new Pair<>(MININGBOT1_W1, MININGBOT1_H1),
             new Pair<>(MININGBOT1_W2, MININGBOT1_H1),
@@ -77,7 +84,9 @@ public class R1920x1080 {
     private static final int HOMESTATION1_W3 = 91;
     private static final int HOMESTATION1_H1 = 9;
     private static final int HOMESTATION1_H2 = 12;
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> warpList = Arrays.asList(
             new Pair<>(WITHIN_W1, WITHIN_H1),
             new Pair<>(ALLRECT_W1, ALLRECT_H1),
@@ -122,7 +131,9 @@ public class R1920x1080 {
     private static final int DOCK_H3 = 12;
     private static final int BLOCKDOCK_H3 = 12;
     private static final int BLOCLDOCK_H3 = 12;
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> hangarList = Arrays.asList(
             new Pair<>(HANGAR_W1, HANGAR_H1),
             new Pair<>(HANGAR_W1, HANGAR_H2));
@@ -141,8 +152,9 @@ public class R1920x1080 {
     private static final int LOCATIONTAB_DEADZONE_X2_W = 889;
     private static final int LOCATIONTAB_DEADZONE_Y1 = 0;
     private static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
-
-    /* ------------------------------------------------------------- */
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> allAsteroidsList = Arrays.asList(
             new Pair<>(CONDENSED_W1, CONDENSED_H1),
             new Pair<>(CONDENSED_W2, CONDENSED_H1),
@@ -201,13 +213,17 @@ public class R1920x1080 {
     private static final int VELDSPAR_W3 = 48;
     private static final int VELDSPAR_H1 = 13;
     private static final int VELDSPAR_H2 = 12;
-    // This find where the floating overview->mining window is in the display
+    /**
+     * *****************************************************************************
+     * This find where the floating overview->mining window is in the display
+     */
     private static final int OVERVIEWMINING_X1 = 1230;
     private static final int OVERVIEWMINING_X2_W = 1919;
     private static final int OVERVIEWMINING_Y1 = 251;
     private static final int OVERVIEWMINING_Y2_H = 1079;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> lockTargetList = Arrays.asList(
             new Pair<>(LOCKTARGET_W1, LOCKTARGET_H1));
     private static final int LOCKTARGET_W1 = 26;
@@ -219,8 +235,9 @@ public class R1920x1080 {
     private static final int LOCKTARGET_DEADZONE_X2_W = 1919;
     private static final int LOCKTARGET_DEADZONE_Y1 = 0;
     private static final int LOCKTARGET_DEADZONE_Y2_H = 200;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> maxCargoList = Arrays.asList(
             new Pair<>(MAXCARGO1_W1, MAXCARGO1_H1),
             new Pair<>(MAXCARGO1_W2, MAXCARGO1_H1));
@@ -236,68 +253,77 @@ public class R1920x1080 {
     private static final int MINGCARGO_WITHOUTM3_W1 = 51;
     private static final int MINGCARGO_H1 = 9;
     private static final int MINGCARGO_H2 = 10;
-    /* ------------------------------------------------------------- */
-    // This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in the display in STATION
+    /**
+     * *****************************************************************************
+     * This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in
+     * the display in STATION
+     */
     private final Quartet<Integer, Integer, Integer, Integer> inventoryDeadzone
             = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
     private static final int INVENTORY_DEADZONE_X1 = 70;
     private static final int INVENTORY_DEADZONE_X2_W = 570;
     private static final int INVENTORY_DEADZONE_Y1 = 40;
     private static final int INVENTORY_DEADZONE_Y2_H = 1040;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> compactMaxCargoList = Arrays.asList(
             new Pair<>(COMPACTMAXCARGO_W1, COMPACTMAXCARGO_H1),
             new Pair<>(COMPACTMAXCARGO_W2, COMPACTMAXCARGO_H1));
     private static final int COMPACTMAXCARGO_W1 = 331;
     private static final int COMPACTMAXCARGO_W2 = 332;
     private static final int COMPACTMAXCARGO_H1 = 5;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private static final int APPROACHING_X1 = 899;
     private static final int APPROACHING_Y1 = 787;
     private static final int APPROACHING_W1 = 121;
     private static final int APPROACHING_H1 = 14;
-    /* ------------------------------------------------------------- */
-
-    // Drag itens deadzone
+    /**
+     * *****************************************************************************
+     * Drag itens deadzone
+     */
     private final Quartet<Integer, Integer, Integer, Integer> dragItensDeadZoneList
             = new Quartet<>(DRAGITENS_DEADZONE_X1, DRAGITENS_DEADZONE_X2_W, DRAGITENS_DEADZONE_Y1, DRAGITENS_DEADZONE_Y2_H);
     private static final int DRAGITENS_DEADZONE_X1 = 245;
     private static final int DRAGITENS_DEADZONE_X2_W = 530;
     private static final int DRAGITENS_DEADZONE_Y1 = 185;
     private static final int DRAGITENS_DEADZONE_Y2_H = 985;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private final List<Pair<Integer, Integer>> undockButtonList = Arrays.asList(
             new Pair<>(UNDOCK_BUTTON_W1, UNDOCK_BUTTON_H1),
             new Pair<>(UNDOCK_BUTTON_W2, UNDOCK_BUTTON_H1));
     private static final int UNDOCK_BUTTON_W1 = 235;
     private static final int UNDOCK_BUTTON_W2 = 234;
     private static final int UNDOCK_BUTTON_H1 = 40;
-    /* This find where the word Approaching is in the display */
     private final Quartet<Integer, Integer, Integer, Integer> undockDeadZone
             = new Quartet<>(UNDOCK_DEADZONE_X1, UNDOCK_DEADZONE_X2_W, UNDOCK_DEADZONE_Y1, UNDOCK_DEADZONE_Y2_H);
     private static final int UNDOCK_DEADZONE_X1 = 571;
     private static final int UNDOCK_DEADZONE_X2_W = 1919;
     private static final int UNDOCK_DEADZONE_Y1 = 0;
     private static final int UNDOCK_DEADZONE_Y2_H = 1079;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private final Quartet<Integer, Integer, Integer, Integer> compactMaxCargoDeadZone
             = new Quartet<>(COMPACTCARGO_DEADZONE_X1, COMPACTCARGO_DEADZONE_X2_W, COMPACTCARGO_DEADZONE_Y1, COMPACTCARGO_DEADZONE_Y2_H);
     private static final int COMPACTCARGO_DEADZONE_X1 = 30;
     private static final int COMPACTCARGO_DEADZONE_X2_W = 444;
     private static final int COMPACTCARGO_DEADZONE_Y1 = 0;
     private static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private static final int CHECKPATH_X1 = 865;
     private static final int CHECKPATH_Y1 = 787;
     private static final int CHECKPATH_W1 = 190;
     private static final int CHECKPATH_H1 = 14;
-    /* ------------------------------------------------------------- */
-
+    /**
+     * *****************************************************************************
+     */
     private static final int VENTURECANNON_W1 = 42;
     private static final int VENTURECANNON_H1 = 46;
 
@@ -312,7 +338,10 @@ public class R1920x1080 {
     private static final int F2VENTURE2_X = F1VENTURE1_X + 51;
     private static final int FNVENTURE_Y = 912;
 
-    /* ------------------------------------------------------------- */
+    /**
+     * *****************************************************************************
+     */
+
     public List<Pair<Integer, Integer>> getInvalidTargetList() {
         return invalidTargetList;
     }
