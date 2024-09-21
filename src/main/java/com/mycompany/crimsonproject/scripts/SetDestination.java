@@ -14,6 +14,8 @@ import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
 import com.mycompany.crimsonproject.utils.RGBrange;
+import java.util.List;
+import org.javatuples.Pair;
 import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 
@@ -26,8 +28,9 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private final int option;
     private R1920x1080 resolution = null;
     private final RGBrange rgbr;
-    private Rectangle miningBotLabel = null;
-    private Rectangle homeStationLabel = null;
+    private Rectangle astBeltDest = null;
+    private Rectangle homeStationDest = null;
+    private final List<Pair<Integer, Integer>> destination;
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
@@ -37,7 +40,13 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private int walkThrough = 0;
 
-    public SetDestination(int option) {
+    /**
+     * @param chosenDest is a list of Pair<Integer, Integer>
+     * @param option is type int that choice if the script will go to station or
+     * asteroid belt
+     */
+    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option) {
+        this.destination = chosenDest;
         this.option = option;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
@@ -71,16 +80,16 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             } // end case 0
 
             case 1 -> {
-                this.miningBotLabel = new SegmentedRegions().getRectangle(this.resolution.getMiningBotList(), this.resolution.getTupleLocationTabDeadZone());
+                this.astBeltDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getTupleLocationTabDeadZone());
 
-                if (this.option == MININGBOT && this.verifyRectangle(miningBotLabel, "MININGBOT1", RIGHTCLICK)) {
+                if (this.option == MININGBOT && this.verifyRectangle(this.astBeltDest, "ASTEROID BELT", RIGHTCLICK)) {
                     this.walkThrough++;
                     descentFlag = false;
 
                 } else {
-                    this.homeStationLabel = new SegmentedRegions().getRectangle(this.resolution.getHomeStationList(), this.resolution.getTupleLocationTabDeadZone());
+                    this.homeStationDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getTupleLocationTabDeadZone());
 
-                    if (this.option == HOMESTATION && this.verifyRectangle(homeStationLabel, "HOMESTATION1", RIGHTCLICK)) {
+                    if (this.option == HOMESTATION && this.verifyRectangle(this.homeStationDest, "HOME STATION", RIGHTCLICK)) {
                         this.walkThrough++;
                         descentFlag = false;
                     }
@@ -95,7 +104,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             } // end case 1
 
             case 2 -> {
-                Rectangle warpBlock = new SegmentedRegions().getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.miningBotLabel));
+                Rectangle warpBlock = new SegmentedRegions().getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
 
                 if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                     //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
@@ -103,7 +112,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     descentFlag = false;
 
                 } else {
-                    Rectangle dock = new SegmentedRegions().getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationLabel));
+                    Rectangle dock = new SegmentedRegions().getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
 
                     if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
                         //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
@@ -112,7 +121,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     }
                 }
 
-                // back to case 1 and find the MININGBOT1 or HOMESTATION1 to restart finding WITHIN/DOCK
+                /* back to case 1 and find the ATEROID BELT or HOME STATION to restart finding WITHIN/DOCK */
                 if (descentFlag) {
                     this.walkThrough--;
                     new ClickScreenEvents().dragScreen();
@@ -145,7 +154,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 Thread.sleep(this.option == HOMESTATION ? 1000 : 1000);
                 this.walkThrough++;
             }*/
-
         } // while
     }
 
