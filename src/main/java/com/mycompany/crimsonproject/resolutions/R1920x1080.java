@@ -19,22 +19,6 @@ import org.javatuples.Quartet;
  */
 public class R1920x1080 {
 
-    public static int getCHECKPATH_X1() {
-        return CHECKPATH_X1;
-    }
-
-    public static int getCHECKPATH_W1() {
-        return CHECKPATH_W1;
-    }
-
-    public static int getCHECKPATH_Y1() {
-        return CHECKPATH_Y1;
-    }
-
-    public static int getCHECKPATH_H1() {
-        return CHECKPATH_H1;
-    }
-
     /**
      * *****************************************************************************
      */
@@ -341,7 +325,6 @@ public class R1920x1080 {
     /**
      * *****************************************************************************
      */
-
     public List<Pair<Integer, Integer>> getInvalidTargetList() {
         return invalidTargetList;
     }
@@ -528,6 +511,22 @@ public class R1920x1080 {
 
     public static int getFNVENTURE_Y() {
         return FNVENTURE_Y;
+    }
+
+    public static int getCHECKPATH_X1() {
+        return CHECKPATH_X1;
+    }
+
+    public static int getCHECKPATH_W1() {
+        return CHECKPATH_W1;
+    }
+
+    public static int getCHECKPATH_Y1() {
+        return CHECKPATH_Y1;
+    }
+
+    public static int getCHECKPATH_H1() {
+        return CHECKPATH_H1;
     }
 
 }
