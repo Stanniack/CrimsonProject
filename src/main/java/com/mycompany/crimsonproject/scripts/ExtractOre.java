@@ -68,7 +68,7 @@ public class ExtractOre implements VerifyRectangle {
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
     public ExtractOre(boolean isSwitchable) {
-        this.isSwitchable = false;
+        this.isSwitchable = isSwitchable;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
     }

@@ -20,7 +20,7 @@ public class MainPC {
 
     public static void main(String[] args) throws InterruptedException {
         final int GOTO_MININGBOT = 1;
-        boolean isSwitchable = false;
+        boolean isSwitchable = true;
         Thread.sleep(4000);
 
         for (int i = 0; i < 2; i++) {
