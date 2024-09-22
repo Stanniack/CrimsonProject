@@ -68,6 +68,46 @@ public class R1920x1080 {
     private static final int HOMESTATION1_W3 = 91;
     private static final int HOMESTATION1_H1 = 9;
     private static final int HOMESTATION1_H2 = 12;
+
+    private final List<Pair<Integer, Integer>> AstBeltIList = Arrays.asList(
+            new Pair<>(ASTBELTI_W1, ASTBELTI_H1),
+            new Pair<>(ASTBELTI_W2, ASTBELTI_H1));
+
+    private static final int ASTBELTI_W1 = 73;
+    private static final int ASTBELTI_W2 = 74;
+    private static final int ASTBELTI_H1 = 9;
+
+    private final List<Pair<Integer, Integer>> AstBeltIIList = Arrays.asList(
+            new Pair<>(ASTBELTII_W1, ASTBELTII_H1),
+            new Pair<>(ASTBELTII_W2, ASTBELTII_H1));
+
+    private static final int ASTBELTII_W1 = 76;
+    private static final int ASTBELTII_W2 = 77;
+    private static final int ASTBELTII_H1 = 9;
+
+    private final List<Pair<Integer, Integer>> AstBeltIIIList = Arrays.asList(
+            new Pair<>(ASTBELTIII_W1, ASTBELTIII_H1),
+            new Pair<>(ASTBELTIII_W2, ASTBELTIII_H1));
+
+    private static final int ASTBELTIII_W1 = 79;
+    private static final int ASTBELTIII_W2 = 80;
+    private static final int ASTBELTIII_H1 = 9;
+
+    private final List<Pair<Integer, Integer>> AstBeltIIIIList = Arrays.asList(
+            new Pair<>(ASTBELTIIII_W1, ASTBELTIIII_H1),
+            new Pair<>(ASTBELTIIII_W2, ASTBELTIIII_H1));
+
+    private static final int ASTBELTIIII_W1 = 82;
+    private static final int ASTBELTIIII_W2 = 83;
+    private static final int ASTBELTIIII_H1 = 9;
+
+    private final List<Pair<Integer, Integer>> AstBeltIIIIIList = Arrays.asList(
+            new Pair<>(ASTBELTIIIII_W1, ASTBELTIIIII_H1),
+            new Pair<>(ASTBELTIIIII_W2, ASTBELTIIIII_H1));
+
+    private static final int ASTBELTIIIII_W1 = 85;
+    private static final int ASTBELTIIIII_W2 = 86;
+    private static final int ASTBELTIIIII_H1 = 9;
     /**
      * *****************************************************************************
      */
@@ -527,6 +567,26 @@ public class R1920x1080 {
 
     public static int getCHECKPATH_H1() {
         return CHECKPATH_H1;
+    }
+
+    public List<Pair<Integer, Integer>> getAstBeltIList() {
+        return AstBeltIList;
+    }
+
+    public List<Pair<Integer, Integer>> getAstBeltIIList() {
+        return AstBeltIIList;
+    }
+
+    public List<Pair<Integer, Integer>> getAstBeltIIIList() {
+        return AstBeltIIIList;
+    }
+
+    public List<Pair<Integer, Integer>> getAstBeltIIIIList() {
+        return AstBeltIIIIList;
+    }
+
+    public List<Pair<Integer, Integer>> getAstBeltIIIIIList() {
+        return AstBeltIIIIIList;
     }
 
 }
