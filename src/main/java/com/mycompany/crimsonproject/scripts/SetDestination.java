@@ -35,6 +35,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
+    private int waitForWarp_MS;
     // it depends the amount of switch cases
     private static final int STEPS = 4;
 
@@ -45,9 +46,10 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
      * @param option is type int that choice wether the script will go to
      * station or asteroid belt
      */
-    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option) {
+    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp) {
         this.destination = chosenDest;
         this.option = option;
+        this.waitForWarp_MS = waitForWarp;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
     }
@@ -135,7 +137,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 }
                 
                 // Sleep until reach the destination
-                Thread.sleep(40000);
+                Thread.sleep(this.waitForWarp_MS);
             }
 
             /*case 4 -> {
