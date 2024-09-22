@@ -48,4 +48,22 @@ public class TextLogs {
             Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public int readLine(String path) {
+        int content = 0;
+
+        try {
+            FileReader file = new FileReader(new File(path));
+            BufferedReader bf = new BufferedReader(file);
+
+            content = Integer.parseInt(bf.readLine());
+            file.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return content;
+    }
 }
