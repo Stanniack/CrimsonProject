@@ -133,6 +133,9 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
+                
+                // Sleep until reach the destination
+                Thread.sleep(40000);
             }
 
             /*case 4 -> {
