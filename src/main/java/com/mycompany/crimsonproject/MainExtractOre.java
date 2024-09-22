@@ -15,10 +15,11 @@ public class MainExtractOre {
 
     public static void main(String[] args) {
         boolean isSwitchable = false;
+        int waitForWarp = 55000;
 
         try {
             Thread.sleep(4000);
-            new ExtractOre(isSwitchable).startScript();
+            new ExtractOre(isSwitchable, waitForWarp).startScript();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
         }

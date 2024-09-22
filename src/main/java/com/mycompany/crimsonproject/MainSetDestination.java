@@ -17,12 +17,12 @@ public class MainSetDestination {
     public static void main(String[] args) {
         final int GOTO_HOMESTATION = 0;
         final int GOTO_MININGBOT = 1;
+        int waitForWarp = 55000;
 
         try {
-
             Thread.sleep(4000);
-            //new SetDestination(new R1920x1080().getMiningBotList(), GOTO_MININGBOT).startScript();
-            new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION).startScript();
+            //new SetDestination(new R1920x1080().getAstBeltIIIIIList(), GOTO_MININGBOT).startScript();
+            new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION, waitForWarp).startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
