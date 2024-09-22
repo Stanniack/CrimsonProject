@@ -20,23 +20,22 @@ public class MainPC {
 
     public static void main(String[] args) throws InterruptedException {
         final int GOTO_MININGBOT = 1;
+        boolean isSwitchable = false;
         Thread.sleep(4000);
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 2; i++) {
             Long start = System.currentTimeMillis();
             try {
 
                 new CargoDeposit().startScript();
-                Thread.sleep(18000);
+                Thread.sleep(12000);
 
-                new SetDestination(new R1920x1080().getMiningBotList(), GOTO_MININGBOT).startScript();
-                Thread.sleep(62000);
+                new SetDestination(new R1920x1080().getAstBeltIList(), GOTO_MININGBOT).startScript();
 
-                boolean isFalse = new ExtractOre().startScript();
+                boolean isFalse = new ExtractOre(isSwitchable).startScript();
                 if (!isFalse) {
                     break;
                 }
-                Thread.sleep(62000);
 
             } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
                 Logger.getLogger(MainPC.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +45,7 @@ public class MainPC {
         }
 
         //end of mining
-        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 6);
+        new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 1);
 
     }
 }
