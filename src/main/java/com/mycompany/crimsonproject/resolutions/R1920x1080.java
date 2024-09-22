@@ -6,16 +6,18 @@ import org.javatuples.Pair;
 import org.javatuples.Quartet;
 
 /**
+ * @author Devmachine
+ *
  * This class uses EVE font size SMALL and scale resolution 100% 1920x1080
  *
- * @author Devmachine BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y
- * + h.
+ * BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y + h.
  *
  * BLOSCKSCREEN calculator with DEADZONE: x1 = x; x2 = x + w + DEADZONE; y1 = y;
- * y2 = y + h + DEADZONE.
+ * y2 = y + h + DEADZONE;
  *
- * BLOCKSCREEN: Rect limitation where to find the recognized rects DEADZONE:
- * 0ixels amount to add in the BLOCKSCREEN for caution or not
+ * BLOCKSCREEN: Rect limitation where to find the recognized rects
+ *
+ * DEADZONE INFO: Pixels amount to add in the BLOCKSCREEN for caution or not
  */
 public class R1920x1080 {
 
