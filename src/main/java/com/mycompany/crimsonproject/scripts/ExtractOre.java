@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
@@ -39,14 +40,16 @@ public class ExtractOre implements VerifyRectangle {
     private long flagLockTargetMS = 0;
     private final int amountCannons = 2;
     private boolean isAnotherAst;
+    private boolean isRunnable = true;
+    private boolean isSwitchable;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int STEPS = 6;
     private static final int SETANOTHERAST_MS = 180000;
     private static final int DEACTIVEPROP_MS = 120000;
     private static final int STARTDRAGSCREEN_MS = 2200000;
-
     private static final int GOTO_HOMESTATION = 0;
+    private static final int GOTO_ASTBELT = 1;
     private static final int CANNON_SLEEP = 1500;
 
     private long timeStartLockTarget = 0;
@@ -62,7 +65,8 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
-    public ExtractOre() {
+    public ExtractOre(boolean isSwitchable) {
+        this.isSwitchable = false;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
     }
@@ -92,7 +96,7 @@ public class ExtractOre implements VerifyRectangle {
             // Call method
             this.flowScript();
         }
-        return true;
+        return isRunnable;
     }
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
@@ -189,7 +193,7 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 5 -> {
-                this.returnDrones();
+                this.returnDrones(8000);
                 new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
@@ -209,7 +213,7 @@ public class ExtractOre implements VerifyRectangle {
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
 
         if (!rectResult.isEmpty()) {
-            System.out.println("All Asteroids: " + rectResult.size());
+            System.out.println("All Rects found: " + rectResult.size());
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
@@ -235,11 +239,21 @@ public class ExtractOre implements VerifyRectangle {
                 new ClickScreenEvents().doubleClick(betterAteroid.getValue());
                 return true;
             }
+
+        } else {
+            if (this.isSwitchable) {
+                this.switchAstBelt();
+                
+            } else {
+                System.out.println("CLOSEST, BETTER ASTEROID IS NULL. RETURNING TO HOME STATION");
+                this.isRunnable = false;
+                this.walkThrough = 5;
+            }
+
         }
 
-        System.out.println("Closest, better asteroid is null\n");
-        new ClickScreenEvents().dragScreen();
         return false;
+
     }
 
     private void activeCannons() throws IOException, InterruptedException, AWTException {
@@ -278,7 +292,7 @@ public class ExtractOre implements VerifyRectangle {
                     100, 125, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.\n");
+                System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
                 deactivedCannons++;
             }
         }
@@ -376,6 +390,36 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
+    private void switchAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
+        int label = new TextLogs().readLine(path);
+
+        switch (label) {
+            case 2 -> {
+                new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT).startScript();
+                new TextLogs().writeLine(path, label + 1);
+            }
+            case 3 -> {
+                new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT).startScript();
+                new TextLogs().writeLine(path, label + 1);
+            }
+            case 4 -> {
+                new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT).startScript();
+                new TextLogs().writeLine(path, label + 1);
+            }
+            case 5 -> {
+                new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT).startScript();
+                new TextLogs().writeLine(path, 0); // return to home station
+            }
+            default -> {
+                System.out.println("Case returned 0, returning to HOME STATION.");
+                new TextLogs().writeLine(path, 2); // reset asteroid belts
+                this.walkThrough = 5;
+                isRunnable = false; // exit the script
+            }
+        }
+    }
+
     private void propulsion() throws AWTException, InterruptedException {
         new KeyboardEvents().clickKey(KeyEvent.VK_F3);
     }
@@ -391,9 +435,8 @@ public class ExtractOre implements VerifyRectangle {
         new KeyboardEvents().clickKey(KeyEvent.VK_F);
     }
 
-    private void returnDrones() throws AWTException, InterruptedException {
+    private void returnDrones(int waitDronesMS) throws AWTException, InterruptedException {
         this.returnAndOrbitDrones();
-        int waitDronesMS = 8000;
         new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
         Thread.sleep(waitDronesMS);
     }
