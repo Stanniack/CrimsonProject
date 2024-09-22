@@ -217,6 +217,8 @@ public class ExtractOre implements VerifyRectangle {
 
         HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
+        
+        System.out.println("Rectangle list size: " + rectResult.size());
 
         if (!rectResult.isEmpty()) {
             System.out.println("All Rects found: " + rectResult.size());
@@ -248,6 +250,7 @@ public class ExtractOre implements VerifyRectangle {
 
         } else {
             if (this.isSwitchable) {
+                System.out.println("No asteroid found, switching asteroid belt.");
                 Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
 
