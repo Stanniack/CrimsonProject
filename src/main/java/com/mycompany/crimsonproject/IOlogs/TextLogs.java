@@ -66,4 +66,14 @@ public class TextLogs {
         }
         return content;
     }
+
+    public void writeLine(String path, int beltNum) {
+        String message = String.valueOf(beltNum);
+
+        try {
+            Files.write(Paths.get(path), message.getBytes(), StandardOpenOption.CREATE);
+        } catch (IOException ex) {
+            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
