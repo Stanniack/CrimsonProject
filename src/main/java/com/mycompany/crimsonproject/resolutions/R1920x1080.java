@@ -292,9 +292,13 @@ public class R1920x1080 {
      */
     private final List<Pair<Integer, Integer>> compactMaxCargoList = Arrays.asList(
             new Pair<>(COMPACTMAXCARGO_W1, COMPACTMAXCARGO_H1),
-            new Pair<>(COMPACTMAXCARGO_W2, COMPACTMAXCARGO_H1));
-    private static final int COMPACTMAXCARGO_W1 = 345;
-    private static final int COMPACTMAXCARGO_W2 = 346;
+            new Pair<>(COMPACTMAXCARGO_W2, COMPACTMAXCARGO_H1),
+            new Pair<>(COMPACTMAXCARGO_W3, COMPACTMAXCARGO_H1),
+            new Pair<>(COMPACTMAXCARGO_W4, COMPACTMAXCARGO_H1));
+    private static final int COMPACTMAXCARGO_W1 = 331;
+    private static final int COMPACTMAXCARGO_W2 = 332;
+    private static final int COMPACTMAXCARGO_W3 = 345;
+    private static final int COMPACTMAXCARGO_W4 = 346;
     private static final int COMPACTMAXCARGO_H1 = 5;
     /**
      * *****************************************************************************
