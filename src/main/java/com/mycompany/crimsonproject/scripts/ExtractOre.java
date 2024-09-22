@@ -34,7 +34,7 @@ public class ExtractOre implements VerifyRectangle {
     private R1920x1080 resolution = null;
 
     private int walkThrough = 0;
-    
+
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
@@ -43,9 +43,9 @@ public class ExtractOre implements VerifyRectangle {
     private long timeStartSetAnotherAst = 0;
     private long timeStartFilled = 0;
     private long timeStartProp = 0;
-    
+
     private final int amountCannons = 2;
-    
+
     private boolean isAnotherAst;
     private boolean isRunnable = true;
     private final boolean isSwitchable;
@@ -217,7 +217,7 @@ public class ExtractOre implements VerifyRectangle {
 
         HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
-        
+
         System.out.println("Rectangle list size: " + rectResult.size());
 
         if (!rectResult.isEmpty()) {
@@ -251,6 +251,7 @@ public class ExtractOre implements VerifyRectangle {
         } else {
             if (this.isSwitchable) {
                 System.out.println("No asteroid found, switching asteroid belt.");
+                this.returnDrones(0);
                 Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
 
@@ -405,22 +406,18 @@ public class ExtractOre implements VerifyRectangle {
 
         switch (label) {
             case 2 -> {
-                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 3 -> {
-                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 4 -> {
-                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 5 -> {
-                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, 0); // return to home station
             }
