@@ -21,6 +21,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         final int GOTO_MININGBOT = 1;
         boolean isSwitchable = true;
+        int waitForWarp = 55000;
         Thread.sleep(4000);
 
         for (int i = 0; i < 2; i++) {
@@ -30,9 +31,9 @@ public class MainPC {
                 new CargoDeposit().startScript();
                 Thread.sleep(12000);
 
-                new SetDestination(new R1920x1080().getAstBeltIList(), GOTO_MININGBOT).startScript();
+                new SetDestination(new R1920x1080().getAstBeltIList(), GOTO_MININGBOT, waitForWarp).startScript();
 
-                boolean isFalse = new ExtractOre(isSwitchable).startScript();
+                boolean isFalse = new ExtractOre(isSwitchable, waitForWarp).startScript();
                 if (!isFalse) {
                     break;
                 }
@@ -46,6 +47,5 @@ public class MainPC {
 
         //end of mining
         new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\endofmining.wav", 1);
-
     }
 }
