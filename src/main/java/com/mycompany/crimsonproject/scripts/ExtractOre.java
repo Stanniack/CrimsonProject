@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -243,15 +245,13 @@ public class ExtractOre implements VerifyRectangle {
         } else {
             if (this.isSwitchable) {
                 this.switchAstBelt();
-                
+
             } else {
                 System.out.println("CLOSEST, BETTER ASTEROID IS NULL. RETURNING TO HOME STATION");
                 this.isRunnable = false;
                 this.walkThrough = 5;
             }
-
         }
-
         return false;
 
     }
@@ -353,6 +353,7 @@ public class ExtractOre implements VerifyRectangle {
 
             System.out.println(msg + "\n");
         } catch (NullPointerException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (isClicked) {
@@ -373,7 +374,7 @@ public class ExtractOre implements VerifyRectangle {
                     this.walkThrough = 0; //!!
                 }
             } else {
-                this.walkThrough = 6;
+                this.walkThrough = 5;
                 System.out.println("Invalid locked target not found, ending script.");
             }
         }
