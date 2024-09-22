@@ -43,9 +43,10 @@ public class ExtractOre implements VerifyRectangle {
     private final int amountCannons = 2;
     private boolean isAnotherAst;
     private boolean isRunnable = true;
-    private boolean isSwitchable;
+    private final boolean isSwitchable;
 
     private static final int LOCKTARGET_MS = 60000;
+    private static final int WAITFORSWITCHASTBELT_MS = 20000;
     private static final int STEPS = 6;
     private static final int SETANOTHERAST_MS = 180000;
     private static final int DEACTIVEPROP_MS = 120000;
@@ -244,6 +245,7 @@ public class ExtractOre implements VerifyRectangle {
 
         } else {
             if (this.isSwitchable) {
+                Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
 
             } else {
@@ -353,7 +355,7 @@ public class ExtractOre implements VerifyRectangle {
 
             System.out.println(msg + "\n");
         } catch (NullPointerException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (isClicked) {
