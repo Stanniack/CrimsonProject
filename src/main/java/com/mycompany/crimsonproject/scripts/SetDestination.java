@@ -42,7 +42,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     /**
      * @param chosenDest is a list of Pair<Integer, Integer>
-     * @param option is type int that choice if the script will go to station or
+     * @param option is type int that choice whether the script will go to station or
      * asteroid belt
      */
     public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option) {
