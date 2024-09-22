@@ -275,12 +275,12 @@ public class ExtractOre implements VerifyRectangle {
                 new KeyboardEvents().clickKey(cannons.get(i));
                 Thread.sleep(CANNON_SLEEP);
                 new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("The cannon was active. Press 2x cannon " + i + "\n");
+                System.out.println("The cannon was active. Press 2x cannon " + i);
 
             } else {
                 Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
                 new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("Just press 1x cannon " + i + "\n");
+                System.out.println("Just press 1x cannon " + i);
             }
         }
     }
@@ -402,18 +402,22 @@ public class ExtractOre implements VerifyRectangle {
 
         switch (label) {
             case 2 -> {
+                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 3 -> {
+                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 4 -> {
+                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 5 -> {
+                this.returnDrones(8000);
                 new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, 0); // return to home station
             }
