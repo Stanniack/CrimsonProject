@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -36,11 +34,18 @@ public class ExtractOre implements VerifyRectangle {
     private R1920x1080 resolution = null;
 
     private int walkThrough = 0;
+    
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
     private long flagLockTargetMS = 0;
+    private long timeStartLockTarget = 0;
+    private long timeStartSetAnotherAst = 0;
+    private long timeStartFilled = 0;
+    private long timeStartProp = 0;
+    
     private final int amountCannons = 2;
+    
     private boolean isAnotherAst;
     private boolean isRunnable = true;
     private final boolean isSwitchable;
@@ -54,11 +59,8 @@ public class ExtractOre implements VerifyRectangle {
     private static final int GOTO_HOMESTATION = 0;
     private static final int GOTO_ASTBELT = 1;
     private static final int CANNON_SLEEP = 1500;
+    private int waitForWarp_MS;
 
-    private long timeStartLockTarget = 0;
-    private long timeStartSetAnotherAst = 0;
-    private long timeStartFilled = 0;
-    private long timeStartProp = 0;
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
     private final Integer Spriority = 1;
@@ -68,8 +70,9 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
-    public ExtractOre(boolean isSwitchable) {
+    public ExtractOre(boolean isSwitchable, int waitForWarp_MS) {
         this.isSwitchable = isSwitchable;
+        this.waitForWarp_MS = waitForWarp_MS;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
     }
@@ -197,7 +200,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 5 -> {
                 this.returnDrones(8000);
-                new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION).startScript();
+                new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION, this.waitForWarp_MS).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
             }
@@ -399,19 +402,19 @@ public class ExtractOre implements VerifyRectangle {
 
         switch (label) {
             case 2 -> {
-                new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT).startScript();
+                new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 3 -> {
-                new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT).startScript();
+                new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 4 -> {
-                new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT).startScript();
+                new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
             case 5 -> {
-                new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT).startScript();
+                new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, 0); // return to home station
             }
             default -> {
