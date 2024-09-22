@@ -84,19 +84,19 @@ public class ExtractOre implements VerifyRectangle {
             // Call method priority MAX
             new TakeScreenshot().take();
 
-            // Call method
-            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), 195, "Invalid target found.");
-
             //Call method
             this.verifyShipLife();
+
+            // Call method
+            this.flowScript();
+
+            // Call method
+            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), 195, "Invalid target found.");
 
             //Call method
             if (this.walkThrough > 2) {
                 this.checkCannonsAction();
             }
-
-            // Call method
-            this.flowScript();
         }
         return isRunnable;
     }
