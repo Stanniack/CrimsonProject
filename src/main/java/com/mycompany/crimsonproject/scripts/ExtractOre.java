@@ -264,7 +264,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            if (this.isCannonActivated(i, 5,
+            if (this.isCannonActivated(i, 7,
                     (Arrays.asList(R1920x1080.getF1VENTURE1_X(), R1920x1080.getF2VENTURE2_X())), R1920x1080.getFNVENTURE_Y(),
                     R1920x1080.getVENTURECANNON_H1(), R1920x1080.getVENTURECANNON_W1(),
                     100, 125, 100)) {
@@ -288,7 +288,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            if (!this.isCannonActivated(i, 5,
+            if (!this.isCannonActivated(i, 7,
                     (Arrays.asList(R1920x1080.getF1VENTURE1_X(), R1920x1080.getF2VENTURE2_X())), R1920x1080.getFNVENTURE_Y(),
                     R1920x1080.getVENTURECANNON_H1(), R1920x1080.getVENTURECANNON_W1(),
                     100, 125, 100)) {
