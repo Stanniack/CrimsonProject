@@ -42,8 +42,8 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     /**
      * @param chosenDest is a list of Pair<Integer, Integer>
-     * @param option is type int that choice whether the script will go to station or
-     * asteroid belt
+     * @param option is type int that choice wether the script will go to
+     * station or asteroid belt
      */
     public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option) {
         this.destination = chosenDest;
@@ -76,8 +76,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 if (this.openLocation()) {
                     this.walkThrough++;
                 }
-
-            } // end case 0
+            }
 
             case 1 -> {
                 this.astBeltDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getTupleLocationTabDeadZone());
@@ -100,8 +99,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     this.walkThrough--;
                     new ClickScreenEvents().dragScreen();
                 }
-
-            } // end case 1
+            }
 
             case 2 -> {
                 Rectangle warpBlock = new SegmentedRegions().getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
@@ -127,7 +125,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     new ClickScreenEvents().dragScreen();
                 }
 
-            } // end case 2
+            }
 
             case 3 -> {
                 Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getTupleLocationTabDeadZone());
