@@ -62,14 +62,11 @@ public class R1920x1080 {
     private static final int MININGBOT1_H1 = 9;
 
     private final List<Pair<Integer, Integer>> homeStationList = Arrays.asList(
-            new Pair<>(HOMESTATION1_W1, HOMESTATION1_H1),
-            new Pair<>(HOMESTATION1_W2, HOMESTATION1_H1),
-            new Pair<>(HOMESTATION1_W3, HOMESTATION1_H2));
-    private static final int HOMESTATION1_W1 = 75;
-    private static final int HOMESTATION1_W2 = 74;
-    private static final int HOMESTATION1_W3 = 91;
-    private static final int HOMESTATION1_H1 = 9;
-    private static final int HOMESTATION1_H2 = 12;
+            new Pair<>(HOMESTATION_W1, HOMESTATION_H1),
+            new Pair<>(HOMESTATION_W2, HOMESTATION_H1));
+    private static final int HOMESTATION_W1 = 67;
+    private static final int HOMESTATION_W2 = 68;
+    private static final int HOMESTATION_H1 = 9;
 
     private final List<Pair<Integer, Integer>> AstBeltIList = Arrays.asList(
             new Pair<>(ASTBELTI_W1, ASTBELTI_H1),
