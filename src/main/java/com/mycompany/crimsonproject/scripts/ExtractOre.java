@@ -59,7 +59,7 @@ public class ExtractOre implements VerifyRectangle {
     private static final int GOTO_HOMESTATION = 0;
     private static final int GOTO_ASTBELT = 1;
     private static final int CANNON_SLEEP = 1500;
-    private int waitForWarp_MS;
+    private final int waitForWarp_MS;
 
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
@@ -423,7 +423,7 @@ public class ExtractOre implements VerifyRectangle {
             }
             default -> {
                 System.out.println("Case returned 0, returning to HOME STATION.");
-                new TextLogs().writeLine(path, 2); // reset asteroid belts
+                new TextLogs().writeLine(path, 1); // reset asteroid belts
                 this.walkThrough = 5;
                 isRunnable = false; // exit the script
             }
