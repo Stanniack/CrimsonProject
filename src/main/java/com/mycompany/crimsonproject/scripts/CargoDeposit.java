@@ -101,20 +101,17 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             } else {
                 new ClickScreenEvents().rightClickCenterButton(rectangle);
             }
-
             return true;
         }
-
         return false;
     }
 
     @Override
-    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> tupleBegin, Triplet<Integer, Integer, Integer> tupleEnd) throws AWTException, InterruptedException, IOException {
+    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
+        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
-
             return true;
         }
         return false;

@@ -45,7 +45,8 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
      * @param chosenDest is a list of Pair<Integer, Integer>
      * @param option is type int that choice wether the script will go to
      * station or asteroid belt
-     * @param waitForWarp type int in milliseconds to sleep when warping between belts or home station
+     * @param waitForWarp type int in milliseconds to sleep when warping between
+     * belts or home station
      */
     public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp) {
         this.destination = chosenDest;
@@ -108,7 +109,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 Rectangle warpBlock = new SegmentedRegions().getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
 
                 if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
-                    //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                     this.walkThrough++;
                     descentFlag = false;
 
@@ -116,7 +116,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     Rectangle dock = new SegmentedRegions().getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
 
                     if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
-                        //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.walkThrough++;
                         descentFlag = false;
                     }
@@ -127,7 +126,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     this.walkThrough--;
                     new ClickScreenEvents().dragScreen();
                 }
-
             }
 
             case 3 -> {
@@ -136,7 +134,6 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
-                
                 // Sleep until reach the destination
                 Thread.sleep(this.waitForWarp_MS);
             }
@@ -174,14 +171,12 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             return new Quartet<>(x1, x2_w, y1, y2_h);
 
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
         }
         return new Quartet<>(0, 0, 0, 0);
     }
 
     private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
         new KeyboardEvents().clickKey(KeyEvent.VK_L);
-        //System.out.println("Window location open by shortcut L\n");
         return true;
     }
 
@@ -203,10 +198,10 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     }
 
     @Override
-    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> tupleBegin, Triplet<Integer, Integer, Integer> tupleEnd) throws AWTException, InterruptedException, IOException {
+    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, tupleBegin, tupleEnd)) {
+        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
 
             if (chosenClick == LEFTCLICK) {
