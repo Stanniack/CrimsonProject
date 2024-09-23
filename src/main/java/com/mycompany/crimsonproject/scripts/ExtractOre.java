@@ -405,19 +405,19 @@ public class ExtractOre implements VerifyRectangle {
         int label = new TextLogs().readLine(path);
 
         switch (label) {
-            case 2 -> {
+            case 1 -> {
                 new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
-            case 3 -> {
+            case 2 -> {
                 new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
-            case 4 -> {
+            case 3 -> {
                 new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, label + 1);
             }
-            case 5 -> {
+            case 4 -> {
                 new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
                 new TextLogs().writeLine(path, 0); // return to home station
             }

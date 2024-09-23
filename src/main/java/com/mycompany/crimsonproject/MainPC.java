@@ -24,7 +24,7 @@ public class MainPC {
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
         final int GOTO_MININGBOT = 1;
         boolean isSwitchable = true;
-        int waitForWarp = 55000;
+        int waitForWarp = 35000;
 
         Thread.sleep(4000);
 
@@ -32,12 +32,15 @@ public class MainPC {
             Long start = System.currentTimeMillis();
             try {
 
+                // script 1
                 new CargoDeposit().startScript();
                 Thread.sleep(12000);
 
+                // script 2
                 List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(path));
                 new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp).startScript();
 
+                // script 3
                 boolean isFalse = new ExtractOre(isSwitchable, waitForWarp).startScript();
                 if (!isFalse) {
                     break;
