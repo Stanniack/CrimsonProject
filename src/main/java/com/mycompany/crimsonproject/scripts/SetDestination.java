@@ -82,14 +82,14 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 1 -> {
-                this.astBeltDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getTupleLocationTabDeadZone());
+                this.astBeltDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
 
                 if (this.option == MININGBOT && this.verifyRectangle(this.astBeltDest, "ASTEROID BELT", RIGHTCLICK)) {
                     this.walkThrough++;
                     descentFlag = false;
 
                 } else {
-                    this.homeStationDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getTupleLocationTabDeadZone());
+                    this.homeStationDest = new SegmentedRegions().getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
 
                     if (this.option == HOMESTATION && this.verifyRectangle(this.homeStationDest, "HOME STATION", RIGHTCLICK)) {
                         this.walkThrough++;
@@ -107,7 +107,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             case 2 -> {
                 Rectangle warpBlock = new SegmentedRegions().getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
 
-                if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
+                if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     //System.out.println(new FindPixels().findByRangeColor(warpBlock.x, warpBlock.y, warpBlock.width, warpBlock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                     this.walkThrough++;
                     descentFlag = false;
@@ -115,7 +115,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 } else {
                     Rectangle dock = new SegmentedRegions().getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
 
-                    if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
+                    if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                         //System.out.println(new FindPixels().findByRangeColor(dock.x, dock.y, dock.width, dock.height, new PIXELRANGE().tupleMinDestinationRGB, new PIXELRANGE().tupleMaxDestinationRGB));
                         this.walkThrough++;
                         descentFlag = false;
@@ -131,7 +131,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 3 -> {
-                Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getTupleLocationTabDeadZone());
+                Rectangle closeButtonWindowLocation = new SegmentedRegions().getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getLocationTabDeadZoneTuple());
 
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;

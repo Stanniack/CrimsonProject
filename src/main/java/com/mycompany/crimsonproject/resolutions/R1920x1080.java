@@ -1,7 +1,6 @@
 package com.mycompany.crimsonproject.resolutions;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.javatuples.Pair;
@@ -118,7 +117,6 @@ public class R1920x1080 {
             5, AstBeltIIIIIList
     );
 
-    //HashMap<String, Rectangle> hm = new HashMap<>();
     /*
      * *****************************************************************************
      */
@@ -181,7 +179,7 @@ public class R1920x1080 {
     private static final int CLOSELOCATIONBUTTON_W1 = 10;
     private static final int CLOSELOCATIONBUTTON_H1 = 10;
 
-    private final Quartet<Integer, Integer, Integer, Integer> tupleLocationTabDeadZone
+    private final Quartet<Integer, Integer, Integer, Integer> locationTabDeadZoneTuple
             = new Quartet<>(LOCATIONTAB_DEADZONE_X1, LOCATIONTAB_DEADZONE_X2_W, LOCATIONTAB_DEADZONE_Y1, LOCATIONTAB_DEADZONE_Y2_H);
     private static final int LOCATIONTAB_DEADZONE_X1 = 445;
     private static final int LOCATIONTAB_DEADZONE_X2_W = 889;
@@ -264,7 +262,7 @@ public class R1920x1080 {
     private static final int LOCKTARGET_W1 = 26;
     private static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
-    private final Quartet<Integer, Integer, Integer, Integer> tupleLockTargetDeadZone
+    private final Quartet<Integer, Integer, Integer, Integer> lockTargetDeadZoneTuple
             = new Quartet<>(LOCKTARGET_DEADZONE_X1, LOCKTARGET_DEADZONE_X2_W, LOCKTARGET_DEADZONE_Y1, LOCKTARGET_DEADZONE_Y2_H);
     private static final int LOCKTARGET_DEADZONE_X1 = 1000;
     private static final int LOCKTARGET_DEADZONE_X2_W = 1919;
@@ -293,7 +291,7 @@ public class R1920x1080 {
      * This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in
      * the display in STATION
      */
-    private final Quartet<Integer, Integer, Integer, Integer> inventoryDeadzone
+    private final Quartet<Integer, Integer, Integer, Integer> inventoryDeadzoneTuple
             = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
     private static final int INVENTORY_DEADZONE_X1 = 70;
     private static final int INVENTORY_DEADZONE_X2_W = 570;
@@ -338,7 +336,7 @@ public class R1920x1080 {
     private static final int UNDOCK_BUTTON_W1 = 235;
     private static final int UNDOCK_BUTTON_W2 = 234;
     private static final int UNDOCK_BUTTON_H1 = 40;
-    private final Quartet<Integer, Integer, Integer, Integer> undockDeadZone
+    private final Quartet<Integer, Integer, Integer, Integer> undockDeadZoneTuple
             = new Quartet<>(UNDOCK_DEADZONE_X1, UNDOCK_DEADZONE_X2_W, UNDOCK_DEADZONE_Y1, UNDOCK_DEADZONE_Y2_H);
     private static final int UNDOCK_DEADZONE_X1 = 571;
     private static final int UNDOCK_DEADZONE_X2_W = 1919;
@@ -347,7 +345,7 @@ public class R1920x1080 {
     /*
      * *****************************************************************************
      */
-    private final Quartet<Integer, Integer, Integer, Integer> compactMaxCargoDeadZone
+    private final Quartet<Integer, Integer, Integer, Integer> compactMaxCargoDeadZoneTuple
             = new Quartet<>(COMPACTCARGO_DEADZONE_X1, COMPACTCARGO_DEADZONE_X2_W, COMPACTCARGO_DEADZONE_Y1, COMPACTCARGO_DEADZONE_Y2_H);
     private static final int COMPACTCARGO_DEADZONE_X1 = 30;
     private static final int COMPACTCARGO_DEADZONE_X2_W = 444;
@@ -412,8 +410,8 @@ public class R1920x1080 {
         return closeLocationButtonList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getTupleLocationTabDeadZone() {
-        return tupleLocationTabDeadZone;
+    public Quartet<Integer, Integer, Integer, Integer> getLocationTabDeadZoneTuple() {
+        return locationTabDeadZoneTuple;
     }
 
     public List<Pair<Integer, Integer>> getAllAsteroidsList() {
@@ -444,8 +442,8 @@ public class R1920x1080 {
         return lockTargetList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getTupleLockTargetDeadZone() {
-        return tupleLockTargetDeadZone;
+    public Quartet<Integer, Integer, Integer, Integer> getLockTargetDeadZoneTuple() {
+        return lockTargetDeadZoneTuple;
     }
 
     public List<Pair<Integer, Integer>> getMaxCargoList() {
@@ -456,8 +454,8 @@ public class R1920x1080 {
         return minCargoList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getInventoryDeadzone() {
-        return inventoryDeadzone;
+    public Quartet<Integer, Integer, Integer, Integer> getInventoryDeadzoneTuple() {
+        return inventoryDeadzoneTuple;
     }
 
     public List<Pair<Integer, Integer>> getCompactMaxCargoList() {
@@ -472,12 +470,12 @@ public class R1920x1080 {
         return undockButtonList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getUndockDeadZone() {
-        return undockDeadZone;
+    public Quartet<Integer, Integer, Integer, Integer> getUndockDeadZoneTuple() {
+        return undockDeadZoneTuple;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getCompactMaxCargoDeadZone() {
-        return compactMaxCargoDeadZone;
+    public Quartet<Integer, Integer, Integer, Integer> getCompactMaxCargoDeadZoneTuple() {
+        return compactMaxCargoDeadZoneTuple;
     }
 
     public static int getOVERVIEWMINING_X1() {

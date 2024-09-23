@@ -57,9 +57,9 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
         switch (this.walkThrough) {
 
             case 0 -> {
-                this.hangarButton = new SegmentedRegions().getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzone());
+                this.hangarButton = new SegmentedRegions().getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
 
-                if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestinationRGB(), this.rgbr.getMaxDestinationRGB())) {
+                if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     this.walkThrough++;
                 } else {
                     new ClickScreenEvents().dragScreen();
@@ -73,7 +73,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 2 -> {
-                Rectangle undockButton = new SegmentedRegions().getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZone());
+                Rectangle undockButton = new SegmentedRegions().getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
 
                 if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                     this.walkThrough++;
