@@ -135,6 +135,7 @@ public class ExtractOre implements VerifyRectangle {
 
                     } else {
                         System.out.println("Lock target and free target not found.");
+                        new ClickScreenEvents().dragScreen();
                     }
 
                 } else {
@@ -154,7 +155,7 @@ public class ExtractOre implements VerifyRectangle {
             case 2 -> {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.launchDrones();
-                this.activeCannons();
+                //this.activeCannons();
                 this.engageDrones(); // engage drones
                 this.walkThrough++; // go to case 3
             }
@@ -271,10 +272,10 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            if (this.isCannonActivated(i, 7,
-                    (Arrays.asList(R1920x1080.getF1VENTURE1_X(), R1920x1080.getF2VENTURE2_X())), R1920x1080.getFNVENTURE_Y(),
-                    R1920x1080.getVENTURECANNON_H1(), R1920x1080.getVENTURECANNON_W1(),
-                    100, 125, 100)) {
+            if (this.isCannonActivated(i, 9,
+                    (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                    R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                    100, 115, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
                 Thread.sleep(CANNON_SLEEP);
@@ -295,10 +296,10 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
 
-            if (!this.isCannonActivated(i, 7,
-                    (Arrays.asList(R1920x1080.getF1VENTURE1_X(), R1920x1080.getF2VENTURE2_X())), R1920x1080.getFNVENTURE_Y(),
-                    R1920x1080.getVENTURECANNON_H1(), R1920x1080.getVENTURECANNON_W1(),
-                    100, 125, 100)) {
+            if (!this.isCannonActivated(i, 9,
+                    (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                    R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                    100, 115, 100)) {
 
                 new KeyboardEvents().clickKey(cannons.get(i));
                 System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
@@ -308,11 +309,11 @@ public class ExtractOre implements VerifyRectangle {
         return deactivedCannons;
     }
 
-    private boolean isCannonActivated(int i, int flagAttempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
+    private boolean isCannonActivated(int i, int attempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
 
         boolean action;
 
-        for (int j = 0; j < flagAttempt; j++) {
+        for (int j = 0; j < attempt; j++) {
             new TakeScreenshot().take2();
 
             action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
