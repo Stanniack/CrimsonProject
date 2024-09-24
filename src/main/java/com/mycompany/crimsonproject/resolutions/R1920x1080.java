@@ -361,19 +361,12 @@ public class R1920x1080 {
     /*
      * *****************************************************************************
      */
-    private static final int VENTURECANNON_W1 = 42;
-    private static final int VENTURECANNON_H1 = 46;
+    private static final int CANNON_W1 = 42;
+    private static final int CANNON_H1 = 46;
 
-    private static final int CANNON_W1 = 15;
-    private static final int CANNON_H1 = 3;
-
-    private static final int F1CANNON1_X = 1057;
+    private static final int F1CANNON1_X = 1044;
     private static final int F2CANNON2_X = F1CANNON1_X + 51;
-    private static final int FNCANNONS_Y = 914;
-
-    private static final int F1VENTURE1_X = 1044;
-    private static final int F2VENTURE2_X = F1VENTURE1_X + 51;
-    private static final int FNVENTURE_Y = 912;
+    private static final int FNCANNON_Y = 912;
 
     /*
      * *****************************************************************************
@@ -510,26 +503,6 @@ public class R1920x1080 {
         return APPROACHING_Y1;
     }
 
-    public static int getFNCANNONS_Y() {
-        return FNCANNONS_Y;
-    }
-
-    public static int getVENTURECANNON_W1() {
-        return VENTURECANNON_W1;
-    }
-
-    public static int getVENTURECANNON_H1() {
-        return VENTURECANNON_H1;
-    }
-
-    public static int getF1CANNON1_X() {
-        return F1CANNON1_X;
-    }
-
-    public static int getF2CANNON2_X() {
-        return F2CANNON2_X;
-    }
-
     public static int getCANNON_W1() {
         return CANNON_W1;
     }
@@ -554,16 +527,16 @@ public class R1920x1080 {
         return BEINGATTACKED_H1;
     }
 
-    public static int getF1VENTURE1_X() {
-        return F1VENTURE1_X;
+    public static int getF1CANNON1_X() {
+        return F1CANNON1_X;
     }
 
-    public static int getF2VENTURE2_X() {
-        return F2VENTURE2_X;
+    public static int getF2CANNON2_X() {
+        return F2CANNON2_X;
     }
 
-    public static int getFNVENTURE_Y() {
-        return FNVENTURE_Y;
+    public static int getFNCANNON_Y() {
+        return FNCANNON_Y;
     }
 
     public static int getCHECKPATH_X1() {

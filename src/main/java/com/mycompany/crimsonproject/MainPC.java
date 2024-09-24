@@ -23,7 +23,7 @@ public class MainPC {
     public static void main(String[] args) throws InterruptedException {
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
         final int GOTO_MININGBOT = 1;
-        boolean isSwitchable = true;
+        boolean isSwitchable = false;
         int waitForWarp = 35000;
 
         Thread.sleep(4000);
