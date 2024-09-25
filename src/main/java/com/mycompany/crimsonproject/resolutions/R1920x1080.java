@@ -361,12 +361,12 @@ public class R1920x1080 {
     /*
      * *****************************************************************************
      */
-    private static final int CANNON_W1 = 42;
+    private static final int CANNON_W1 = 45;
     private static final int CANNON_H1 = 46;
 
-    private static final int F1CANNON1_X = 1044;
+    private static final int F1CANNON1_X = 1042;
     private static final int F2CANNON2_X = F1CANNON1_X + 51;
-    private static final int FNCANNON_Y = 912;
+    private static final int FNCANNON_Y = 911;
 
     /*
      * *****************************************************************************
