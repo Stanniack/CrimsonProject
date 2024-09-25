@@ -37,7 +37,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     private static final int MININGBOT = 1;
     private final int waitForWarp_MS;
     // it depends the amount of switch cases
-    private static final int STEPS = 4;
+    private static final int STEPS = 3;
 
     private int walkThrough = 0;
 
