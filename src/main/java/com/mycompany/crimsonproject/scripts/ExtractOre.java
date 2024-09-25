@@ -3,6 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
+import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
@@ -34,6 +35,7 @@ public class ExtractOre implements VerifyRectangle {
     private Rectangle target;
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
+    private ActionModules actModules;
 
     private final Triplet<Integer, Integer, Integer> tonsOfGreen;
     private final int giveAtry;
@@ -84,6 +86,7 @@ public class ExtractOre implements VerifyRectangle {
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
+        this.actModules = new ActionModules();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -123,7 +126,7 @@ public class ExtractOre implements VerifyRectangle {
                     this.timeStartLockTarget = System.currentTimeMillis();
                     this.timeStartProp = System.currentTimeMillis();
                     this.isAnotherAst = true;
-                    this.propulsion();
+                    this.actModules.propulsion();
                     this.walkThrough++; // go to case 1
                 }
             } // end case 0
@@ -163,8 +166,8 @@ public class ExtractOre implements VerifyRectangle {
             case 2 -> {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.activeCannons();
-                this.launchDrones();
-                this.engageDrones(); // engage drones
+                this.actModules.launchDrones();
+                this.actModules.engageDrones(); // engage drones
                 this.walkThrough++; // go to case 3
             }
 
@@ -202,13 +205,13 @@ public class ExtractOre implements VerifyRectangle {
 
                 // check propulsion
                 if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS && this.isAnotherAst == true) {
-                    this.propulsion();
+                    this.actModules.propulsion();
                     this.isAnotherAst = false;
                 }
             }
 
             case 5 -> {
-                this.returnDrones(8000);
+                this.actModules.returnDrones(8000);
                 new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION, this.waitForWarp_MS).startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
@@ -259,7 +262,7 @@ public class ExtractOre implements VerifyRectangle {
         } else {
             if (this.isSwitchable) {
                 System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
-                this.returnDrones(0);
+                this.actModules.returnDrones(0);
                 Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
 
@@ -458,47 +461,4 @@ public class ExtractOre implements VerifyRectangle {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void propulsion() {
-        try {
-            new KeyboardEvents().clickKey(KeyEvent.VK_F3);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void launchDrones() {
-        try {
-            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void engageDrones() {
-        try {
-            new KeyboardEvents().clickKey(KeyEvent.VK_F);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void returnDrones(int waitForDronesMS) {
-        try {
-            this.returnAndOrbitDrones();
-            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
-            Thread.sleep(waitForDronesMS);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void returnAndOrbitDrones() {
-        try {
-            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
-        } catch (AWTException | InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 }
