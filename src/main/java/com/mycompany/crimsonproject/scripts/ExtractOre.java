@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -32,6 +34,9 @@ public class ExtractOre implements VerifyRectangle {
     private Rectangle target;
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
+
+    private final Triplet<Integer, Integer, Integer> tonsOfGreen;
+    private final int giveAtry;
 
     private int walkThrough = 0;
 
@@ -52,7 +57,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int WAITFORSWITCHASTBELT_MS = 20000;
-    private static final int STEPS = 6;
+    private static final int STEPS = 5;
     private static final int SETANOTHERAST_MS = 180000;
     private static final int DEACTIVEPROP_MS = 120000;
     private static final int STARTDRAGSCREEN_MS = 2200000;
@@ -70,9 +75,13 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
-    public ExtractOre(boolean isSwitchable, int waitForWarp_MS) {
+    // JavDoc!!!!!!!!!!!!!!!!!
+    public ExtractOre(boolean isSwitchable, int waitForWarp_MS, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
         this.isSwitchable = isSwitchable;
         this.waitForWarp_MS = waitForWarp_MS;
+        this.giveAtry = giveAtry;
+        this.tonsOfGreen = tonsOfGreen;
+
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
     }
@@ -218,10 +227,9 @@ public class ExtractOre implements VerifyRectangle {
         HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
 
-        System.out.println("Rectangle list size: " + rectResult.size());
+        System.out.println("Rectangle list size: " + rectResult.size() + "\n");
 
         if (!rectResult.isEmpty()) {
-            System.out.println("All Rects found: " + rectResult.size());
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
@@ -250,7 +258,7 @@ public class ExtractOre implements VerifyRectangle {
 
         } else {
             if (this.isSwitchable) {
-                System.out.println("No asteroid found, switching asteroid belt.");
+                System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
                 this.returnDrones(0);
                 Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
@@ -265,55 +273,71 @@ public class ExtractOre implements VerifyRectangle {
 
     }
 
-    private int checkCannonsAction() throws InterruptedException, AWTException, IOException {
+    private int checkCannonsAction() {
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
         int deactivedCannons = 0;
 
         for (int i = 0; i < cannons.size(); i++) {
+            try {
+                if (!this.isCannonActivated(i, this.giveAtry,
+                        (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                        R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                        this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
 
-            if (!this.isCannonActivated(i, 9,
-                    (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
-                    R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                    100, 115, 100)) {
+                    new KeyboardEvents().clickKey(cannons.get(i));
+                    System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
+                    deactivedCannons++;
+                }
 
-                new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
-                deactivedCannons++;
+            } catch (InterruptedException | AWTException ex) {
+                Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return deactivedCannons;
     }
 
-    private void activeCannons() throws IOException, InterruptedException, AWTException {
+    private void activeCannons() {
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+
         for (int i = 0; i < cannons.size(); i++) {
-            if (this.isCannonActivated(i, 9,
-                    (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
-                    R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                    100, 115, 100)) {
-                new KeyboardEvents().clickKey(cannons.get(i));
-                Thread.sleep(CANNON_SLEEP);
-                new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("The cannon was active. Press 2x cannon " + i);
-            } else {
-                Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
-                new KeyboardEvents().clickKey(cannons.get(i));
-                System.out.println("Just press 1x cannon " + i);
+            try {
+                if (this.isCannonActivated(i, this.giveAtry,
+                        (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                        R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                        this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
+
+                    new KeyboardEvents().clickKey(cannons.get(i));
+                    Thread.sleep(CANNON_SLEEP);
+                    new KeyboardEvents().clickKey(cannons.get(i));
+                    System.out.println("The cannon was active. Press 2x cannon " + i);
+
+                } else {
+                    Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
+                    new KeyboardEvents().clickKey(cannons.get(i));
+                    System.out.println("Just press 1x cannon " + i);
+                }
+
+            } catch (InterruptedException | AWTException ex) {
+                Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
-    private boolean isCannonActivated(int i, int attempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
+    private boolean isCannonActivated(int i, int attempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) {
 
         boolean action;
 
         for (int j = 0; j < attempt; j++) {
-            new TakeScreenshot().take2();
+            try {
+                new TakeScreenshot().take2();
 
-            action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
-            if (action) {
-                return true;
+                action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
+                if (action) {
+                    return true;
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return false;
@@ -385,70 +409,96 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    public void verifyShipLife() throws IOException, TesseractException, AWTException, InterruptedException {
-        int row = R1920x1080.getBEINGATTACKED_X1();
-        int column = R1920x1080.getBEINGATTACKED_Y1();
-        int width = R1920x1080.getBEINGATTACKED_W1();
-        int height = R1920x1080.getBEINGATTACKED_H1();
+    public void verifyShipLife() {
+        try {
+            int row = R1920x1080.getBEINGATTACKED_X1();
+            int column = R1920x1080.getBEINGATTACKED_Y1();
+            int width = R1920x1080.getBEINGATTACKED_W1();
+            int height = R1920x1080.getBEINGATTACKED_H1();
 
-        if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttacked(), this.rgbr.getMaxBeingAttacked())) {
-            new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
+            if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttacked(), this.rgbr.getMaxBeingAttacked())) {
+                new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void switchAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
+    private void switchAstBelt() {
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
         int label = new TextLogs().readLine(path);
 
-        switch (label) {
-            case 1 -> {
-                new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
-                new TextLogs().writeLine(path, label + 1);
+        try {
+            switch (label) {
+                case 1 -> {
+                    new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    new TextLogs().writeLine(path, label + 1);
+                }
+                case 2 -> {
+                    new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    new TextLogs().writeLine(path, label + 1);
+                }
+                case 3 -> {
+                    new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    new TextLogs().writeLine(path, label + 1);
+                }
+                case 4 -> {
+                    new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    new TextLogs().writeLine(path, 0); // return to home station
+                }
+                default -> {
+                    System.out.println("Case returned 0, returning to HOME STATION.");
+                    new TextLogs().writeLine(path, 1); // reset asteroid belts
+                    this.walkThrough = 5;
+                    isRunnable = false; // exit the script
+                }
             }
-            case 2 -> {
-                new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
-                new TextLogs().writeLine(path, label + 1);
-            }
-            case 3 -> {
-                new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
-                new TextLogs().writeLine(path, label + 1);
-            }
-            case 4 -> {
-                new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
-                new TextLogs().writeLine(path, 0); // return to home station
-            }
-            default -> {
-                System.out.println("Case returned 0, returning to HOME STATION.");
-                new TextLogs().writeLine(path, 1); // reset asteroid belts
-                this.walkThrough = 5;
-                isRunnable = false; // exit the script
-            }
+
+        } catch (IOException | TesseractException | AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void propulsion() throws AWTException, InterruptedException {
-        new KeyboardEvents().clickKey(KeyEvent.VK_F3);
+    private void propulsion() {
+        try {
+            new KeyboardEvents().clickKey(KeyEvent.VK_F3);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void launchDrones() throws AWTException, InterruptedException {
-        int timeSleepMS = 3000;
-        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
-        Thread.sleep(timeSleepMS);
-        new KeyboardEvents().clickKey(KeyEvent.VK_F);
+    private void launchDrones() {
+        try {
+            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void engageDrones() throws AWTException, InterruptedException {
-        new KeyboardEvents().clickKey(KeyEvent.VK_F);
+    private void engageDrones() {
+        try {
+            new KeyboardEvents().clickKey(KeyEvent.VK_F);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void returnDrones(int waitDronesMS) throws AWTException, InterruptedException {
-        this.returnAndOrbitDrones();
-        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
-        Thread.sleep(waitDronesMS);
+    private void returnDrones(int waitForDronesMS) {
+        try {
+            this.returnAndOrbitDrones();
+            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);
+            Thread.sleep(waitForDronesMS);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void returnAndOrbitDrones() throws AWTException, InterruptedException {
-        new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
+    public void returnAndOrbitDrones() {
+        try {
+            new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
