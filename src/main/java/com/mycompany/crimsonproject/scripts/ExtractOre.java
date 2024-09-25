@@ -153,6 +153,7 @@ public class ExtractOre implements VerifyRectangle {
 
             case 2 -> {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
+                this.activeCannons();
                 this.launchDrones();
                 this.engageDrones(); // engage drones
                 this.walkThrough++; // go to case 3
@@ -281,6 +282,26 @@ public class ExtractOre implements VerifyRectangle {
             }
         }
         return deactivedCannons;
+    }
+
+    private void activeCannons() throws IOException, InterruptedException, AWTException {
+        List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
+        for (int i = 0; i < cannons.size(); i++) {
+            if (this.isCannonActivated(i, 9,
+                    (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                    R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                    100, 115, 100)) {
+                new KeyboardEvents().clickKey(cannons.get(i));
+                Thread.sleep(CANNON_SLEEP);
+                new KeyboardEvents().clickKey(cannons.get(i));
+                System.out.println("The cannon was active. Press 2x cannon " + i);
+            } else {
+                Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
+                new KeyboardEvents().clickKey(cannons.get(i));
+                System.out.println("Just press 1x cannon " + i);
+            }
+        }
+
     }
 
     private boolean isCannonActivated(int i, int attempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) throws InterruptedException, AWTException, IOException {
