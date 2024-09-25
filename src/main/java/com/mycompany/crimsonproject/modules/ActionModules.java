@@ -21,7 +21,7 @@ public class ActionModules {
         }
     }
 
-    private void launchDrones() {
+    public void launchDrones() {
         try {
             new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
@@ -29,7 +29,7 @@ public class ActionModules {
         }
     }
 
-    private void engageDrones() {
+    public void engageDrones() {
         try {
             new KeyboardEvents().clickKey(KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
@@ -37,7 +37,7 @@ public class ActionModules {
         }
     }
 
-    private void returnDrones(int waitForDronesMS) {
+    public void returnDrones(int waitForDronesMS) {
         try {
             this.returnAndOrbitDrones();
             new KeyboardEvents().pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_R);

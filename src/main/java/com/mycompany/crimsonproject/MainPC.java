@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
+import org.javatuples.Triplet;
 
 /**
  *
@@ -25,6 +26,8 @@ public class MainPC {
         final int GOTO_MININGBOT = 1;
         boolean isSwitchable = false;
         int waitForWarp = 35000;
+        int giveAtry = 13;
+        Triplet<Integer, Integer, Integer> tonsOfGreen = new Triplet(100, 125, 100);
 
         Thread.sleep(4000);
 
@@ -41,7 +44,7 @@ public class MainPC {
                 new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp).startScript();
 
                 // script 3
-                boolean isFalse = new ExtractOre(isSwitchable, waitForWarp).startScript();
+                boolean isFalse = new ExtractOre(isSwitchable, waitForWarp, giveAtry, tonsOfGreen).startScript();
                 if (!isFalse) {
                     break;
                 }

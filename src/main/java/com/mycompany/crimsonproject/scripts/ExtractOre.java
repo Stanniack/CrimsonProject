@@ -35,7 +35,7 @@ public class ExtractOre implements VerifyRectangle {
     private Rectangle target;
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
-    private ActionModules actModules;
+    private final ActionModules actModules;
 
     private final Triplet<Integer, Integer, Integer> tonsOfGreen;
     private final int giveAtry;
