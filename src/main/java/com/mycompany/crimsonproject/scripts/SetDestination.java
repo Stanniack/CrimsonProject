@@ -58,7 +58,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        while (this.walkThrough < STEPS) {
+        while (this.walkThrough <= STEPS) {
             // Call method
             // Todo connection lost
 

@@ -93,7 +93,7 @@ public class ExtractOre implements VerifyRectangle {
 
         this.timeStartFilled = System.currentTimeMillis();
 
-        while (this.walkThrough < STEPS) {
+        while (this.walkThrough <= STEPS) {
             // Todo connection lost 
             // TODO
 

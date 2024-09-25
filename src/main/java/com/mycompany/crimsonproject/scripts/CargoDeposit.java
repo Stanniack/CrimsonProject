@@ -30,7 +30,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     private Rectangle hangarButton;
     private int walkThrough = 0;
-    private static final int STEPS = 3;
+    private static final int STEPS = 2;
 
     public CargoDeposit() {
         this.resolution = new R1920x1080();
@@ -39,7 +39,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
-        while (this.walkThrough < STEPS) {
+        while (this.walkThrough <= STEPS) {
             // Call method
             // Todo connection lost
 
