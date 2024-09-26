@@ -2,11 +2,11 @@
 
 # Alpha v0.0.0 - 29/01/24
 
-* Minera apenas 5 tipos de minérios: Condensed Scordite, Scordite, Dense Veldspar e Veldspar
-  - Mineração por prioridade, respectivamente.
+* 5 tipos de minérios para testes: Condensed Scordite, Scordite, Dense Veldspar e Veldspar
+  - Mineração por prioridade.
 
-* Utiliza Apenas a nave Venture 5km³ cargo hold
-    - Por enquanto não possui funcionalidade de drones mineradores.
+* Utiliza identificação do cargo hold em compact mode quando estiver cheio para voltar à estação
+    - Por enquanto não possui funcionalidade de drones. (Ver versões posteriores)
 
 * Estação espacial e área de mineração precisam estar no mesmo sistema solar
     - O bot encontra suas rotas por labels na aba de localizações;
@@ -20,7 +20,6 @@
   - 5 tipos de minérios: Veldspar, Concentrated V., Dense V., Scordite, Condensed S.
 
 # Alpha v0.2.0 - 27/02/24
-   - As funcionalidades do Alpha 0.1 continuam as mesmas;
    - Abas foram repadronizadas para facilitar o uso do bot sem que ele quebre com frequência;
    - Algoritmo foi enxugado em ExtractOre para evitar que o algoritmo quebre com frequência ou, se quebrar, volte depois de um tempo.
 
@@ -48,16 +47,32 @@
   - Afunilamento da área de procura de retângulos em setDestination e generalização do método caso necessários em outras partes do código.
 
 # Alpha v0.3.5 - 17/05/24
-  - Adicionando um script similar ao CheckCargoDeposit (CargoDeposit) mas que não verifica se o mining hold da nave está cheio, apenas transfere a possível carga e sai da estação.
+  - Introdução de um script similar ao CheckCargoDeposit (CargoDeposit) mas que não verifica se o mining hold da nave está cheio, apenas transfere a possível carga e sai da estação.
 
 # Alpha v0.3.6 - 01/06/24
-  - Adicionando um método para verificar targets que não sejam asteroids (1ª versão ainda em testes).
+  - Introdução de um método para verificar targets que não sejam asteroids (1ª versão ainda em testes).
 
 # Alpha v0.3.7 - 12/06/24
-  - Introduzindo drones mineradores: Launch, engage and return.
+  - Introdução de drones mineradores: Launch, engage and return.
 
 # Alpha v0.3.8 - 20/06/24
-  - Introduzindo método que verifica se a nave está sendo atacada (1ª versão).
+  - Introdução de método que verifica se a nave está sendo atacada (1ª versão).
+
+# Alpha v0.3.9 - 28/07/24
+  - Introdução de métodos que disparam sons de alerta.
+
+# Alpha v0.3.9.1 - 03/08/24
+  - Introdução de método que engaja os drones.
+
+# Alpha v0.4.0 - 03/08/24
+  - Introdução de alertas .wav em determinadas partes dos scripts onde é necessária a atenção do usuario.
+
+# Alpha v0.4.1 - 24/08/24
+  - Introdução de text logs para verificar tempo de ciclo de mineração.
+
+# Alpha v0.4.2 - 22/09/24
+  - Introdução de método que alterna entre 5 asteroid belts. Agora é possível alternar entre minerar apenas um asteroid belt ou 5.
+
 
 # Bug fixes
 
