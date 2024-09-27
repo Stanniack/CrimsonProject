@@ -25,7 +25,7 @@ abstract class RobotEvent {
     
     RobotEvent () {
         try {
-            bot = new Robot();
+            this.bot = new Robot();
         } catch (AWTException ex) {
             Logger.getLogger(RobotEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
