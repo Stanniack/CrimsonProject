@@ -109,7 +109,7 @@ public class ExtractOre implements VerifyRectangle {
             this.flowScript();
 
             // Call method
-            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), "Invalid target found.");
+            this.verifyInvalidTarget(this.resolution.getInvalidTargetList());
 
             //Call method
             if (this.walkThrough > 2) {
@@ -375,7 +375,7 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
+    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects) throws IOException, TesseractException, AWTException, InterruptedException {
         boolean isClicked = false;
         int mOe = 195; // margin of error
 
@@ -389,7 +389,6 @@ public class ExtractOre implements VerifyRectangle {
                 isClicked = true;
             }
 
-            System.out.println(msg + "\n");
         } catch (NullPointerException ex) {
             //Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
