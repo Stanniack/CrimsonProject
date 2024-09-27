@@ -42,6 +42,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private int walkThrough = 0;
 
+    private long flagSwitchBelt = 0;
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
@@ -60,6 +61,7 @@ public class ExtractOre implements VerifyRectangle {
     private static final int LOCKTARGET_MS = 60000;
     private static final int WAITFORSWITCHASTBELT_MS = 20000;
     private static final int STEPS = 5;
+    private static final int ASTNOTFOUND = 7;
     private static final int SETANOTHERAST_MS = 180000;
     private static final int DEACTIVEPROP_MS = 120000;
     private static final int STARTDRAGSCREEN_MS = 2200000;
@@ -107,7 +109,7 @@ public class ExtractOre implements VerifyRectangle {
             this.flowScript();
 
             // Call method
-            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), 195, "Invalid target found.");
+            this.verifyInvalidTarget(this.resolution.getInvalidTargetList(), "Invalid target found.");
 
             //Call method
             if (this.walkThrough > 2) {
@@ -260,8 +262,13 @@ public class ExtractOre implements VerifyRectangle {
             }
 
         } else {
-            if (this.isSwitchable) {
+
+            this.flagSwitchBelt++;
+            new ClickScreenEvents().dragScreen();
+
+            if (this.isSwitchable && this.flagSwitchBelt == ASTNOTFOUND) {
                 System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
+                this.flagSwitchBelt = 0;
                 this.actModules.returnDrones(0);
                 Thread.sleep(WAITFORSWITCHASTBELT_MS);
                 this.switchAstBelt();
@@ -273,7 +280,6 @@ public class ExtractOre implements VerifyRectangle {
             }
         }
         return false;
-
     }
 
     private int checkCannonsAction() {
@@ -333,7 +339,6 @@ public class ExtractOre implements VerifyRectangle {
         for (int j = 0; j < attempt; j++) {
             try {
                 new TakeScreenshot().take2();
-
                 action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
                 if (action) {
                     return true;
@@ -370,15 +375,16 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, int moe, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
+    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects, String msg) throws IOException, TesseractException, AWTException, InterruptedException {
         boolean isClicked = false;
+        int mOe = 195; // margin of error
 
         try {
             Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, this.resolution.getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
             if (new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, this.rgbr.getMinInfo(), this.rgbr.getMaxInfo())) {
-                rect.y += moe;
+                rect.y += mOe;
                 new ClickScreenEvents().leftClickCenterButton(rect);
                 isClicked = true;
             }
