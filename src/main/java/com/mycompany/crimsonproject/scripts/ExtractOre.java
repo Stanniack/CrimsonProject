@@ -369,7 +369,7 @@ public class ExtractOre implements VerifyRectangle {
         boolean approaching = new FindPixels().findByColor(
                 R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
                 R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(),
-                new Triplet<>(255, 255, 255));
+                255, 255, 255);
 
         if (approaching == true) {
             return true;
