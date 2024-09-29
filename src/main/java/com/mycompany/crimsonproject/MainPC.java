@@ -26,7 +26,8 @@ public class MainPC {
         final int GOTO_MININGBOT = 1;
         boolean isSwitchable = false;
         int waitForWarp = 35000;
-        int giveAtry = 13;
+        boolean isCheckWarpable = true;
+        int giveAtry = 9;
         Triplet<Integer, Integer, Integer> tonsOfGreen = new Triplet(100, 125, 100);
 
         Thread.sleep(4000);
@@ -41,10 +42,11 @@ public class MainPC {
 
                 // script 2
                 List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(path));
-                new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp).startScript();
+                SetDestination setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192));
+                setDestination.startScript();
 
                 // script 3
-                boolean isFalse = new ExtractOre(isSwitchable, waitForWarp, giveAtry, tonsOfGreen).startScript();
+                boolean isFalse = new ExtractOre(setDestination, isSwitchable, giveAtry, tonsOfGreen).startScript();
                 if (!isFalse) {
                     break;
                 }
