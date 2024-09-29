@@ -68,7 +68,8 @@ public class ExtractOre implements VerifyRectangle {
     private static final int GOTO_HOMESTATION = 0;
     private static final int GOTO_ASTBELT = 1;
     private static final int CANNON_SLEEP = 1500;
-    private final int waitForWarp_MS;
+
+    private SetDestination setDestination;
 
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
@@ -80,9 +81,19 @@ public class ExtractOre implements VerifyRectangle {
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
     // JavDoc!!!!!!!!!!!!!!!!!
-    public ExtractOre(boolean isSwitchable, int waitForWarp_MS, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+    public ExtractOre(SetDestination setDestination, boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+        this.setDestination = setDestination;
         this.isSwitchable = isSwitchable;
-        this.waitForWarp_MS = waitForWarp_MS;
+        this.giveAtry = giveAtry;
+        this.tonsOfGreen = tonsOfGreen;
+
+        this.rgbr = new RGBrange();
+        this.resolution = new R1920x1080();
+        this.actModules = new ActionModules();
+    }
+
+    public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+        this.isSwitchable = isSwitchable;
         this.giveAtry = giveAtry;
         this.tonsOfGreen = tonsOfGreen;
 
@@ -214,7 +225,8 @@ public class ExtractOre implements VerifyRectangle {
 
             case 5 -> {
                 this.actModules.returnDrones(8000);
-                new SetDestination(this.resolution.getHomeStationList(), GOTO_HOMESTATION, this.waitForWarp_MS).startScript();
+                this.setDestination.setParameters(this.resolution.getHomeStationList(), GOTO_HOMESTATION);
+                this.setDestination.startScript();
                 System.out.println("End of mining and go docking!\n");
                 this.walkThrough++;
             }
@@ -442,19 +454,23 @@ public class ExtractOre implements VerifyRectangle {
         try {
             switch (label) {
                 case 1 -> {
-                    new SetDestination(this.resolution.getAstBeltIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 2 -> {
-                    new SetDestination(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 3 -> {
-                    new SetDestination(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 4 -> {
-                    new SetDestination(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT, this.waitForWarp_MS).startScript();
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.startScript();
                     new TextLogs().writeLine(path, 0); // return to home station
                 }
                 default -> {
