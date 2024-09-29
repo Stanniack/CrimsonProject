@@ -1,10 +1,8 @@
 /target/
-src/main/java/com/mycompany/crimsonproject/screenshots/screenshot.png
 src/main/java/com/mycompany/crimsonproject/MainPC.java
 src/main/java/com/mycompany/crimsonproject/screenshots/screenshot.png
 src/main/java/com/mycompany/crimsonproject/soundlogs/MainAudio.java
 src/main/java/com/mycompany/crimsonproject/robot/MainTake.java
 src/main/java/com/mycompany/crimsonproject/soundlogs/MainAudio.java
-src/main/java/com/mycompany/crimsonproject/IOlogs/logsfiles/switchbelt.txt
 src/main/java/com/mycompany/crimsonproject/MainPC2.java
-src/main/java/com/mycompany/crimsonproject/IOlogs/logsfiles/switchbelt.txt
+src/main/java/com/mycompany/crimsonproject/screenshots/warpable.png
