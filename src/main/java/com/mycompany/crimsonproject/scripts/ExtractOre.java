@@ -36,6 +36,11 @@ public class ExtractOre implements VerifyRectangle {
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
     private final ActionModules actModules;
+    private final FindPixels findPixels;
+    private final ClickScreenEvents clickEvents;
+    private final KeyboardEvents keyboardEvents;
+    private final SegmentedRegions segmentedRegions;
+    private final TakeScreenshot takeScreenshot;
 
     private final Triplet<Integer, Integer, Integer> tonsOfGreen;
     private final int giveAtry;
@@ -90,6 +95,11 @@ public class ExtractOre implements VerifyRectangle {
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
         this.actModules = new ActionModules();
+        this.findPixels = new FindPixels();
+        this.clickEvents = new ClickScreenEvents();
+        this.keyboardEvents = new KeyboardEvents();
+        this.segmentedRegions = new SegmentedRegions();
+        this.takeScreenshot = new TakeScreenshot();
     }
 
     public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
@@ -100,6 +110,11 @@ public class ExtractOre implements VerifyRectangle {
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
         this.actModules = new ActionModules();
+        this.findPixels = new FindPixels();
+        this.clickEvents = new ClickScreenEvents();
+        this.keyboardEvents = new KeyboardEvents();
+        this.segmentedRegions = new SegmentedRegions();
+        this.takeScreenshot = new TakeScreenshot();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -146,27 +161,27 @@ public class ExtractOre implements VerifyRectangle {
 
             case 1 -> {
                 // Search for target
-                this.target = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
+                this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
 
                 if (this.verifyRectangle(this.target, "TARGET", 0)) {
-                    if (new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
+                    if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
                         // If there is a lock target, just go to next step
                         this.walkThrough++; // go to case 2
 
-                    } else if (new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTarget(), this.rgbr.getMaxFreeTarget())) {
+                    } else if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTarget(), this.rgbr.getMaxFreeTarget())) {
                         // If the target is free, click target and go next step
-                        new ClickScreenEvents().leftClickCenterButton(this.target);
+                        this.clickEvents.leftClickCenterButton(this.target);
                         this.walkThrough++; // go to case 2
 
                     } else {
                         System.out.println("Lock target and free target not found.");
-                        new ClickScreenEvents().dragScreen();
+                        this.clickEvents.dragScreen();
                     }
 
                 } else {
                     this.flagLockTargetMS = System.currentTimeMillis() - this.timeStartLockTarget;
                     //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
-                    new ClickScreenEvents().dragScreen();
+                    this.clickEvents.dragScreen();
 
                     if (this.flagLockTargetMS > LOCKTARGET_MS) {
                         System.out.println("Restarting script.\n\n");
@@ -185,14 +200,14 @@ public class ExtractOre implements VerifyRectangle {
             }
 
             case 3 -> {
-                Rectangle compactMaxCargo = new SegmentedRegions().getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
+                Rectangle compactMaxCargo = this.segmentedRegions.getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
 
                 if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
                     if (this.flagUntilToBeFilledMS > STARTDRAGSCREEN_MS) {
-                        new ClickScreenEvents().dragScreen();
+                        this.clickEvents.dragScreen();
                     }
                     this.walkThrough++; // go to case 4
                 }
@@ -241,7 +256,7 @@ public class ExtractOre implements VerifyRectangle {
         Entry<String, Rectangle> betterAteroid = null;
         this.priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = new SegmentedRegions().getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
+        HashMap<String, Rectangle> rectResult = this.segmentedRegions.getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
 
         System.out.println("Rectangle list size: " + rectResult.size() + "\n");
@@ -269,13 +284,13 @@ public class ExtractOre implements VerifyRectangle {
                 System.out.println("CLOSEST, BETTER ASTEROID FOUND (Y Coordinate): "
                         + betterAteroid.getKey() + " (X,Y) -> (" + betterAteroid.getValue().x + ", " + betterAteroid.getValue().y + ")\n");
 
-                new ClickScreenEvents().doubleClick(betterAteroid.getValue());
+                this.clickEvents.doubleClick(betterAteroid.getValue());
                 return true;
             }
 
         } else {
 
-            new ClickScreenEvents().dragScreen();
+            this.clickEvents.dragScreen();
 
             if (this.isSwitchable) {
                 this.flagSwitchBelt++;
@@ -308,7 +323,7 @@ public class ExtractOre implements VerifyRectangle {
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                         this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
 
-                    new KeyboardEvents().clickKey(cannons.get(i));
+                    this.keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
                     deactivedCannons++;
                 }
@@ -330,14 +345,14 @@ public class ExtractOre implements VerifyRectangle {
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                         this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
 
-                    new KeyboardEvents().clickKey(cannons.get(i));
+                    this.keyboardEvents.clickKey(cannons.get(i));
                     Thread.sleep(CANNON_SLEEP);
-                    new KeyboardEvents().clickKey(cannons.get(i));
+                    this.keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("The cannon was active. Press 2x cannon " + i);
 
                 } else {
                     Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
-                    new KeyboardEvents().clickKey(cannons.get(i));
+                    this.keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("Just press 1x cannon " + i);
                 }
 
@@ -354,7 +369,7 @@ public class ExtractOre implements VerifyRectangle {
         for (int j = 0; j < attempt; j++) {
             try {
                 new TakeScreenshot().take2();
-                action = new FindPixels().findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
+                action = this.findPixels.findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
                 if (action) {
                     return true;
                 }
@@ -378,7 +393,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = new FindPixels().findByColor(
+        boolean approaching = this.findPixels.findByColor(
                 R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
                 R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(),
                 255, 255, 255);
@@ -395,12 +410,12 @@ public class ExtractOre implements VerifyRectangle {
         int mOe = 195; // margin of error
 
         try {
-            Rectangle rect = new SegmentedRegions().getRectangle(listWxHrects, this.resolution.getInvalidTargetDeadZoneList());
+            Rectangle rect = this.segmentedRegions.getRectangle(listWxHrects, this.resolution.getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
-            if (new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, this.rgbr.getMinInfo(), this.rgbr.getMaxInfo())) {
+            if (this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, this.rgbr.getMinInfo(), this.rgbr.getMaxInfo())) {
                 rect.y += mOe;
-                new ClickScreenEvents().leftClickCenterButton(rect);
+                this.clickEvents.leftClickCenterButton(rect);
                 isClicked = true;
             }
 
@@ -409,20 +424,20 @@ public class ExtractOre implements VerifyRectangle {
         }
 
         if (isClicked) {
-            Rectangle locktarget = new SegmentedRegions().getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
+            Rectangle locktarget = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
 
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
-                new ClickScreenEvents().leftClickCenterButton(locktarget);
+                this.clickEvents.leftClickCenterButton(locktarget);
                 this.walkThrough = 0; //!!
 
             } else if (this.target != null) {
                 int asteroidTarget = 36;
                 this.target.x += asteroidTarget;
-                boolean lockAsteroidTarget = new FindPixels().findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget());
+                boolean lockAsteroidTarget = this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget());
 
                 if (lockAsteroidTarget) {
-                    new ClickScreenEvents().leftClickCenterButton(this.target);
+                    this.clickEvents.leftClickCenterButton(this.target);
                     this.walkThrough = 0; //!!
                 }
             } else {
@@ -439,7 +454,7 @@ public class ExtractOre implements VerifyRectangle {
             int width = R1920x1080.getBEINGATTACKED_W1();
             int height = R1920x1080.getBEINGATTACKED_H1();
 
-            if (new FindPixels().findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttacked(), this.rgbr.getMaxBeingAttacked())) {
+            if (this.findPixels.findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttacked(), this.rgbr.getMaxBeingAttacked())) {
                 new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
             }
         } catch (IOException ex) {
