@@ -126,7 +126,7 @@ public class ExtractOre implements VerifyRectangle {
             // TODO
 
             // Call method priority MAX
-            new TakeScreenshot().take();
+            this.takeScreenshot.take();
 
             //Call method
             this.verifyShipLife();
@@ -138,7 +138,7 @@ public class ExtractOre implements VerifyRectangle {
             this.verifyInvalidTarget(this.resolution.getInvalidTargetList());
 
             //Call method
-            if (this.walkThrough > 2) {
+            if (this.walkThrough > 2 && this.walkThrough < STEPS) {
                 this.checkCannonsAction();
             }
         }
@@ -368,7 +368,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int j = 0; j < attempt; j++) {
             try {
-                new TakeScreenshot().take2();
+                this.takeScreenshot.take2();
                 action = this.findPixels.findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
                 if (action) {
                     return true;
@@ -474,22 +474,22 @@ public class ExtractOre implements VerifyRectangle {
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 2 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT);
                     this.setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 3 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT);
                     this.setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 4 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    this.setDestination.setParameters(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT);
                     this.setDestination.startScript();
-                    new TextLogs().writeLine(path, 0); // return to home station
+                    new TextLogs().writeLine(path, label + 1); // return to home station
                 }
-                default -> {
-                    System.out.println("Case returned 0, returning to HOME STATION.");
+                case 5 -> {
+                    System.out.println("Last asteroid belt farmed, returning to HOME STATION.");
                     new TextLogs().writeLine(path, 1); // reset asteroid belts
                     this.walkThrough = 5;
                     isRunnable = false; // exit the script
