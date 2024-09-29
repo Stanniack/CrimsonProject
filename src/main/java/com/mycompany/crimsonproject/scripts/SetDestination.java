@@ -25,20 +25,21 @@ import org.javatuples.Triplet;
  */
 public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
-    private final int option;
+    private int option;
     private R1920x1080 resolution = null;
     private final RGBrange rgbr;
     private Rectangle astBeltDest = null;
     private Rectangle homeStationDest = null;
-    private final List<Pair<Integer, Integer>> destination;
+    private List<Pair<Integer, Integer>> destination;
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
     private final int waitForWarp_MS;
+    private final boolean isCheckWarpable;
+    private final Triplet<Integer, Integer, Integer> greaterThan;
     // it depends the amount of switch cases
-    private static final int STEPS = 3;
-
+    private static final int STEPS = 4;
     private int walkThrough = 0;
 
     /**
@@ -47,13 +48,24 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
      * station or asteroid belt
      * @param waitForWarp type int in milliseconds to sleep when warping between
      * belts or home station
+     * @param isCheckWarpable true if is ckeckable to identify by pixels or
+     * false by wait for warp in milliseconds
+     * @param greaterThan a triplet of white range in RGB tons
      */
-    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp) {
+    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> greaterThan) {
         this.destination = chosenDest;
         this.option = option;
         this.waitForWarp_MS = waitForWarp;
+        this.isCheckWarpable = isCheckWarpable;
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
+        this.greaterThan = greaterThan;
+    }
+
+    protected void setParameters(List<Pair<Integer, Integer>> chosenDest, int option) {
+        this.destination = chosenDest;
+        this.option = option;
+        this.walkThrough = 0;
     }
 
     public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -134,27 +146,31 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
-                // Sleep until reach the destination
-                Thread.sleep(this.waitForWarp_MS);
             }
 
-            /*case 4 -> {
-                boolean isWarping = true;
-                int waitForWarpMS = 5000;
-                Thread.sleep(waitForWarpMS);
+            case 4 -> {
+                if (this.isCheckWarpable) {
+                    boolean isWarping = true;
+                    Thread.sleep(5000);
 
-                while (isWarping) {
-                    new TakeScreenshot().takeSRGB();
-                    isWarping = new FindPixels().greaterThanRGB(
-                            R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
-                            R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
-                            255, 255, 255);
-                    System.out.println(isWarping);
+                    while (isWarping) {
+                        new TakeScreenshot().take2();
+                        isWarping = new FindPixels().greaterThan(
+                                R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
+                                R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
+                                this.greaterThan.getValue0(), this.greaterThan.getValue1(), this.greaterThan.getValue2());
+                    }
+
+                    if (!isWarping) {
+                        new TakeScreenshot().take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
+                    }
+                    Thread.sleep(this.option == HOMESTATION ? 12000 : 1000);
+
+                } else {
+                    Thread.sleep(this.waitForWarp_MS); // Sleep until reach the destination
                 }
-
-                Thread.sleep(this.option == HOMESTATION ? 1000 : 1000);
                 this.walkThrough++;
-            }*/
+            }
         } // while
     }
 
