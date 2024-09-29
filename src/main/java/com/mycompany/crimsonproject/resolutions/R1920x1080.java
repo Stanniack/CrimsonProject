@@ -354,10 +354,11 @@ public class R1920x1080 {
     /*
      * *****************************************************************************
      */
-    private static final int CHECKPATH_X1 = 865;
-    private static final int CHECKPATH_Y1 = 787;
-    private static final int CHECKPATH_W1 = 190;
-    private static final int CHECKPATH_H1 = 14;
+    private static final int CHECKPATH_X1 = 760;
+    private static final int CHECKPATH_Y1 = 765;
+    private static final int CHECKPATH_W1 = 400;
+    private static final int CHECKPATH_H1 = 100;
+    //x1 = x; x2 = x + w; y1 = y; y2 = y + h.
     /*
      * *****************************************************************************
      */
