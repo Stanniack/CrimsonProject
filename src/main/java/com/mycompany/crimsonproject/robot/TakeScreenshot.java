@@ -17,6 +17,21 @@ import javax.imageio.ImageIO;
  */
 public class TakeScreenshot extends RobotEvent {
 
+    public void take(String path) {
+        try {
+            Thread.sleep(SLEEP_MS2);
+
+            Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+
+            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+
+            ImageIO.write(bf, "png", new File(path));
+
+        } catch (InterruptedException | IOException ex) {
+            Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void take() {
         try {
             Thread.sleep(SLEEP_MS2);
@@ -39,6 +54,20 @@ public class TakeScreenshot extends RobotEvent {
         try {
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
+            Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+
+            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+
+            ImageIO.write(bf, "png", new File(path));
+
+        } catch (IOException ex) {
+            Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void take2(String path) {
+
+        try {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
             BufferedImage bf = this.bot.createScreenCapture(rectangle);
