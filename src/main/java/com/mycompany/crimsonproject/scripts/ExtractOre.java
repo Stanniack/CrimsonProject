@@ -289,24 +289,23 @@ public class ExtractOre implements VerifyRectangle {
             }
 
         } else {
-
             this.clickEvents.dragScreen();
+            this.flagSwitchBelt++;
 
-            if (this.isSwitchable) {
-                this.flagSwitchBelt++;
+            if (this.flagSwitchBelt == ASTNOTFOUND) {
 
-                if (this.flagSwitchBelt == ASTNOTFOUND) {
+                if (this.isSwitchable) {
                     System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
-                    this.flagSwitchBelt = 0;
                     this.actModules.returnDrones(0);
                     Thread.sleep(WAITFORSWITCHASTBELT_MS);
                     this.switchAstBelt();
-                }
 
-            } else {
-                System.out.println("CLOSEST, BETTER ASTEROID IS NULL. RETURNING TO HOME STATION");
-                this.isRunnable = false;
-                this.walkThrough = 5;
+                } else {
+                    System.out.println("CLOSEST, BETTER ASTEROID IS NULL. RETURNING TO HOME STATION");
+                    this.isRunnable = false;
+                    this.walkThrough = 5;
+                }
+                this.flagSwitchBelt = 0;
             }
         }
         return false;
