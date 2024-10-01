@@ -311,24 +311,26 @@ public class ExtractOre implements VerifyRectangle {
         return false;
     }
 
-    private int checkCannonsAction() {
+    private int checkCannonsAction() throws IOException {
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
         int deactivedCannons = 0;
 
-        for (int i = 0; i < cannons.size(); i++) {
-            try {
-                if (!this.isCannonActivated(i, this.giveAtry,
-                        (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
-                        R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                        this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
+        if (this.checkPixelsAprroaching()) {
+            for (int i = 0; i < cannons.size(); i++) {
+                try {
+                    if (!this.isCannonActivated(i, this.giveAtry,
+                            (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
+                            R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                            this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
 
-                    this.keyboardEvents.clickKey(cannons.get(i));
-                    System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
-                    deactivedCannons++;
+                        this.keyboardEvents.clickKey(cannons.get(i));
+                        System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
+                        deactivedCannons++;
+                    }
+
+                } catch (InterruptedException | AWTException ex) {
+                    Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-            } catch (InterruptedException | AWTException ex) {
-                Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return deactivedCannons;
