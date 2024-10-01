@@ -24,6 +24,10 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
 
     private final R1920x1080 resolution;
     private final RGBrange rgbr;
+    private final FindPixels findPixels;
+    private final ClickScreenEvents clickEvents;
+    private final SegmentedRegions segmentedRegions;
+    private final TakeScreenshot takeScreenshot;
 
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
@@ -35,6 +39,11 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     public CargoDeposit() {
         this.resolution = new R1920x1080();
         this.rgbr = new RGBrange();
+
+        this.findPixels = new FindPixels();
+        this.clickEvents = new ClickScreenEvents();
+        this.segmentedRegions = new SegmentedRegions();
+        this.takeScreenshot = new TakeScreenshot();
     }
 
     public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
@@ -44,7 +53,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             // Todo connection lost
 
             // Call method
-            new TakeScreenshot().take();
+            this.takeScreenshot.take();
 
             // Call method
             this.flowScript();
@@ -57,12 +66,12 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
         switch (this.walkThrough) {
 
             case 0 -> {
-                this.hangarButton = new SegmentedRegions().getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
+                this.hangarButton = this.segmentedRegions.getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
 
                 if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     this.walkThrough++;
                 } else {
-                    new ClickScreenEvents().dragScreen();
+                    this.clickEvents.dragScreen();
                 }
             }
 
@@ -73,12 +82,12 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 2 -> {
-                Rectangle undockButton = new SegmentedRegions().getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
+                Rectangle undockButton = this.segmentedRegions.getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
 
                 if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                     this.walkThrough++;
                 } else {
-                    new ClickScreenEvents().dragScreen();
+                    this.clickEvents.dragScreen();
                 }
             }
 
@@ -86,7 +95,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        new ClickScreenEvents().dragItemsToInventory(this.resolution.getDragItensDeadZoneList(), this.hangarButton);
+        this.clickEvents.dragItemsToInventory(this.resolution.getDragItensDeadZoneList(), this.hangarButton);
     }
 
     @Override
@@ -97,9 +106,9 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             System.out.printf("Rect found (%s): Width: %d and Height: %d\n\n", itemName, rectangle.width, rectangle.height);
 
             if (chosenClick == LEFTCLICK) {
-                new ClickScreenEvents().leftClickCenterButton(rectangle);
+                this.clickEvents.leftClickCenterButton(rectangle);
             } else {
-                new ClickScreenEvents().rightClickCenterButton(rectangle);
+                this.clickEvents.rightClickCenterButton(rectangle);
             }
             return true;
         }
@@ -110,11 +119,11 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && new FindPixels().findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
+        if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
             return true;
         }
         return false;
     }
 
-} // end class
+}
