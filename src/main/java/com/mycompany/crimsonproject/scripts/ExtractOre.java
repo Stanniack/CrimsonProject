@@ -155,22 +155,19 @@ public class ExtractOre implements VerifyRectangle {
                     this.timeStartProp = System.currentTimeMillis();
                     this.isAnotherAst = true;
                     this.actModules.propulsion();
-                    this.walkThrough++; // go to case 1
+                    this.walkThrough++;
                 }
             } // end case 0
 
             case 1 -> {
-                // Search for target
-                this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
+                this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple()); // Search for target
 
                 if (this.verifyRectangle(this.target, "TARGET", 0)) {
                     if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
-                        // If there is a lock target, just go to next step
-                        this.walkThrough++; // go to case 2
+                        this.walkThrough++; // If there is a lock target, just go to next step
 
                     } else if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTarget(), this.rgbr.getMaxFreeTarget())) {
-                        // If the target is free, click target and go next step
-                        this.clickEvents.leftClickCenterButton(this.target);
+                        this.clickEvents.leftClickCenterButton(this.target); // If the target is free, click target and go next step
                         this.walkThrough++; // go to case 2
 
                     } else {
@@ -218,21 +215,17 @@ public class ExtractOre implements VerifyRectangle {
                 this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStartFilled);
                 this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStartProp);
 
-                // if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
-                // else if: check approaching is true -> continue mining
-                // else ship is not mining -> reset mining
-                if (this.flagSetAnotherAstMS > SETANOTHERAST_MS && this.checkCannonsAction() == this.amountCannons) {
+                if (this.flagSetAnotherAstMS > SETANOTHERAST_MS && this.checkCannonsAction() == this.amountCannons) {//if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
                     this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
-                } else if (this.checkPixelsAprroaching()) {
+                } else if (this.checkPixelsAprroaching()) {//else if: check approaching is true -> continue mining
                     this.walkThrough--; // back to case and check maxCargo
 
-                } else {
+                } else {//else ship is not mining -> reset mining
                     this.walkThrough = 0; // Approaching not found, the ship is not mining
                 }
 
-                // check propulsion
-                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS && this.isAnotherAst == true) {
+                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS && this.isAnotherAst == true) {//check propulsion
                     this.actModules.propulsion();
                     this.isAnotherAst = false;
                 }
