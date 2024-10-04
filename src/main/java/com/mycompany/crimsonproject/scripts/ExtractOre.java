@@ -192,6 +192,7 @@ public class ExtractOre implements VerifyRectangle {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.activeCannons();
                 this.actModules.launchDrones();
+                Thread.sleep(2000);
                 this.actModules.engageDrones(); // engage drones
                 this.walkThrough++; // go to case 3
             }
