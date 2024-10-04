@@ -64,7 +64,7 @@ public class ExtractOre implements VerifyRectangle {
     private final boolean isSwitchable;
 
     private static final int LOCKTARGET_MS = 60000;
-    private static final int WAITFORSWITCHASTBELT_MS = 20000;
+    private static final int WAITFORSWITCHASTBELT_MS = 10000;
     private static final int STEPS = 5;
     private static final int ASTNOTFOUND = 7;
     private static final int SETANOTHERAST_MS = 180000;
