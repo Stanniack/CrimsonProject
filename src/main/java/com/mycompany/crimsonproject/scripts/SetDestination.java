@@ -147,7 +147,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     }
                 }
 
-                /* back to case 1 and find the ATEROID BELT or HOME STATION to restart finding WITHIN/DOCK */
+                /* back to case 1 and find the ASTEROID BELT or HOME STATION to restart finding WITHIN/DOCK */
                 if (descentFlag) {
                     this.walkThrough--;
                     this.clickEvents.dragScreen();
@@ -164,10 +164,11 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
             case 4 -> {
                 if (this.isCheckWarpable) {
+                    Long flagTimeWarp = System.currentTimeMillis();
                     boolean isWarping = true;
                     Thread.sleep(5000);
 
-                    while (isWarping) {
+                    while (isWarping ||  flagTimeWarp - System.currentTimeMillis() > (this.waitForWarp_MS * 2) ) {
                         this.takeScreenshot.take2();
                         isWarping = this.findPixels.greaterThan(
                                 R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
