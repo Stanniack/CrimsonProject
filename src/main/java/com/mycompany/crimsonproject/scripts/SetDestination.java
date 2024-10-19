@@ -168,7 +168,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                     boolean isWarping = true;
                     Thread.sleep(5000);
 
-                    while (isWarping ||  flagTimeWarp - System.currentTimeMillis() > (this.waitForWarp_MS * 2) ) {
+                    while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (this.waitForWarp_MS * 2)) {
                         this.takeScreenshot.take2();
                         isWarping = this.findPixels.greaterThan(
                                 R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
