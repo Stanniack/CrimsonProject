@@ -163,30 +163,34 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             }
 
             case 4 -> {
-                if (this.isCheckWarpable) {
-                    Long flagTimeWarp = System.currentTimeMillis();
-                    boolean isWarping = true;
-                    Thread.sleep(5000);
-
-                    while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (this.waitForWarp_MS * 2)) {
-                        this.takeScreenshot.take2();
-                        isWarping = this.findPixels.greaterThan(
-                                R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
-                                R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
-                                this.greaterThan.getValue0(), this.greaterThan.getValue1(), this.greaterThan.getValue2());
-                    }
-
-                    if (!isWarping) {
-                        this.takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
-                    }
-                    Thread.sleep(this.option == HOMESTATION ? 12000 : 1000);
-
-                } else {
-                    Thread.sleep(this.waitForWarp_MS); // Sleep until reach the destination
-                }
-                this.walkThrough++;
+                this.checkWarpable();
             }
-        } // while
+        }
+    }
+
+    private void checkWarpable() throws InterruptedException, IOException {
+        if (this.isCheckWarpable) {
+            Long flagTimeWarp = System.currentTimeMillis();
+            boolean isWarping = true;
+            Thread.sleep(5000);
+
+            while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (this.waitForWarp_MS * 2)) {
+                this.takeScreenshot.take2();
+                isWarping = this.findPixels.greaterThan(
+                        R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
+                        R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
+                        this.greaterThan.getValue0(), this.greaterThan.getValue1(), this.greaterThan.getValue2());
+            }
+
+            if (!isWarping) {
+                this.takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
+            }
+            Thread.sleep(this.option == HOMESTATION ? 12000 : 1000);
+
+        } else {
+            Thread.sleep(this.waitForWarp_MS); // Sleep until reach the destination
+        }
+        this.walkThrough++;
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getFunnelRectTuple(Rectangle rect) {
