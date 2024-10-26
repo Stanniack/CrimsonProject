@@ -29,7 +29,7 @@ public class MiningFacade {
 
     private final List<Pair<Integer, Integer>> astBelt;
     private final Triplet<Integer, Integer, Integer> whiteRGB;
-    private final Triplet<Integer, Integer, Integer> shadeOfWhite;
+    private final Triplet<Integer, Integer, Integer> shadeOfGreen;
 
     private final boolean switchAstbelt;
     private final boolean isCheckWarpable;
@@ -55,8 +55,8 @@ public class MiningFacade {
      * belts
      * @param attempts number of tries to check if the miner cannons are
      * activated
-     * @param shadesOfGreen a triplet of shades of green to check with attempts
-     * to maximize the search for active miner cannons
+     * @param shadesOfGreen a triplet of green shades to check with attempts
+     * to maximize the search for active miner cannons (less/equal than R, )
      * @param logRoutePath directory to create a .txt log with times in
      * milliseconds per routes of mining
      * @param numberOfAlertLoops number of alerts loopings to play
@@ -75,7 +75,7 @@ public class MiningFacade {
         this.whiteRGB = whiteRGB;
         this.switchAstbelt = switchAstbelt;
         this.attempts = attempts;
-        this.shadeOfWhite = shadesOfGreen;
+        this.shadeOfGreen = shadesOfGreen;
         this.logRoutePath = logRoutePath;
         this.numberOfAlertLoops = numberOfAlertLoops;
     }
@@ -130,7 +130,7 @@ public class MiningFacade {
     }
 
     private boolean extractOre() throws IOException, TesseractException, AWTException, InterruptedException {
-        return new ExtractOre(setDestination, switchAstbelt, attempts, shadeOfWhite).startScript();
+        return new ExtractOre(setDestination, switchAstbelt, attempts, shadeOfGreen).startScript();
     }
 
     private void playAlertOfEnd() {
