@@ -87,7 +87,7 @@ public class MiningFacade {
         CalendarUtils calendar = new CalendarUtils();
         int minutes = 25;
 
-        while (calendar.isServerSave(minutes)) {
+        while (!calendar.isServerSave(minutes)) {
             flowScript();
             this.playAlertOfEnd();
         }
