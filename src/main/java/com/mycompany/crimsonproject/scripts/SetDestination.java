@@ -58,7 +58,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
      * belts or home station
      * @param isCheckWarpable true if is ckeckable to identify by pixels or
      * false by wait for warp in milliseconds
-     * @param greaterThan a triplet of white range in RGB tons
+     * @param greaterThan a triplet of white range in RGB shades
      */
     public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> greaterThan) {
         this.destination = chosenDest;

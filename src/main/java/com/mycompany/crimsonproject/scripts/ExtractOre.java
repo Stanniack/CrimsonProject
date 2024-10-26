@@ -42,7 +42,7 @@ public class ExtractOre implements VerifyRectangle {
     private final SegmentedRegions segmentedRegions;
     private final TakeScreenshot takeScreenshot;
 
-    private final Triplet<Integer, Integer, Integer> tonsOfGreen;
+    private final Triplet<Integer, Integer, Integer> shadeOfGreen;
     private final int giveAtry;
 
     private int walkThrough = 0;
@@ -86,11 +86,11 @@ public class ExtractOre implements VerifyRectangle {
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
     // JavDoc!!!!!!!!!!!!!!!!!
-    public ExtractOre(SetDestination setDestination, boolean switchAatBelt, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+    public ExtractOre(SetDestination setDestination, boolean switchAatBelt, int giveAtry, Triplet<Integer, Integer, Integer> shadeOfGreen) {
         this.setDestination = setDestination;
         this.switchAstBelt = switchAatBelt;
         this.giveAtry = giveAtry;
-        this.tonsOfGreen = tonsOfGreen;
+        this.shadeOfGreen = shadeOfGreen;
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
@@ -102,10 +102,10 @@ public class ExtractOre implements VerifyRectangle {
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+    public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> shadeOfGreen) {
         this.switchAstBelt = isSwitchable;
         this.giveAtry = giveAtry;
-        this.tonsOfGreen = tonsOfGreen;
+        this.shadeOfGreen = shadeOfGreen;
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
@@ -315,7 +315,7 @@ public class ExtractOre implements VerifyRectangle {
                     if (!this.isCannonActivated(i, this.giveAtry,
                             (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                             R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                            this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
+                            this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
 
                         this.keyboardEvents.clickKey(cannons.get(i));
                         System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
@@ -338,7 +338,7 @@ public class ExtractOre implements VerifyRectangle {
                 if (this.isCannonActivated(i, this.giveAtry,
                         (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                        this.tonsOfGreen.getValue0(), this.tonsOfGreen.getValue1(), this.tonsOfGreen.getValue2())) {
+                        this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
 
                     this.keyboardEvents.clickKey(cannons.get(i));
                     Thread.sleep(CANNON_SLEEP);
