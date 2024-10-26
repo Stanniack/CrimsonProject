@@ -43,7 +43,7 @@ public class ExtractOre implements VerifyRectangle {
     private final TakeScreenshot takeScreenshot;
 
     private final Triplet<Integer, Integer, Integer> shadeOfGreen;
-    private final int giveAtry;
+    private final int attemps;
 
     private int walkThrough = 0;
 
@@ -85,12 +85,21 @@ public class ExtractOre implements VerifyRectangle {
     /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
-    // JavDoc!!!!!!!!!!!!!!!!!
-    public ExtractOre(SetDestination setDestination, boolean switchAatBelt, int giveAtry, Triplet<Integer, Integer, Integer> shadeOfGreen) {
+    /**
+     * @param setDestination is an instanced object containing some essentials
+     * started attributed to recycle in ExtractOre class
+     * @param switchAstBelt true if the script is enable to switch asteroid
+     * belts
+     * @param attempts number of tries to check if the miner cannons are
+     * activated
+     * @param shadesOfGreen a triplet of greem shades to check with attempts
+     * to maximize the search for active miner cannons
+     */
+    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen) {
         this.setDestination = setDestination;
-        this.switchAstBelt = switchAatBelt;
-        this.giveAtry = giveAtry;
-        this.shadeOfGreen = shadeOfGreen;
+        this.switchAstBelt = switchAstBelt;
+        this.attemps = attempts;
+        this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
@@ -102,10 +111,10 @@ public class ExtractOre implements VerifyRectangle {
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> shadeOfGreen) {
+    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen) {
         this.switchAstBelt = isSwitchable;
-        this.giveAtry = giveAtry;
-        this.shadeOfGreen = shadeOfGreen;
+        this.attemps = attempts;
+        this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
@@ -312,7 +321,7 @@ public class ExtractOre implements VerifyRectangle {
         if (this.checkPixelsAprroaching()) {
             for (int i = 0; i < cannons.size(); i++) {
                 try {
-                    if (!this.isCannonActivated(i, this.giveAtry,
+                    if (!this.isCannonActivated(i, this.attemps,
                             (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                             R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                             this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
@@ -335,7 +344,7 @@ public class ExtractOre implements VerifyRectangle {
 
         for (int i = 0; i < cannons.size(); i++) {
             try {
-                if (this.isCannonActivated(i, this.giveAtry,
+                if (this.isCannonActivated(i, this.attemps,
                         (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                         this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
