@@ -61,7 +61,7 @@ public class ExtractOre implements VerifyRectangle {
 
     private boolean isAnotherAst;
     private boolean isRunnable = true;
-    private final boolean isSwitchable;
+    private final boolean switchAstBelt;
 
     private static final int LOCKTARGET_MS = 60000;
     private static final int WAITFORSWITCHASTBELT_MS = 10000;
@@ -86,9 +86,9 @@ public class ExtractOre implements VerifyRectangle {
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
     // JavDoc!!!!!!!!!!!!!!!!!
-    public ExtractOre(SetDestination setDestination, boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
+    public ExtractOre(SetDestination setDestination, boolean switchAatBelt, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
         this.setDestination = setDestination;
-        this.isSwitchable = isSwitchable;
+        this.switchAstBelt = switchAatBelt;
         this.giveAtry = giveAtry;
         this.tonsOfGreen = tonsOfGreen;
 
@@ -103,7 +103,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     public ExtractOre(boolean isSwitchable, int giveAtry, Triplet<Integer, Integer, Integer> tonsOfGreen) {
-        this.isSwitchable = isSwitchable;
+        this.switchAstBelt = isSwitchable;
         this.giveAtry = giveAtry;
         this.tonsOfGreen = tonsOfGreen;
 
@@ -288,7 +288,7 @@ public class ExtractOre implements VerifyRectangle {
 
             if (this.flagSwitchBelt == ASTNOTFOUND) {
 
-                if (this.isSwitchable) {
+                if (this.switchAstBelt) {
                     System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
                     this.actModules.returnDrones(0);
                     Thread.sleep(WAITFORSWITCHASTBELT_MS);
