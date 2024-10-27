@@ -1,6 +1,7 @@
 package com.mycompany.crimsonproject.facades;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
+import com.mycompany.crimsonproject.exceptions.EndOfScriptException;
 import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.SetDestination;
@@ -55,8 +56,8 @@ public class MiningFacade {
      * belts
      * @param attempts number of tries to check if the miner cannons are
      * activated
-     * @param shadesOfGreen a triplet of green shades to check with attempts
-     * to maximize the search for active miner cannons (less/equal than R, )
+     * @param shadesOfGreen a triplet of green shades to check with attempts to
+     * maximize the search for active miner cannons (less/equal than R, )
      * @param logRoutePath directory to create a .txt log with times in
      * milliseconds per routes of mining
      * @param numberOfAlertLoops number of alerts loopings to play
@@ -85,11 +86,15 @@ public class MiningFacade {
      */
     public void startMining() {
         CalendarUtils calendar = new CalendarUtils();
-        int minutes = 25;
+        int minutes = 38;
 
         while (!calendar.isServerSave(minutes)) {
-            flowScript();
-            this.playAlertOfEnd();
+            try {
+                flowScript();
+                this.playAlertOfEnd();
+            } catch (EndOfScriptException ex) {
+                break;
+            }
         }
     }
 
@@ -100,18 +105,23 @@ public class MiningFacade {
      */
     public void startMining(int loops) {
         for (int i = 0; i < loops; i++) {
-            flowScript();
-            this.playAlertOfEnd();
+            try {
+                flowScript();
+                this.playAlertOfEnd();
+            } catch (EndOfScriptException ex) {
+                Logger.getLogger(MiningFacade.class.getName()).log(Level.SEVERE, null, ex);
+                break;
+            }
         }
     }
 
-    private void flowScript() {
+    private void flowScript() throws EndOfScriptException {
         this.startRouteTime = System.currentTimeMillis();
         try {
             this.cargoDeposit();
             this.gotoAstBelt();
             if (!this.extractOre()) {
-                return; // Use 'return' insted of 'break'
+                throw new EndOfScriptException("Script 3 returned false, end of mining.");
             }
             this.logRouteTime();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
