@@ -451,7 +451,7 @@ public class ExtractOre implements VerifyRectangle {
         }
     }
 
-    public void verifyShipLife() {
+    private void verifyShipLife() {
         try {
             int row = R1920x1080.getBEINGATTACKED_X1();
             int column = R1920x1080.getBEINGATTACKED_Y1();
