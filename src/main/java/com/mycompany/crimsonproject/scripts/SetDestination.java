@@ -46,7 +46,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
     private final int waitForWarp_MS;
     private final boolean isCheckWarpable;
-    private final Triplet<Integer, Integer, Integer> greaterThan;
+    private final Triplet<Integer, Integer, Integer> whiteRangeRGB;
     // it depends the amount of switch cases
     private int walkThrough = 0;
 
@@ -58,9 +58,9 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
      * belts or home station
      * @param isCheckWarpable true if is ckeckable to identify by pixels or
      * false by wait for warp in milliseconds
-     * @param greaterThan a triplet of white range in RGB shades
+     * @param whiteRangeRGB a triplet of white range in RGB shades
      */
-    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> greaterThan) {
+    public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> whiteRangeRGB) {
         this.destination = chosenDest;
         this.option = option;
         this.waitForWarp_MS = waitForWarp;
@@ -68,7 +68,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
 
         this.rgbr = new RGBrange();
         this.resolution = new R1920x1080();
-        this.greaterThan = greaterThan;
+        this.whiteRangeRGB = whiteRangeRGB;
         this.findPixels = new FindPixels();
         this.clickEvents = new ClickScreenEvents();
         this.segmentedRegions = new SegmentedRegions();
@@ -179,7 +179,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
                 isWarping = this.findPixels.greaterThan(
                         R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
                         R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
-                        this.greaterThan.getValue0(), this.greaterThan.getValue1(), this.greaterThan.getValue2());
+                        this.whiteRangeRGB.getValue0(), this.whiteRangeRGB.getValue1(), this.whiteRangeRGB.getValue2());
             }
 
             if (!isWarping) {
