@@ -29,7 +29,7 @@ public class MiningFacade {
 
     private final List<Pair<Integer, Integer>> astBelt;
     private final Triplet<Integer, Integer, Integer> whiteRGB;
-    private final Triplet<Integer, Integer, Integer> shadeOfGreen;
+    private final Triplet<Integer, Integer, Integer> shadesOfGreen;
 
     private final boolean switchAstbelt;
     private final boolean isCheckWarpable;
@@ -75,7 +75,7 @@ public class MiningFacade {
         this.whiteRGB = whiteRGB;
         this.switchAstbelt = switchAstbelt;
         this.attempts = attempts;
-        this.shadeOfGreen = shadesOfGreen;
+        this.shadesOfGreen = shadesOfGreen;
         this.logRoutePath = logRoutePath;
         this.numberOfAlertLoops = numberOfAlertLoops;
     }
@@ -130,7 +130,7 @@ public class MiningFacade {
     }
 
     private boolean extractOre() throws IOException, TesseractException, AWTException, InterruptedException {
-        return new ExtractOre(setDestination, switchAstbelt, attempts, shadeOfGreen).startScript();
+        return new ExtractOre(setDestination, switchAstbelt, attempts, shadesOfGreen).startScript();
     }
 
     private void playAlertOfEnd() {
