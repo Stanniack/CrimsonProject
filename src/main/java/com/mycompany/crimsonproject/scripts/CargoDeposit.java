@@ -10,17 +10,17 @@ import java.awt.Rectangle;
 import java.io.IOException;
 
 import net.sourceforge.tess4j.TesseractException;
-import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
-import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import org.javatuples.Triplet;
+import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
+import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 
 /**
  *
  * @author Devmachine
  *
  */
-public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
+public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier {
 
     private final R1920x1080 resolution;
     private final RGBrange rgbr;
@@ -68,7 +68,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             case 0 -> {
                 this.hangarButton = this.segmentedRegions.getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
 
-                if (this.verifyRectangleColor(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
+                if (this.RectangleAndColorVerifier(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     this.walkThrough++;
                 } else {
                     this.clickEvents.dragScreen();
@@ -84,7 +84,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
             case 2 -> {
                 Rectangle undockButton = this.segmentedRegions.getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
 
-                if (this.verifyRectangle(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                if (this.RectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                     this.walkThrough++;
                 } else {
                     this.clickEvents.dragScreen();
@@ -99,7 +99,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     }
 
     @Override
-    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean RectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rectangle != null) {
@@ -116,7 +116,7 @@ public class CargoDeposit implements VerifyRectangle, VerifyRectangleColor {
     }
 
     @Override
-    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
+    public boolean RectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {

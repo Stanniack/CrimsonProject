@@ -11,19 +11,19 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
-import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
-import com.mycompany.crimsonproject.interfaces.VerifyRectangleColor;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import java.util.List;
 import org.javatuples.Pair;
 import org.javatuples.Quartet;
 import org.javatuples.Triplet;
+import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
+import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 
 /**
  *
  * @author Devmachine
  */
-public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
+public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier {
 
     private final R1920x1080 resolution;
     private final RGBrange rgbr;
@@ -111,20 +111,20 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             case 1 -> {
                 this.astBeltDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
 
-                if (this.option == MININGBOT && this.verifyRectangle(this.astBeltDest, "ASTEROID BELT", RIGHTCLICK)) {
+                if (this.option == MININGBOT && this.RectangleVerifier(this.astBeltDest, "ASTEROID BELT", RIGHTCLICK)) {
                     this.walkThrough++;
                     descentFlag = false;
 
                 } else {
                     this.homeStationDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
 
-                    if (this.option == HOMESTATION && this.verifyRectangle(this.homeStationDest, "HOME STATION", RIGHTCLICK)) {
+                    if (this.option == HOMESTATION && this.RectangleVerifier(this.homeStationDest, "HOME STATION", RIGHTCLICK)) {
                         this.walkThrough++;
                         descentFlag = false;
                     }
                 }
 
-                /* Close location windows if doesnt find the MININGBOT1 or HOMESTATION1 */
+                /* Close location windows if it doesn't find the MINING BOT lavel or HOME STATION LABEL */
                 if (descentFlag) {
                     this.walkThrough--;
                     this.clickEvents.dragScreen();
@@ -134,14 +134,14 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             case 2 -> {
                 Rectangle warpBlock = this.segmentedRegions.getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
 
-                if (this.option == MININGBOT && this.verifyRectangleColor(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
+                if (this.option == MININGBOT && this.RectangleAndColorVerifier(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     this.walkThrough++;
                     descentFlag = false;
 
                 } else {
                     Rectangle dock = this.segmentedRegions.getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
 
-                    if (this.option == HOMESTATION && this.verifyRectangleColor(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
+                    if (this.option == HOMESTATION && this.RectangleAndColorVerifier(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                         this.walkThrough++;
                         descentFlag = false;
                     }
@@ -157,7 +157,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
             case 3 -> {
                 Rectangle closeButtonWindowLocation = this.segmentedRegions.getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getLocationTabDeadZoneTuple());
 
-                if (this.verifyRectangle(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
+                if (this.RectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
             }
@@ -216,7 +216,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     }
 
     @Override
-    public boolean verifyRectangle(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean RectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
@@ -233,7 +233,7 @@ public class SetDestination implements VerifyRectangle, VerifyRectangleColor {
     }
 
     @Override
-    public boolean verifyRectangleColor(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
+    public boolean RectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {

@@ -2,7 +2,6 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
-import com.mycompany.crimsonproject.interfaces.VerifyRectangle;
 import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
@@ -25,12 +24,13 @@ import java.util.logging.Logger;
 import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
+import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 
 /**
  *
  * @author Devmachine
  */
-public class ExtractOre implements VerifyRectangle {
+public class ExtractOre implements RectangleVerifier {
 
     private Rectangle target;
     private RGBrange rgbr = null;
@@ -171,7 +171,7 @@ public class ExtractOre implements VerifyRectangle {
             case 1 -> {
                 this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple()); // Search for target
 
-                if (this.verifyRectangle(this.target, "TARGET", 0)) {
+                if (this.RectangleVerifier(this.target, "TARGET", 0)) {
                     if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
                         this.walkThrough++; // If there is a lock target, just go to next step
 
@@ -209,7 +209,7 @@ public class ExtractOre implements VerifyRectangle {
             case 3 -> {
                 Rectangle compactMaxCargo = this.segmentedRegions.getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
 
-                if (this.verifyRectangle(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
+                if (this.RectangleVerifier(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
@@ -386,7 +386,7 @@ public class ExtractOre implements VerifyRectangle {
     }
 
     @Override
-    public boolean verifyRectangle(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean RectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         if (rectangle != null) {
             System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
