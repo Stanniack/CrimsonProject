@@ -21,15 +21,16 @@ public class MainSetDestination {
     public static void main(String[] args) {
         final int GOTO_HOMESTATION = 0;
         final int GOTO_MININGBOT = 1;
-        int waitForWarp = 35000;
-        boolean isCheckWarpable = true;
+        int waitForWarp = 40000;
+        boolean isCheckWarpable = false;
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
 
         try {
             Thread.sleep(4000);
             List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(path));
-            new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp, isCheckWarpable, new Triplet<Integer, Integer, Integer>(192, 192, 192)).startScript();
-            //new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION, waitForWarp).startScript();
+            //new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192)).startScript();
+            new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192))
+                    .startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
