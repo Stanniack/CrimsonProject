@@ -98,8 +98,6 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
     private void flowScript() throws InterruptedException, AWTException, IOException, TesseractException {
 
-        boolean descentFlag = true;
-
         switch (this.walkThrough) {
 
             case 0 -> {
@@ -110,22 +108,13 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
             case 1 -> {
                 this.astBeltDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
+                this.homeStationDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
 
-                if (this.option == MININGBOT && this.RectangleVerifier(this.astBeltDest, "ASTEROID BELT", RIGHTCLICK)) {
+                if (this.clickDestinationLabel(false, astBeltDest, MININGBOT, "ASTEROID BELT")
+                        || this.clickDestinationLabel(false, astBeltDest, HOMESTATION, "HOME STATION")) {
                     this.walkThrough++;
-                    descentFlag = false;
 
                 } else {
-                    this.homeStationDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
-
-                    if (this.option == HOMESTATION && this.RectangleVerifier(this.homeStationDest, "HOME STATION", RIGHTCLICK)) {
-                        this.walkThrough++;
-                        descentFlag = false;
-                    }
-                }
-
-                /* Close location windows if it doesn't find the MINING BOT lavel or HOME STATION LABEL */
-                if (descentFlag) {
                     this.walkThrough--;
                     this.clickEvents.dragScreen();
                 }
@@ -133,22 +122,13 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
             case 2 -> {
                 Rectangle warpBlock = this.segmentedRegions.getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
+                Rectangle dock = this.segmentedRegions.getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
 
-                if (this.option == MININGBOT && this.RectangleAndColorVerifier(warpBlock, "WARPBLOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
+                if (this.clickDestinationLabel(true, warpBlock, MININGBOT, "WARP BLOCK")
+                        || this.clickDestinationLabel(true, dock, HOMESTATION, "DOCK")) {
                     this.walkThrough++;
-                    descentFlag = false;
 
                 } else {
-                    Rectangle dock = this.segmentedRegions.getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
-
-                    if (this.option == HOMESTATION && this.RectangleAndColorVerifier(dock, "DOCK", LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
-                        this.walkThrough++;
-                        descentFlag = false;
-                    }
-                }
-
-                /* back to case 1 and find the ASTEROID BELT or HOME STATION to restart finding WITHIN/DOCK */
-                if (descentFlag) {
                     this.walkThrough--;
                     this.clickEvents.dragScreen();
                 }
@@ -164,8 +144,16 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
             case 4 -> {
                 this.checkWarpable();
+                this.walkThrough++;
             }
         }
+    }
+
+    private boolean clickDestinationLabel(boolean isRectColorVerifier, Rectangle label, int option, String itemLabel) throws IOException, TesseractException, InterruptedException, AWTException {
+        return (this.option == option)
+                && (isRectColorVerifier
+                        ? this.RectangleAndColorVerifier(label, itemLabel, LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())
+                        : this.RectangleVerifier(label, itemLabel, RIGHTCLICK));
     }
 
     private void checkWarpable() throws InterruptedException, IOException {
@@ -190,7 +178,6 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         } else {
             Thread.sleep(this.waitForWarp_MS); // Sleep until reach the destination
         }
-        this.walkThrough++;
     }
 
     private Quartet<Integer, Integer, Integer, Integer> getFunnelRectTuple(Rectangle rect) {
@@ -217,7 +204,6 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
     @Override
     public boolean RectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
-
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
@@ -234,7 +220,6 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
     @Override
     public boolean RectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
-
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
