@@ -1,6 +1,7 @@
 .classpath
 .project
 .settings
+.mvnw.cmd
 /target/
 src/main/java/com/mycompany/crimsonproject/MainPC.java
 src/main/java/com/mycompany/crimsonproject/screenshots/screenshot.png

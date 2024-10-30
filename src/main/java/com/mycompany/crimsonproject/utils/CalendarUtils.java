@@ -13,10 +13,11 @@ public class CalendarUtils {
     /**
      *
      * @param minutes average time per mining route cicle
-     * @return false if it is possible continue mining or true if it is server save time
+     * @return false if it is possible continue mining or true if it is server
+     * save time
      */
     public boolean isServerSave(int minutes) {
-        int ssHour = 11, fullHour = 60;
+        int ssHour = 10, fullHour = 60;
         ZoneId zoneId = ZoneId.of("Atlantic/Reykjavik");
         ZonedDateTime nowInReykjavik = ZonedDateTime.now(zoneId);
         LocalTime localTime = nowInReykjavik.toLocalTime();
