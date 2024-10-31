@@ -42,8 +42,6 @@ public class TextLogs {
             }
             file.close();
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,8 +57,6 @@ public class TextLogs {
             content = Integer.parseInt(bf.readLine());
             file.close();
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
         }
