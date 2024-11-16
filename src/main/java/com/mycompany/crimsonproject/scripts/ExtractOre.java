@@ -92,8 +92,8 @@ public class ExtractOre implements RectangleVerifier {
      * belts
      * @param attempts number of tries to check if the miner cannons are
      * activated
-     * @param shadesOfGreen a triplet of greem shades to check with attempts
-     * to maximize the search for active miner cannons
+     * @param shadesOfGreen a triplet of greem shades to check with attempts to
+     * maximize the search for active miner cannons
      */
     public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen) {
         this.setDestination = setDestination;
@@ -209,7 +209,7 @@ public class ExtractOre implements RectangleVerifier {
             case 3 -> {
                 Rectangle compactMaxCargo = this.segmentedRegions.getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
 
-                if (this.RectangleVerifier(compactMaxCargo, "MAXCARGO_VENTURE", 0)) {
+                if (this.RectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
@@ -252,7 +252,6 @@ public class ExtractOre implements RectangleVerifier {
     }
 
     private boolean getAsteroids() throws IOException, TesseractException, AWTException, InterruptedException {
-
         /* Reset Y list coordinates to 1081y */
         List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
