@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject.facades;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.exceptions.EndOfScriptException;
+import com.mycompany.crimsonproject.resolutions.R1920x1080;
 import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.SetDestination;
@@ -28,7 +29,7 @@ public class MiningFacade {
     private final int numberOfAlertLoops;
     private final int attempts;
 
-    private final List<Pair<Integer, Integer>> astBelt;
+    private final String astBeltPath;
     private final Triplet<Integer, Integer, Integer> whiteRGB;
     private final Triplet<Integer, Integer, Integer> shadesOfGreen;
 
@@ -44,8 +45,7 @@ public class MiningFacade {
     /**
      * @param waitCargoDepositMS to wait in milliseconds until start script
      * after cargo deposit
-     * @param astBelt a list of pair containing id of asteroid belt and its
-     * rectangle
+     * @param astBeltPath a path directory where asteroid belt number is to start mining
      * @param waitForWarpMS to wait in milliseconds until reach to destination
      * before start the mining script
      * @param isCheckWarpable true if it is possible to verify by pixels methods
@@ -64,13 +64,13 @@ public class MiningFacade {
      */
     public MiningFacade(
             int waitCargoDepositMS,
-            List<Pair<Integer, Integer>> astBelt, int waitForWarpMS, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> whiteRGB,
+            String astBeltPath, int waitForWarpMS, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> whiteRGB,
             boolean switchAstbelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen,
             String logRoutePath,
             int numberOfAlertLoops) {
 
         this.waitCargoDepositMS = waitCargoDepositMS;
-        this.astBelt = astBelt;
+        this.astBeltPath = astBeltPath;
         this.waitForWarpMS = waitForWarpMS;
         this.isCheckWarpable = isCheckWarpable;
         this.whiteRGB = whiteRGB;
@@ -135,6 +135,7 @@ public class MiningFacade {
     }
 
     private void gotoAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
+        List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(this.astBeltPath));
         this.setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarpMS, isCheckWarpable, whiteRGB);
         this.setDestination.startScript();
     }
