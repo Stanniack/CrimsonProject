@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
-import com.mycompany.crimsonproject.interfaces.NetworkConnectionVerifier;
+import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
 import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
@@ -27,14 +27,12 @@ import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 import com.mycompany.crimsonproject.interfaces.Sleeper;
-import com.mycompany.crimsonproject.utils.CalendarUtils;
-import com.mycompany.crimsonproject.utils.HostTools;
 
 /**
  *
  * @author Devmachine
  */
-public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnectionVerifier {
+public class ExtractOre implements RectangleVerifier, Sleeper {
 
 // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
@@ -53,6 +51,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnection
     private boolean switchAstBelt;
     private boolean isAnotherAst;
     private int walkThrough = 0;
+    private NetworkConnectionHandler connectionHandler;
 
 // Attributes for time tracking and flags
     private int flagSwitchBelt = 0;
@@ -135,6 +134,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnection
         this.keyboardEvents = new KeyboardEvents();
         this.segmentedRegions = new SegmentedRegions();
         this.takeScreenshot = new TakeScreenshot();
+        this.connectionHandler = new NetworkConnectionHandler();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -143,7 +143,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnection
 
         while (this.walkThrough <= STEPS) {
             // Call method
-            if (this.networkVerifier()) {
+            if (this.connectionHandler.networkVerifier()) {
                 this.takeScreenshot.take();
                 this.verifyShipLife();
                 this.flowScript();
@@ -515,20 +515,5 @@ public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnection
         } catch (InterruptedException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public boolean networkVerifier() {
-        HostTools host = new HostTools();
-
-        if (!host.checkHostConnection()) {
-            CalendarUtils cu = new CalendarUtils();
-            TextLogs textLogs = new TextLogs();
-            String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\lostconnection.txt";
-            String message = "Lost connection at " + cu.getDate();
-            textLogs.createLogMessage(path, message);
-            return false;
-        }
-        return true;
     }
 }
