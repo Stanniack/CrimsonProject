@@ -28,6 +28,7 @@ public class MiningFacade {
     private final int waitForWarpMS;
     private final int numberOfAlertLoops;
     private final int returnDronesMS;
+    private final int engageDronesMS;
     private final int attempts;
 
     private final String astBeltPath;
@@ -60,6 +61,7 @@ public class MiningFacade {
      * @param shadesOfGreen a triplet of green shades to check with attempts to
      * maximize the search for active miner cannons (less/equal than R, )
      * @param returnDronesMS time in MS to wait drones returning to drone bay
+     * @param engageDronesMS time in MS to wait for engane drones on the ast belt
      * @param logRoutePath directory to create a .txt log with times in
      * milliseconds per routes of mining
      * @param numberOfAlertLoops number of alerts loopings to play
@@ -67,7 +69,7 @@ public class MiningFacade {
     public MiningFacade(
             int waitCargoDepositMS,
             String astBeltPath, int waitForWarpMS, boolean isCheckWarpable, Triplet<Integer, Integer, Integer> whiteRGB,
-            boolean switchAstbelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS,
+            boolean switchAstbelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS, int engageDronesMS,
             String logRoutePath,
             int numberOfAlertLoops) {
 
@@ -79,6 +81,7 @@ public class MiningFacade {
         this.switchAstbelt = switchAstbelt;
         this.attempts = attempts;
         this.returnDronesMS = returnDronesMS;
+        this.engageDronesMS = engageDronesMS;
         this.shadesOfGreen = shadesOfGreen;
         this.logRoutePath = logRoutePath;
         this.numberOfAlertLoops = numberOfAlertLoops;
@@ -144,7 +147,7 @@ public class MiningFacade {
     }
 
     private boolean extractOre() throws IOException, TesseractException, AWTException, InterruptedException {
-        return new ExtractOre(setDestination, switchAstbelt, attempts, shadesOfGreen, returnDronesMS).startScript();
+        return new ExtractOre(setDestination, switchAstbelt, attempts, shadesOfGreen, returnDronesMS, engageDronesMS).startScript();
     }
 
     private void playAlertOfEnd() {
