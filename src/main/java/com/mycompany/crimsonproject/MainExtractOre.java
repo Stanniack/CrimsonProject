@@ -20,6 +20,7 @@ public class MainExtractOre {
         boolean isSwitchable = true;
         int attempts = 9;
         int returnDroneMS = 10000;
+        int engageDroneMS = 5000;
         final int GOTO_HOMESTATION = 0;
         int waitForWarp = 35000;
         boolean isCheckWarpable = true;
@@ -28,7 +29,7 @@ public class MainExtractOre {
         try {
             Thread.sleep(4000);
             new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192)).startScript();
-            new ExtractOre(isSwitchable, attempts, tonsOfGreen, returnDroneMS)
+            new ExtractOre(isSwitchable, attempts, tonsOfGreen, returnDroneMS, engageDroneMS)
                     .startScript();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(CrimsonProject.class.getName()).log(Level.SEVERE, null, ex);
