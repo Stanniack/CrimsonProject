@@ -47,10 +47,11 @@ public class ExtractOre implements RectangleVerifier {
 
     private int walkThrough = 0;
 
-    private long flagSwitchBelt = 0;
+    private int flagSwitchBelt = 0;
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
+    private int returnDronesMS = 0;
     private long flagLockTargetMS = 0;
     private long timeStartLockTarget = 0;
     private long timeStartSetAnotherAst = 0;
@@ -94,11 +95,13 @@ public class ExtractOre implements RectangleVerifier {
      * activated
      * @param shadesOfGreen a triplet of greem shades to check with attempts to
      * maximize the search for active miner cannons
+     * @param returnDronesMS time in MS to wait drones returning to drone bay
      */
-    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen) {
+    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS) {
         this.setDestination = setDestination;
         this.switchAstBelt = switchAstBelt;
         this.attemps = attempts;
+        this.returnDronesMS = returnDronesMS;
         this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
@@ -111,9 +114,10 @@ public class ExtractOre implements RectangleVerifier {
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen) {
+    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS) {
         this.switchAstBelt = isSwitchable;
         this.attemps = attempts;
+        this.returnDronesMS = returnDroneMS;
         this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
@@ -242,7 +246,7 @@ public class ExtractOre implements RectangleVerifier {
             }
 
             case 5 -> {
-                this.actModules.returnDrones(8000);
+                this.actModules.returnDrones(this.returnDronesMS);
                 this.setDestination.setParameters(this.resolution.getHomeStationList(), GOTO_HOMESTATION);
                 this.setDestination.startScript();
                 System.out.println("End of mining and go docking!\n");
