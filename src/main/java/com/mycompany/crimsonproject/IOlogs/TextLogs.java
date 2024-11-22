@@ -2,7 +2,6 @@ package com.mycompany.crimsonproject.IOlogs;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -63,9 +62,17 @@ public class TextLogs {
         return content;
     }
 
-    public void writeLine(String path, int beltNum) {
-        String message = String.valueOf(beltNum);
+    public void writeLine(String path, int num) {
+        String message = String.valueOf(num);
 
+        try {
+            Files.write(Paths.get(path), message.getBytes(), StandardOpenOption.CREATE);
+        } catch (IOException ex) {
+            Logger.getLogger(TextLogs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void createLogMessage(String path, String message) {
         try {
             Files.write(Paths.get(path), message.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException ex) {
