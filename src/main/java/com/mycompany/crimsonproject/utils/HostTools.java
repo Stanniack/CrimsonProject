@@ -15,7 +15,6 @@ public class HostTools {
         } catch (UnknownHostException ex) {
             return false;
         }
-
         return true;
     }
 }
