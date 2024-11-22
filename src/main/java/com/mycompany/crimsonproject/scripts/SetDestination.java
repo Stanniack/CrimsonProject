@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
+import com.mycompany.crimsonproject.handlers.SleeperHandler;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
@@ -19,15 +20,12 @@ import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
-import com.mycompany.crimsonproject.interfaces.Sleeper;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Devmachine
  */
-public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier, Sleeper {
+public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier {
 
 // Attributes related to graphical interface and screen manipulation
     private final R1920x1080 resolution;
@@ -37,6 +35,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private final SegmentedRegions segmentedRegions;
     private final TakeScreenshot takeScreenshot;
     private final KeyboardEvents keyboardEvents;
+    private final SleeperHandler sleeper;
 
 // Attributes for destination and movement management
     private int option;
@@ -86,6 +85,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         segmentedRegions = new SegmentedRegions();
         takeScreenshot = new TakeScreenshot();
         keyboardEvents = new KeyboardEvents();
+        sleeper = new SleeperHandler();
     }
 
     protected void setParameters(List<Pair<Integer, Integer>> chosenDest, int option) {
@@ -175,7 +175,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         if (isCheckWarpable) {
             Long flagTimeWarp = System.currentTimeMillis();
             boolean isWarping = true;
-            sleep(5000);
+            sleeper.sleep(5000);
 
             while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (waitForWarp_MS * 2)) {
                 takeScreenshot.take2();
@@ -188,10 +188,10 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             if (!isWarping) {
                 takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
             }
-            sleep(option == HOMESTATION ? 12000 : 1000);
+            sleeper.sleep(option == HOMESTATION ? 12000 : 1000);
 
         } else {
-            sleep(waitForWarp_MS); // Sleep until reach the destination
+            sleeper.sleep(waitForWarp_MS); // Sleep until reach the destination
         }
     }
 
@@ -246,14 +246,5 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void sleep(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SetDestination.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

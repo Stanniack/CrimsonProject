@@ -3,6 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
+import com.mycompany.crimsonproject.handlers.SleeperHandler;
 import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
@@ -26,13 +27,12 @@ import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
-import com.mycompany.crimsonproject.interfaces.Sleeper;
 
 /**
  *
  * @author Devmachine
  */
-public class ExtractOre implements RectangleVerifier, Sleeper {
+public class ExtractOre implements RectangleVerifier {
 
 // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
@@ -44,6 +44,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
     private KeyboardEvents keyboardEvents;
     private SegmentedRegions segmentedRegions;
     private TakeScreenshot takeScreenshot;
+    private SleeperHandler sleeper;
 
 // Attributes for configurations and states
     private SetDestination setDestination;
@@ -304,7 +305,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
                 if (switchAstBelt) {
                     System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
                     actModules.returnDrones(0);
-                    sleep(WAITFORSWITCHASTBELT_MS);
+                    sleeper.sleep(WAITFORSWITCHASTBELT_MS);
                     switchAstBelt();
 
                 } else {
@@ -354,12 +355,12 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
                         shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
                     keyboardEvents.clickKey(cannons.get(i));
-                    sleep(CANNON_SLEEP);
+                    sleeper.sleep(CANNON_SLEEP);
                     keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("The cannon was active. Press 2x cannon " + i);
 
                 } else {
-                    sleep(CANNON_SLEEP); // Wait if cannon was canceled
+                    sleeper.sleep(CANNON_SLEEP); // Wait if cannon was canceled
                     keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("Just press 1x cannon " + i);
                 }
@@ -506,14 +507,5 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void sleep(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

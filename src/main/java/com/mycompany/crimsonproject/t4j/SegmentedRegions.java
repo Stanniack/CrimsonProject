@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject.t4j;
 
-import com.mycompany.crimsonproject.interfaces.Sleeper;
+import com.mycompany.crimsonproject.handlers.SleeperHandler;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.resolutions.R1920x1080;
@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
 import net.sourceforge.tess4j.Tesseract;
@@ -26,17 +24,19 @@ import org.javatuples.Quartet;
  *
  * @author Devmachine
  */
-public class SegmentedRegions implements Sleeper {
+public class SegmentedRegions {
 
     private final Tesseract instance;
     private BufferedImage bf;
     private File imageFile;
     private final RGBrange rgbr;
     private final R1920x1080 fhd;
+    private SleeperHandler sleeper;
 
     public SegmentedRegions() {
         rgbr = new RGBrange();
         fhd = new R1920x1080();
+        sleeper = new SleeperHandler();
         instance = new Tesseract();
         instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
         instance.setLanguage("eng");
@@ -49,9 +49,9 @@ public class SegmentedRegions implements Sleeper {
 
         imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         bf = ImageIO.read(imageFile);
-        instance.getSegmentedRegions(bf, level);
+        List<Rectangle> segmentedRegions = instance.getSegmentedRegions(bf, level);
 
-        return instance.getSegmentedRegions(bf, level);
+        return segmentedRegions;
     }
 
     /**
@@ -73,7 +73,7 @@ public class SegmentedRegions implements Sleeper {
             result = getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            sleep(20000);
+            sleeper.sleep(20000);
             new TakeScreenshot().take();
             result = getSegmentedFile();
         }
@@ -108,7 +108,7 @@ public class SegmentedRegions implements Sleeper {
             result = getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            sleep(20000);
+            sleeper.sleep(20000);
             new TakeScreenshot().take();
             result = getSegmentedFile();
         }
@@ -190,14 +190,5 @@ public class SegmentedRegions implements Sleeper {
         }
 
         return hm;
-    }
-
-    @Override
-    public void sleep(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

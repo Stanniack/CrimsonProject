@@ -1,6 +1,6 @@
 package com.mycompany.crimsonproject.robot;
 
-import com.mycompany.crimsonproject.interfaces.Sleeper;
+import com.mycompany.crimsonproject.handlers.SleeperHandler;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author Devmachine
  */
-abstract class RobotEvent implements Sleeper {
+abstract class RobotEvent {
 
     protected static final int SLEEP_MS = 100;
     protected static final int SLEEP_MS2 = 150;
@@ -32,13 +32,10 @@ abstract class RobotEvent implements Sleeper {
         }
     }
 
-    @Override
     public void sleep(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RobotEvent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SleeperHandler sleeper = new SleeperHandler();
+        sleeper.sleep(milliseconds);
+
     }
 
 }
