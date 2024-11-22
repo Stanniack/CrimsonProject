@@ -1,14 +1,17 @@
 package com.mycompany.crimsonproject.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 
 /**
  *
  * @author Devmachine
  */
 public class CalendarUtils {
+    private Calendar calendar;
 
     /**
      *
@@ -23,5 +26,11 @@ public class CalendarUtils {
         LocalTime localTime = nowInReykjavik.toLocalTime();
 
         return (localTime.getHour() == ssHour && (fullHour - localTime.getMinute()) < minutes);
+    }
+
+    public String getDate() {
+        this.calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(calendar.getTime());
     }
 }
