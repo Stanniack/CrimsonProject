@@ -113,6 +113,9 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         initializeSharedAttributes(switchAstBelt, attempts, shadesOfGreen, returnDronesMS, waitEngageMS);
     }
 
+    /**
+     * Initialize all attributes required
+     */
     private void initializeSharedAttributes(boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen,
             int returnDronesMS, int waitEngageMS) {
         this.switchAstBelt = switchAstBelt;
@@ -129,13 +132,6 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         this.keyboardEvents = new KeyboardEvents();
         this.segmentedRegions = new SegmentedRegions();
         this.takeScreenshot = new TakeScreenshot();
-    }
-
-    /**
-     * Initialize all attributes required
-     */
-    private void initAttributes(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS, int waitEngageMS) {
-
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
