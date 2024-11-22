@@ -13,6 +13,7 @@ public class MainFacade {
         int waitCargoDepositMS = 12000;
         int waitForWarpMS = 65000;
         int attempts = 9;
+        int returnDroneMS = 10000;
 
         String astBeltPath = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\switchbelt.txt";
         String logRoutePath = "C:\\Users\\Flavio\\Desktop\\spr.txt";
@@ -28,7 +29,7 @@ public class MainFacade {
         Thread.sleep(4000);
         new MiningFacade(
                 waitCargoDepositMS,
-                astBeltPath, waitForWarpMS, isCheckWarpable, whiteRGB, switchAstBelt, attempts, shadesOfGreen,
+                astBeltPath, waitForWarpMS, isCheckWarpable, whiteRGB, switchAstBelt, attempts, shadesOfGreen, returnDroneMS,
                 logRoutePath,
                 numberOfAlertLoops)
                 .startMining();
