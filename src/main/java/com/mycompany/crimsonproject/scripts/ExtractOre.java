@@ -2,6 +2,7 @@ package com.mycompany.crimsonproject.scripts;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
+import com.mycompany.crimsonproject.interfaces.NetworkConnectionVerifier;
 import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
@@ -26,12 +27,14 @@ import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 import com.mycompany.crimsonproject.interfaces.Sleeper;
+import com.mycompany.crimsonproject.utils.CalendarUtils;
+import com.mycompany.crimsonproject.utils.HostTools;
 
 /**
  *
  * @author Devmachine
  */
-public class ExtractOre implements RectangleVerifier, Sleeper {
+public class ExtractOre implements RectangleVerifier, Sleeper, NetworkConnectionVerifier {
 
 // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
@@ -139,24 +142,19 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         this.timeStartFilled = System.currentTimeMillis();
 
         while (this.walkThrough <= STEPS) {
-            // Todo connection lost 
-            // TODO
-
-            // Call method priority MAX
-            this.takeScreenshot.take();
-
-            //Call method
-            this.verifyShipLife();
-
             // Call method
-            this.flowScript();
+            if (this.networkVerifier()) {
+                this.takeScreenshot.take();
+                this.verifyShipLife();
+                this.flowScript();
+                this.verifyInvalidTarget(this.resolution.getInvalidTargetList());
 
-            // Call method
-            this.verifyInvalidTarget(this.resolution.getInvalidTargetList());
-
-            //Call method
-            if (this.walkThrough > 2 && this.walkThrough < STEPS) {
-                this.checkCannonsAction();
+                if (this.walkThrough > 2 && this.walkThrough < STEPS) {
+                    this.checkCannonsAction();
+                }
+            } else {
+                this.isRunnable = false;
+                break;
             }
         }
         return isRunnable;
@@ -373,7 +371,6 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
     }
 
     private boolean isCannonActivated(int i, int attempt, List<Integer> coordinatesX, int y, int width, int height, int red, int green, int blue) {
-
         boolean action;
 
         for (int j = 0; j < attempt; j++) {
@@ -387,16 +384,6 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
             } catch (IOException ex) {
                 Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) {
-
-        if (rectangle != null) {
-            System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
-            return true;
         }
         return false;
     }
@@ -502,7 +489,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
                     System.out.println("Last asteroid belt farmed, returning to HOME STATION.");
                     new TextLogs().writeLine(path, 1); // reset asteroid belts
                     this.walkThrough = 5;
-                    isRunnable = false; // exit the script
+                    this.isRunnable = false; // exit the script
                 }
             }
 
@@ -512,11 +499,36 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
     }
 
     @Override
+    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) {
+
+        if (rectangle != null) {
+            System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void sleep(long milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public boolean networkVerifier() {
+        HostTools host = new HostTools();
+
+        if (!host.checkHostConnection()) {
+            CalendarUtils cu = new CalendarUtils();
+            TextLogs textLogs = new TextLogs();
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\lostconnection.txt";
+            String message = "Lost connection at " + cu.getDate();
+            textLogs.createLogMessage(path, message);
+            return false;
+        }
+        return true;
     }
 }

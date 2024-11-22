@@ -1,6 +1,8 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
+import com.mycompany.crimsonproject.interfaces.NetworkConnectionVerifier;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -14,13 +16,15 @@ import com.mycompany.crimsonproject.utils.RGBrange;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
+import com.mycompany.crimsonproject.utils.CalendarUtils;
+import com.mycompany.crimsonproject.utils.HostTools;
 
 /**
  *
  * @author Devmachine
  *
  */
-public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier {
+public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier, NetworkConnectionVerifier {
 
 // Attributes related to graphical interface and screen manipulation
     private final R1920x1080 resolution;
@@ -38,6 +42,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private Rectangle hangarButton;
 
 // switch-case behaviour attributes
+    private boolean isRunnable = true;
     private int walkThrough = 0;
     private static final int STEPS = 2;
 
@@ -51,19 +56,20 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public void startScript() throws InterruptedException, IOException, AWTException, TesseractException {
+    public boolean startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
         while (this.walkThrough <= STEPS) {
-            // Call method
-            // Todo connection lost
+            // If there is net, continue script
+            if (this.networkVerifier()) {
+                this.takeScreenshot.take();
+                this.flowScript();
 
-            // Call method
-            this.takeScreenshot.take();
-
-            // Call method
-            this.flowScript();
+            } else {
+                this.isRunnable = false;
+                break;
+            }
         }
-
+        return isRunnable;
     }
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
@@ -131,4 +137,18 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         return false;
     }
 
+    @Override
+    public boolean networkVerifier() {
+        HostTools host = new HostTools();
+
+        if (!host.checkHostConnection()) {
+            CalendarUtils cu = new CalendarUtils();
+            TextLogs textLogs = new TextLogs();
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\IOlogs\\logsfiles\\lostconnection.txt";
+            String message = "Lost connection at " + cu.getDate();
+            textLogs.createLogMessage(path, message);
+            return false;
+        }
+        return true;
+    }
 }
