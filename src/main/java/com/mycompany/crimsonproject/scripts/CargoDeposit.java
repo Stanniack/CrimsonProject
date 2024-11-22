@@ -68,7 +68,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 0 -> {
                 this.hangarButton = this.segmentedRegions.getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
 
-                if (this.RectangleAndColorVerifier(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
+                if (this.rectangleAndColorVerifier(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
                     this.walkThrough++;
                 } else {
                     this.clickEvents.dragScreen();
@@ -84,7 +84,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 2 -> {
                 Rectangle undockButton = this.segmentedRegions.getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
 
-                if (this.RectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                if (this.rectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
                     this.walkThrough++;
                 } else {
                     this.clickEvents.dragScreen();
@@ -99,7 +99,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     }
 
     @Override
-    public boolean RectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rectangle != null) {
@@ -116,7 +116,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     }
 
     @Override
-    public boolean RectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
+    public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {

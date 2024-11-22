@@ -175,7 +175,7 @@ public class ExtractOre implements RectangleVerifier {
             case 1 -> {
                 this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple()); // Search for target
 
-                if (this.RectangleVerifier(this.target, "TARGET", 0)) {
+                if (this.rectangleVerifier(this.target, "TARGET", 0)) {
                     if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
                         this.walkThrough++; // If there is a lock target, just go to next step
 
@@ -213,7 +213,7 @@ public class ExtractOre implements RectangleVerifier {
             case 3 -> {
                 Rectangle compactMaxCargo = this.segmentedRegions.getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
 
-                if (this.RectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
+                if (this.rectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
                     this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
 
                 } else {
@@ -389,7 +389,7 @@ public class ExtractOre implements RectangleVerifier {
     }
 
     @Override
-    public boolean RectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
 
         if (rectangle != null) {
             System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);

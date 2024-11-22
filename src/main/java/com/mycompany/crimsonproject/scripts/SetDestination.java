@@ -137,7 +137,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             case 3 -> {
                 Rectangle closeButtonWindowLocation = this.segmentedRegions.getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getLocationTabDeadZoneTuple());
 
-                if (this.RectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
+                if (this.rectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     this.walkThrough++;
                 }
             }
@@ -152,8 +152,8 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private boolean clickDestinationLabel(boolean isRectColorVerifier, Rectangle label, int option, String itemLabel) throws IOException, TesseractException, InterruptedException, AWTException {
         return (this.option == option)
                 && (isRectColorVerifier
-                        ? this.RectangleAndColorVerifier(label, itemLabel, LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())
-                        : this.RectangleVerifier(label, itemLabel, RIGHTCLICK));
+                        ? this.rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())
+                        : this.rectangleVerifier(label, itemLabel, RIGHTCLICK));
     }
 
     private void checkWarpable() throws InterruptedException, IOException {
@@ -203,7 +203,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     }
 
     @Override
-    public boolean RectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean rectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
@@ -219,7 +219,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     }
 
     @Override
-    public boolean RectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
+    public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
