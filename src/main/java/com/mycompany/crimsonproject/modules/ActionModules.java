@@ -12,10 +12,11 @@ import java.util.logging.Logger;
  * @author Devmachine
  */
 public class ActionModules {
+
     private final KeyboardEvents keyBoardEvents;
 
     public ActionModules() {
-        this.keyBoardEvents = new KeyboardEvents(); 
+        this.keyBoardEvents = new KeyboardEvents();
     }
 
     public void propulsion() {
@@ -35,6 +36,14 @@ public class ActionModules {
     }
 
     public void engageDrones() {
+        try {
+            this.keyBoardEvents.clickKey(KeyEvent.VK_F);
+        } catch (AWTException | InterruptedException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void engageDrones(int waitMS) {
         try {
             this.keyBoardEvents.clickKey(KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
