@@ -136,6 +136,7 @@ public class ExtractOre implements RectangleVerifier {
         segmentedRegions = new SegmentedRegions();
         takeScreenshot = new TakeScreenshot();
         connectionHandler = new NetworkConnectionHandler();
+        sleeper = new SleeperHandler();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {

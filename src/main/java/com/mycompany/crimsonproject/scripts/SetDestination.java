@@ -85,6 +85,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         segmentedRegions = new SegmentedRegions();
         takeScreenshot = new TakeScreenshot();
         keyboardEvents = new KeyboardEvents();
+        connectionHandler = new NetworkConnectionHandler();
         sleeper = new SleeperHandler();
     }
 
