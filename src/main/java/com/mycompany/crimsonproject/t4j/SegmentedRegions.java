@@ -35,23 +35,23 @@ public class SegmentedRegions implements Sleeper {
     private final R1920x1080 fhd;
 
     public SegmentedRegions() {
-        this.rgbr = new RGBrange();
-        this.fhd = new R1920x1080();
-        this.instance = new Tesseract();
-        this.instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
-        this.instance.setLanguage("eng");
-        this.instance.setVariable("user_defined_dpi", "300");
+        rgbr = new RGBrange();
+        fhd = new R1920x1080();
+        instance = new Tesseract();
+        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
+        instance.setLanguage("eng");
+        instance.setVariable("user_defined_dpi", "300");
     }
 
     private List<Rectangle> getSegmentedFile() throws IOException, TesseractException {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        this.bf = ImageIO.read(this.imageFile);
-        this.instance.getSegmentedRegions(this.bf, level);
+        imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        bf = ImageIO.read(imageFile);
+        instance.getSegmentedRegions(bf, level);
 
-        return this.instance.getSegmentedRegions(this.bf, level);
+        return instance.getSegmentedRegions(bf, level);
     }
 
     /**
@@ -70,12 +70,12 @@ public class SegmentedRegions implements Sleeper {
         List<Rectangle> result;
 
         try {
-            result = this.getSegmentedFile();
+            result = getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            this.sleep(20000);
+            sleep(20000);
             new TakeScreenshot().take();
-            result = this.getSegmentedFile();
+            result = getSegmentedFile();
         }
 
         for (Rectangle rect : result) {
@@ -105,12 +105,12 @@ public class SegmentedRegions implements Sleeper {
         List<Rectangle> result;
 
         try {
-            result = this.getSegmentedFile();
+            result = getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            this.sleep(20000);
+            sleep(20000);
             new TakeScreenshot().take();
-            result = this.getSegmentedFile();
+            result = getSegmentedFile();
         }
 
         for (Rectangle rect : result) {
@@ -138,13 +138,13 @@ public class SegmentedRegions implements Sleeper {
      */
     public HashMap<String, Rectangle> getAllOres(int x, int x2_w, int y, int y2_h) throws IOException, TesseractException {
 
-        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
-        this.bf = ImageIO.read(this.imageFile);
+        imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        bf = ImageIO.read(imageFile);
 
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        List<Rectangle> result = this.instance.getSegmentedRegions(this.bf, level);
+        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
 
         /* Sort from lower to bigger Y coordinate */
         Collections.sort(result, new RectComparatorByY());
@@ -157,31 +157,31 @@ public class SegmentedRegions implements Sleeper {
             if ((result.get(i).x >= x && result.get(i).x <= x2_w)
                     && (result.get(i).y >= y && result.get(i).y <= y2_h)) {
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getCondensedScorditeList()) {
+                for (Pair<Integer, Integer> asteroid : fhd.getCondensedScorditeList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P0:CS - i: " + i, result.get(i));
                     }
                 }
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getScorditeList()) {
+                for (Pair<Integer, Integer> asteroid : fhd.getScorditeList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P1:S - i: " + i, result.get(i));
                     }
                 }
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getDenseVeldsparList()) {
+                for (Pair<Integer, Integer> asteroid : fhd.getDenseVeldsparList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P2:DV - i: " + i, result.get(i));
                     }
                 }
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getConcentratedVeldsparList()) {
+                for (Pair<Integer, Integer> asteroid : fhd.getConcentratedVeldsparList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P3:CV - i: " + i, result.get(i));
                     }
                 }
 
-                for (Pair<Integer, Integer> asteroid : this.fhd.getVeldsparList()) {
+                for (Pair<Integer, Integer> asteroid : fhd.getVeldsparList()) {
                     if (result.get(i).width == asteroid.getValue0() && result.get(i).height == asteroid.getValue1()) {
                         hm.put("P4:V - i: " + i, result.get(i));
                     }

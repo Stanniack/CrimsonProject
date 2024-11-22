@@ -45,26 +45,26 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private NetworkConnectionHandler connectionHandler;
 
     public CargoDeposit() {
-        this.resolution = new R1920x1080();
-        this.rgbr = new RGBrange();
+        resolution = new R1920x1080();
+        rgbr = new RGBrange();
 
-        this.findPixels = new FindPixels();
-        this.clickEvents = new ClickScreenEvents();
-        this.segmentedRegions = new SegmentedRegions();
-        this.takeScreenshot = new TakeScreenshot();
-        this.connectionHandler = new NetworkConnectionHandler();
+        findPixels = new FindPixels();
+        clickEvents = new ClickScreenEvents();
+        segmentedRegions = new SegmentedRegions();
+        takeScreenshot = new TakeScreenshot();
+        connectionHandler = new NetworkConnectionHandler();
     }
 
     public boolean startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
-        while (this.walkThrough <= STEPS) {
+        while (walkThrough <= STEPS) {
             // If there is net, continue script
-            if (this.connectionHandler.networkVerifier()) {
-                this.takeScreenshot.take();
-                this.flowScript();
+            if (connectionHandler.networkVerifier()) {
+                takeScreenshot.take();
+                flowScript();
 
             } else {
-                this.isRunnable = false;
+                isRunnable = false;
                 break;
             }
         }
@@ -73,31 +73,31 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
 
     private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
 
-        switch (this.walkThrough) {
+        switch (walkThrough) {
 
             case 0 -> {
-                this.hangarButton = this.segmentedRegions.getRectangle(this.resolution.getHangarList(), this.resolution.getInventoryDeadzoneTuple());
+                hangarButton = segmentedRegions.getRectangle(resolution.getHangarList(), resolution.getInventoryDeadzoneTuple());
 
-                if (this.rectangleAndColorVerifier(hangarButton, "HANGAR", 0, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())) {
-                    this.walkThrough++;
+                if (rectangleAndColorVerifier(hangarButton, "HANGAR", 0, rgbr.getMinDestination(), rgbr.getMaxDestination())) {
+                    walkThrough++;
                 } else {
-                    this.clickEvents.dragScreen();
+                    clickEvents.dragScreen();
                 }
             }
 
             case 1 -> {
-                this.dragItens();
-                this.walkThrough++;
-                this.hangarButton = null;
+                dragItens();
+                walkThrough++;
+                hangarButton = null;
             }
 
             case 2 -> {
-                Rectangle undockButton = this.segmentedRegions.getRectangle(this.resolution.getUndockButtonList(), this.resolution.getUndockDeadZoneTuple());
+                Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockDeadZoneTuple());
 
-                if (this.rectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
-                    this.walkThrough++;
+                if (rectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                    walkThrough++;
                 } else {
-                    this.clickEvents.dragScreen();
+                    clickEvents.dragScreen();
                 }
             }
 
@@ -105,7 +105,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        this.clickEvents.dragItemsToInventory(this.resolution.getDragItensDeadZoneList(), this.hangarButton);
+        clickEvents.dragItemsToInventory(resolution.getDragItensDeadZoneList(), hangarButton);
     }
 
     @Override
@@ -116,9 +116,9 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             System.out.printf("Rect found (%s): Width: %d and Height: %d\n\n", itemName, rectangle.width, rectangle.height);
 
             if (chosenClick == LEFTCLICK) {
-                this.clickEvents.leftClickCenterButton(rectangle);
+                clickEvents.leftClickCenterButton(rectangle);
             } else {
-                this.clickEvents.rightClickCenterButton(rectangle);
+                clickEvents.rightClickCenterButton(rectangle);
             }
             return true;
         }
@@ -129,7 +129,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
 
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
+        if (rect != null && findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
             return true;
         }

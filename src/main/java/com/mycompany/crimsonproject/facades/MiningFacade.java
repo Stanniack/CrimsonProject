@@ -99,7 +99,7 @@ public class MiningFacade {
         while (!calendar.isServerSave(minutes)) {
             try {
                 flowScript();
-                this.playAlertOfEnd();
+                playAlertOfEnd();
             } catch (EndOfScriptException ex) {
                 break;
             }
@@ -115,7 +115,7 @@ public class MiningFacade {
         for (int i = 0; i < loops; i++) {
             try {
                 flowScript();
-                this.playAlertOfEnd();
+                playAlertOfEnd();
             } catch (EndOfScriptException ex) {
                 Logger.getLogger(MiningFacade.class.getName()).log(Level.SEVERE, null, ex);
                 break;
@@ -124,12 +124,12 @@ public class MiningFacade {
     }
 
     private void flowScript() throws EndOfScriptException {
-        this.startRouteTime = System.currentTimeMillis();
+        startRouteTime = System.currentTimeMillis();
         try {
-            if (!this.cargoDeposit() || !this.gotoAstBelt() || !this.extractOre()) {
+            if (!cargoDeposit() || !gotoAstBelt() || !extractOre()) {
                 throw new EndOfScriptException("An error occurred, end of mining.");
             }
-            this.logRouteTime();
+            logRouteTime();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
             Logger.getLogger(MiningFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,9 +141,9 @@ public class MiningFacade {
 
     private boolean gotoAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
         Thread.sleep(waitCargoDepositMS); // wait ship left the station
-        List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(this.astBeltPath));
-        this.setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarpMS, isCheckWarpable, whiteRGB);
-        return this.setDestination.startScript();
+        List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(astBeltPath));
+        setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarpMS, isCheckWarpable, whiteRGB);
+        return setDestination.startScript();
     }
 
     private boolean extractOre() throws IOException, TesseractException, AWTException, InterruptedException {

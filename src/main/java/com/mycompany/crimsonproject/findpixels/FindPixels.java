@@ -18,21 +18,20 @@ public class FindPixels {
     private Color color;
 
     public FindPixels() {
-        this.imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
+        imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
     }
 
     public int pixelContainsColorByRange(File imageFile, int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
-
-        this.bf = ImageIO.read(imageFile);
+        bf = ImageIO.read(imageFile);
         int area = 0;
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
-                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
-                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
+                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
+                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
+                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
                     area++;
                 }
             }
@@ -41,17 +40,15 @@ public class FindPixels {
     }
 
     public boolean findByRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
-
-        this.bf = ImageIO.read(this.imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
-                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
-                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
-
+                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
+                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
+                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
                     return true;
                 }
             }
@@ -60,18 +57,17 @@ public class FindPixels {
     }
 
     public boolean findByRangeColor(File imageFile, int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
-
-        this.bf = ImageIO.read(imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if ((this.color.getRed() >= beginRange.getValue0() && this.color.getRed() <= endRange.getValue0())
-                        && (this.color.getGreen() >= beginRange.getValue1() && this.color.getGreen() <= endRange.getValue1())
-                        && (this.color.getBlue() >= beginRange.getValue2() && this.color.getBlue() <= endRange.getValue2())) {
+                if ((color.getRed() >= beginRange.getValue0() && color.getRed() <= endRange.getValue0())
+                        && (color.getGreen() >= beginRange.getValue1() && color.getGreen() <= endRange.getValue1())
+                        && (color.getBlue() >= beginRange.getValue2() && color.getBlue() <= endRange.getValue2())) {
 
-                    System.out.println(this.color.toString());
+                    System.out.println(color.toString());
                     return true;
                 }
             }
@@ -80,14 +76,13 @@ public class FindPixels {
     }
 
     public boolean findByColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
-
-        this.bf = ImageIO.read(this.imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if (this.color.getRed() == red && this.color.getGreen() == green && this.color.getBlue() == blue) {
+                if (color.getRed() == red && color.getGreen() == green && color.getBlue() == blue) {
                     return true;
                 }
             }
@@ -96,14 +91,13 @@ public class FindPixels {
     }
 
     public boolean greaterThan(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
-
-        this.bf = ImageIO.read(this.imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if (this.color.getRed() >= red && this.color.getGreen() >= green && this.color.getBlue() >= blue) {
+                if (color.getRed() >= red && color.getGreen() >= green && color.getBlue() >= blue) {
                     return true;
                 }
             }
@@ -112,14 +106,13 @@ public class FindPixels {
     }
 
     public boolean findByGreenColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
-
-        this.bf = ImageIO.read(this.imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if (this.color.getRed() <= red && this.color.getGreen() >= green && this.color.getBlue() <= blue) {
+                if (color.getRed() <= red && color.getGreen() >= green && color.getBlue() <= blue) {
                     return true;
                 }
             }
@@ -128,20 +121,18 @@ public class FindPixels {
     }
 
     public boolean findByGreenColor(File imageFile, int row, int column, int width, int height, int red, int green, int blue) throws IOException {
-
-        this.bf = ImageIO.read(imageFile);
+        bf = ImageIO.read(imageFile);
 
         for (int r = row; r < (row + width); r++) {
             for (int c = column; c < (column + height); c++) {
-                this.color = new Color(this.bf.getRGB(r, c));
+                color = new Color(bf.getRGB(r, c));
 
-                if (this.color.getRed() <= red && this.color.getGreen() >= green && this.color.getBlue() <= blue) {
-                    System.out.println(this.color.toString());
+                if (color.getRed() <= red && color.getGreen() >= green && color.getBlue() <= blue) {
+                    System.out.println(color.toString());
                     return true;
                 }
             }
         }
         return false;
     }
-
 }

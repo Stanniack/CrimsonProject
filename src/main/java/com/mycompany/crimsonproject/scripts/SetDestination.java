@@ -73,37 +73,37 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
      */
     public SetDestination(List<Pair<Integer, Integer>> chosenDest, int option, int waitForWarp, boolean isCheckWarpable,
             Triplet<Integer, Integer, Integer> whiteRangeRGB) {
-        this.destination = chosenDest;
+        destination = chosenDest;
         this.option = option;
-        this.waitForWarp_MS = waitForWarp;
+        waitForWarp_MS = waitForWarp;
         this.isCheckWarpable = isCheckWarpable;
 
-        this.rgbr = new RGBrange();
-        this.resolution = new R1920x1080();
+        rgbr = new RGBrange();
+        resolution = new R1920x1080();
         this.whiteRangeRGB = whiteRangeRGB;
-        this.findPixels = new FindPixels();
-        this.clickEvents = new ClickScreenEvents();
-        this.segmentedRegions = new SegmentedRegions();
-        this.takeScreenshot = new TakeScreenshot();
-        this.keyboardEvents = new KeyboardEvents();
+        findPixels = new FindPixels();
+        clickEvents = new ClickScreenEvents();
+        segmentedRegions = new SegmentedRegions();
+        takeScreenshot = new TakeScreenshot();
+        keyboardEvents = new KeyboardEvents();
     }
 
     protected void setParameters(List<Pair<Integer, Integer>> chosenDest, int option) {
-        this.destination = chosenDest;
+        destination = chosenDest;
         this.option = option;
-        this.walkThrough = 0;
+        walkThrough = 0;
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException {
 
-        while (this.walkThrough <= STEPS) {
+        while (walkThrough <= STEPS) {
             // If there is net, continue script
-            if (this.connectionHandler.networkVerifier()) {
-                this.takeScreenshot.take();
-                this.flowScript();
+            if (connectionHandler.networkVerifier()) {
+                takeScreenshot.take();
+                flowScript();
 
             } else {
-                this.isRunnable = false;
+                isRunnable = false;
                 break;
             }
         }
@@ -112,53 +112,53 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
     private void flowScript() throws AWTException, IOException, TesseractException {
 
-        switch (this.walkThrough) {
+        switch (walkThrough) {
 
             case 0 -> {
-                if (this.openLocation()) {
-                    this.walkThrough++;
+                if (openLocation()) {
+                    walkThrough++;
                 }
             }
 
             case 1 -> {
-                this.astBeltDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
-                this.homeStationDest = this.segmentedRegions.getRectangle(this.destination, this.resolution.getLocationTabDeadZoneTuple());
+                astBeltDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabDeadZoneTuple());
+                homeStationDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabDeadZoneTuple());
 
-                if (this.clickDestinationLabel(false, astBeltDest, MININGBOT, "ASTEROID BELT")
-                        || this.clickDestinationLabel(false, astBeltDest, HOMESTATION, "HOME STATION")) {
-                    this.walkThrough++;
+                if (clickDestinationLabel(false, astBeltDest, MININGBOT, "ASTEROID BELT")
+                        || clickDestinationLabel(false, astBeltDest, HOMESTATION, "HOME STATION")) {
+                    walkThrough++;
 
                 } else {
-                    this.walkThrough--;
-                    this.clickEvents.dragScreen();
+                    walkThrough--;
+                    clickEvents.dragScreen();
                 }
             }
 
             case 2 -> {
-                Rectangle warpBlock = this.segmentedRegions.getRectangle(this.resolution.getWarpList(), this.getFunnelRectTuple(this.astBeltDest));
-                Rectangle dock = this.segmentedRegions.getRectangle(this.resolution.getDockList(), this.getFunnelRectTuple(this.homeStationDest));
+                Rectangle warpBlock = segmentedRegions.getRectangle(resolution.getWarpList(), getFunnelRectTuple(astBeltDest));
+                Rectangle dock = segmentedRegions.getRectangle(resolution.getDockList(), getFunnelRectTuple(homeStationDest));
 
-                if (this.clickDestinationLabel(true, warpBlock, MININGBOT, "WARP BLOCK")
-                        || this.clickDestinationLabel(true, dock, HOMESTATION, "DOCK")) {
-                    this.walkThrough++;
+                if (clickDestinationLabel(true, warpBlock, MININGBOT, "WARP BLOCK")
+                        || clickDestinationLabel(true, dock, HOMESTATION, "DOCK")) {
+                    walkThrough++;
 
                 } else {
-                    this.walkThrough--;
-                    this.clickEvents.dragScreen();
+                    walkThrough--;
+                    clickEvents.dragScreen();
                 }
             }
 
             case 3 -> {
-                Rectangle closeButtonWindowLocation = this.segmentedRegions.getRectangle(this.resolution.getCloseLocationButtonList(), this.resolution.getLocationTabDeadZoneTuple());
+                Rectangle closeButtonWindowLocation = segmentedRegions.getRectangle(resolution.getCloseLocationButtonList(), resolution.getLocationTabDeadZoneTuple());
 
-                if (this.rectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
-                    this.walkThrough++;
+                if (rectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
+                    walkThrough++;
                 }
             }
 
             case 4 -> {
-                this.checkWarpable();
-                this.walkThrough++;
+                checkWarpable();
+                walkThrough++;
             }
         }
     }
@@ -167,31 +167,31 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             throws IOException, TesseractException, AWTException {
         return (this.option == option)
                 && (isRectColorVerifier
-                        ? this.rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())
-                        : this.rectangleVerifier(label, itemLabel, RIGHTCLICK));
+                        ? rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, rgbr.getMinDestination(), rgbr.getMaxDestination())
+                        : rectangleVerifier(label, itemLabel, RIGHTCLICK));
     }
 
     private void checkWarpable() throws IOException {
-        if (this.isCheckWarpable) {
+        if (isCheckWarpable) {
             Long flagTimeWarp = System.currentTimeMillis();
             boolean isWarping = true;
-            this.sleep(5000);
+            sleep(5000);
 
-            while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (this.waitForWarp_MS * 2)) {
-                this.takeScreenshot.take2();
-                isWarping = this.findPixels.greaterThan(
+            while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (waitForWarp_MS * 2)) {
+                takeScreenshot.take2();
+                isWarping = findPixels.greaterThan(
                         R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
                         R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
-                        this.whiteRangeRGB.getValue0(), this.whiteRangeRGB.getValue1(), this.whiteRangeRGB.getValue2());
+                        whiteRangeRGB.getValue0(), whiteRangeRGB.getValue1(), whiteRangeRGB.getValue2());
             }
 
             if (!isWarping) {
-                this.takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
+                takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
             }
-            this.sleep(this.option == HOMESTATION ? 12000 : 1000);
+            sleep(option == HOMESTATION ? 12000 : 1000);
 
         } else {
-            this.sleep(this.waitForWarp_MS); // Sleep until reach the destination
+            sleep(waitForWarp_MS); // Sleep until reach the destination
         }
     }
 
@@ -213,20 +213,19 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     }
 
     private boolean openLocation() throws IOException, TesseractException, AWTException {
-        this.keyboardEvents.clickKey(KeyEvent.VK_L);
+        keyboardEvents.clickKey(KeyEvent.VK_L);
         return true;
     }
 
     @Override
     public boolean rectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException {
-        /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
 
             if (chosenClick == LEFTCLICK) {
-                this.clickEvents.leftClickCenterButton(rect);
+                clickEvents.leftClickCenterButton(rect);
             } else {
-                this.clickEvents.rightClickCenterButton(rect);
+                clickEvents.rightClickCenterButton(rect);
             }
             return true;
         }
@@ -236,14 +235,13 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     @Override
     public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB)
             throws AWTException, IOException {
-        /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
-        if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
+        if (rect != null && findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
 
             if (chosenClick == LEFTCLICK) {
-                this.clickEvents.leftClickCenterButton(rect);
+                clickEvents.leftClickCenterButton(rect);
             } else {
-                this.clickEvents.rightClickCenterButton(rect);
+                clickEvents.rightClickCenterButton(rect);
             }
             return true;
         }

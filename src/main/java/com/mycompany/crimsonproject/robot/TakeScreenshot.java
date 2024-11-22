@@ -19,11 +19,11 @@ public class TakeScreenshot extends RobotEvent {
 
     public void take(String path) {
         try {
-            this.sleep(SLEEP_MS2);
+            sleep(SLEEP_MS2);
 
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+            BufferedImage bf = bot.createScreenCapture(rectangle);
 
             ImageIO.write(bf, "png", new File(path));
 
@@ -34,13 +34,13 @@ public class TakeScreenshot extends RobotEvent {
 
     public void take() {
         try {
-            this.sleep(SLEEP_MS2);
+            sleep(SLEEP_MS2);
 
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+            BufferedImage bf = bot.createScreenCapture(rectangle);
 
             ImageIO.write(bf, "png", new File(path));
 
@@ -55,7 +55,7 @@ public class TakeScreenshot extends RobotEvent {
 
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+            BufferedImage bf = bot.createScreenCapture(rectangle);
 
             ImageIO.write(bf, "png", new File(path));
 
@@ -68,7 +68,7 @@ public class TakeScreenshot extends RobotEvent {
         try {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+            BufferedImage bf = bot.createScreenCapture(rectangle);
 
             ImageIO.write(bf, "png", new File(path));
 
@@ -83,7 +83,7 @@ public class TakeScreenshot extends RobotEvent {
 
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
-            BufferedImage bf = this.bot.createScreenCapture(rectangle);
+            BufferedImage bf = bot.createScreenCapture(rectangle);
 
             // Convert image to SRGB
             ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_sRGB), null);

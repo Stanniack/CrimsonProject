@@ -126,34 +126,34 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         this.waitEngageMS = waitEngageMS;
         this.shadeOfGreen = shadesOfGreen;
 
-        this.rgbr = new RGBrange();
-        this.resolution = new R1920x1080();
-        this.actModules = new ActionModules();
-        this.findPixels = new FindPixels();
-        this.clickEvents = new ClickScreenEvents();
-        this.keyboardEvents = new KeyboardEvents();
-        this.segmentedRegions = new SegmentedRegions();
-        this.takeScreenshot = new TakeScreenshot();
-        this.connectionHandler = new NetworkConnectionHandler();
+        rgbr = new RGBrange();
+        resolution = new R1920x1080();
+        actModules = new ActionModules();
+        findPixels = new FindPixels();
+        clickEvents = new ClickScreenEvents();
+        keyboardEvents = new KeyboardEvents();
+        segmentedRegions = new SegmentedRegions();
+        takeScreenshot = new TakeScreenshot();
+        connectionHandler = new NetworkConnectionHandler();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
 
-        this.timeStartFilled = System.currentTimeMillis();
+        timeStartFilled = System.currentTimeMillis();
 
-        while (this.walkThrough <= STEPS) {
+        while (walkThrough <= STEPS) {
             // Call method
-            if (this.connectionHandler.networkVerifier()) {
-                this.takeScreenshot.take();
-                this.verifyShipLife();
-                this.flowScript();
-                this.verifyInvalidTarget(this.resolution.getInvalidTargetList());
+            if (connectionHandler.networkVerifier()) {
+                takeScreenshot.take();
+                verifyShipLife();
+                flowScript();
+                verifyInvalidTarget(resolution.getInvalidTargetList());
 
-                if (this.walkThrough > 2 && this.walkThrough < STEPS) {
-                    this.checkCannonsAction();
+                if (walkThrough > 2 && walkThrough < STEPS) {
+                    checkCannonsAction();
                 }
             } else {
-                this.isRunnable = false;
+                isRunnable = false;
                 break;
             }
         }
@@ -162,96 +162,96 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
 
     private void flowScript() throws AWTException, IOException, TesseractException {
 
-        switch (this.walkThrough) {
+        switch (walkThrough) {
 
             case 0 -> {
-                if (this.getAsteroids()) {
-                    this.timeStartLockTarget = System.currentTimeMillis();
-                    this.timeStartProp = System.currentTimeMillis();
-                    this.isAnotherAst = true;
-                    this.actModules.propulsion();
-                    this.walkThrough++;
+                if (getAsteroids()) {
+                    timeStartLockTarget = System.currentTimeMillis();
+                    timeStartProp = System.currentTimeMillis();
+                    isAnotherAst = true;
+                    actModules.propulsion();
+                    walkThrough++;
                 }
             } // end case 0
 
             case 1 -> {
-                this.target = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple()); // Search for target
+                target = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetDeadZoneTuple()); // Search for target
 
-                if (this.rectangleVerifier(this.target, "TARGET", 0)) {
-                    if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget())) {
-                        this.walkThrough++; // If there is a lock target, just go to next step
+                if (rectangleVerifier(target, "TARGET", 0)) {
+                    if (findPixels.findByRangeColor(target.x, target.y, target.width, target.height, rgbr.getMinLockTarget(), rgbr.getMaxLockTarget())) {
+                        walkThrough++; // If there is a lock target, just go to next step
 
-                    } else if (this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinFreeTarget(), this.rgbr.getMaxFreeTarget())) {
-                        this.clickEvents.leftClickCenterButton(this.target); // If the target is free, click target and go next step
-                        this.walkThrough++; // go to case 2
+                    } else if (findPixels.findByRangeColor(target.x, target.y, target.width, target.height, rgbr.getMinFreeTarget(), rgbr.getMaxFreeTarget())) {
+                        clickEvents.leftClickCenterButton(target); // If the target is free, click target and go next step
+                        walkThrough++; // go to case 2
 
                     } else {
                         System.out.println("Lock target and free target not found.");
-                        this.clickEvents.dragScreen();
+                        clickEvents.dragScreen();
                     }
 
                 } else {
-                    this.flagLockTargetMS = System.currentTimeMillis() - this.timeStartLockTarget;
-                    //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", this.flagLockTarget_MS / 1000, LOCKTARGET_MS / 1000);
-                    this.clickEvents.dragScreen();
+                    flagLockTargetMS = System.currentTimeMillis() - timeStartLockTarget;
+                    //System.out.printf("Rect (LOCKTARGET) at case 2 not found. Time to restart the script: %d/%d\n\n", flagLockTargetMS / 1000, LOCKTARGET_MS / 1000);
+                    clickEvents.dragScreen();
 
-                    if (this.flagLockTargetMS > LOCKTARGET_MS) {
+                    if (flagLockTargetMS > LOCKTARGET_MS) {
                         System.out.println("Restarting script.\n\n");
-                        this.flagLockTargetMS = 0; // reset flag
-                        this.walkThrough = 0; // reset script
+                        flagLockTargetMS = 0; // reset flag
+                        walkThrough = 0; // reset script
                     }
                 }
             }
 
             case 2 -> {
-                this.timeStartSetAnotherAst = System.currentTimeMillis();
-                this.activeCannons();
-                this.actModules.launchDrones();
-                this.actModules.engageDrones(this.waitEngageMS); // engage drones
-                this.walkThrough++; // go to case 3
+                timeStartSetAnotherAst = System.currentTimeMillis();
+                activeCannons();
+                actModules.launchDrones();
+                actModules.engageDrones(waitEngageMS); // engage drones
+                walkThrough++; // go to case 3
             }
 
             case 3 -> {
-                Rectangle compactMaxCargo = this.segmentedRegions.getRectangle(this.resolution.getCompactMaxCargoList(), this.resolution.getCompactMaxCargoDeadZoneTuple());
+                Rectangle compactMaxCargo = segmentedRegions.getRectangle(resolution.getCompactMaxCargoList(), resolution.getCompactMaxCargoDeadZoneTuple());
 
-                if (this.rectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
-                    this.walkThrough = 5; // go to case 5 - docking and drag itens to main station
+                if (rectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
+                    walkThrough = 5; // go to case 5 - docking and drag items to main station
 
                 } else {
-                    if (this.flagUntilToBeFilledMS > STARTDRAGSCREEN_MS) {
-                        this.clickEvents.dragScreen();
+                    if (flagUntilToBeFilledMS > STARTDRAGSCREEN_MS) {
+                        clickEvents.dragScreen();
                     }
-                    this.walkThrough++; // go to case 4
+                    walkThrough++; // go to case 4
                 }
             }
 
             case 4 -> {
-                this.flagSetAnotherAstMS = (System.currentTimeMillis() - this.timeStartSetAnotherAst);
-                this.flagUntilToBeFilledMS = (System.currentTimeMillis() - this.timeStartFilled);
-                this.flagDeactivePropulsionMS = (System.currentTimeMillis() - this.timeStartProp);
+                flagSetAnotherAstMS = (System.currentTimeMillis() - timeStartSetAnotherAst);
+                flagUntilToBeFilledMS = (System.currentTimeMillis() - timeStartFilled);
+                flagDeactivePropulsionMS = (System.currentTimeMillis() - timeStartProp);
 
-                if (this.flagSetAnotherAstMS > SETANOTHERAST_MS && this.checkCannonsAction() == this.amountCannons) {//if: time to set another ast is exceeded or cannons was deactivated -> reset flag & mining 
-                    this.walkThrough = 0; // Time exceeded, restart to search for another asteroids
+                if (flagSetAnotherAstMS > SETANOTHERAST_MS && checkCannonsAction() == amountCannons) { // if: time to set another ast is exceeded or cannons were deactivated -> reset flag & mining 
+                    walkThrough = 0; // Time exceeded, restart to search for another asteroids
 
-                } else if (this.checkPixelsAprroaching()) {//else if: check approaching is true -> continue mining
-                    this.walkThrough--; // back to case and check maxCargo
+                } else if (checkPixelsAprroaching()) { // else if: check approaching is true -> continue mining
+                    walkThrough--; // back to case and check maxCargo
 
-                } else {//else ship is not mining -> reset mining
-                    this.walkThrough = 0; // Approaching not found, the ship is not mining
+                } else { // else ship is not mining -> reset mining
+                    walkThrough = 0; // Approaching not found, the ship is not mining
                 }
 
-                if (this.flagDeactivePropulsionMS > DEACTIVEPROP_MS && this.isAnotherAst == true) {//check propulsion
-                    this.actModules.propulsion();
-                    this.isAnotherAst = false;
+                if (flagDeactivePropulsionMS > DEACTIVEPROP_MS && isAnotherAst) { // check propulsion
+                    actModules.propulsion();
+                    isAnotherAst = false;
                 }
             }
 
             case 5 -> {
-                this.actModules.returnDrones(this.returnDronesMS);
-                this.setDestination.setParameters(this.resolution.getHomeStationList(), GOTO_HOMESTATION);
-                this.setDestination.startScript();
+                actModules.returnDrones(returnDronesMS);
+                setDestination.setParameters(resolution.getHomeStationList(), GOTO_HOMESTATION);
+                setDestination.startScript();
                 System.out.println("End of mining and go docking!\n");
-                this.walkThrough++;
+                walkThrough++;
             }
         }
     }
@@ -261,9 +261,9 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
         Entry<String, Rectangle> betterAteroid = null;
-        this.priorityOreValue = 0;
+        priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = this.segmentedRegions.getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
+        HashMap<String, Rectangle> rectResult = segmentedRegions.getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
                 R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
 
         System.out.println("Rectangle list size: " + rectResult.size() + "\n");
@@ -272,10 +272,10 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
 
             for (Map.Entry<String, Rectangle> item : rectResult.entrySet()) {
 
-                for (int i = (this.priorityList.size() - 1); i >= 0; i--) {
+                for (int i = (priorityList.size() - 1); i >= 0; i--) {
 
-                    if (item.getKey().contains("P" + i) && this.priorityOreValue <= this.priorityList.get(i)) {
-                        this.priorityOreValue = this.priorityList.get(i);
+                    if (item.getKey().contains("P" + i) && priorityOreValue <= priorityList.get(i)) {
+                        priorityOreValue = priorityList.get(i);
 
                         //System.out.println(item.getKey() + ": " + item.getValue().y + "y");
                         if (item.getValue().y <= closestOreList.get(i)) {
@@ -291,28 +291,28 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
                 System.out.println("CLOSEST, BETTER ASTEROID FOUND (Y Coordinate): "
                         + betterAteroid.getKey() + " (X,Y) -> (" + betterAteroid.getValue().x + ", " + betterAteroid.getValue().y + ")\n");
 
-                this.clickEvents.doubleClick(betterAteroid.getValue());
+                clickEvents.doubleClick(betterAteroid.getValue());
                 return true;
             }
 
         } else {
-            this.clickEvents.dragScreen();
-            this.flagSwitchBelt++;
+            clickEvents.dragScreen();
+            flagSwitchBelt++;
 
-            if (this.flagSwitchBelt == ASTNOTFOUND) {
+            if (flagSwitchBelt == ASTNOTFOUND) {
 
-                if (this.switchAstBelt) {
+                if (switchAstBelt) {
                     System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
-                    this.actModules.returnDrones(0);
-                    this.sleep(WAITFORSWITCHASTBELT_MS);
-                    this.switchAstBelt();
+                    actModules.returnDrones(0);
+                    sleep(WAITFORSWITCHASTBELT_MS);
+                    switchAstBelt();
 
                 } else {
                     System.out.println("CLOSEST, BETTER ASTEROID IS NULL. RETURNING TO HOME STATION");
-                    this.isRunnable = false;
-                    this.walkThrough = 5;
+                    isRunnable = false;
+                    walkThrough = 5;
                 }
-                this.flagSwitchBelt = 0;
+                flagSwitchBelt = 0;
             }
         }
         return false;
@@ -322,15 +322,15 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         List<Integer> cannons = Arrays.asList(KeyEvent.VK_F1, KeyEvent.VK_F2);
         int deactivedCannons = 0;
 
-        if (this.checkPixelsAprroaching()) {
+        if (checkPixelsAprroaching()) {
             for (int i = 0; i < cannons.size(); i++) {
                 try {
-                    if (!this.isCannonActivated(i, this.attempts,
+                    if (!isCannonActivated(i, attempts,
                             (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                             R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                            this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
+                            shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
-                        this.keyboardEvents.clickKey(cannons.get(i));
+                        keyboardEvents.clickKey(cannons.get(i));
                         System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
                         deactivedCannons++;
                     }
@@ -348,19 +348,19 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
 
         for (int i = 0; i < cannons.size(); i++) {
             try {
-                if (this.isCannonActivated(i, this.attempts,
+                if (isCannonActivated(i, attempts,
                         (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
-                        this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
+                        shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
-                    this.keyboardEvents.clickKey(cannons.get(i));
-                    this.sleep(CANNON_SLEEP);
-                    this.keyboardEvents.clickKey(cannons.get(i));
+                    keyboardEvents.clickKey(cannons.get(i));
+                    sleep(CANNON_SLEEP);
+                    keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("The cannon was active. Press 2x cannon " + i);
 
                 } else {
-                    this.sleep(CANNON_SLEEP); // Wait if cannon was canceled
-                    this.keyboardEvents.clickKey(cannons.get(i));
+                    sleep(CANNON_SLEEP); // Wait if cannon was canceled
+                    keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("Just press 1x cannon " + i);
                 }
 
@@ -375,8 +375,8 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
 
         for (int j = 0; j < attempt; j++) {
             try {
-                this.takeScreenshot.take2();
-                action = this.findPixels.findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
+                takeScreenshot.take2();
+                action = findPixels.findByGreenColor(coordinatesX.get(i), y, width, height, red, green, blue);
                 if (action) {
                     return true;
                 }
@@ -390,7 +390,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = this.findPixels.findByColor(
+        boolean approaching = findPixels.findByColor(
                 R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
                 R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(),
                 255, 255, 255);
@@ -407,12 +407,12 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         int mOe = 195; // margin of error
 
         try {
-            Rectangle rect = this.segmentedRegions.getRectangle(listWxHrects, this.resolution.getInvalidTargetDeadZoneList());
+            Rectangle rect = segmentedRegions.getRectangle(listWxHrects, resolution.getInvalidTargetDeadZoneList());
             System.out.println("Invalid target found: " + rect.toString());
 
-            if (this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, this.rgbr.getMinInfo(), this.rgbr.getMaxInfo())) {
+            if (findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, rgbr.getMinInfo(), rgbr.getMaxInfo())) {
                 rect.y += mOe;
-                this.clickEvents.leftClickCenterButton(rect);
+                clickEvents.leftClickCenterButton(rect);
                 isClicked = true;
             }
 
@@ -421,24 +421,24 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         }
 
         if (isClicked) {
-            Rectangle locktarget = this.segmentedRegions.getRectangle(this.resolution.getLockTargetList(), this.resolution.getLockTargetDeadZoneTuple());
+            Rectangle locktarget = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetDeadZoneTuple());
 
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
-                this.clickEvents.leftClickCenterButton(locktarget);
-                this.walkThrough = 0; //!!
+                clickEvents.leftClickCenterButton(locktarget);
+                walkThrough = 0; //!!
 
-            } else if (this.target != null) {
+            } else if (target != null) {
                 int asteroidTarget = 36;
-                this.target.x += asteroidTarget;
-                boolean lockAsteroidTarget = this.findPixels.findByRangeColor(this.target.x, this.target.y, this.target.width, this.target.height, this.rgbr.getMinLockTarget(), this.rgbr.getMaxLockTarget());
+                target.x += asteroidTarget;
+                boolean lockAsteroidTarget = findPixels.findByRangeColor(target.x, target.y, target.width, target.height, rgbr.getMinLockTarget(), rgbr.getMaxLockTarget());
 
                 if (lockAsteroidTarget) {
-                    this.clickEvents.leftClickCenterButton(this.target);
-                    this.walkThrough = 0; //!!
+                    clickEvents.leftClickCenterButton(target);
+                    walkThrough = 0; //!!
                 }
             } else {
-                this.walkThrough = 5;
+                walkThrough = 5;
                 System.out.println("Invalid locked target not found, ending script.");
             }
         }
@@ -451,7 +451,7 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
             int width = R1920x1080.getBEINGATTACKED_W1();
             int height = R1920x1080.getBEINGATTACKED_H1();
 
-            if (this.findPixels.findByRangeColor(row, column, width, height, this.rgbr.getMinBeingAttacked(), this.rgbr.getMaxBeingAttacked())) {
+            if (findPixels.findByRangeColor(row, column, width, height, rgbr.getMinBeingAttacked(), rgbr.getMaxBeingAttacked())) {
                 new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);
             }
         } catch (IOException ex) {
@@ -466,30 +466,30 @@ public class ExtractOre implements RectangleVerifier, Sleeper {
         try {
             switch (label) {
                 case 1 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIList(), GOTO_ASTBELT);
-                    this.setDestination.startScript();
+                    setDestination.setParameters(resolution.getAstBeltIIList(), GOTO_ASTBELT);
+                    setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 2 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIIList(), GOTO_ASTBELT);
-                    this.setDestination.startScript();
+                    setDestination.setParameters(resolution.getAstBeltIIIList(), GOTO_ASTBELT);
+                    setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 3 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIIIList(), GOTO_ASTBELT);
-                    this.setDestination.startScript();
+                    setDestination.setParameters(resolution.getAstBeltIIIIList(), GOTO_ASTBELT);
+                    setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1);
                 }
                 case 4 -> {
-                    this.setDestination.setParameters(this.resolution.getAstBeltIIIIIList(), GOTO_ASTBELT);
-                    this.setDestination.startScript();
+                    setDestination.setParameters(resolution.getAstBeltIIIIIList(), GOTO_ASTBELT);
+                    setDestination.startScript();
                     new TextLogs().writeLine(path, label + 1); // return to home station
                 }
                 case 5 -> {
                     System.out.println("Last asteroid belt farmed, returning to HOME STATION.");
                     new TextLogs().writeLine(path, 1); // reset asteroid belts
-                    this.walkThrough = 5;
-                    this.isRunnable = false; // exit the script
+                    walkThrough = 5;
+                    isRunnable = false; // exit the script
                 }
             }
 
