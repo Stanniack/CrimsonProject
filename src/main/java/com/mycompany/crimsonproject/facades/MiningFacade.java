@@ -47,7 +47,8 @@ public class MiningFacade {
     /**
      * @param waitCargoDepositMS to wait in milliseconds until start script
      * after cargo deposit
-     * @param astBeltPath a path directory where asteroid belt number is to start mining
+     * @param astBeltPath a path directory where asteroid belt number is to
+     * start mining
      * @param waitForWarpMS to wait in milliseconds until reach to destination
      * before start the mining script
      * @param isCheckWarpable true if it is possible to verify by pixels methods
@@ -61,7 +62,8 @@ public class MiningFacade {
      * @param shadesOfGreen a triplet of green shades to check with attempts to
      * maximize the search for active miner cannons (less/equal than R, )
      * @param returnDronesMS time in MS to wait drones returning to drone bay
-     * @param engageDronesMS time in MS to wait for engane drones on the ast belt
+     * @param engageDronesMS time in MS to wait for engane drones on the ast
+     * belt
      * @param logRoutePath directory to create a .txt log with times in
      * milliseconds per routes of mining
      * @param numberOfAlertLoops number of alerts loopings to play
@@ -124,10 +126,8 @@ public class MiningFacade {
     private void flowScript() throws EndOfScriptException {
         this.startRouteTime = System.currentTimeMillis();
         try {
-            this.cargoDeposit();
-            this.gotoAstBelt();
-            if (!this.extractOre()) {
-                throw new EndOfScriptException("Script 3 returned false, end of mining.");
+            if (!this.cargoDeposit() || !this.gotoAstBelt() || !this.extractOre()) {
+                throw new EndOfScriptException("An error occurred, end of mining.");
             }
             this.logRouteTime();
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {
@@ -135,15 +135,15 @@ public class MiningFacade {
         }
     }
 
-    private void cargoDeposit() throws InterruptedException, IOException, AWTException, TesseractException {
-        new CargoDeposit().startScript();
-        Thread.sleep(waitCargoDepositMS);
+    private boolean cargoDeposit() throws InterruptedException, IOException, AWTException, TesseractException {
+        return new CargoDeposit().startScript();
     }
 
-    private void gotoAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean gotoAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
+        Thread.sleep(waitCargoDepositMS); // wait ship left the station
         List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(this.astBeltPath));
         this.setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarpMS, isCheckWarpable, whiteRGB);
-        this.setDestination.startScript();
+        return this.setDestination.startScript();
     }
 
     private boolean extractOre() throws IOException, TesseractException, AWTException, InterruptedException {
