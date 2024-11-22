@@ -45,6 +45,7 @@ public class ActionModules {
 
     public void engageDrones(int waitMS) {
         try {
+            Thread.sleep(waitMS);
             this.keyBoardEvents.clickKey(KeyEvent.VK_F);
         } catch (AWTException | InterruptedException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
