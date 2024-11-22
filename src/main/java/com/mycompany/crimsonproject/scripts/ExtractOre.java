@@ -32,60 +32,62 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
  */
 public class ExtractOre implements RectangleVerifier {
 
+    // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
-    private final ActionModules actModules;
-    private final FindPixels findPixels;
-    private final ClickScreenEvents clickEvents;
-    private final KeyboardEvents keyboardEvents;
-    private final SegmentedRegions segmentedRegions;
-    private final TakeScreenshot takeScreenshot;
+    private ActionModules actModules;
+    private FindPixels findPixels;
+    private ClickScreenEvents clickEvents;
+    private KeyboardEvents keyboardEvents;
+    private SegmentedRegions segmentedRegions;
+    private TakeScreenshot takeScreenshot;
 
-    private final Triplet<Integer, Integer, Integer> shadeOfGreen;
-    private final int attemps;
-
+    // Attributes for configurations and states
+    private SetDestination setDestination;
+    private boolean isRunnable = true;
+    private boolean switchAstBelt;
+    private boolean isAnotherAst;
     private int walkThrough = 0;
 
+    // Attributes for time tracking and flags
     private int flagSwitchBelt = 0;
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
-    private int returnDronesMS = 0;
-    private int waitEngageMS = 0;
     private long flagLockTargetMS = 0;
     private long timeStartLockTarget = 0;
     private long timeStartSetAnotherAst = 0;
     private long timeStartFilled = 0;
     private long timeStartProp = 0;
 
-    private final int amountCannons = 2;
-
-    private boolean isAnotherAst;
-    private boolean isRunnable = true;
-    private final boolean switchAstBelt;
-
-    private static final int LOCKTARGET_MS = 60000;
-    private static final int WAITFORSWITCHASTBELT_MS = 10000;
-    private static final int STEPS = 5;
-    private static final int ASTNOTFOUND = 7;
-    private static final int SETANOTHERAST_MS = 180000;
-    private static final int DEACTIVEPROP_MS = 120000;
-    private static final int STARTDRAGSCREEN_MS = 2200000;
-    private static final int GOTO_HOMESTATION = 0;
-    private static final int GOTO_ASTBELT = 1;
-    private static final int CANNON_SLEEP = 1500;
-
-    private SetDestination setDestination;
-
+    // Attributes for behavior and priority settings
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
     private final Integer Spriority = 1;
     private final Integer DVpriority = 2;
     private final Integer CVpriority = 3;
     private final Integer Vpriority = 4;
-    /* These lists must be ordered by priority, from lowest to highest to get the closest and better ore possible */
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
+
+    // Attributes related to mining and combat
+    private final int amountCannons = 2;
+    private Triplet<Integer, Integer, Integer> shadeOfGreen;
+    private int attempts;
+    private int returnDronesMS = 0;
+    private int waitEngageMS = 0;
+
+    // Constants for program behavior
+    private static final int LOCKTARGET_MS = 60000;
+    private static final int WAITFORSWITCHASTBELT_MS = 10000;
+    private static final int SETANOTHERAST_MS = 180000;
+    private static final int DEACTIVEPROP_MS = 120000;
+    private static final int STARTDRAGSCREEN_MS = 2200000;
+    private static final int STEPS = 5;
+    private static final int ASTNOTFOUND = 7;
+    private static final int GOTO_HOMESTATION = 0;
+    private static final int GOTO_ASTBELT = 1;
+    private static final int CANNON_SLEEP = 1500;
 
     /**
      * @param setDestination is an instanced object containing some essentials
@@ -99,10 +101,21 @@ public class ExtractOre implements RectangleVerifier {
      * @param returnDronesMS time in MS to wait drones returning to drone bay
      * @param waitEngageMS time in MS to wait for engane drones on the ast belt
      */
-    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS, int waitEngageMS) {
+    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts,
+            Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS, int waitEngageMS) {
         this.setDestination = setDestination;
+        initializeSharedAttributes(switchAstBelt, attempts, shadesOfGreen, returnDronesMS, waitEngageMS);
+    }
+
+    public ExtractOre(boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen,
+            int returnDronesMS, int waitEngageMS) {
+        initializeSharedAttributes(switchAstBelt, attempts, shadesOfGreen, returnDronesMS, waitEngageMS);
+    }
+
+    private void initializeSharedAttributes(boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen,
+            int returnDronesMS, int waitEngageMS) {
         this.switchAstBelt = switchAstBelt;
-        this.attemps = attempts;
+        this.attempts = attempts;
         this.returnDronesMS = returnDronesMS;
         this.waitEngageMS = waitEngageMS;
         this.shadeOfGreen = shadesOfGreen;
@@ -117,21 +130,11 @@ public class ExtractOre implements RectangleVerifier {
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS, int waitEngageMS) {
-        this.switchAstBelt = isSwitchable;
-        this.attemps = attempts;
-        this.returnDronesMS = returnDroneMS;
-        this.waitEngageMS = waitEngageMS;
-        this.shadeOfGreen = shadesOfGreen;
+    /**
+     * Initialize all attributes required
+     */
+    private void initAttributes(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS, int waitEngageMS) {
 
-        this.rgbr = new RGBrange();
-        this.resolution = new R1920x1080();
-        this.actModules = new ActionModules();
-        this.findPixels = new FindPixels();
-        this.clickEvents = new ClickScreenEvents();
-        this.keyboardEvents = new KeyboardEvents();
-        this.segmentedRegions = new SegmentedRegions();
-        this.takeScreenshot = new TakeScreenshot();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -327,7 +330,7 @@ public class ExtractOre implements RectangleVerifier {
         if (this.checkPixelsAprroaching()) {
             for (int i = 0; i < cannons.size(); i++) {
                 try {
-                    if (!this.isCannonActivated(i, this.attemps,
+                    if (!this.isCannonActivated(i, this.attempts,
                             (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                             R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                             this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
@@ -350,7 +353,7 @@ public class ExtractOre implements RectangleVerifier {
 
         for (int i = 0; i < cannons.size(); i++) {
             try {
-                if (this.isCannonActivated(i, this.attemps,
+                if (this.isCannonActivated(i, this.attempts,
                         (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
                         R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
                         this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
