@@ -22,6 +22,7 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
  */
 public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier {
 
+// Attributes related to graphical interface and screen manipulation
     private final R1920x1080 resolution;
     private final RGBrange rgbr;
     private final FindPixels findPixels;
@@ -29,10 +30,14 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private final SegmentedRegions segmentedRegions;
     private final TakeScreenshot takeScreenshot;
 
+// Constants for mouse click actions
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
 
+// Attributes related to specific UI elements
     private Rectangle hangarButton;
+
+// switch-case behaviour attributes
     private int walkThrough = 0;
     private static final int STEPS = 2;
 

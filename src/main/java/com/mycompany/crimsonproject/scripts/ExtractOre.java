@@ -32,7 +32,7 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
  */
 public class ExtractOre implements RectangleVerifier {
 
-    // Attributes related to graphical interface and screen manipulation
+// Attributes related to graphical interface and screen manipulation
     private Rectangle target;
     private RGBrange rgbr = null;
     private R1920x1080 resolution = null;
@@ -43,14 +43,14 @@ public class ExtractOre implements RectangleVerifier {
     private SegmentedRegions segmentedRegions;
     private TakeScreenshot takeScreenshot;
 
-    // Attributes for configurations and states
+// Attributes for configurations and states
     private SetDestination setDestination;
     private boolean isRunnable = true;
     private boolean switchAstBelt;
     private boolean isAnotherAst;
     private int walkThrough = 0;
 
-    // Attributes for time tracking and flags
+// Attributes for time tracking and flags
     private int flagSwitchBelt = 0;
     private long flagSetAnotherAstMS = 0;
     private long flagUntilToBeFilledMS = 0;
@@ -61,7 +61,7 @@ public class ExtractOre implements RectangleVerifier {
     private long timeStartFilled = 0;
     private long timeStartProp = 0;
 
-    // Attributes for behavior and priority settings
+// Attributes for behavior and priority settings
     private Integer priorityOreValue;
     private final Integer CSpriority = 0;
     private final Integer Spriority = 1;
@@ -70,14 +70,14 @@ public class ExtractOre implements RectangleVerifier {
     private final Integer Vpriority = 4;
     private final List<Integer> priorityList = Arrays.asList(CSpriority, Spriority, DVpriority, CVpriority, Vpriority);
 
-    // Attributes related to mining and combat
+// Attributes related to mining and combat
     private final int amountCannons = 2;
     private Triplet<Integer, Integer, Integer> shadeOfGreen;
     private int attempts;
     private int returnDronesMS = 0;
     private int waitEngageMS = 0;
 
-    // Constants for program behavior
+// Constants for program behavior
     private static final int LOCKTARGET_MS = 60000;
     private static final int WAITFORSWITCHASTBELT_MS = 10000;
     private static final int SETANOTHERAST_MS = 180000;

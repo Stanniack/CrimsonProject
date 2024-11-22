@@ -25,6 +25,7 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
  */
 public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier {
 
+// Attributes related to graphical interface and screen manipulation
     private final R1920x1080 resolution;
     private final RGBrange rgbr;
     private final FindPixels findPixels;
@@ -33,22 +34,27 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private final TakeScreenshot takeScreenshot;
     private final KeyboardEvents keyboardEvents;
 
+// Attributes for destination and movement management
     private int option;
     private Rectangle astBeltDest;
     private Rectangle homeStationDest;
     private List<Pair<Integer, Integer>> destination;
 
+// Constants for mouse click actions and destination types
     private static final int RIGHTCLICK = 0;
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
-    private static final int STEPS = 4;
+    
 
+// Attributes related to warping and timing
     private final int waitForWarp_MS;
     private final boolean isCheckWarpable;
     private final Triplet<Integer, Integer, Integer> whiteRangeRGB;
-    // it depends the amount of switch cases
+
+// switch-case behaviour attributes
     private int walkThrough = 0;
+    private static final int STEPS = 4;
 
     /**
      * @param chosenDest is a list of Pair<Integer, Integer>
