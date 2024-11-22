@@ -52,6 +52,7 @@ public class ExtractOre implements RectangleVerifier {
     private long flagUntilToBeFilledMS = 0;
     private long flagDeactivePropulsionMS = 0;
     private int returnDronesMS = 0;
+    private int waitEngageMS = 0;
     private long flagLockTargetMS = 0;
     private long timeStartLockTarget = 0;
     private long timeStartSetAnotherAst = 0;
@@ -96,12 +97,14 @@ public class ExtractOre implements RectangleVerifier {
      * @param shadesOfGreen a triplet of greem shades to check with attempts to
      * maximize the search for active miner cannons
      * @param returnDronesMS time in MS to wait drones returning to drone bay
+     * @param waitEngageMS time in MS to wait for engane drones on the ast belt
      */
-    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS) {
+    public ExtractOre(SetDestination setDestination, boolean switchAstBelt, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDronesMS, int waitEngageMS) {
         this.setDestination = setDestination;
         this.switchAstBelt = switchAstBelt;
         this.attemps = attempts;
         this.returnDronesMS = returnDronesMS;
+        this.waitEngageMS = waitEngageMS;
         this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
@@ -114,10 +117,11 @@ public class ExtractOre implements RectangleVerifier {
         this.takeScreenshot = new TakeScreenshot();
     }
 
-    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS) {
+    public ExtractOre(boolean isSwitchable, int attempts, Triplet<Integer, Integer, Integer> shadesOfGreen, int returnDroneMS, int waitEngageMS) {
         this.switchAstBelt = isSwitchable;
         this.attemps = attempts;
         this.returnDronesMS = returnDroneMS;
+        this.waitEngageMS = waitEngageMS;
         this.shadeOfGreen = shadesOfGreen;
 
         this.rgbr = new RGBrange();
@@ -205,8 +209,7 @@ public class ExtractOre implements RectangleVerifier {
                 this.timeStartSetAnotherAst = System.currentTimeMillis();
                 this.activeCannons();
                 this.actModules.launchDrones();
-                Thread.sleep(2000);
-                this.actModules.engageDrones(); // engage drones
+                this.actModules.engageDrones(this.waitEngageMS); // engage drones
                 this.walkThrough++; // go to case 3
             }
 
