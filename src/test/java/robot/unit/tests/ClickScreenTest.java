@@ -20,7 +20,7 @@ public class ClickScreenTest {
 
         try {
             cs.doubleClick(rect);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ClickScreenTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
