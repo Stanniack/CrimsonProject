@@ -19,7 +19,7 @@ public class TakeScreenshot extends RobotEvent {
 
     public void take(String path) {
         try {
-            Thread.sleep(SLEEP_MS2);
+            this.sleep(SLEEP_MS2);
 
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
@@ -27,14 +27,14 @@ public class TakeScreenshot extends RobotEvent {
 
             ImageIO.write(bf, "png", new File(path));
 
-        } catch (InterruptedException | IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void take() {
         try {
-            Thread.sleep(SLEEP_MS2);
+            this.sleep(SLEEP_MS2);
 
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
@@ -44,13 +44,12 @@ public class TakeScreenshot extends RobotEvent {
 
             ImageIO.write(bf, "png", new File(path));
 
-        } catch (InterruptedException | IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void take2() {
-
         try {
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
@@ -66,7 +65,6 @@ public class TakeScreenshot extends RobotEvent {
     }
 
     public void take2(String path) {
-
         try {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 
@@ -80,7 +78,6 @@ public class TakeScreenshot extends RobotEvent {
     }
 
     public void takeSRGB() {
-
         try {
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
 
@@ -98,5 +95,4 @@ public class TakeScreenshot extends RobotEvent {
             Logger.getLogger(TakeScreenshot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

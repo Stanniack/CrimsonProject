@@ -22,7 +22,7 @@ public class ActionModules {
     public void propulsion() {
         try {
             this.keyBoardEvents.clickKey(KeyEvent.VK_F3);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -30,7 +30,7 @@ public class ActionModules {
     public void launchDrones() {
         try {
             this.keyBoardEvents.pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_F);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -38,16 +38,20 @@ public class ActionModules {
     public void engageDrones() {
         try {
             this.keyBoardEvents.clickKey(KeyEvent.VK_F);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void engageDrones(int waitMS) {
         try {
-            Thread.sleep(waitMS);
+            try {
+                Thread.sleep(waitMS);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ActionModules.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.keyBoardEvents.clickKey(KeyEvent.VK_F);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -65,7 +69,7 @@ public class ActionModules {
     public void returnAndOrbitDrones() {
         try {
             this.keyBoardEvents.pressKey(KeyEvent.VK_SHIFT, KeyEvent.VK_ALT, KeyEvent.VK_R);
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -18,12 +18,15 @@ import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
+import com.mycompany.crimsonproject.interfaces.Sleeper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Devmachine
  */
-public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier {
+public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier, Sleeper {
 
 // Attributes related to graphical interface and screen manipulation
     private final R1920x1080 resolution;
@@ -45,7 +48,6 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private static final int LEFTCLICK = 1;
     private static final int HOMESTATION = 0;
     private static final int MININGBOT = 1;
-    
 
 // Attributes related to warping and timing
     private final int waitForWarp_MS;
@@ -88,7 +90,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         this.walkThrough = 0;
     }
 
-    public void startScript() throws IOException, TesseractException, AWTException, InterruptedException {
+    public void startScript() throws IOException, TesseractException, AWTException {
 
         while (this.walkThrough <= STEPS) {
             // Call method
@@ -102,7 +104,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         }
     }
 
-    private void flowScript() throws InterruptedException, AWTException, IOException, TesseractException {
+    private void flowScript() throws AWTException, IOException, TesseractException {
 
         switch (this.walkThrough) {
 
@@ -155,18 +157,19 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         }
     }
 
-    private boolean clickDestinationLabel(boolean isRectColorVerifier, Rectangle label, int option, String itemLabel) throws IOException, TesseractException, InterruptedException, AWTException {
+    private boolean clickDestinationLabel(boolean isRectColorVerifier, Rectangle label, int option, String itemLabel)
+            throws IOException, TesseractException, AWTException {
         return (this.option == option)
                 && (isRectColorVerifier
                         ? this.rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, this.rgbr.getMinDestination(), this.rgbr.getMaxDestination())
                         : this.rectangleVerifier(label, itemLabel, RIGHTCLICK));
     }
 
-    private void checkWarpable() throws InterruptedException, IOException {
+    private void checkWarpable() throws IOException {
         if (this.isCheckWarpable) {
             Long flagTimeWarp = System.currentTimeMillis();
             boolean isWarping = true;
-            Thread.sleep(5000);
+            this.sleep(5000);
 
             while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (this.waitForWarp_MS * 2)) {
                 this.takeScreenshot.take2();
@@ -179,10 +182,10 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             if (!isWarping) {
                 this.takeScreenshot.take2(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\warpable.png");
             }
-            Thread.sleep(this.option == HOMESTATION ? 12000 : 1000);
+            this.sleep(this.option == HOMESTATION ? 12000 : 1000);
 
         } else {
-            Thread.sleep(this.waitForWarp_MS); // Sleep until reach the destination
+            this.sleep(this.waitForWarp_MS); // Sleep until reach the destination
         }
     }
 
@@ -203,13 +206,13 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         return new Quartet<>(0, 0, 0, 0);
     }
 
-    private boolean openLocation() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean openLocation() throws IOException, TesseractException, AWTException {
         this.keyboardEvents.clickKey(KeyEvent.VK_L);
         return true;
     }
 
     @Override
-    public boolean rectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean rectangleVerifier(Rectangle rect, String itemName, int chosenClick) throws AWTException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
@@ -225,7 +228,8 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     }
 
     @Override
-    public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB) throws AWTException, InterruptedException, IOException {
+    public boolean rectangleAndColorVerifier(Rectangle rect, String itemName, int chosenClick, Triplet<Integer, Integer, Integer> minRGB, Triplet<Integer, Integer, Integer> maxRGB)
+            throws AWTException, IOException {
         /* For a millis seconds to take another screenshot, if not waiting by, the new screenshot doesn't take the right float window for click. */
         if (rect != null && this.findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, minRGB, maxRGB)) {
             System.out.printf("Rect found (%s): Width: %d and Height: %d - (%d, %d)\n\n", itemName, rect.width, rect.height, rect.x, rect.y);
@@ -238,6 +242,15 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SetDestination.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

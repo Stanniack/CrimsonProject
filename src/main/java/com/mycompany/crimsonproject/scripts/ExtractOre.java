@@ -25,12 +25,13 @@ import net.sourceforge.tess4j.TesseractException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
+import com.mycompany.crimsonproject.interfaces.Sleeper;
 
 /**
  *
  * @author Devmachine
  */
-public class ExtractOre implements RectangleVerifier {
+public class ExtractOre implements RectangleVerifier, Sleeper {
 
 // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
@@ -165,7 +166,7 @@ public class ExtractOre implements RectangleVerifier {
         return isRunnable;
     }
 
-    private void flowScript() throws AWTException, InterruptedException, IOException, TesseractException {
+    private void flowScript() throws AWTException, IOException, TesseractException {
 
         switch (this.walkThrough) {
 
@@ -261,7 +262,7 @@ public class ExtractOre implements RectangleVerifier {
         }
     }
 
-    private boolean getAsteroids() throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean getAsteroids() throws IOException, TesseractException, AWTException {
         /* Reset Y list coordinates to 1081y */
         List<Integer> closestOreList = Arrays.asList(1081, 1081, 1081, 1081, 1081);
 
@@ -309,7 +310,7 @@ public class ExtractOre implements RectangleVerifier {
                 if (this.switchAstBelt) {
                     System.out.println("NO ASTEROID FOUND, SWITCHING ASTEROID BELT.");
                     this.actModules.returnDrones(0);
-                    Thread.sleep(WAITFORSWITCHASTBELT_MS);
+                    this.sleep(WAITFORSWITCHASTBELT_MS);
                     this.switchAstBelt();
 
                 } else {
@@ -340,7 +341,7 @@ public class ExtractOre implements RectangleVerifier {
                         deactivedCannons++;
                     }
 
-                } catch (InterruptedException | AWTException ex) {
+                } catch (AWTException ex) {
                     Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -359,17 +360,17 @@ public class ExtractOre implements RectangleVerifier {
                         this.shadeOfGreen.getValue0(), this.shadeOfGreen.getValue1(), this.shadeOfGreen.getValue2())) {
 
                     this.keyboardEvents.clickKey(cannons.get(i));
-                    Thread.sleep(CANNON_SLEEP);
+                    this.sleep(CANNON_SLEEP);
                     this.keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("The cannon was active. Press 2x cannon " + i);
 
                 } else {
-                    Thread.sleep(CANNON_SLEEP); // Wait if cannon was canceled
+                    this.sleep(CANNON_SLEEP); // Wait if cannon was canceled
                     this.keyboardEvents.clickKey(cannons.get(i));
                     System.out.println("Just press 1x cannon " + i);
                 }
 
-            } catch (InterruptedException | AWTException ex) {
+            } catch (AWTException ex) {
                 Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -395,7 +396,7 @@ public class ExtractOre implements RectangleVerifier {
     }
 
     @Override
-    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) throws AWTException, InterruptedException {
+    public boolean rectangleVerifier(Rectangle rectangle, String itemName, int chosenClick) {
 
         if (rectangle != null) {
             System.out.printf("Rect found (%s) - Width: %d and Height: %d at coordinates (%d, %d)\n\n", itemName, rectangle.width, rectangle.height, rectangle.x, rectangle.y);
@@ -418,7 +419,7 @@ public class ExtractOre implements RectangleVerifier {
         return false;
     }
 
-    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects) throws IOException, TesseractException, AWTException, InterruptedException {
+    private void verifyInvalidTarget(List<Pair<Integer, Integer>> listWxHrects) throws IOException, TesseractException, AWTException {
         boolean isClicked = false;
         int mOe = 195; // margin of error
 
@@ -509,7 +510,16 @@ public class ExtractOre implements RectangleVerifier {
                 }
             }
 
-        } catch (IOException | TesseractException | AWTException | InterruptedException ex) {
+        } catch (IOException | TesseractException | AWTException ex) {
+            Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ex) {
             Logger.getLogger(ExtractOre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

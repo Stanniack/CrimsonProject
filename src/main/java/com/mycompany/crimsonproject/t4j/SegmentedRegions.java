@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.t4j;
 
+import com.mycompany.crimsonproject.interfaces.Sleeper;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.sort.RectComparatorByY;
 import com.mycompany.crimsonproject.resolutions.R1920x1080;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
 import net.sourceforge.tess4j.Tesseract;
@@ -23,7 +26,7 @@ import org.javatuples.Quartet;
  *
  * @author Devmachine
  */
-public class SegmentedRegions {
+public class SegmentedRegions implements Sleeper {
 
     private final Tesseract instance;
     private BufferedImage bf;
@@ -61,17 +64,16 @@ public class SegmentedRegions {
      * rectangle or return NULL
      * @throws IOException
      * @throws TesseractException
-     * @throws java.lang.InterruptedException
      * @throws java.awt.AWTException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, InterruptedException, AWTException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, AWTException {
         List<Rectangle> result;
 
         try {
             result = this.getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            Thread.sleep(20000);
+            this.sleep(20000);
             new TakeScreenshot().take();
             result = this.getSegmentedFile();
         }
@@ -97,17 +99,16 @@ public class SegmentedRegions {
      * rectangle or return NULL
      * @throws IOException
      * @throws TesseractException
-     * @throws java.lang.InterruptedException
      * @throws java.awt.AWTException
      */
-    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, InterruptedException, AWTException {
+    public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, AWTException {
         List<Rectangle> result;
 
         try {
             result = this.getSegmentedFile();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            Thread.sleep(20000);
+            this.sleep(20000);
             new TakeScreenshot().take();
             result = this.getSegmentedFile();
         }
@@ -189,5 +190,14 @@ public class SegmentedRegions {
         }
 
         return hm;
+    }
+
+    @Override
+    public void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

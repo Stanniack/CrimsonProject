@@ -8,34 +8,33 @@ import java.awt.AWTException;
  */
 public class KeyboardEvents extends RobotEvent {
 
-    public void clickKey(int keyEvent1) throws AWTException, InterruptedException {
-        Thread.sleep(SLEEP_MS);
+    public void clickKey(int keyEvent1) throws AWTException {
+        this.sleep(SLEEP_MS);
         this.bot.keyPress(keyEvent1);
         this.bot.keyRelease(keyEvent1);
     }
 
-    public void pressKey(int keyEvent1, int keyEvent2) throws AWTException, InterruptedException {
-        Thread.sleep(SLEEP_MS);
+    public void pressKey(int keyEvent1, int keyEvent2) throws AWTException {
+        this.sleep(SLEEP_MS);
         this.bot.keyPress(keyEvent1);
         this.bot.keyPress(keyEvent2);
 
-        Thread.sleep(SLEEP_MS);
+        this.sleep(SLEEP_MS);
         this.bot.keyRelease(keyEvent1);
         this.bot.keyRelease(keyEvent2);
 
     }
 
-    public void pressKey(int keyEvent1, int keyEvent2, int keyEvent3) throws AWTException, InterruptedException {
-        Thread.sleep(SLEEP_MS);
+    public void pressKey(int keyEvent1, int keyEvent2, int keyEvent3) throws AWTException {
+        this.sleep(SLEEP_MS);
         this.bot.keyPress(keyEvent1);
         this.bot.keyPress(keyEvent2);
         this.bot.keyPress(keyEvent3);
 
-        Thread.sleep(SLEEP_MS);
+        this.sleep(SLEEP_MS);
         this.bot.keyRelease(keyEvent1);
         this.bot.keyRelease(keyEvent2);
         this.bot.keyRelease(keyEvent3);
 
     }
-
 }

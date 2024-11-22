@@ -30,7 +30,7 @@ public class KeyBoardEventsTest {
             KeyboardEvents kbe = new KeyboardEvents();
             kbe.clickKey(KeyEvent.VK_F1);
 
-        } catch (AWTException | InterruptedException ex) {
+        } catch (AWTException ex) {
             Logger.getLogger(KeyBoardEventsTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
