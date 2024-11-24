@@ -1,5 +1,6 @@
 package com.mycompany.crimsonproject.scripts;
 
+import com.mycompany.crimsonproject.IOlogs.JsonLogs;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
@@ -40,9 +41,11 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
 
 // switch-case behaviour attributes
     private boolean isRunnable = true;
+    private boolean isStaticClicker = true;
     private int walkThrough = 0;
     private static final int STEPS = 2;
     private NetworkConnectionHandler connectionHandler;
+    private JsonLogs jsonLogs;
 
     public CargoDeposit() {
         resolution = new R1920x1080Small();
@@ -53,6 +56,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         segmentedRegions = new SegmentedRegions();
         takeScreenshot = new TakeScreenshot();
         connectionHandler = new NetworkConnectionHandler();
+        jsonLogs = new JsonLogs();
     }
 
     public boolean startScript() throws InterruptedException, IOException, AWTException, TesseractException {
@@ -94,7 +98,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 2 -> {
                 Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockDeadZoneTuple());
 
-                if (rectangleVerifier(undockButton, "UNDOCKBUTTON", LEFTCLICK)) {
+                if ((isStaticClicker && staticCheck(undockButton)) || this.dynamicCheck(undockButton)) {
                     walkThrough++;
                 } else {
                     clickEvents.dragScreen();
@@ -134,5 +138,37 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             return true;
         }
         return false;
+    }
+
+    private boolean isClickerDeprecated(String clicker) {
+        return jsonLogs.readClicker(clicker) == null || (boolean) jsonLogs.readClicker(clicker).get("deprecated");
+    }
+
+    private boolean saveClicker(Rectangle rect, String clicker) {
+        return jsonLogs.saveClicker(rect, clicker);
+    }
+
+    private Rectangle getClicker(String clicker) {
+        return jsonLogs.getClicker(clicker);
+    }
+
+    private boolean staticCheck(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
+        // If true, search a clicker and save it
+        if (isClickerDeprecated("undock")) {
+
+            // if true save clicker to another cycle, else there is a clicker saved
+            if (dynamicCheck(undockButton)) {
+                saveClicker(undockButton, "undock");
+                return true;
+            }
+
+        } else {
+            return rectangleVerifier(this.getClicker("undock"), "STATIC CLICKER UNDOCK BUTTON", LEFTCLICK);
+        }
+        return false;
+    }
+
+    private boolean dynamicCheck(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
+        return rectangleVerifier(undockButton, "DYNAMICALLY IDENTIFIED UNDOCK BUTTON", LEFTCLICK);
     }
 }
