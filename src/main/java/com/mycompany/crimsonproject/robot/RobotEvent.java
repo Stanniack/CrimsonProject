@@ -35,7 +35,5 @@ abstract class RobotEvent {
     public void sleep(long milliseconds) {
         SleeperHandler sleeper = new SleeperHandler();
         sleeper.sleep(milliseconds);
-
     }
-
 }
