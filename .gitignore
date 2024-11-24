@@ -11,3 +11,4 @@ src/main/java/com/mycompany/crimsonproject/soundlogs/MainAudio.java
 src/main/java/com/mycompany/crimsonproject/MainPC2.java
 src/main/java/com/mycompany/crimsonproject/screenshots/warpable.png
 src/main/java/com/mycompany/crimsonproject/IOlogs/logsfiles/lostconnection.txt
+src/main/java/com/mycompany/crimsonproject/IOlogs/logsfiles/switchbelt.txt
