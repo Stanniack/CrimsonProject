@@ -11,7 +11,7 @@ import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.soundlogs.SoundAlert;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
 import com.mycompany.crimsonproject.utils.RGBrange;
-import com.mycompany.crimsonproject.resolutions.R1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080Small;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -37,7 +37,7 @@ public class ExtractOre implements RectangleVerifier {
 // Attributes related to graphical interface and screen manipulation
     private Rectangle target;
     private RGBrange rgbr = null;
-    private R1920x1080 resolution = null;
+    private R1920x1080Small resolution = null;
     private ActionModules actModules;
     private FindPixels findPixels;
     private ClickScreenEvents clickEvents;
@@ -128,7 +128,7 @@ public class ExtractOre implements RectangleVerifier {
         this.shadeOfGreen = shadesOfGreen;
 
         rgbr = new RGBrange();
-        resolution = new R1920x1080();
+        resolution = new R1920x1080Small();
         actModules = new ActionModules();
         findPixels = new FindPixels();
         clickEvents = new ClickScreenEvents();
@@ -265,8 +265,8 @@ public class ExtractOre implements RectangleVerifier {
         Entry<String, Rectangle> betterAteroid = null;
         priorityOreValue = 0;
 
-        HashMap<String, Rectangle> rectResult = segmentedRegions.getAllOres(R1920x1080.getOVERVIEWMINING_X1(), R1920x1080.getOVERVIEWMINING_X2_W(),
-                R1920x1080.getOVERVIEWMINING_Y1(), R1920x1080.getOVERVIEWMINING_Y2_H());
+        HashMap<String, Rectangle> rectResult = segmentedRegions.getAllOres(R1920x1080Small.getOVERVIEWMINING_X1(), R1920x1080Small.getOVERVIEWMINING_X2_W(),
+                R1920x1080Small.getOVERVIEWMINING_Y1(), R1920x1080Small.getOVERVIEWMINING_Y2_H());
 
         System.out.println("Rectangle list size: " + rectResult.size() + "\n");
 
@@ -328,8 +328,8 @@ public class ExtractOre implements RectangleVerifier {
             for (int i = 0; i < cannons.size(); i++) {
                 try {
                     if (!isCannonActivated(i, attempts,
-                            (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
-                            R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                            (Arrays.asList(R1920x1080Small.getF1CANNON1_X(), R1920x1080Small.getF2CANNON2_X())), R1920x1080Small.getFNCANNON_Y(),
+                            R1920x1080Small.getCANNON_H1(), R1920x1080Small.getCANNON_W1(),
                             shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
                         keyboardEvents.clickKey(cannons.get(i));
@@ -351,8 +351,8 @@ public class ExtractOre implements RectangleVerifier {
         for (int i = 0; i < cannons.size(); i++) {
             try {
                 if (isCannonActivated(i, attempts,
-                        (Arrays.asList(R1920x1080.getF1CANNON1_X(), R1920x1080.getF2CANNON2_X())), R1920x1080.getFNCANNON_Y(),
-                        R1920x1080.getCANNON_H1(), R1920x1080.getCANNON_W1(),
+                        (Arrays.asList(R1920x1080Small.getF1CANNON1_X(), R1920x1080Small.getF2CANNON2_X())), R1920x1080Small.getFNCANNON_Y(),
+                        R1920x1080Small.getCANNON_H1(), R1920x1080Small.getCANNON_W1(),
                         shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
                     keyboardEvents.clickKey(cannons.get(i));
@@ -392,9 +392,8 @@ public class ExtractOre implements RectangleVerifier {
 
     private boolean checkPixelsAprroaching() throws IOException {
 
-        boolean approaching = findPixels.findByColor(
-                R1920x1080.getAPPROACHING_X1(), R1920x1080.getAPPROACHING_Y1(),
-                R1920x1080.getAPPROACHING_W1(), R1920x1080.getAPPROACHING_H1(),
+        boolean approaching = findPixels.findByColor(R1920x1080Small.getAPPROACHING_X1(), R1920x1080Small.getAPPROACHING_Y1(),
+                R1920x1080Small.getAPPROACHING_W1(), R1920x1080Small.getAPPROACHING_H1(),
                 255, 255, 255);
 
         if (approaching == true) {
@@ -448,10 +447,10 @@ public class ExtractOre implements RectangleVerifier {
 
     private void verifyShipLife() {
         try {
-            int row = R1920x1080.getBEINGATTACKED_X1();
-            int column = R1920x1080.getBEINGATTACKED_Y1();
-            int width = R1920x1080.getBEINGATTACKED_W1();
-            int height = R1920x1080.getBEINGATTACKED_H1();
+            int row = R1920x1080Small.getBEINGATTACKED_X1();
+            int column = R1920x1080Small.getBEINGATTACKED_Y1();
+            int width = R1920x1080Small.getBEINGATTACKED_W1();
+            int height = R1920x1080Small.getBEINGATTACKED_H1();
 
             if (findPixels.findByRangeColor(row, column, width, height, rgbr.getMinBeingAttacked(), rgbr.getMaxBeingAttacked())) {
                 new SoundAlert().start(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\soundlogs\\soundfiles\\attack1.wav", 1);

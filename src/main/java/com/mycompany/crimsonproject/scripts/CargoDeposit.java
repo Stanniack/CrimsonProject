@@ -5,7 +5,7 @@ import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.resolutions.R1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080Small;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier {
 
 // Attributes related to graphical interface and screen manipulation
-    private final R1920x1080 resolution;
+    private final R1920x1080Small resolution;
     private final RGBrange rgbr;
     private final FindPixels findPixels;
     private final ClickScreenEvents clickEvents;
@@ -45,7 +45,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private NetworkConnectionHandler connectionHandler;
 
     public CargoDeposit() {
-        resolution = new R1920x1080();
+        resolution = new R1920x1080Small();
         rgbr = new RGBrange();
 
         findPixels = new FindPixels();

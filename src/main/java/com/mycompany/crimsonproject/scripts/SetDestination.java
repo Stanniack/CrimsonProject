@@ -7,7 +7,7 @@ import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
-import com.mycompany.crimsonproject.resolutions.R1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080Small;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -28,7 +28,7 @@ import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
 public class SetDestination implements RectangleVerifier, RectangleAndColorVerifier {
 
 // Attributes related to graphical interface and screen manipulation
-    private final R1920x1080 resolution;
+    private final R1920x1080Small resolution;
     private final RGBrange rgbr;
     private final FindPixels findPixels;
     private final ClickScreenEvents clickEvents;
@@ -78,7 +78,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         this.isCheckWarpable = isCheckWarpable;
 
         rgbr = new RGBrange();
-        resolution = new R1920x1080();
+        resolution = new R1920x1080Small();
         this.whiteRangeRGB = whiteRangeRGB;
         findPixels = new FindPixels();
         clickEvents = new ClickScreenEvents();
@@ -180,9 +180,8 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
             while (isWarping || (System.currentTimeMillis() - flagTimeWarp) < (waitForWarp_MS * 2)) {
                 takeScreenshot.take2();
-                isWarping = findPixels.greaterThan(
-                        R1920x1080.getCHECKPATH_X1(), R1920x1080.getCHECKPATH_Y1(),
-                        R1920x1080.getCHECKPATH_W1(), R1920x1080.getCHECKPATH_H1(),
+                isWarping = findPixels.greaterThan(R1920x1080Small.getCHECKPATH_X1(), R1920x1080Small.getCHECKPATH_Y1(),
+                        R1920x1080Small.getCHECKPATH_W1(), R1920x1080Small.getCHECKPATH_H1(),
                         whiteRangeRGB.getValue0(), whiteRangeRGB.getValue1(), whiteRangeRGB.getValue2());
             }
 

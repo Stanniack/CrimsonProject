@@ -1,7 +1,7 @@
 package com.mycompany.crimsonproject;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
-import com.mycompany.crimsonproject.resolutions.R1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080Small;
 import com.mycompany.crimsonproject.scripts.SetDestination;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -27,9 +27,9 @@ public class MainSetDestination {
 
         try {
             Thread.sleep(4000);
-            List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(path));
+            List<Pair<Integer, Integer>> astBelt = new R1920x1080Small().getAstBeltsMap().get(new TextLogs().readLine(path));
             //new SetDestination(astBelt, GOTO_MININGBOT, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192)).startScript();
-            new SetDestination(new R1920x1080().getHomeStationList(), GOTO_HOMESTATION, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192))
+            new SetDestination(new R1920x1080Small().getHomeStationList(), GOTO_HOMESTATION, waitForWarp, isCheckWarpable, new Triplet<>(192, 192, 192))
                     .startScript();
 
         } catch (InterruptedException | IOException | AWTException | TesseractException ex) {

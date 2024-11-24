@@ -20,7 +20,7 @@ import org.javatuples.Quartet;
  *
  * DEADZONE INFO: Pixels amount to add in the BLOCKSCREEN for caution or not
  */
-public class R1920x1080 {
+public class R1920x1080Small {
 
     /*
      * *****************************************************************************

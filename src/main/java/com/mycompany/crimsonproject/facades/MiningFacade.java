@@ -2,7 +2,7 @@ package com.mycompany.crimsonproject.facades;
 
 import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.exceptions.EndOfScriptException;
-import com.mycompany.crimsonproject.resolutions.R1920x1080;
+import com.mycompany.crimsonproject.resolutions.R1920x1080Small;
 import com.mycompany.crimsonproject.scripts.CargoDeposit;
 import com.mycompany.crimsonproject.scripts.ExtractOre;
 import com.mycompany.crimsonproject.scripts.SetDestination;
@@ -141,7 +141,7 @@ public class MiningFacade {
 
     private boolean gotoAstBelt() throws IOException, TesseractException, AWTException, InterruptedException {
         Thread.sleep(waitCargoDepositMS); // wait ship left the station
-        List<Pair<Integer, Integer>> astBelt = new R1920x1080().getAstBeltsMap().get(new TextLogs().readLine(astBeltPath));
+        List<Pair<Integer, Integer>> astBelt = new R1920x1080Small().getAstBeltsMap().get(new TextLogs().readLine(astBeltPath));
         setDestination = new SetDestination(astBelt, GOTO_MININGBOT, waitForWarpMS, isCheckWarpable, whiteRGB);
         return setDestination.startScript();
     }
