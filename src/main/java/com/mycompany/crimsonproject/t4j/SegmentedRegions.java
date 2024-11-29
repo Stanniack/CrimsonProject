@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
 import net.sourceforge.tess4j.Tesseract;
@@ -72,7 +74,7 @@ public class SegmentedRegions {
         try {
             result = getSegmentedFile();
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+             Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
             sleeper.sleep(20000);
             new TakeScreenshot().take();
             result = getSegmentedFile();
@@ -95,7 +97,7 @@ public class SegmentedRegions {
      *
      * @param listOfWidthAndHeight list containing pair of tuples with the width
      * and height
-     * @return If there is a rectangle compatible with the input, it will return
+     * @return if there is a rectangle compatible with the input, it will return
      * rectangle or return NULL
      * @throws IOException
      * @throws TesseractException
@@ -107,7 +109,7 @@ public class SegmentedRegions {
         try {
             result = getSegmentedFile();
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
             sleeper.sleep(20000);
             new TakeScreenshot().take();
             result = getSegmentedFile();
@@ -125,14 +127,14 @@ public class SegmentedRegions {
 
     /**
      *
-     * @param x is the first horizental coordinate on the screen
-     * @param x2_w is the final horizental coordinate where x and x2 are the
-     * scope for the loop to pass
-     * @param y is the first vertical coordinate on the screen
-     * @param y2_h is the final vertical coordinate where y and y2 are the scope
+     * @param x first x_axis coordinate on the screen
+     * @param x2_w final x_axis coordinate where x and x2 are the scope for the
+     * loop to pass
+     * @param y is the first y_axis coordinate on the screen
+     * @param y2_h is the final y_axis coordinate where y and y2 are the scope
      * for the loop to pass
-     * @return the method return all asteroid found by priority: V0 is the lower
-     * priority and Vn is the highest priority
+     * @return return all asteroid found by priority: V0 is the lower priority
+     * and Vn is the highest priority
      * @throws java.io.IOException
      * @throws net.sourceforge.tess4j.TesseractException
      */
