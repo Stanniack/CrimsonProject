@@ -17,8 +17,8 @@ public class RGBrange {
     private static final int BEINGATTACKED_MAXGREEN = 18;
     private static final int BEINGATTACKED_MAXBLUE = 18;
 
-    private final Triplet<Integer, Integer, Integer> minDestination = new Triplet<>(DESTINATION_MINRED, DESTINATION_MINGREEN, DESTINATION_MINBLUE);
-    private final Triplet<Integer, Integer, Integer> maxDestination = new Triplet<>(DESTINATION_MAXRED, DESTINATION_MAXGREEN, DESTINATION_MAXBLUE);
+    private final Triplet<Integer, Integer, Integer> minWhiteLabel = new Triplet<>(DESTINATION_MINRED, DESTINATION_MINGREEN, DESTINATION_MINBLUE);
+    private final Triplet<Integer, Integer, Integer> maxWhiteLabel = new Triplet<>(DESTINATION_MAXRED, DESTINATION_MAXGREEN, DESTINATION_MAXBLUE);
     private static final int DESTINATION_MINRED = 178;
     private static final int DESTINATION_MINGREEN = 179;
     private static final int DESTINATION_MINBLUE = 179;
@@ -91,12 +91,12 @@ public class RGBrange {
     private static final int MAXPLAYERNPCCOLOR_GREEN = 107;
     private static final int MAXPLAYERNPCCOLOR_BLUE = 107;
 
-    public Triplet<Integer, Integer, Integer> getMinDestination() {
-        return minDestination;
+    public Triplet<Integer, Integer, Integer> getMinWhiteLabel() {
+        return minWhiteLabel;
     }
 
-    public Triplet<Integer, Integer, Integer> getMaxDestination() {
-        return maxDestination;
+    public Triplet<Integer, Integer, Integer> getMaxWhiteLabel() {
+        return maxWhiteLabel;
     }
 
     public Triplet<Integer, Integer, Integer> getMaxInfo() {

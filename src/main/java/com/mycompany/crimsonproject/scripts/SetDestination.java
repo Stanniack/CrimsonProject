@@ -168,7 +168,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             throws IOException, TesseractException, AWTException {
         return (this.option == option)
                 && (isRectColorVerifier
-                        ? rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, rgbr.getMinDestination(), rgbr.getMaxDestination())
+                        ? rectangleAndColorVerifier(label, itemLabel, LEFTCLICK, rgbr.getMinWhiteLabel(), rgbr.getMaxWhiteLabel())
                         : rectangleVerifier(label, itemLabel, RIGHTCLICK));
     }
 
