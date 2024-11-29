@@ -98,7 +98,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 2 -> {
                 Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockDeadZoneTuple());
 
-                if ((isStaticClicker && staticCheck(undockButton)) || this.dynamicCheck(undockButton)) {
+                if ((isStaticClicker && staticCheck(undockButton)) || dynamicCheck(undockButton)) {
                     walkThrough++;
                 } else {
                     clickEvents.dragScreen();
