@@ -82,7 +82,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 0 -> {
                 hangarButton = segmentedRegions.getRectangle(resolution.getHangarList(), resolution.getInventoryDeadzoneTuple());
 
-                if (rectangleAndColorVerifier(hangarButton, "HANGAR", 0, rgbr.getMinDestination(), rgbr.getMaxDestination())) {
+                if (rectangleAndColorVerifier(hangarButton, "HANGAR", 0, rgbr.getMinWhiteLabel(), rgbr.getMaxWhiteLabel())) {
                     walkThrough++;
                 } else {
                     clickEvents.dragScreen();
