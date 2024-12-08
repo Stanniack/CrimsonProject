@@ -27,7 +27,7 @@ public class WindowsServiceHandler {
      * @param ms The time (in milliseconds) to wait between checks when the
      * conditions are not met.
      */
-    public void windowsVerifier(Integer ms) {
+    public void windowsChecker(Integer ms) {
         Triplet<String, String, Boolean> GUIstats = wService.activeWindowsChecker();
         boolean constainsGUIname = GUIstats.getValue0().contains(GUIname);
         boolean equalsExe = GUIstats.getValue1().equals(exeName);
