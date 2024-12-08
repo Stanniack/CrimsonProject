@@ -11,12 +11,14 @@ public class WindowsServiceHandler {
 
     private String GUIname = "EVE";
     private String exeName = "exefile.exe";
+
     private WindowsService wService;
     private SleeperHandler sleeper;
 
     public WindowsServiceHandler() {
-        this.wService = wService = new WindowsService();
+        this.wService = new WindowsService();
         this.sleeper = sleeper = new SleeperHandler();
+
     }
 
     /**
@@ -29,13 +31,10 @@ public class WindowsServiceHandler {
      */
     public void windowsChecker(Integer ms) {
         Triplet<String, String, Boolean> GUIstats = wService.activeWindowsChecker();
-        boolean constainsGUIname = GUIstats.getValue0().contains(GUIname);
-        boolean equalsExe = GUIstats.getValue1().equals(exeName);
-        boolean isFullscreen = GUIstats.getValue2();
-        System.out.println(!(constainsGUIname && equalsExe && isFullscreen) ? "The script was interupted. Check your EVE.exe" : null);
 
-        while (!(constainsGUIname && equalsExe && isFullscreen)) {
+        while (GUIstats != null && !(GUIstats.getValue0().contains(GUIname) && GUIstats.getValue1().equals(exeName) && GUIstats.getValue2())) {
             sleeper.sleep(ms);
+            GUIstats = wService.activeWindowsChecker();
         }
     }
 }
