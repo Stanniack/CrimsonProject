@@ -3,6 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.IOlogs.JsonLogs;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
+import com.mycompany.crimsonproject.handlers.WindowsServiceHandler;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
 import com.mycompany.crimsonproject.t4j.SegmentedRegions;
@@ -46,6 +47,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private static final int STEPS = 2;
     private NetworkConnectionHandler connectionHandler;
     private JsonLogs jsonLogs;
+    private WindowsServiceHandler wHandler;
 
     public CargoDeposit() {
         resolution = new R1920x1080Small();
@@ -57,13 +59,16 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         takeScreenshot = new TakeScreenshot();
         connectionHandler = new NetworkConnectionHandler();
         jsonLogs = new JsonLogs();
+        wHandler = new WindowsServiceHandler();
+
     }
 
     public boolean startScript() throws InterruptedException, IOException, AWTException, TesseractException {
 
         while (walkThrough <= STEPS) {
-            // If there is net, continue script
-            if (connectionHandler.networkVerifier()) {
+
+            if (connectionHandler.networkVerifier()) { // if there is net, continue script
+                wHandler.windowsChecker(500);
                 takeScreenshot.take();
                 flowScript();
 

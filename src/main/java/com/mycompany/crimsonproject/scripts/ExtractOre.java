@@ -4,6 +4,7 @@ import com.mycompany.crimsonproject.IOlogs.TextLogs;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
 import com.mycompany.crimsonproject.handlers.SleeperHandler;
+import com.mycompany.crimsonproject.handlers.WindowsServiceHandler;
 import com.mycompany.crimsonproject.modules.ActionModules;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
@@ -45,6 +46,7 @@ public class ExtractOre implements RectangleVerifier {
     private SegmentedRegions segmentedRegions;
     private TakeScreenshot takeScreenshot;
     private SleeperHandler sleeper;
+    private WindowsServiceHandler wHandler;
 
 // Attributes for configurations and states
     private SetDestination setDestination;
@@ -137,6 +139,7 @@ public class ExtractOre implements RectangleVerifier {
         takeScreenshot = new TakeScreenshot();
         connectionHandler = new NetworkConnectionHandler();
         sleeper = new SleeperHandler();
+        wHandler = new WindowsServiceHandler();
     }
 
     public boolean startScript() throws IOException, TesseractException, AWTException, InterruptedException {
@@ -144,14 +147,16 @@ public class ExtractOre implements RectangleVerifier {
         timeStartFilled = System.currentTimeMillis();
 
         while (walkThrough <= STEPS) {
-            // Call method
-            if (connectionHandler.networkVerifier()) {
+
+            if (connectionHandler.networkVerifier()) { // if there is net, continue script
+                wHandler.windowsChecker(500);
                 takeScreenshot.take();
                 verifyShipLife();
                 flowScript();
                 verifyInvalidTarget(resolution.getInvalidTargetList());
 
                 if (walkThrough > 2 && walkThrough < STEPS) {
+                    wHandler.windowsChecker(500);
                     checkCannonsAction();
                 }
             } else {
@@ -333,7 +338,7 @@ public class ExtractOre implements RectangleVerifier {
                             shadeOfGreen.getValue0(), shadeOfGreen.getValue1(), shadeOfGreen.getValue2())) {
 
                         keyboardEvents.clickKey(cannons.get(i));
-                        System.out.println("\nCannon " + (i + 1) + " was deactived. Activating again.");
+                        System.out.println("\nCannon " + (i + 1) + " was deactivated. Activating again.");
                         deactivedCannons++;
                     }
 

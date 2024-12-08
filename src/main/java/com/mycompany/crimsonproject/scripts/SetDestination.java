@@ -3,6 +3,7 @@ package com.mycompany.crimsonproject.scripts;
 import com.mycompany.crimsonproject.findpixels.FindPixels;
 import com.mycompany.crimsonproject.handlers.NetworkConnectionHandler;
 import com.mycompany.crimsonproject.handlers.SleeperHandler;
+import com.mycompany.crimsonproject.handlers.WindowsServiceHandler;
 import com.mycompany.crimsonproject.robot.ClickScreenEvents;
 import com.mycompany.crimsonproject.robot.KeyboardEvents;
 import com.mycompany.crimsonproject.robot.TakeScreenshot;
@@ -59,6 +60,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private int walkThrough = 0;
     private static final int STEPS = 4;
     private NetworkConnectionHandler connectionHandler;
+    private WindowsServiceHandler wHandler;
 
     /**
      * @param chosenDest is a list of Pair<Integer, Integer>
@@ -87,6 +89,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
         keyboardEvents = new KeyboardEvents();
         connectionHandler = new NetworkConnectionHandler();
         sleeper = new SleeperHandler();
+        wHandler = new WindowsServiceHandler();
     }
 
     protected void setParameters(List<Pair<Integer, Integer>> chosenDest, int option) {
@@ -98,8 +101,9 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     public boolean startScript() throws IOException, TesseractException, AWTException {
 
         while (walkThrough <= STEPS) {
-            // If there is net, continue script
-            if (connectionHandler.networkVerifier()) {
+
+            if (connectionHandler.networkVerifier()) { // if there is net, continue script
+                wHandler.windowsChecker(500);
                 takeScreenshot.take();
                 flowScript();
 
