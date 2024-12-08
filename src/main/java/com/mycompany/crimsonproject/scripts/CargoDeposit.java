@@ -42,12 +42,12 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
 
 // switch-case behaviour attributes
     private boolean isRunnable = true;
-    private boolean isStaticClicker = true;
+    private final boolean isStaticClicker = true;
     private int walkThrough = 0;
     private static final int STEPS = 2;
-    private NetworkConnectionHandler connectionHandler;
-    private JsonLogs jsonLogs;
-    private WindowsServiceHandler wHandler;
+    private final NetworkConnectionHandler connectionHandler;
+    private final JsonLogs jsonLogs;
+    private final WindowsServiceHandler wHandler;
 
     public CargoDeposit() {
         resolution = new R1920x1080Small();
