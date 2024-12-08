@@ -77,6 +77,9 @@
 ### **Alpha v0.4.2 - 22/09/24**
 - Alternância entre 5 *asteroid belts* implementada.
 
+### **Alpha v0.4.3 - 08/12/24**
+- Pausa de script caso a resolução não seja full screen ou a instância do EVE não esteja em primeira plano
+
 ---
 
 ## **Bug Fixes**
@@ -103,3 +106,4 @@
 ### **Alpha v0.3.7 - 19/06/24**
 - Adicionado *sleep* para exceções no Tesseract.
 
+---
