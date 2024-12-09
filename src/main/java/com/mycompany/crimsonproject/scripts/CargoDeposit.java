@@ -103,7 +103,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             case 2 -> {
                 Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockDeadZoneTuple());
 
-                if ((isStaticClicker && staticCheck(undockButton)) || dynamicCheck(undockButton)) {
+                if ((isStaticClicker && staticChecker(undockButton)) || dynamicChecker(undockButton)) {
                     walkThrough++;
                 } else {
                     clickEvents.dragScreen();
@@ -157,12 +157,12 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         return jsonLogs.getClicker(clicker);
     }
 
-    private boolean staticCheck(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean staticChecker(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
         // If true, search a clicker and save it
         if (isClickerDeprecated("undock")) {
 
             // if true save clicker to another cycle, else there is a clicker saved
-            if (dynamicCheck(undockButton)) {
+            if (dynamicChecker(undockButton)) {
                 saveClicker(undockButton, "undock");
                 return true;
             }
@@ -173,7 +173,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         return false;
     }
 
-    private boolean dynamicCheck(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
+    private boolean dynamicChecker(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
         return rectangleVerifier(undockButton, "DYNAMICALLY IDENTIFIED UNDOCK BUTTON", LEFTCLICK);
     }
 }
