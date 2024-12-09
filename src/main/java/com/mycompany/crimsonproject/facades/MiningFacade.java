@@ -104,6 +104,9 @@ public class MiningFacade {
                 break;
             }
         }
+
+        // TODO reset switchbelt.txt
+        // TODO reset deprecated status .json
     }
 
     /**
@@ -121,6 +124,9 @@ public class MiningFacade {
                 break;
             }
         }
+
+        // TODO reset switchbelt.txt
+        // TODO reset deprecated status .json
     }
 
     private void flowScript() throws EndOfScriptException {
