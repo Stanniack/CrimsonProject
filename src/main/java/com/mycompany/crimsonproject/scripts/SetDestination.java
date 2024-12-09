@@ -59,8 +59,8 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
     private boolean isRunnable = true;
     private int walkThrough = 0;
     private static final int STEPS = 4;
-    private NetworkConnectionHandler connectionHandler;
-    private WindowsServiceHandler wHandler;
+    private final NetworkConnectionHandler connectionHandler;
+    private final WindowsServiceHandler wHandler;
 
     /**
      * @param chosenDest is a list of Pair<Integer, Integer>
