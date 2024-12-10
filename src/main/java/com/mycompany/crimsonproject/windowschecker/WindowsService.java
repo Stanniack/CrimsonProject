@@ -17,6 +17,11 @@ public class WindowsService {
     private String windowTitle; // Janela ativa
     private String exeName = ""; // Nome do executável
     private boolean isFullscreen; // Fullscreen?
+    private HWND foregroundWindow;
+
+    public WindowsService() {
+        foregroundWindow = User32.INSTANCE.GetForegroundWindow(); // Obtém a janela que está atualmente em primeiro plano
+    }
 
     /**
      * Checks the currently active window and returns information about it,
@@ -30,25 +35,76 @@ public class WindowsService {
      * found.
      */
     public Triplet<String, String, Boolean> activeWindowsChecker() {
-        HWND foregroundWindow = User32.INSTANCE.GetForegroundWindow(); // Obtém a janela que está atualmente em primeiro plano
 
         if (foregroundWindow != null) { // Verifica se a janela ativa foi identificada (não é nula)
 
+            windowTitle = currentWindowsTitle(); // Busca o título da janela em primeiro plano
+            exeName = currentExecutable(); // Obtém o nome do executável em primeiro plano
+            isFullscreen = isCurrentWindowFullscreen(); // Verifica se em primeiro plano está em full screen
+
+            return new Triplet<>(windowTitle, exeName, isFullscreen); // Retorna um Triplet com título da janela, nome do executável e se está em fullscreen
+        }
+
+        return null; // Retorna null caso não haja uma janela ativa
+    }
+
+    /**
+     * Returns the title of the currently active window in Windows.
+     *
+     * Uses the User32 library to get the foreground window title. If no window
+     * is in the foreground, returns an empty string.
+     *
+     * @return The title of the active window, or an empty string if none.
+     */
+    public String currentWindowsTitle() {
+
+        if (foregroundWindow != null) {
             char[] windowText = new char[512]; // Cria um buffer para armazenar o título da janela
             User32.INSTANCE.GetWindowText(foregroundWindow, windowText, 512); // Obtém o título da janela ativa usando o handle
-            windowTitle = Native.toString(windowText); // Converte o título da janela para uma String
+            return Native.toString(windowText);// Converte o título da janela para uma String
+        }
+        return "";
+    }
 
-            IntByReference processId = new IntByReference(); // Cria uma referência para armazenar o ID do processo associado à janela
-            User32.INSTANCE.GetWindowThreadProcessId(foregroundWindow, processId); // Obtém o ID do processo que criou a janela ativa
+    /**
+     * Checks if the currently active window is in fullscreen mode.
+     *
+     * Retrieves the window's position and compares it with the screen
+     * dimensions to determine if the window covers the entire screen.
+     *
+     * @return true if the window is fullscreen, false otherwise.
+     */
+    public boolean isCurrentWindowFullscreen() {
 
+        if (foregroundWindow != null) {
             RECT windowRect = new RECT(); // Cria um objeto RECT para armazenar as coordenadas da janela
             User32.INSTANCE.GetWindowRect(foregroundWindow, windowRect); // Obtém as dimensões (posição) da janela ativa
 
             int screenWidth = User32.INSTANCE.GetSystemMetrics(User32.SM_CXSCREEN); // Obtém a largura da tela
             int screenHeight = User32.INSTANCE.GetSystemMetrics(User32.SM_CYSCREEN); // Obtém a altura da tela
 
-            isFullscreen = (windowRect.left == 0 && windowRect.top == 0
+            return (windowRect.left == 0 && windowRect.top == 0
                     && windowRect.right == screenWidth && windowRect.bottom == screenHeight); // Verifica se a janela ocupa toda a tela
+        }
+        return false;
+    }
+
+    /**
+     * Retrieves the name of the executable associated with the currently active
+     * window.
+     *
+     * Obtains the process ID of the active window, then queries the process for
+     * its executable name.
+     *
+     * @return The name of the executable, or an empty string if it cannot be
+     * determined.
+     */
+    public String currentExecutable() {
+        String executableName = "";
+
+        if (foregroundWindow != null) {
+            IntByReference processId = new IntByReference(); // Cria uma referência para armazenar o ID do processo associado à janela
+            User32.INSTANCE.GetWindowThreadProcessId(foregroundWindow, processId); // Obtém o ID do processo que criou a janela ativa
 
             HANDLE process = Kernel32.INSTANCE.OpenProcess(
                     WinNT.PROCESS_QUERY_INFORMATION | WinNT.PROCESS_VM_READ, // Abre o processo para consulta de informações
@@ -58,14 +114,11 @@ public class WindowsService {
             if (process != null) { // Se o processo for aberto com sucesso
                 char[] exePath = new char[512]; // Cria um buffer para armazenar o caminho do executável
                 Psapi.INSTANCE.GetModuleBaseNameW(process, null, exePath, 512); // Obtém o nome do executável associado ao processo
-                exeName = Native.toString(exePath); // Converte o caminho do executável para uma String
+                executableName = Native.toString(exePath); // Converte o caminho do executável para uma String
                 Kernel32.INSTANCE.CloseHandle(process); // Fecha o handle do processo
             }
-
-            return new Triplet<>(windowTitle, exeName, isFullscreen); // Retorna um Triplet com título da janela, nome do executável e se está em fullscreen
         }
-
-        return null; // Retorna null caso não haja uma janela ativa
+        return executableName;
     }
 
 // Interfaces da User32.dll
