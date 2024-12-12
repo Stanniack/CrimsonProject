@@ -28,7 +28,7 @@ import org.javatuples.Quartet;
  */
 public class SegmentedRegions {
 
-    private final Tesseract instance;
+    private final Tesseract tesseract;
     private BufferedImage bf;
     private File imageFile;
     private final RGBrange rgbr;
@@ -39,34 +39,93 @@ public class SegmentedRegions {
         rgbr = new RGBrange();
         fhd = new R1920x1080Small();
         sleeper = new SleeperHandler();
-        instance = new Tesseract();
-        instance.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
-        instance.setLanguage("eng");
-        instance.setVariable("user_defined_dpi", "300");
+        tesseract = new Tesseract();
+        tesseract.setDatapath(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\datatreiners\\");
+        tesseract.setLanguage("eng");
+        tesseract.setVariable("user_defined_dpi", "300");
     }
 
+    /**
+     * Retrieves a list of segmented regions from an image file based on
+     * word-level segmentation.
+     *
+     * @return a list of {@code Rectangle} objects representing the bounding
+     * boxes of segmented regions.
+     * @throws IOException if there is an error reading the image file.
+     * @throws TesseractException if an error occurs during the OCR process.
+     */
     private List<Rectangle> getSegmentedFile() throws IOException, TesseractException {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
         imageFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\", "screenshot.png");
         bf = ImageIO.read(imageFile);
-        List<Rectangle> segmentedRegions = instance.getSegmentedRegions(bf, level);
+        List<Rectangle> segmentedRegions = tesseract.getSegmentedRegions(bf, level);
 
         return segmentedRegions;
     }
 
     /**
+     * Searches for a rectangle in the segmented regions that matches specific
+     * dimensions and positional constraints, and performs OCR on the found
+     * region.
      *
-     * @param listOfWidthAndHeight list containing pair of tuples with the width
-     * and height
-     * @param tupleBlockScreen a tuple of 4 containing the right coordinates of
-     * screen to search the rectangles
-     * @return If there is a rectangle compatible with the input, it will return
-     * rectangle or return NULL
-     * @throws IOException
-     * @throws TesseractException
-     * @throws java.awt.AWTException
+     * @param listOfWidthAndHeight a list of {@code Pair<Integer, Integer>}
+     * objects representing the target width and height dimensions.
+     * @param tupleBlockScreen a
+     * {@code Quartet<Integer, Integer, Integer, Integer>} specifying the x and
+     * y bounds for the rectangle's position.
+     * @return a {@code Pair<Rectangle, String>} where the first element is the
+     * matching {@code Rectangle} and the second element is the OCR result for
+     * that region.
+     * @throws IOException if an error occurs while reading the image file.
+     * @throws TesseractException if an error occurs during the OCR process.
+     * @throws AWTException if there is an issue with screen capture during
+     * fallback operations.
+     */
+    public Pair<Rectangle, String> getOcrRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, AWTException {
+        List<Rectangle> result;
+
+        try {
+            result = getSegmentedFile();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
+            sleeper.sleep(20000);
+            new TakeScreenshot().take();
+            result = getSegmentedFile();
+        }
+
+        for (Rectangle rect : result) {
+            for (Pair<Integer, Integer> pair : listOfWidthAndHeight) {
+                if ((rect.width == pair.getValue0() && rect.height == pair.getValue1())
+                        && (rect.x >= tupleBlockScreen.getValue0() && rect.x <= tupleBlockScreen.getValue1())
+                        && (rect.y >= tupleBlockScreen.getValue2() && rect.y <= tupleBlockScreen.getValue3())) {
+
+                    BufferedImage subImage = bf.getSubimage(rect.x, rect.y, rect.width, rect.height); // Busca sub imagem do retângulo achado
+                    String treatedRect = this.tesseract.doOCR(subImage); // busca OCR do retângulo achado
+
+                    return new Pair(rect, treatedRect.trim()); // retorna o retângulo para ação com click e seu OCR tratado com trim()
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for a rectangle in the segmented regions that matches specific
+     * dimensions and positional constraints.
+     *
+     * @param listOfWidthAndHeight a list of {@code Pair<Integer, Integer>}
+     * objects representing the target width and height dimensions.
+     * @param tupleBlockScreen a
+     * {@code Quartet<Integer, Integer, Integer, Integer>} specifying the x and
+     * y bounds for the rectangle's position.
+     * @return the matching {@code Rectangle} if found, or {@code null} if no
+     * match exists.
+     * @throws IOException if an error occurs while reading the image file.
+     * @throws TesseractException if an error occurs during the OCR process.
+     * @throws AWTException if there is an issue with screen capture during
+     * fallback operations.
      */
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, AWTException {
         List<Rectangle> result;
@@ -74,7 +133,7 @@ public class SegmentedRegions {
         try {
             result = getSegmentedFile();
         } catch (NullPointerException ex) {
-             Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
             sleeper.sleep(20000);
             new TakeScreenshot().take();
             result = getSegmentedFile();
@@ -94,14 +153,17 @@ public class SegmentedRegions {
     }
 
     /**
+     * Searches for a rectangle in the segmented regions that matches specific
+     * width and height dimensions.
      *
-     * @param listOfWidthAndHeight list containing pair of tuples with the width
-     * and height
-     * @return if there is a rectangle compatible with the input, it will return
-     * rectangle or return NULL
-     * @throws IOException
-     * @throws TesseractException
-     * @throws java.awt.AWTException
+     * @param listOfWidthAndHeight a list of {@code Pair<Integer, Integer>}
+     * objects representing the target width and height dimensions.
+     * @return the matching {@code Rectangle} if found, or {@code null} if no
+     * match exists.
+     * @throws IOException if an error occurs while reading the image file.
+     * @throws TesseractException if an error occurs during the OCR process.
+     * @throws AWTException if there is an issue with screen capture during
+     * fallback operations.
      */
     public Rectangle getRectangle(List<Pair<Integer, Integer>> listOfWidthAndHeight) throws IOException, TesseractException, AWTException {
         List<Rectangle> result;
@@ -146,7 +208,7 @@ public class SegmentedRegions {
         /* First searching: Words */
         int level = TessPageIteratorLevel.RIL_WORD;
 
-        List<Rectangle> result = instance.getSegmentedRegions(bf, level);
+        List<Rectangle> result = tesseract.getSegmentedRegions(bf, level);
 
         /* Sort from lower to bigger Y coordinate */
         Collections.sort(result, new RectComparatorByY());
