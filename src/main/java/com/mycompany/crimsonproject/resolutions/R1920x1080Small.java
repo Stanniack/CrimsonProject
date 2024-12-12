@@ -13,12 +13,12 @@ import org.javatuples.Quartet;
  *
  * BLOCKSCREEN calculator: x1 = x; x2 = x + w; y1 = y; y2 = y + h.
  *
- * BLOSCKSCREEN calculator with DEADZONE: x1 = x; x2 = x + w + DEADZONE; y1 = y;
- * y2 = y + h + DEADZONE;
+ * BLOSCKSCREEN calculator with BOUND ZONE: x1 = x; x2 = x + w + BOUNE ZONE; y1 = y;
+ * y2 = y + h + BOUNE ZONE;
  *
  * BLOCKSCREEN: Rect limitation where to find the recognized rects
  *
- * DEADZONE INFO: Pixels amount to add in the BLOCKSCREEN for caution or not
+ * BOUND ZONE INFO: Pixels amount to add in the BLOCKSCREEN for caution or not
  */
 public class R1920x1080Small {
 
@@ -36,7 +36,7 @@ public class R1920x1080Small {
     private static final int INVALIDTARGET_H2 = 50;
     private static final int INVALIDTARGET_H3 = 16;
 
-    private final Quartet<Integer, Integer, Integer, Integer> invalidTargetDeadZoneList
+    private final Quartet<Integer, Integer, Integer, Integer> invalidTargetScreenConstraints
             = new Quartet<>(INVALIDTARGET_DEADZONE_X1, INVALIDTARGET_DEADZONE_X2_W, INVALIDTARGET_DEADZONE_Y1, INVALIDTARGET_DEADZONE_Y2_H);
     private static final int INVALIDTARGET_DEADZONE_X1 = 751;
     private static final int INVALIDTARGET_DEADZONE_X2_W = 951;
@@ -181,12 +181,12 @@ public class R1920x1080Small {
     private static final int CLOSELOCATIONBUTTON_W1 = 10;
     private static final int CLOSELOCATIONBUTTON_H1 = 10;
 
-    private final Quartet<Integer, Integer, Integer, Integer> locationTabDeadZoneTuple
-            = new Quartet<>(LOCATIONTAB_DEADZONE_X1, LOCATIONTAB_DEADZONE_X2_W, LOCATIONTAB_DEADZONE_Y1, LOCATIONTAB_DEADZONE_Y2_H);
-    private static final int LOCATIONTAB_DEADZONE_X1 = 445;
-    private static final int LOCATIONTAB_DEADZONE_X2_W = 889;
-    private static final int LOCATIONTAB_DEADZONE_Y1 = 0;
-    private static final int LOCATIONTAB_DEADZONE_Y2_H = 540;
+    private final Quartet<Integer, Integer, Integer, Integer> locationTabScreenConstraints
+            = new Quartet<>(LOCATIONTAB_BOUNDZONE_X1, LOCATIONTAB_BOUNDZONE_X2_W, LOCATIONTAB_BOUNDZONE_Y1, LOCATIONTAB_BOUNDZONE_Y2_H);
+    private static final int LOCATIONTAB_BOUNDZONE_X1 = 445;
+    private static final int LOCATIONTAB_BOUNDZONE_X2_W = 889;
+    private static final int LOCATIONTAB_BOUNDZONE_Y1 = 0;
+    private static final int LOCATIONTAB_BOUNDZONE_Y2_H = 540;
     /*
      * *****************************************************************************
      */
@@ -264,12 +264,12 @@ public class R1920x1080Small {
     private static final int LOCKTARGET_W1 = 26;
     private static final int LOCKTARGET_H1 = 26;
     /* This find where the button LOCK TARGET OF SELECTED ITEM WINDOW is in the display */
-    private final Quartet<Integer, Integer, Integer, Integer> lockTargetDeadZoneTuple
-            = new Quartet<>(LOCKTARGET_DEADZONE_X1, LOCKTARGET_DEADZONE_X2_W, LOCKTARGET_DEADZONE_Y1, LOCKTARGET_DEADZONE_Y2_H);
-    private static final int LOCKTARGET_DEADZONE_X1 = 1000;
-    private static final int LOCKTARGET_DEADZONE_X2_W = 1919;
-    private static final int LOCKTARGET_DEADZONE_Y1 = 0;
-    private static final int LOCKTARGET_DEADZONE_Y2_H = 200;
+    private final Quartet<Integer, Integer, Integer, Integer> lockTargetScreenConstraints
+            = new Quartet<>(LOCKTARGET_BOUNDZONE_X1, LOCKTARGET_BOUNDZONE_X2_W, LOCKTARGET_BOUNDZONE_Y1, LOCKTARGET_BOUNDZONE_Y2_H);
+    private static final int LOCKTARGET_BOUNDZONE_X1 = 1000;
+    private static final int LOCKTARGET_BOUNDZONE_X2_W = 1919;
+    private static final int LOCKTARGET_BOUNDZONE_Y1 = 0;
+    private static final int LOCKTARGET_BOUNDZONE_Y2_H = 200;
     /*
      * *****************************************************************************
      */
@@ -293,12 +293,12 @@ public class R1920x1080Small {
      * This find where the rectangle of MAXCARGO and ITEM (ITEM HANGAR) is in
      * the display in STATION
      */
-    private final Quartet<Integer, Integer, Integer, Integer> inventoryDeadzoneTuple
-            = new Quartet<>(INVENTORY_DEADZONE_X1, INVENTORY_DEADZONE_X2_W, INVENTORY_DEADZONE_Y1, INVENTORY_DEADZONE_Y2_H);
-    private static final int INVENTORY_DEADZONE_X1 = 70;
-    private static final int INVENTORY_DEADZONE_X2_W = 570;
-    private static final int INVENTORY_DEADZONE_Y1 = 40;
-    private static final int INVENTORY_DEADZONE_Y2_H = 1040;
+    private final Quartet<Integer, Integer, Integer, Integer> inventoryScreenConstraints
+            = new Quartet<>(INVENTORY_BOUNDZONE_X1, INVENTORY_BOUNDZONE_X2_W, INVENTORY_BOUNDZONE_Y1, INVENTORY_BOUNDZONE_Y2_H);
+    private static final int INVENTORY_BOUNDZONE_X1 = 70;
+    private static final int INVENTORY_BOUNDZONE_X2_W = 570;
+    private static final int INVENTORY_BOUNDZONE_Y1 = 40;
+    private static final int INVENTORY_BOUNDZONE_Y2_H = 1040;
     /*
      * *****************************************************************************
      */
@@ -321,14 +321,14 @@ public class R1920x1080Small {
     private static final int APPROACHING_H1 = 14;
     /*
      * *****************************************************************************
-     * Drag itens deadzone
+     * Drag itens bound zone
      */
-    private final Quartet<Integer, Integer, Integer, Integer> dragItensDeadZoneList
-            = new Quartet<>(DRAGITENS_DEADZONE_X1, DRAGITENS_DEADZONE_X2_W, DRAGITENS_DEADZONE_Y1, DRAGITENS_DEADZONE_Y2_H);
-    private static final int DRAGITENS_DEADZONE_X1 = 245;
-    private static final int DRAGITENS_DEADZONE_X2_W = 530;
-    private static final int DRAGITENS_DEADZONE_Y1 = 185;
-    private static final int DRAGITENS_DEADZONE_Y2_H = 985;
+    private final Quartet<Integer, Integer, Integer, Integer> dragItensScreenConstraints
+            = new Quartet<>(DRAGITENS_BOUNDZONE_X1, DRAGITENS_BOUNDZONE_X2_W, DRAGITENS_BOUNDZONE_Y1, DRAGITENS_BOUNDZONE_Y2_H);
+    private static final int DRAGITENS_BOUNDZONE_X1 = 245;
+    private static final int DRAGITENS_BOUNDZONE_X2_W = 530;
+    private static final int DRAGITENS_BOUNDZONE_Y1 = 185;
+    private static final int DRAGITENS_BOUNDZONE_Y2_H = 985;
     /*
      * *****************************************************************************
      */
@@ -338,21 +338,21 @@ public class R1920x1080Small {
     private static final int UNDOCK_BUTTON_W1 = 235;
     private static final int UNDOCK_BUTTON_W2 = 234;
     private static final int UNDOCK_BUTTON_H1 = 40;
-    private final Quartet<Integer, Integer, Integer, Integer> undockDeadZoneTuple
-            = new Quartet<>(UNDOCK_DEADZONE_X1, UNDOCK_DEADZONE_X2_W, UNDOCK_DEADZONE_Y1, UNDOCK_DEADZONE_Y2_H);
-    private static final int UNDOCK_DEADZONE_X1 = 571;
-    private static final int UNDOCK_DEADZONE_X2_W = 1919;
-    private static final int UNDOCK_DEADZONE_Y1 = 0;
-    private static final int UNDOCK_DEADZONE_Y2_H = 1079;
+    private final Quartet<Integer, Integer, Integer, Integer> undockScreenConstraints
+            = new Quartet<>(UNDOCK_BOUNDZONE_X1, UNDOCK_BOUNDZONE_X2_W, UNDOCK_BOUNDZONE_Y1, UNDOCK_BOUNDZONE_Y2_H);
+    private static final int UNDOCK_BOUNDZONE_X1 = 571;
+    private static final int UNDOCK_BOUNDZONE_X2_W = 1919;
+    private static final int UNDOCK_BOUNDZONE_Y1 = 0;
+    private static final int UNDOCK_BOUNDZONE_Y2_H = 1079;
     /*
      * *****************************************************************************
      */
-    private final Quartet<Integer, Integer, Integer, Integer> compactMaxCargoDeadZoneTuple
-            = new Quartet<>(COMPACTCARGO_DEADZONE_X1, COMPACTCARGO_DEADZONE_X2_W, COMPACTCARGO_DEADZONE_Y1, COMPACTCARGO_DEADZONE_Y2_H);
-    private static final int COMPACTCARGO_DEADZONE_X1 = 30;
-    private static final int COMPACTCARGO_DEADZONE_X2_W = 444;
-    private static final int COMPACTCARGO_DEADZONE_Y1 = 0;
-    private static final int COMPACTCARGO_DEADZONE_Y2_H = 540;
+    private final Quartet<Integer, Integer, Integer, Integer> compactMaxCargoScreenConstraints
+            = new Quartet<>(COMPACTCARGO_BOUNDZONE_X1, COMPACTCARGO_BOUNDZONE_X2_W, COMPACTCARGO_BOUNDZONE_Y1, COMPACTCARGO_BOUNDZONE_Y2_H);
+    private static final int COMPACTCARGO_BOUNDZONE_X1 = 30;
+    private static final int COMPACTCARGO_BOUNDZONE_X2_W = 444;
+    private static final int COMPACTCARGO_BOUNDZONE_Y1 = 0;
+    private static final int COMPACTCARGO_BOUNDZONE_Y2_H = 540;
     /*
      * *****************************************************************************
      */
@@ -378,8 +378,8 @@ public class R1920x1080Small {
         return invalidTargetList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getInvalidTargetDeadZoneList() {
-        return invalidTargetDeadZoneList;
+    public Quartet<Integer, Integer, Integer, Integer> getInvalidTargetScreenConstraints() {
+        return invalidTargetScreenConstraints;
     }
 
     public List<Pair<Integer, Integer>> getMiningBotList() {
@@ -406,8 +406,8 @@ public class R1920x1080Small {
         return closeLocationButtonList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getLocationTabDeadZoneTuple() {
-        return locationTabDeadZoneTuple;
+    public Quartet<Integer, Integer, Integer, Integer> getLocationTabScreenConstraints() {
+        return locationTabScreenConstraints;
     }
 
     public List<Pair<Integer, Integer>> getAllAsteroidsList() {
@@ -438,8 +438,8 @@ public class R1920x1080Small {
         return lockTargetList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getLockTargetDeadZoneTuple() {
-        return lockTargetDeadZoneTuple;
+    public Quartet<Integer, Integer, Integer, Integer> getLockTargetScreenConstraints() {
+        return lockTargetScreenConstraints;
     }
 
     public List<Pair<Integer, Integer>> getMaxCargoList() {
@@ -450,28 +450,28 @@ public class R1920x1080Small {
         return minCargoList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getInventoryDeadzoneTuple() {
-        return inventoryDeadzoneTuple;
+    public Quartet<Integer, Integer, Integer, Integer> getInventoryScreenConstraints() {
+        return inventoryScreenConstraints;
     }
 
     public List<Pair<Integer, Integer>> getCompactMaxCargoList() {
         return compactMaxCargoList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getDragItensDeadZoneList() {
-        return dragItensDeadZoneList;
+    public Quartet<Integer, Integer, Integer, Integer> getDragItensScreenConstraints() {
+        return dragItensScreenConstraints;
     }
 
     public List<Pair<Integer, Integer>> getUndockButtonList() {
         return undockButtonList;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getUndockDeadZoneTuple() {
-        return undockDeadZoneTuple;
+    public Quartet<Integer, Integer, Integer, Integer> getUndockScreenConstraints() {
+        return undockScreenConstraints;
     }
 
-    public Quartet<Integer, Integer, Integer, Integer> getCompactMaxCargoDeadZoneTuple() {
-        return compactMaxCargoDeadZoneTuple;
+    public Quartet<Integer, Integer, Integer, Integer> getCompactMaxCargoScreenConstraints() {
+        return compactMaxCargoScreenConstraints;
     }
 
     public static int getOVERVIEWMINING_X1() {

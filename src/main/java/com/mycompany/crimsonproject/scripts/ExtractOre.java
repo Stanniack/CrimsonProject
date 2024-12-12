@@ -182,7 +182,7 @@ public class ExtractOre implements RectangleVerifier {
             } // end case 0
 
             case 1 -> {
-                target = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetDeadZoneTuple()); // Search for target
+                target = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetScreenConstraints()); // Search for target
 
                 if (rectangleVerifier(target, "TARGET", 0)) {
                     if (findPixels.findByRangeColor(target.x, target.y, target.width, target.height, rgbr.getMinLockTarget(), rgbr.getMaxLockTarget())) {
@@ -219,7 +219,7 @@ public class ExtractOre implements RectangleVerifier {
             }
 
             case 3 -> {
-                Rectangle compactMaxCargo = segmentedRegions.getRectangle(resolution.getCompactMaxCargoList(), resolution.getCompactMaxCargoDeadZoneTuple());
+                Rectangle compactMaxCargo = segmentedRegions.getRectangle(resolution.getCompactMaxCargoList(), resolution.getCompactMaxCargoScreenConstraints());
 
                 if (rectangleVerifier(compactMaxCargo, "MAX CARGO", 0)) {
                     walkThrough = 5; // go to case 5 - docking and drag items to main station
@@ -413,7 +413,7 @@ public class ExtractOre implements RectangleVerifier {
         int mOe = 195; // margin of error
 
         try {
-            Rectangle rect = segmentedRegions.getRectangle(listWxHrects, resolution.getInvalidTargetDeadZoneList());
+            Rectangle rect = segmentedRegions.getRectangle(listWxHrects, resolution.getInvalidTargetScreenConstraints());
             System.out.println("Invalid target found: " + rect.toString());
 
             if (findPixels.findByRangeColor(rect.x, rect.y, rect.width, rect.height, rgbr.getMinInfo(), rgbr.getMaxInfo())) {
@@ -427,7 +427,7 @@ public class ExtractOre implements RectangleVerifier {
         }
 
         if (isClicked) {
-            Rectangle locktarget = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetDeadZoneTuple());
+            Rectangle locktarget = segmentedRegions.getRectangle(resolution.getLockTargetList(), resolution.getLockTargetScreenConstraints());
 
             if (locktarget != null) {
                 System.out.println("Invalid locked target found: " + locktarget.toString());
