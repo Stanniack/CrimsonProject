@@ -173,6 +173,7 @@ public class R1920x1080Small {
     private static final int HANGAR_W1 = 34;
     private static final int HANGAR_H1 = 12;
     private static final int HANGAR_H2 = 11;
+    private static final int HANGAR_H3 = 10;
 
     private final List<Pair<Integer, Integer>> closeLocationButtonList = Arrays.asList(
             new Pair<>(CLOSELOCATIONBUTTON_W1, CLOSELOCATIONBUTTON_H1));
