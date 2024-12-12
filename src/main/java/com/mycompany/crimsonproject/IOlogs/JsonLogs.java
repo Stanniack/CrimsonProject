@@ -22,9 +22,11 @@ public class JsonLogs {
     }
 
     /**
+     * Reads a specific clicker data from a JSON file and returns it as a map.
      *
-     * @param clicker clicker's name in .json file to be read
-     * @return a clicker type Map key:valor
+     * @param clicker the key identifying the clicker in the JSON file.
+     * @return a map containing the clicker data, or {@code null} if an error
+     * occurs.
      */
     public Map<String, Object> readClicker(String clicker) {
         try {
@@ -39,10 +41,12 @@ public class JsonLogs {
     }
 
     /**
-     * @param rect rectangle button/clicker to be saved with status not
-     * deprecated
-     * @param clicker name of object in .json file
-     * @return true if clicked has been saved or false if not
+     * Saves the dimensions and state of a clicker to a JSON file.
+     *
+     * @param rect the rectangle containing the dimensions of the clicker.
+     * @param clicker the key identifying the clicker in the JSON file.
+     * @return {@code true} if the data is saved successfully, otherwise
+     * {@code false}.
      */
     public boolean saveClicker(Rectangle rect, String clicker) {
         try {
@@ -63,8 +67,12 @@ public class JsonLogs {
     }
 
     /**
-     * @param clicker name to convert to Rectangle
-     * @return a Rectangle with x, y, w, h info
+     * Retrieves the dimensions of a clicker from a JSON file as a
+     * {@link Rectangle}.
+     *
+     * @param clicker the key identifying the clicker in the JSON file.
+     * @return a {@link Rectangle} representing the clicker's dimensions, or
+     * {@code null} if an error occurs.
      */
     public Rectangle getClicker(String clicker) {
         try {

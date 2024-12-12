@@ -10,6 +10,11 @@ import java.util.logging.Logger;
  */
 public class SleeperHandler implements Sleeper {
 
+    /**
+     * Pauses the execution for a specified number of milliseconds.
+     *
+     * @param milliseconds the duration in milliseconds to pause the execution.
+     */
     @Override
     public void sleep(long milliseconds) {
         try {

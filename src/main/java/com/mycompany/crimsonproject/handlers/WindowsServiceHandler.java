@@ -22,12 +22,10 @@ public class WindowsServiceHandler {
     }
 
     /**
-     * Verifies the status of a window based on its name, executable, and
-     * fullscreen state. If the conditions are not met, it will continuously
-     * check and wait for the conditions to be true.
+     * Checks if a specific window is active by repeatedly verifying the
+     * window's status until the conditions are met.
      *
-     * @param ms The time (in milliseconds) to wait between checks when the
-     * conditions are not met.
+     * @param ms the time in milliseconds to wait between each check.
      */
     public void windowsChecker(Integer ms) {
         Triplet<String, String, Boolean> GUIstats = wService.activeWindowsChecker();

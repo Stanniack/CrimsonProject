@@ -37,11 +37,11 @@ public class R1920x1080Small {
     private static final int INVALIDTARGET_H3 = 16;
 
     private final Quartet<Integer, Integer, Integer, Integer> invalidTargetScreenConstraints
-            = new Quartet<>(INVALIDTARGET_DEADZONE_X1, INVALIDTARGET_DEADZONE_X2_W, INVALIDTARGET_DEADZONE_Y1, INVALIDTARGET_DEADZONE_Y2_H);
-    private static final int INVALIDTARGET_DEADZONE_X1 = 751;
-    private static final int INVALIDTARGET_DEADZONE_X2_W = 951;
-    private static final int INVALIDTARGET_DEADZONE_Y1 = 420;
-    private static final int INVALIDTARGET_DEADZONE_Y2_H = 470;
+            = new Quartet<>(INVALIDTARGET_BOUNDZONE_X1, INVALIDTARGET_BOUNDZONE_X2_W, INVALIDTARGET_BOUNDZONE_Y1, INVALIDTARGET_BOUNDZONE_Y2_H);
+    private static final int INVALIDTARGET_BOUNDZONE_X1 = 751;
+    private static final int INVALIDTARGET_BOUNDZONE_X2_W = 951;
+    private static final int INVALIDTARGET_BOUNDZONE_Y1 = 420;
+    private static final int INVALIDTARGET_BOUNDZONE_Y2_H = 470;
     /*
      * *****************************************************************************
      */

@@ -9,6 +9,13 @@ import java.net.UnknownHostException;
  */
 public class HostTools {
 
+    /**
+     * Checks if the system can establish a connection to the internet by
+     * attempting to reach "www.google.com".
+     *
+     * @return {@code true} if the system can connect to the host, otherwise
+     * {@code false}.
+     */
     public boolean checkHostConnection() {
         try {
             InetAddress.getByName("www.google.com");
