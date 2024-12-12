@@ -16,14 +16,18 @@ import net.sourceforge.tess4j.TesseractException;
 import com.mycompany.crimsonproject.utils.RGBrange;
 import org.javatuples.Triplet;
 import com.mycompany.crimsonproject.interfaces.RectangleAndColorVerifier;
+import com.mycompany.crimsonproject.interfaces.RectangleAndOcrVerifier;
 import com.mycompany.crimsonproject.interfaces.RectangleVerifier;
+import com.mycompany.crimsonproject.keywords.OriginalWords;
+import com.mycompany.crimsonproject.keywords.SmallWords;
+import org.javatuples.Pair;
 
 /**
  *
  * @author Devmachine
  *
  */
-public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier {
+public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifier, RectangleAndOcrVerifier {
 
 // Attributes related to graphical interface and screen manipulation
     private final R1920x1080Small resolution;
@@ -35,10 +39,11 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
 
 // Constants for mouse click actions
     private static final int RIGHTCLICK = 0;
+    private static final int NONCLICK = -1;
     private static final int LEFTCLICK = 1;
 
 // Attributes related to specific UI elements
-    private Rectangle hangarButton;
+    private Pair<Rectangle, String> hangarButton;
 
 // switch-case behaviour attributes
     private boolean isRunnable = true;
@@ -48,9 +53,10 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private final NetworkConnectionHandler connectionHandler;
     private final JsonLogs jsonLogs;
     private final WindowsServiceHandler wHandler;
+    private final OriginalWords ocrWords;
 
     public CargoDeposit() {
-        resolution = new R1920x1080Small();
+        resolution = new R1920x1080Small(); // construtor
         rgbr = new RGBrange();
 
         findPixels = new FindPixels();
@@ -60,6 +66,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         connectionHandler = new NetworkConnectionHandler();
         jsonLogs = new JsonLogs();
         wHandler = new WindowsServiceHandler();
+        ocrWords = new SmallWords(); // construtor
 
     }
 
@@ -85,9 +92,9 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         switch (walkThrough) {
 
             case 0 -> {
-                hangarButton = segmentedRegions.getRectangle(resolution.getHangarList(), resolution.getInventoryDeadzoneTuple());
+                hangarButton = segmentedRegions.getOcrRectangle(resolution.getHangarList(), resolution.getInventoryDeadzoneTuple());
 
-                if (rectangleAndColorVerifier(hangarButton, "HANGAR", 0, rgbr.getMinWhiteLabel(), rgbr.getMaxWhiteLabel())) {
+                if (rectangleAndOcrVerifier(hangarButton, ocrWords.getHangar(), "HANGAR", NONCLICK)) {
                     walkThrough++;
                 } else {
                     clickEvents.dragScreen();
@@ -114,7 +121,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        clickEvents.dragItemsToInventory(resolution.getDragItensDeadZoneList(), hangarButton);
+        clickEvents.dragItemsToInventory(resolution.getDragItensDeadZoneList(), hangarButton.getValue0());
     }
 
     @Override
@@ -126,8 +133,22 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
 
             if (chosenClick == LEFTCLICK) {
                 clickEvents.leftClickCenterButton(rectangle);
-            } else {
-                clickEvents.rightClickCenterButton(rectangle);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean rectangleAndOcrVerifier(Pair<Rectangle, String> pair, String ocrMatch, String itemName, int chosenClick) throws AWTException, InterruptedException {
+
+        if (pair != null && pair.getValue1().equals(ocrMatch)) {
+            Rectangle rect = pair.getValue0();
+            String ocrRect = pair.getValue1();
+            System.out.printf("Rect found (%s) - Width: %d, Height: %d and its OCR: %s\n\n", itemName, rect.width, rect.height, ocrRect);
+
+            if (chosenClick == LEFTCLICK) {
+                clickEvents.leftClickCenterButton(rect);
             }
             return true;
         }
@@ -176,4 +197,5 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     private boolean dynamicChecker(Rectangle undockButton) throws IOException, TesseractException, AWTException, InterruptedException {
         return rectangleVerifier(undockButton, "DYNAMICALLY IDENTIFIED UNDOCK BUTTON", LEFTCLICK);
     }
+
 }
