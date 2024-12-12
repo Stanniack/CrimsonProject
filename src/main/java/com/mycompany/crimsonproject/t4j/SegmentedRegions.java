@@ -111,6 +111,28 @@ public class SegmentedRegions {
         return null;
     }
 
+    public Pair<Rectangle, String> getOcrRectangle(String ocrWord, Quartet<Integer, Integer, Integer, Integer> tupleBlockScreen) throws IOException, TesseractException, AWTException {
+        List<Rectangle> result;
+
+        try {
+            result = getSegmentedFile();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(SegmentedRegions.class.getName()).log(Level.SEVERE, null, ex);
+            sleeper.sleep(20000);
+            new TakeScreenshot().take();
+            result = getSegmentedFile();
+        }
+
+        for (Rectangle rect : result) {
+            BufferedImage subImage = bf.getSubimage(rect.x, rect.y, rect.width, rect.height); // Busca sub imagem do retângulo achado
+            String treatedRect = this.tesseract.doOCR(subImage).trim(); // busca OCR do retângulo achado
+            if (treatedRect.equals(ocrWord)) {
+                return new Pair(rect, treatedRect.trim()); // retorna o retângulo para ação com click e seu OCR tratado com trim()
+            }
+        }
+        return null;
+    }
+
     /**
      * Searches for a rectangle in the segmented regions that matches specific
      * dimensions and positional constraints.
