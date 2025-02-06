@@ -126,8 +126,8 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             }
 
             case 1 -> {
-                astBeltDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabDeadZoneTuple());
-                homeStationDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabDeadZoneTuple());
+                astBeltDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabScreenConstraints());
+                homeStationDest = segmentedRegions.getRectangle(destination, resolution.getLocationTabScreenConstraints());
 
                 if (clickDestinationLabel(false, astBeltDest, MININGBOT, "ASTEROID BELT")
                         || clickDestinationLabel(false, astBeltDest, HOMESTATION, "HOME STATION")) {
@@ -154,7 +154,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
             }
 
             case 3 -> {
-                Rectangle closeButtonWindowLocation = segmentedRegions.getRectangle(resolution.getCloseLocationButtonList(), resolution.getLocationTabDeadZoneTuple());
+                Rectangle closeButtonWindowLocation = segmentedRegions.getRectangle(resolution.getCloseLocationButtonList(), resolution.getLocationTabScreenConstraints());
 
                 if (rectangleVerifier(closeButtonWindowLocation, "CLOSEBUTTONLOCATION", LEFTCLICK)) {
                     walkThrough++;
@@ -178,7 +178,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
 
     private void checkWarpable() throws IOException {
         if (isCheckWarpable) {
-            Long flagTimeWarp = System.currentTimeMillis();
+            Long flagTimeWarp = System.currentTimeMillis(); // var de redundância caso isWarping trave no true
             boolean isWarping = true;
             sleeper.sleep(5000);
 
@@ -186,7 +186,7 @@ public class SetDestination implements RectangleVerifier, RectangleAndColorVerif
                 takeScreenshot.take2();
                 isWarping = findPixels.greaterThan(R1920x1080Small.getCHECKPATH_X1(), R1920x1080Small.getCHECKPATH_Y1(),
                         R1920x1080Small.getCHECKPATH_W1(), R1920x1080Small.getCHECKPATH_H1(),
-                        whiteRangeRGB.getValue0(), whiteRangeRGB.getValue1(), whiteRangeRGB.getValue2());
+                        whiteRangeRGB.getValue0(), whiteRangeRGB.getValue1(), whiteRangeRGB.getValue2()); // DO OCR!
             }
 
             if (!isWarping) {

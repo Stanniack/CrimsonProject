@@ -1,109 +1,138 @@
-<h1 align="center">✨ Releases / Lançamentos ✨</h1>
+<h1 align="center">🚀✨Releases✨🚀</h1>
 
 ---
 
-## Alpha v0.0.0 - 29/01/24
-- **5 tipos de minérios** para testes: *Condensed Scordite, Scordite, Dense Veldspar e Veldspar.*
-  - Mineração por prioridade.
-- **Identificação do cargo hold** em compact mode ao atingir capacidade máxima:
-  - Retorna à estação automaticamente.
-  - *Drones não são suportados nesta versão (ver futuras atualizações).*
-- **Requisitos:** 
-  - Estação espacial e área de mineração devem estar no mesmo sistema solar.
-  - Labels necessários para rotas:  
-    - `HOMESTATION1`: estação para armazenar minérios.  
-    - `MININGBOT1`: área de mineração.
-- Sem interface gráfica (*versão Alpha para testes*).
+<h1 align="center">📌 Current Version - Alpha v0.4.3 - 08/12/24 📌</h1>
+
+- **Interface CLI (Command Line Interface):**  
+  - For now, the interface is via command line, still in Alpha version.  
+- **Alert sounds** added for different situations:  
+  - Alert sound when the ship is attacked.  
+  - Alert sound when the mining cycle ends.  
+  - Alert sound when the total mining cycle ends.  
+- **Server shutdown safety:**  
+  - The ship stops mining and automatically returns to the station when the server is about to shut down.  
+- **Click memorization** implemented:  
+  - Improves performance when working together with Tesseract and OCR image recognition.  
+- **Button and text recognition by OCR:**  
+  - Enhanced detection of buttons and texts in the game interface.  
+- **Cargo hold identification in compact mode:**  
+  - When reaching maximum capacity, the ship automatically returns to the station.  
+- **Automatic pause in non-full screen mode:**  
+  - The script pauses automatically if the screen is not in full screen mode.  
+  - The script resumes automatically when the screen returns to full screen mode.  
+- **In-game behavior:**  
+  - Support for mining drones and combat drones.  
+  - Identifies if the ship is under attack:  
+    - In case of attack, the ship flees to the station and automatically shuts down the script.  
+- **Requirements:**  
+  - Space station and mining area must be in the same solar system.  
+  - Required labels for routes:  
+    - `HOMESTATION`: station to store minerals.  
+    - `ASTEROIDBELTI` to `ASTEROIDBELTV`: mining areas.  
 
 ---
 
-## **Histórico de Versões**
+<h1 align="center">💻 Technologies Used 💻</h1>
+
+The project uses the following technologies and libraries:
+
+- **Language:** Java 18
+- **Dependency management:** Maven
+- **Text recognition (OCR):** Tesseract via Tess4J (v5.10.0)
+- **JSON manipulation:** Jackson Databind (v2.15.2)
+- **Tuple usage:** JavaTuples (v1.2)
+- **Testing:** JUnit 4 (v4.13.2)
+
+---
+
+<h1 align="center">📜 Version History 📜</h1>
 
 ### **Alpha v0.1.0 - 02/02/24**
-- Minérios priorizados do menor para o maior, facilitando adição de novos tipos.
-- Minérios disponíveis: *Veldspar, Concentrated V., Dense V., Scordite, Condensed S.*
+- Minerals prioritized from smallest to largest, facilitating the addition of new types.
+- Available minerals: *Veldspar, Concentrated V., Dense V., Scordite, Condensed S.*
 
 ### **Alpha v0.2.0 - 27/02/24**
-- Abas repadronizadas para maior estabilidade.
-- Algoritmo de *ExtractOre* otimizado para lidar com falhas frequentes.
+- Tabs standardized for greater stability.
+- *ExtractOre* algorithm optimized to handle frequent failures.
 
 ### **Alpha v0.2.1 - 03/03/24**
-- Shortcut `'L'` substitui a necessidade de abrir a HUD manualmente para acessar localizações.
-- Atualizado **Tesseract** de versão 4.5.1 para 5.10.0.
+- Shortcut `'L'` replaces the need to manually open the HUD to access locations.
+- Updated **Tesseract** from version 4.5.1 to 5.10.0.
 
 ### **Alpha v0.2.2 - 06/03/24**
-- Aba de *Lock Target* agora possui tolerância de tempo para resetar o script caso o botão não seja localizado.
+- *Lock Target* tab now has time tolerance to reset the script if the button is not located.
 
 ### **Alpha v0.3.0 - 18/03/24**
-- Identificação de "Approaching" e canhões implementada por varredura de pixels.
+- Identification of "Approaching" and cannons implemented via pixel scanning.
 
 ### **Alpha v0.3.1 - 27/03/24**
-- Início da repadronização do mecanismo de empurrar a tela (*dragScreen*).
+- Start of standardization of the screen push mechanism (*dragScreen*).
 
 ### **Alpha v0.3.2 - 14/04/24**
-- Seleção de *target* adaptada para situações como: *Free target, Lock target e Alpha target.*
+- *Target* selection adapted for situations such as: *Free target, Lock target, and Alpha target.*
 
 ### **Alpha v0.3.3 - 03/05/24**
-- Expansão de cores para *Lock Target* e *Free Target*, aumentando precisão.
-- Definido tempo para *DragScreen* em casos de verificação presa na *compactMaxCargo*.
+- Color expansion for *Lock Target* and *Free Target*, increasing accuracy.
+- Defined time for *DragScreen* in cases of verification stuck in *compactMaxCargo*.
 
 ### **Alpha v0.3.4 - 12/05/24**
-- Redução e generalização da área de busca de retângulos no método *setDestination*.
+- Reduction and generalization of the search area for rectangles in the *setDestination* method.
 
 ### **Alpha v0.3.5 - 17/05/24**
-- Introduzido *CargoDeposit*: transfere carga sem verificar se o mining hold está cheio.
+- Introduced *CargoDeposit*: transfers cargo without checking if the mining hold is full.
 
 ### **Alpha v0.3.6 - 01/06/24**
-- Método experimental para verificar *targets* que não sejam asteroides.
+- Experimental method to verify *targets* that are not asteroids.
 
 ### **Alpha v0.3.7 - 12/06/24**
-- Suporte inicial a drones mineradores (*Launch, Engage, Return*).
+- Initial support for mining drones (*Launch, Engage, Return*).
 
 ### **Alpha v0.3.8 - 20/06/24**
-- Implementação de detecção de ataques à nave (*1ª versão*).
+- Implementation of ship attack detection (*1st version*).
 
 ### **Alpha v0.3.9 - 28/07/24**
-- Métodos para disparar alertas sonoros.
+- Methods to trigger sound alerts.
 
 ### **Alpha v0.3.9.1 - 03/08/24**
-- Método de engajamento de drones adicionado.
+- Drone engagement method added.
 
 ### **Alpha v0.4.0 - 03/08/24**
-- Alertas em formato **.wav** para atenção do usuário.
+- Alerts in **.wav** format for user attention.
 
 ### **Alpha v0.4.1 - 24/08/24**
-- Logs textuais para monitorar ciclos de mineração.
+- Text logs to monitor mining cycles.
 
 ### **Alpha v0.4.2 - 22/09/24**
-- Alternância entre 5 *asteroid belts* implementada.
+- Switching between 5 *asteroid belts* implemented.
 
 ### **Alpha v0.4.3 - 08/12/24**
-- Pausa de script caso a resolução não seja full screen ou a instância do EVE não esteja em primeira plano
+- Script pause if the resolution is not full screen or the EVE instance is not in the foreground.
 
 ---
 
-## **Bug Fixes**
+<h1 align="center">🔧 Bug Fixes 🔧</h1>
 
 ### **Alpha v0.0.0 - 02/02/24**
-- Corrigido algoritmo que não reconhecia minério de prioridade 0.
+- Fixed algorithm that did not recognize priority 0 mineral.
 
 ### **Alpha v0.1.0 - 08/02/24**
-- Ajuste no atributo `timeStart` e aumento da tolerância para *LOCKTARGET*.
+- Adjusted `timeStart` attribute and increased tolerance for *LOCKTARGET*.
 
 ### **Alpha v0.1.0 - 18/02/24**
-- Correção da flag para priorização de minérios.
-- Código de aproximação por duplo-clique em vez de uso de setas.
+- Fixed flag for mineral prioritization.
+- Approach code via double-click instead of using arrows.
 
 ### **Alpha v0.3.0 - 24/03/24**
-- Correção no algoritmo de verificação de opacidade de canhões.
+- Fixed algorithm for verifying cannon opacity.
 
 ### **Alpha v0.3.5 - 26/05/24**
-- Tratamento para exceção `NullPointerException` do Tesseract.
+- Handling of `NullPointerException` for Tesseract.
 
 ### **Alpha v0.3.6 - 07/06/24**
-- Refinamento do método *invalidTarget* em *ExtractOre*.
+- Refinement of the *invalidTarget* method in *ExtractOre*.
 
 ### **Alpha v0.3.7 - 19/06/24**
-- Adicionado *sleep* para exceções no Tesseract.
+- Added *sleep* for Tesseract exceptions.
 
 ---

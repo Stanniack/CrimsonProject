@@ -11,6 +11,13 @@ import com.mycompany.crimsonproject.utils.HostTools;
  */
 public class NetworkConnectionHandler implements NetworkConnectionVerifier {
 
+    /**
+     * Verifies the network connection and logs a message if the connection is
+     * lost.
+     *
+     * @return {@code true} if the network connection is active, otherwise
+     * {@code false}.
+     */
     @Override
     public boolean networkVerifier() {
         HostTools host = new HostTools();

@@ -17,6 +17,13 @@ import javax.imageio.ImageIO;
  */
 public class TakeScreenshot extends RobotEvent {
 
+    /**
+     * Pauses for a specified amount of time, then takes a screenshot of the
+     * entire screen and saves it as a PNG image to the specified path. The
+     * sleep duration is controlled by the constant {@code SLEEP_MS2}.
+     *
+     * @param path the file path where the screenshot will be saved.
+     */
     public void take(String path) {
         try {
             sleep(SLEEP_MS2);
@@ -32,6 +39,11 @@ public class TakeScreenshot extends RobotEvent {
         }
     }
 
+    /**
+     * Pauses for a specified amount of time, then takes a screenshot of the
+     * entire screen and saves it as a PNG image to a default path. The sleep
+     * duration is controlled by the constant {@code SLEEP_MS2}.
+     */
     public void take() {
         try {
             sleep(SLEEP_MS2);
@@ -49,6 +61,10 @@ public class TakeScreenshot extends RobotEvent {
         }
     }
 
+    /**
+     * Takes a screenshot of the entire screen and saves it as a PNG image to a
+     * default path.
+     */
     public void take2() {
         try {
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";
@@ -64,6 +80,12 @@ public class TakeScreenshot extends RobotEvent {
         }
     }
 
+    /**
+     * Takes a screenshot of the entire screen and saves it as a PNG image to
+     * the specified path.
+     *
+     * @param path the file path where the screenshot will be saved.
+     */
     public void take2(String path) {
         try {
             Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
@@ -77,6 +99,10 @@ public class TakeScreenshot extends RobotEvent {
         }
     }
 
+    /**
+     * Takes a screenshot of the entire screen, converts it to the sRGB color
+     * space, and saves it as a PNG image to a default path.
+     */
     public void takeSRGB() {
         try {
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\mycompany\\crimsonproject\\screenshots\\screenshot.png";

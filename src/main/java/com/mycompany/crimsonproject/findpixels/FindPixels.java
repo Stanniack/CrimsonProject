@@ -22,16 +22,20 @@ public class FindPixels {
     }
 
     /**
-     * Find a pixel greater/equal than beginRange and less/equal than endRange
+     * Checks if any pixel within the specified area falls within the given
+     * color range.
      *
-     * @param row first row to search range color
-     * @param column first column to search range color
-     * @param width last row to search range color (row + width)
-     * @param height last column to search range color (column + height)
-     * @param beginRange a triplet containing RGB
-     * @param endRange triplet containing RGB
-     * @return true if found a pixel according to input given
-     * @throws IOException
+     * @param row the starting row of the area to search.
+     * @param column the starting column of the area to search.
+     * @param width the width of the area to search.
+     * @param height the height of the area to search.
+     * @param beginRange the beginning RGB range as a {@link Triplet} (red,
+     * green, blue).
+     * @param endRange the ending RGB range as a {@link Triplet} (red, green,
+     * blue).
+     * @return {@code true} if a pixel within the range is found, otherwise
+     * {@code false}.
+     * @throws IOException if an error occurs while reading the image file.
      */
     public boolean findByRangeColor(int row, int column, int width, int height, Triplet<Integer, Integer, Integer> beginRange, Triplet<Integer, Integer, Integer> endRange) throws IOException {
         bf = ImageIO.read(imageFile);
@@ -51,17 +55,19 @@ public class FindPixels {
     }
 
     /**
-     * Find a pixel equal than input RGB given
+     * Checks if any pixel within the specified area matches the given RGB
+     * color.
      *
-     * @param row first row to search range color
-     * @param column first column to search range color
-     * @param width last row to search range color (row + width)
-     * @param height last column to search range color (column + height)
-     * @param red color equal red
-     * @param green color equal green
-     * @param blue color equal blue
-     * @return true if found a pixel according to input given
-     * @throws IOException BufferedRead exception
+     * @param row the starting row of the area to search.
+     * @param column the starting column of the area to search.
+     * @param width the width of the area to search.
+     * @param height the height of the area to search.
+     * @param red the red component of the target color.
+     * @param green the green component of the target color.
+     * @param blue the blue component of the target color.
+     * @return {@code true} if a pixel with the exact color is found, otherwise
+     * {@code false}.
+     * @throws IOException if an error occurs while reading the image file.
      */
     public boolean findByColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
         bf = ImageIO.read(imageFile);
@@ -79,17 +85,19 @@ public class FindPixels {
     }
 
     /**
-     * Find a pixel greater/equal than input RGB given
+     * Checks if any pixel within the specified area has RGB values greater than
+     * or equal to the given values.
      *
-     * @param row first row to search range color
-     * @param column first column to search range color
-     * @param width last row to search range color (row + width)
-     * @param height last column to search range color (column + height)
-     * @param red color greater/equal than red
-     * @param green color greater/equal than green
-     * @param blue color greater/equal than blue
-     * @return true if found a pixel according to input given
-     * @throws IOException BufferedRead exception
+     * @param row the starting row of the area to search.
+     * @param column the starting column of the area to search.
+     * @param width the width of the area to search.
+     * @param height the height of the area to search.
+     * @param red the minimum red value.
+     * @param green the minimum green value.
+     * @param blue the minimum blue value.
+     * @return {@code true} if a pixel with RGB values greater than or equal to
+     * the specified values is found, otherwise {@code false}.
+     * @throws IOException if an error occurs while reading the image file.
      */
     public boolean greaterThan(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
         bf = ImageIO.read(imageFile);
@@ -107,18 +115,20 @@ public class FindPixels {
     }
 
     /**
+     * Checks if any pixel within the specified area has a green value greater
+     * than or equal to the specified value, while the red and blue values are
+     * less than or equal to their respective specified values.
      *
-     * Find a unique green pixel in a given multiarray scope
-     *
-     * @param row first row to search range color
-     * @param column first column to search range color
-     * @param width last row to search range color (row + width)
-     * @param height last column to search range color (column + height)
-     * @param red color less/equal than red
-     * @param green color greater/equal than green
-     * @param blue color less/equal than blue
-     * @return true if found a pixel according to input given
-     * @throws IOException BufferedRead exception
+     * @param row the starting row of the area to search.
+     * @param column the starting column of the area to search.
+     * @param width the width of the area to search.
+     * @param height the height of the area to search.
+     * @param red the maximum red value.
+     * @param green the minimum green value.
+     * @param blue the maximum blue value.
+     * @return {@code true} if a pixel meeting the criteria is found, otherwise
+     * {@code false}.
+     * @throws IOException if an error occurs while reading the image file.
      */
     public boolean findByGreenColor(int row, int column, int width, int height, int red, int green, int blue) throws IOException {
         bf = ImageIO.read(imageFile);
@@ -136,18 +146,22 @@ public class FindPixels {
     }
 
     /**
-     * Find a unique green pixel in a given multiarray scope
+     * Checks if any pixel within the specified area of the provided image file
+     * has a green value greater than or equal to the specified value, while the
+     * red and blue values are less than or equal to their respective specified
+     * values. Prints the color of the matching pixel if found.
      *
-     * @param imageFile image file given
-     * @param row first row to search range color
-     * @param column first column to search range color
-     * @param width last row to search range color (row + width)
-     * @param height last column to search range color (column + height)
-     * @param red color less/equal than red
-     * @param green color greater/equal than green
-     * @param blue color less/equal than blue
-     * @return true if found a pixel according to input given
-     * @throws IOException BufferedRead exception
+     * @param imageFile the image file to be processed.
+     * @param row the starting row of the area to search.
+     * @param column the starting column of the area to search.
+     * @param width the width of the area to search.
+     * @param height the height of the area to search.
+     * @param red the maximum red value.
+     * @param green the minimum green value.
+     * @param blue the maximum blue value.
+     * @return {@code true} if a pixel meeting the criteria is found, otherwise
+     * {@code false}.
+     * @throws IOException if an error occurs while reading the image file.
      */
     public boolean findByGreenColor(File imageFile, int row, int column, int width, int height, int red, int green, int blue) throws IOException {
         bf = ImageIO.read(imageFile);

@@ -121,41 +121,112 @@ public class WindowsService {
         return executableName;
     }
 
-// Interfaces da User32.dll
+    /**
+     * Interface for accessing user32.dll functions for interacting with Windows
+     * GUI.
+     */
     public interface User32 extends W32APIOptions {
 
         User32 INSTANCE = Native.load("user32", User32.class, DEFAULT_OPTIONS);
 
-        HWND GetForegroundWindow(); // Obtém a janela ativa
+        /**
+         * Retrieves the handle of the currently active window.
+         *
+         * @return the handle of the active window.
+         */
+        HWND GetForegroundWindow();
 
-        int GetWindowText(HWND hWnd, char[] lpString, int nMaxCount); // Obtém o título da janela
+        /**
+         * Retrieves the title of a window.
+         *
+         * @param hWnd the handle of the window.
+         * @param lpString the character array to store the window title.
+         * @param nMaxCount the maximum number of characters to be written to
+         * lpString.
+         * @return the number of characters copied to lpString.
+         */
+        int GetWindowText(HWND hWnd, char[] lpString, int nMaxCount);
 
-        int GetWindowThreadProcessId(HWND hWnd, IntByReference lpdwProcessId); // Obtém o ID do processo
+        /**
+         * Retrieves the process ID of the window's thread.
+         *
+         * @param hWnd the handle of the window.
+         * @param lpdwProcessId the reference to store the process ID.
+         * @return the thread identifier.
+         */
+        int GetWindowThreadProcessId(HWND hWnd, IntByReference lpdwProcessId);
 
-        boolean GetWindowRect(HWND hWnd, RECT rect); // Obtém as dimensões da janela
+        /**
+         * Retrieves the dimensions of the window.
+         *
+         * @param hWnd the handle of the window.
+         * @param rect the RECT structure to store the window dimensions.
+         * @return {@code true} if successful, {@code false} otherwise.
+         */
+        boolean GetWindowRect(HWND hWnd, RECT rect);
 
-        int GetSystemMetrics(int nIndex); // Obtém informações sobre o sistema
+        /**
+         * Retrieves information about the system, such as screen width and
+         * height.
+         *
+         * @param nIndex the index for the system information to retrieve.
+         * @return the requested system information.
+         */
+        int GetSystemMetrics(int nIndex);
 
-        int SM_CXSCREEN = 0; // Largura da tela
-        int SM_CYSCREEN = 1; // Altura da tela
+        int SM_CXSCREEN = 0; // Screen width
+        int SM_CYSCREEN = 1; // Screen height
     }
 
-// Interfaces da Psapi.dll
+    /**
+     * Interface for accessing psapi.dll functions for interacting with process
+     * information in Windows.
+     */
     public interface Psapi extends W32APIOptions {
 
-        Psapi INSTANCE = Native.load("psapi", Psapi.class, DEFAULT_OPTIONS); // Carrega a biblioteca psapi.dll e mapeia a interface Psapi com as opções padrão
+        Psapi INSTANCE = Native.load("psapi", Psapi.class, DEFAULT_OPTIONS); // Loads the psapi.dll library and maps the Psapi interface with default options
 
-        int GetModuleBaseNameW(HANDLE hProcess, HMODULE hModule, char[] lpBaseName, int nSize); // Obtém o nome do módulo base (executável) de um processo
+        /**
+         * Retrieves the base name of a module (executable) for a given process.
+         *
+         * @param hProcess the handle of the process.
+         * @param hModule the handle of the module.
+         * @param lpBaseName the character array to store the base name of the
+         * module.
+         * @param nSize the size of the buffer to store the base name.
+         * @return the number of characters written to lpBaseName.
+         */
+        int GetModuleBaseNameW(HANDLE hProcess, HMODULE hModule, char[] lpBaseName, int nSize); // Retrieves the base module name of a process
     }
 
-// Interfaces da Kernel32.dll
+    /**
+     * Interface for accessing kernel32.dll functions for interacting with
+     * processes and handles in Windows.
+     */
     public interface Kernel32 extends W32APIOptions {
 
-        Kernel32 INSTANCE = Native.load("kernel32", Kernel32.class, DEFAULT_OPTIONS); // Carrega a biblioteca kernel32.dll e mapeia a interface Kernel32 com as opções padrão
+        Kernel32 INSTANCE = Native.load("kernel32", Kernel32.class, DEFAULT_OPTIONS); // Loads the kernel32.dll library and maps the Kernel32 interface with default options
 
-        HANDLE OpenProcess(int dwDesiredAccess, boolean bInheritHandle, int dwProcessId); // Abre um processo com o ID do processo e o nível de acesso desejado
+        /**
+         * Opens a process with the specified process ID and desired access
+         * level.
+         *
+         * @param dwDesiredAccess the desired access level for the process.
+         * @param bInheritHandle indicates whether the handle should be
+         * inherited.
+         * @param dwProcessId the ID of the process to open.
+         * @return a handle to the opened process.
+         */
+        HANDLE OpenProcess(int dwDesiredAccess, boolean bInheritHandle, int dwProcessId); // Opens a process with the specified process ID and desired access
 
-        boolean CloseHandle(HANDLE hObject); // Fecha um handle de processo
+        /**
+         * Closes a handle to a process or other object.
+         *
+         * @param hObject the handle to be closed.
+         * @return {@code true} if the handle was successfully closed,
+         * {@code false} otherwise.
+         */
+        boolean CloseHandle(HANDLE hObject); // Closes a process handle
     }
 
 }

@@ -92,7 +92,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
         switch (walkThrough) {
 
             case 0 -> {
-                hangarButton = segmentedRegions.getOcrRectangle(resolution.getHangarList(), resolution.getInventoryDeadzoneTuple());
+                hangarButton = segmentedRegions.getOcrRectangle(resolution.getHangarList(), resolution.getInventoryScreenConstraints());
 
                 if (rectangleAndOcrVerifier(hangarButton, ocrWords.getHangar(), "HANGAR", NONCLICK)) {
                     walkThrough++;
@@ -108,7 +108,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
             }
 
             case 2 -> {
-                Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockDeadZoneTuple());
+                Rectangle undockButton = segmentedRegions.getRectangle(resolution.getUndockButtonList(), resolution.getUndockScreenConstraints());
 
                 if ((isStaticClicker && staticChecker(undockButton)) || dynamicChecker(undockButton)) {
                     walkThrough++;
@@ -121,7 +121,7 @@ public class CargoDeposit implements RectangleVerifier, RectangleAndColorVerifie
     }
 
     private void dragItens() throws AWTException, InterruptedException {
-        clickEvents.dragItemsToInventory(resolution.getDragItensDeadZoneList(), hangarButton.getValue0());
+        clickEvents.dragItemsToInventory(resolution.getDragItensScreenConstraints(), hangarButton.getValue0());
     }
 
     @Override
