@@ -94,7 +94,7 @@ public class MiningFacade {
      */
     public void startMining() {
         CalendarUtils calendar = new CalendarUtils();
-        int minutes = 38;
+        int minutes = 45;
 
         while (!calendar.isServerSave(minutes)) {
             try {
