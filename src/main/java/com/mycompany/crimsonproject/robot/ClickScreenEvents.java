@@ -50,11 +50,11 @@ public class ClickScreenEvents extends RobotEvent {
         sleep(1000);
 
         // Move the mouse to a specified position and drag the screen
-        bot.mouseMove(1200, 870);
+        bot.mouseMove(960, 1090);
         sleep(SLEEP_MS);
 
         bot.mousePress(leftClick);
-        bot.mouseMove(1230, 870);
+        bot.mouseMove(990, 1090);
 
         sleep(SLEEP_MS);
         bot.mouseRelease(leftClick);
